@@ -16,9 +16,9 @@ TSLenght = 121
 
 
 TSLenght_res_Inner_lines = TSLenght + 1
-TSLegnht_res_Outer_lines = TSLenght + 1
-TSLegnht_res_ILT_lines = TSLenght + 1
-TSLegnht_rN0841 = 1
+TSLlenght_res_Outer_lines = TSLenght + 1
+TSLlenght_res_ILT_lines = TSLenght + 1
+TSLlenght_rN0841 = 1
 
 
 
@@ -52,11 +52,7 @@ class FSG_Analysis:
 
                 self.check_AAA_formation()
 
-
-
-
-
-
+                self.Inner_lines()
 
 
 
@@ -81,15 +77,22 @@ class FSG_Analysis:
     def check_AAA_formation(self):
         for line in self.whole_document_Inner_lines[self.startLine_res_Inner_lines:
                     (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
-
             D = float(line.strip().split()[0]) * 2
+            if D > 1.1 * self.d0:                                               # kako ovo definirati - mijenja se?
+                return True
+
+        return False
 
 
-            # if D > 1.5 * self.d0:     # kako ovo definirati - mijenja se?
-            #     print(D, self.d0)
+    def Inner_lines(self):
+        
+        for n_line in range(TSLenght_res_Inner_lines-1):
 
+            d_ILT_cont = float(self.whole_document_ILT_lines[self.startLine_res_ILT_lines + n_line].strip().split()[0])*2
 
+            d_Inner_cont = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[0])*2
 
+            print(d_Inner_cont)
 
 
 FSG_Analysis()
