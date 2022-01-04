@@ -103,7 +103,7 @@ class FSG_Analysis:
 
 
     def data_construction(self):
-        self.d0 = float(self.whole_document_Inner_lines[5].strip().split()[0]) * 2
+        self.r0 = float(self.whole_document_Inner_lines[5].strip().split()[0]) * 2
         self.oneSim_data_dict = {"timeStep":[], "inner_contours":[], "z":[], "outer_contours":[], "ILT_contours":[]}
 
 
@@ -123,8 +123,8 @@ class FSG_Analysis:
     def check_AAA_formation(self):
         for line in self.whole_document_Inner_lines[self.startLine_res_Inner_lines:
         (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
-            D = float(line.strip().split()[0]) * 2
-            if D > 1.1 * self.d0:                                               # kako ovo definirati - mijenja se?
+            R = float(line.strip().split()[0])
+            if R > 1.1 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
 
@@ -133,10 +133,10 @@ class FSG_Analysis:
         timeSteps_list, d_inner_list, z_list, d_outer_list, d_ILT_list = [], [], [], [], []
         for n_line in range(TSLenght_res_Inner_lines-1):
 
-            d_inner = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[0])*2
+            d_inner = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[0])
             z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3])
-            d_outer = float(self.whole_document_Outer_lines[self.startLine_res_Outer_lines + n_line].strip().split()[0])*2
-            d_ILT = float(self.whole_document_ILT_lines[self.startLine_res_ILT_lines + n_line].strip().split()[0])*2
+            d_outer = float(self.whole_document_Outer_lines[self.startLine_res_Outer_lines + n_line].strip().split()[0])
+            d_ILT = float(self.whole_document_ILT_lines[self.startLine_res_ILT_lines + n_line].strip().split()[0])
 
             d_inner_list.append(d_inner)
             z_list.append(z)
