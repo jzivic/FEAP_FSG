@@ -42,26 +42,18 @@ class FSG_Analysis:
 
 
 
-
-
-
-
         for simulation_folder in simulations:                               # ulazi u folder simulacije
             simulation_path = results_directory + simulation_folder
             os.chdir(simulation_path)
 
             # Setting simulation
             self.simulation_name = simulation_folder
-            self.n_sim = 0
-
             self.set_files()
             self.data_construction()
 
 
 
             for self.time_step in chosen_TimeSteps:
-                self.n_sim += 1
-
                 self.setting_start_lines()
                 # self.check_AAA_formation()
 
@@ -75,14 +67,15 @@ class FSG_Analysis:
                       self.oneSim_data_dict["inner_contours"],
                       self.oneSim_data_dict["z"],
                       self.oneSim_data_dict["outer_contours"],
-                      self.oneSim_data_dict["ILT_contours"]
-                      ]
-
+                      self.oneSim_data_dict["ILT_contours"]]
 
             all_simulations_data_df.loc[self.simulation_name] = dopuna
+        all_simulations_data_df.to_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_analize.pickle")
 
 
-        print(all_simulations_data_df["timeStep"])
+
+
+
 
 
 
@@ -111,8 +104,6 @@ class FSG_Analysis:
 
     def data_construction(self):
         self.d0 = float(self.whole_document_Inner_lines[5].strip().split()[0]) * 2
-
-
         self.oneSim_data_dict = {"timeStep":[], "inner_contours":[], "z":[], "outer_contours":[], "ILT_contours":[]}
 
 
