@@ -33,12 +33,12 @@ class FSG_Analysis:
     def __init__(self):
 
         # Podaci svih simulacija i svih vremenskih koraka
-        all_simulations_data_df = pd.DataFrame({"timeSteps":[[3,3]],
-                                                "inner_contours":[1],
-                                                "z":[1],
-                                                "outer_contours":[1],
-                                                "ILT_contours":[2]},
-                                            index= ["pero"])
+        all_simulations_data_df = pd.DataFrame({"timeStep":[],
+                                                "inner_contours":[],
+                                                "z":[],
+                                                "outer_contours":[],
+                                                "ILT_contours":[]},
+                                            index= [])
 
 
 
@@ -65,19 +65,24 @@ class FSG_Analysis:
                 self.setting_start_lines()
                 # self.check_AAA_formation()
 
-                self.timeStep_extraction()
+                try:
+                    self.timeStep_extraction()
+                except IndexError:
+                    pass
 
 
+            dopuna = [self.oneSim_data_dict["timeStep"],
+                      self.oneSim_data_dict["inner_contours"],
+                      self.oneSim_data_dict["z"],
+                      self.oneSim_data_dict["outer_contours"],
+                      self.oneSim_data_dict["ILT_contours"]
+                      ]
 
-            # all_simulations_data_df.index.append(self.simulation_name)
 
-            # all_simulations_data_df["timeSteps"].add(2)
-
-            # all_simulations_data_df["inner_contours"].add(self.oneSim_data_dict["inner_contours"])
+            all_simulations_data_df.loc[self.simulation_name] = dopuna
 
 
-            print(all_simulations_data_df)
-
+        print(all_simulations_data_df["timeStep"])
 
 
 
@@ -108,7 +113,7 @@ class FSG_Analysis:
         self.d0 = float(self.whole_document_Inner_lines[5].strip().split()[0]) * 2
 
 
-        self.oneSim_data_dict = {"timeSteps":[], "inner_contours":[], "z":[], "outer_contours":[], "ILT_contours":[]}
+        self.oneSim_data_dict = {"timeStep":[], "inner_contours":[], "z":[], "outer_contours":[], "ILT_contours":[]}
 
 
 
@@ -134,7 +139,7 @@ class FSG_Analysis:
 
 
     def timeStep_extraction(self):
-        d_inner_list, z_list, d_outer_list, d_ILT_list = [], [], [], []
+        timeSteps_list, d_inner_list, z_list, d_outer_list, d_ILT_list = [], [], [], [], []
         for n_line in range(TSLenght_res_Inner_lines-1):
 
             d_inner = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[0])*2
@@ -147,11 +152,13 @@ class FSG_Analysis:
             d_outer_list.append(d_outer)
             d_ILT_list.append(d_ILT)
 
+
+        self.oneSim_data_dict["timeStep"].append(self.time_step)
+
         self.oneSim_data_dict["inner_contours"].append(d_inner_list)
         self.oneSim_data_dict["z"].append(z_list)
         self.oneSim_data_dict["outer_contours"].append(d_outer_list)
         self.oneSim_data_dict["ILT_contours"].append(d_ILT_list)
-        self.oneSim_data_dict["timeSteps"].append(self.time_step)
 
 
 
