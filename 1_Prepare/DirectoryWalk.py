@@ -146,7 +146,7 @@ class FSG_Analysis:
                 (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
 
             R = float(line.strip().split()[0])
-            if R > 1.5 * self.r0:                                               # kako ovo definirati - mijenja se?
+            if R > 1 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
 

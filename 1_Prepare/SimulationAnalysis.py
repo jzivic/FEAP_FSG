@@ -12,7 +12,7 @@ simulation_names = ["prava_025_14", "prava_030_14", "prava_035_14", "prava_040_1
 # print(all_data["timeStep"])
 # print(all_data.loc["prava_025_14"]["timeStep"])
 
-print(all_data.timeStep)
+# print(all_data.timeStep)
 
 
 
@@ -28,8 +28,6 @@ def vremenska_analiza(vremena):
 
             index = all_data.loc[simul]["timeStep"].index(trenutak)
 
-
-
             inner_cont = all_data.loc[simul]["inner_contours"][index]
             ILT_cont = all_data.loc[simul]["ILT_contours"][index]
             outer_cont = all_data.loc[simul]["outer_contours"][index]
@@ -37,7 +35,6 @@ def vremenska_analiza(vremena):
 
             ILT_thickness = all_data.loc[simul]["ILT_thickness_contours"][index]
             vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
-
 
 
             def crtanje_kontura():
@@ -53,7 +50,7 @@ def vremenska_analiza(vremena):
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
 
-            crtanje_kontura()
+            # crtanje_kontura()
 
 
             def debljina_stijenke():
@@ -79,6 +76,8 @@ def vremenska_analiza(vremena):
                 plt.legend()
 
             # debljina_ILTa()
+
+
 
         plt.show()
 
