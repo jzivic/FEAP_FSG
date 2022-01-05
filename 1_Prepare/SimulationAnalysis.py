@@ -8,6 +8,8 @@ all_data = pd.read_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_analize.
 vremena = [300]
 simulation_names = ["prava_025_14", "prava_030_14", "prava_035_14", "prava_040_14" ]
 
+simulation_names = ["prava_025_14" ]
+
 
 # print(all_data["timeStep"])
 # print(all_data.loc["prava_025_14"]["timeStep"])
@@ -49,9 +51,7 @@ def vremenska_analiza(vremena):
                 plt.xlim([0,250])
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
-
             # crtanje_kontura()
-
 
             def debljina_stijenke():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -61,10 +61,7 @@ def vremenska_analiza(vremena):
                 plt.xlabel("Axial coordinate $z$ [mm]")
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
-
             # debljina_stijenke()
-
-
 
             def debljina_ILTa():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -74,13 +71,10 @@ def vremenska_analiza(vremena):
                 plt.xlabel("Axial coordinate $z$ [mm]")
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
-
             # debljina_ILTa()
 
 
-
         plt.show()
-
 
 
 vremenska_analiza(vremena)
