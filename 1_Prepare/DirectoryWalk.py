@@ -40,6 +40,8 @@ class FSG_Analysis:
                                                 "ILT_contours":[],
                                                 "ILT_thickness_contours":[],
                                                 "vein_thickness_contours": [],
+                                                "D": [],
+                                                "H": [],
                                                 },
                                             index= [])
 
@@ -58,12 +60,18 @@ class FSG_Analysis:
 
             for self.time_step in chosen_TimeSteps:
                 self.setting_start_lines()
-                # self.check_AAA_formation()
 
-                try:
-                    self.timeStep_extraction()
-                except IndexError:
-                    pass
+
+                if self.check_AAA_formation() == True:
+                    try:
+                        self.timeStep_extraction()
+                    except IndexError:
+                        pass
+
+                elif self.check_AAA_formation() == False:
+                    dopuna = [None for i in range(len(all_simulations_data_df))]
+
+
 
 
             dopuna = [self.oneSim_data_dict["timeStep"],
@@ -73,11 +81,15 @@ class FSG_Analysis:
                       self.oneSim_data_dict["ILT_contours"],
 
                       self.oneSim_data_dict["ILT_thickness_contours"],
-                      self.oneSim_data_dict["vein_thickness_contours"]
+                      self.oneSim_data_dict["vein_thickness_contours"],
+
+                      self.oneSim_data_dict["D"],
+                      self.oneSim_data_dict["H"]
                       ]
 
             all_simulations_data_df.loc[self.simulation_name] = dopuna
         all_simulations_data_df.to_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_analize.pickle")
+
 
 
 
@@ -110,9 +122,10 @@ class FSG_Analysis:
 
 
     def data_construction(self):
-        self.r0 = float(self.whole_document_Inner_lines[5].strip().split()[0]) * 2
+        self.r0 = float(self.whole_document_Inner_lines[5].strip().split()[0])
         self.oneSim_data_dict = {"timeStep":[], "inner_contours":[], "z":[], "outer_contours":[], "ILT_contours":[],
-                                 "ILT_thickness_contours":[], "vein_thickness_contours":[]}
+                                 "ILT_thickness_contours":[], "vein_thickness_contours":[],
+                                 "H":[], "D":[]}
 
 
 
@@ -132,41 +145,50 @@ class FSG_Analysis:
         for line in self.whole_document_Inner_lines[self.startLine_res_Inner_lines:
         (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
             R = float(line.strip().split()[0])
-            if R > 1.1 * self.r0:                                               # kako ovo definirati - mijenja se?
+            if R > 1.3 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
 
 
+
     def timeStep_extraction(self):
-        timeSteps_list, d_inner_list, z_list, d_outer_list, d_ILT_list = [], [], [], [], []
-        ILT_thickness_list, vein_thickness_list = [], []
+        timeSteps_list, r_inner_list, z_list, r_outer_list, r_ILT_list = [], [], [], [], []
+        ILT_thickness_list, vein_thickness_list, h_list = [], [], []
         for n_line in range(TSLenght_res_Inner_lines-1):
 
-            d_inner = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[0])
+            r_inner = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[0])
             z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3])
-            d_outer = float(self.whole_document_Outer_lines[self.startLine_res_Outer_lines + n_line].strip().split()[0])
-            d_ILT = float(self.whole_document_ILT_lines[self.startLine_res_ILT_lines + n_line].strip().split()[0])
-            ILT_thickness = d_inner - d_ILT
-            vein_thickness = d_outer - d_inner
+            r_outer = float(self.whole_document_Outer_lines[self.startLine_res_Outer_lines + n_line].strip().split()[0])
+            r_ILT = float(self.whole_document_ILT_lines[self.startLine_res_ILT_lines + n_line].strip().split()[0])
+            ILT_thickness = r_inner - r_ILT
+            vein_thickness = r_outer - r_inner
 
-            d_inner_list.append(d_inner)
+            r_inner_list.append(r_inner)
             z_list.append(z)
-            d_outer_list.append(d_outer)
-            d_ILT_list.append(d_ILT)
+            r_outer_list.append(r_outer)
+            r_ILT_list.append(r_ILT)
             ILT_thickness_list.append(ILT_thickness)
             vein_thickness_list.append(vein_thickness)
 
+            if r_inner > 1.05 * self.r0:
+                h_list.append(z)
+
+        # try:
+        H = h_list[-1] - h_list[0]
+        D = max(r_inner_list)*2
+
         self.oneSim_data_dict["timeStep"].append(self.time_step)
 
-        self.oneSim_data_dict["inner_contours"].append(d_inner_list)
+        self.oneSim_data_dict["inner_contours"].append(r_inner_list)
         self.oneSim_data_dict["z"].append(z_list)
-        self.oneSim_data_dict["outer_contours"].append(d_outer_list)
-        self.oneSim_data_dict["ILT_contours"].append(d_ILT_list)
+        self.oneSim_data_dict["outer_contours"].append(r_outer_list)
+        self.oneSim_data_dict["ILT_contours"].append(r_ILT_list)
 
         self.oneSim_data_dict["ILT_thickness_contours"].append(ILT_thickness_list)
         self.oneSim_data_dict["vein_thickness_contours"].append(vein_thickness_list)
 
-
+        self.oneSim_data_dict["D"].append(D)
+        self.oneSim_data_dict["H"].append(H)
 
 
 
