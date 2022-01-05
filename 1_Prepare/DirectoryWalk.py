@@ -143,9 +143,10 @@ class FSG_Analysis:
 
     def check_AAA_formation(self):
         for line in self.whole_document_Inner_lines[self.startLine_res_Inner_lines:
-        (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
+                (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
+
             R = float(line.strip().split()[0])
-            if R > 1.3 * self.r0:                                               # kako ovo definirati - mijenja se?
+            if R > 1.5 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
 
@@ -173,7 +174,6 @@ class FSG_Analysis:
             if r_inner > 1.05 * self.r0:
                 h_list.append(z)
 
-        # try:
         H = h_list[-1] - h_list[0]
         D = max(r_inner_list)*2
 
