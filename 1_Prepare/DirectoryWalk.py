@@ -11,10 +11,7 @@ from SimulationsData import *
 
 suffix_list = ["89-5"]
 
-
-
 TSLenght = 121
-
 
 TSLenght_res_Inner_lines = TSLenght + 1
 TSLlenght_res_Outer_lines = TSLenght + 1
@@ -23,12 +20,7 @@ TSLlenght_rN0841 = 1
 
 
 
-
-
-
-
 class FSG_Analysis:
-
 
     def __init__(self):
 
@@ -46,7 +38,6 @@ class FSG_Analysis:
                                             index= [])
 
 
-
         for simulation_folder in simulations:                               # ulazi u folder simulacije
             simulation_path = results_directory + simulation_folder
             os.chdir(simulation_path)
@@ -56,11 +47,8 @@ class FSG_Analysis:
             self.set_files()
             self.data_construction()
 
-
-
             for self.time_step in chosen_TimeSteps:
                 self.setting_start_lines()
-
 
                 if self.check_AAA_formation() == True:
                     try:
@@ -70,8 +58,6 @@ class FSG_Analysis:
 
                 elif self.check_AAA_formation() == False:
                     dopuna = [None for i in range(len(all_simulations_data_df))]
-
-
 
 
             dopuna = [self.oneSim_data_dict["timeStep"],
@@ -89,11 +75,6 @@ class FSG_Analysis:
 
             all_simulations_data_df.loc[self.simulation_name] = dopuna
         all_simulations_data_df.to_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_analize.pickle")
-
-
-
-
-
 
 
 
@@ -129,11 +110,6 @@ class FSG_Analysis:
 
 
 
-
-
-
-        #
-
     # Svaki vremenski korak se vrti
 
     def setting_start_lines(self):
@@ -149,8 +125,6 @@ class FSG_Analysis:
             if R > 1 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
-
-
 
     def timeStep_extraction(self):
         timeSteps_list, r_inner_list, z_list, r_outer_list, r_ILT_list = [], [], [], [], []
