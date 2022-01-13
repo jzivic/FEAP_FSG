@@ -2,17 +2,15 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 
-all_data = pd.read_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_analize.pickle")
-simulation_names = ["prava_025_14", "prava_030_14", "prava_035_14", "prava_040_14" ]
+# all_data = pd.read_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_analize.pickle")
+# simulation_names = ["prava_025_14", "prava_030_14", "prava_035_14", "prava_040_14" ]
 
 
 all_data = pd.read_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle")
 simulation_names = ["prava_Newt_5", "prava_Newt_6" ]
 
 
-
-
-times = [300]
+times = [200]
 
 
 def time_analysis(times):
@@ -34,8 +32,10 @@ def time_analysis(times):
             ILT_thickness = all_data.loc[simul]["ILT_thickness_contours"][index]
             vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
 
+            S22_cont = all_data.loc[simul]["S22_contours"][index]
 
-            def crtanje_kontura():
+
+            def plot_contours():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(z, inner_cont, c=color, label=simul)
                 plt.plot(z, ILT_cont, linestyle=':', c=color)
@@ -47,7 +47,22 @@ def time_analysis(times):
                 plt.xlim([0,250])
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
-            # crtanje_kontura()
+            # plot_contours()
+
+
+            def plot_stress():
+                color = next(plt.gca()._get_lines.prop_cycler)['color']
+                plt.plot(z, S22_cont, c=color, label=simul)
+                plt.title(str(trenutak)+". korak")
+                plt.ylabel("Stress S22 [mm]")
+                plt.xlabel("Axial coordinate $z$ [mm]")
+                plt.xlim([0,250])
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+                plt.legend()
+            plot_stress()
+
+
+
 
             def debljina_stijenke():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -73,6 +88,11 @@ def time_analysis(times):
 
 # time_analysis(times)
 
+
+
+
+
+
 # r = 12
 r = 13.5
 wanted_D = r*2
@@ -85,7 +105,6 @@ def diameter_analysis():
         time = all_data.loc[simul]["timeStep"][index]
         print(time, simul)
 
-
         inner_cont = all_data.loc[simul]["inner_contours"][index]
         ILT_cont = all_data.loc[simul]["ILT_contours"][index]
         outer_cont = all_data.loc[simul]["outer_contours"][index]
@@ -94,8 +113,9 @@ def diameter_analysis():
         ILT_thickness = all_data.loc[simul]["ILT_thickness_contours"][index]
         vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
 
+        S22_cont = all_data.loc[simul]["S22_contours"][index]
 
-        def crtanje_kontura():
+        def plot_contours():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(z, inner_cont, c=color, label=simul)
             plt.plot(z, ILT_cont, linestyle=':', c=color)
@@ -108,7 +128,21 @@ def diameter_analysis():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
 
-        crtanje_kontura()
+        # plot_contours()
+
+
+        def plot_stress():
+            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            plt.plot(z, S22_cont, c=color, label=simul)
+            # plt.title(str(trenutak) + ". korak")
+            plt.ylabel("Stress S22 [mm]")
+            plt.xlabel("Axial coordinate $z$ [mm]")
+            plt.xlim([0, 250])
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            plt.legend()
+
+        plot_stress()
+
 
         def debljina_stijenke():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
