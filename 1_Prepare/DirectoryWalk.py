@@ -18,6 +18,8 @@ TSLlenght_res_Outer_lines = TSLenght + 1
 TSLlenght_res_ILT_lines = TSLenght + 1
 TSLlenght_rN0841 = 1
 
+TSLlenght_res_Y0__field = 850
+
 
 
 class FSG_Analysis:
@@ -74,7 +76,7 @@ class FSG_Analysis:
                       ]
 
             all_simulations_data_df.loc[self.simulation_name] = dopuna
-        all_simulations_data_df.to_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_analize.pickle")
+        all_simulations_data_df.to_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle")
 
 
 
@@ -116,6 +118,8 @@ class FSG_Analysis:
         self.startLine_res_Inner_lines = 5 + TSLenght_res_Inner_lines * (self.time_step - 1)
         self.startLine_res_ILT_lines = self.startLine_res_Inner_lines
         self.startLine_res_Outer_lines = self.startLine_res_Inner_lines
+        # self
+
 
     def check_AAA_formation(self):
         for line in self.whole_document_Inner_lines[self.startLine_res_Inner_lines:
@@ -129,6 +133,7 @@ class FSG_Analysis:
     def timeStep_extraction(self):
         timeSteps_list, r_inner_list, z_list, r_outer_list, r_ILT_list = [], [], [], [], []
         ILT_thickness_list, vein_thickness_list, h_list = [], [], []
+
         for n_line in range(TSLenght_res_Inner_lines-1):
 
             r_inner = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[0])

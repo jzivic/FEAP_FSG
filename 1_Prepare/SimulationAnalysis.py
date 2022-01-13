@@ -3,20 +3,16 @@ from matplotlib import pyplot as plt
 
 
 all_data = pd.read_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_analize.pickle")
+simulation_names = ["prava_025_14", "prava_030_14", "prava_035_14", "prava_040_14" ]
+
+
+all_data = pd.read_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle")
+simulation_names = ["prava_Newt_5", "prava_Newt_6" ]
+
+
 
 
 times = [300]
-simulation_names = ["prava_025_14", "prava_030_14", "prava_035_14", "prava_040_14" ]
-
-# simulation_names = ["prava_025_14" ]
-
-
-# print(all_data["timeStep"])
-# print(all_data.loc["prava_025_14"]["timeStep"])
-
-a = all_data.loc["prava_025_14"].D
-b = all_data.loc["prava_025_14"].timeStep
-
 
 
 def time_analysis(times):
@@ -77,7 +73,8 @@ def time_analysis(times):
 
 # time_analysis(times)
 
-r = 12
+# r = 12
+r = 13.5
 wanted_D = r*2
 
 def diameter_analysis():
@@ -111,7 +108,7 @@ def diameter_analysis():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
 
-        # crtanje_kontura()
+        crtanje_kontura()
 
         def debljina_stijenke():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -122,9 +119,9 @@ def diameter_analysis():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
 
-        debljina_stijenke()
+        # debljina_stijenke()
     
-    
+
         def debljina_ILTa():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(z, ILT_thickness, c=color, label=simul)
