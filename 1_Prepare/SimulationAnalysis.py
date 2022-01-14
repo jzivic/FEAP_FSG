@@ -10,8 +10,9 @@ all_data = pd.read_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_automati
 simulation_names = ["prava_Newt_5", "prava_Newt_6" ]
 
 
-times = [200]
 
+
+times = [199]
 
 def time_analysis(times):
 
@@ -59,9 +60,7 @@ def time_analysis(times):
                 plt.xlim([0,250])
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
-            plot_stress()
-
-
+            # plot_stress()
 
 
             def debljina_stijenke():
@@ -86,7 +85,7 @@ def time_analysis(times):
 
         plt.show()
 
-# time_analysis(times)
+time_analysis(times)
 
 
 
@@ -94,7 +93,7 @@ def time_analysis(times):
 
 
 # r = 12
-r = 13.5
+r = 14
 wanted_D = r*2
 
 def diameter_analysis():
@@ -109,15 +108,15 @@ def diameter_analysis():
         ILT_cont = all_data.loc[simul]["ILT_contours"][index]
         outer_cont = all_data.loc[simul]["outer_contours"][index]
         z = all_data.loc[simul]["z"][index]
-
         ILT_thickness = all_data.loc[simul]["ILT_thickness_contours"][index]
         vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
-
         S22_cont = all_data.loc[simul]["S22_contours"][index]
+
+
 
         def plot_contours():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(z, inner_cont, c=color, label=simul)
+            plt.plot(z, inner_cont, c=color, label=(simul+", TS: "+str(time)))
             plt.plot(z, ILT_cont, linestyle=':', c=color)
             # plt.plot(z, outer_cont, linestyle='--', c=color)
             # plt.title(str(trenutak) + ". korak")
@@ -127,53 +126,46 @@ def diameter_analysis():
             plt.xlim([0, 250])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-
-        # plot_contours()
+        plot_contours()
 
 
         def plot_stress():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(z, S22_cont, c=color, label=simul)
+            plt.plot(z, S22_cont, c=color, label=(simul+", TS: "+str(time)))
             # plt.title(str(trenutak) + ". korak")
             plt.ylabel("Stress S22 [mm]")
             plt.xlabel("Axial coordinate $z$ [mm]")
             plt.xlim([0, 250])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-
-        plot_stress()
+        # plot_stress()
 
 
         def debljina_stijenke():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(z, vein_thickness, linestyle='-', c=color, label=simul)
+            plt.plot(z, vein_thickness, linestyle='-', c=color, label=(simul+", TS: "+str(time)))
             plt.title("Debljina stijenke: ")
             plt.ylabel("Thickness [mm]")
             plt.xlabel("Axial coordinate $z$ [mm]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-
         # debljina_stijenke()
     
 
         def debljina_ILTa():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(z, ILT_thickness, c=color, label=simul)
+            plt.plot(z, ILT_thickness, c=color, label=(simul+", TS: "+str(time)))
             plt.title("Debljina ILTa: ")
             plt.ylabel("Thickness [mm]")
             plt.xlabel("Axial coordinate $z$ [mm]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-
         # debljina_ILTa()
-
-
-
 
 
     plt.show()
 
-diameter_analysis()
+# diameter_analysis()
 
 
 
