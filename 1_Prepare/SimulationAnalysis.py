@@ -1,3 +1,5 @@
+from SimulationsData import *
+
 import pandas as pd
 from matplotlib import pyplot as plt
 
@@ -6,13 +8,24 @@ from matplotlib import pyplot as plt
 # simulation_names = ["prava_025_14", "prava_030_14", "prava_035_14", "prava_040_14" ]
 
 
-all_data = pd.read_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle")
-simulation_names = ["prava_Newt_5", "prava_Newt_6" ]
+
+# simulation_names = ["prava_Newt_5",  "Newt_5_4nodes", "Newt_5_NS", "prava_Newt_6",
+#                     "prava_Newt_55_n", "prava_BC_n2", "prava_BC_s2",  "prava_Casson_1"]
+
+
+
+simulation_names = [
+                    "AAA_Newt_snizena_65",
+                    "AAA_Newt_snizena_75",
+                    "AAA_Newt_snizena_85",
+                    ]
 
 
 
 
-times = [199]
+all_data = pd.read_pickle(pickle_name)
+times = [200]
+
 
 def time_analysis(times):
 
@@ -48,7 +61,7 @@ def time_analysis(times):
                 plt.xlim([0,250])
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
-            # plot_contours()
+            plot_contours()
 
 
             def plot_stress():
@@ -85,15 +98,12 @@ def time_analysis(times):
 
         plt.show()
 
-time_analysis(times)
+# time_analysis(times)
 
 
 
 
-
-
-# r = 12
-r = 14
+r = 13.5
 wanted_D = r*2
 
 def diameter_analysis():
@@ -126,7 +136,7 @@ def diameter_analysis():
             plt.xlim([0, 250])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        plot_contours()
+        # plot_contours()
 
 
         def plot_stress():
@@ -160,12 +170,41 @@ def diameter_analysis():
             plt.xlabel("Axial coordinate $z$ [mm]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # debljina_ILTa()
+        debljina_ILTa()
 
 
     plt.show()
 
 # diameter_analysis()
+
+
+
+# def growth_over_time()
+
+
+
+sim = all_data.loc["AAA_Newt_snizena_65"]
+
+
+print(sim)
+
+# plt.plot(sim["D"])
+# plt.show()
+
+
+# for i in all_data:
+#     print(i)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

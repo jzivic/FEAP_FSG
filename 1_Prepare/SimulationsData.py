@@ -1,27 +1,31 @@
+chosen_TimeSteps = [i for i in range(666)]
+
+
+# results_directory = "//home/josip/feap/FSG/automatizacija_13/"   #path to analysis dir
+# simulation_names = [
+#                     "prava_Newt_5",
+#                     "Newt_5_4nodes",
+#                     "Newt_5_NS",
+#
+#                     "prava_Newt_6",
+#                     "prava_Newt_55_n",
+#                     "prava_BC_n2",
+#                     "prava_BC_s2",
+#                     "prava_Casson_1"
+#                     ]
+
+
+
 
 
 
 results_directory = "//home/josip/feap/FSG/automatizacija_15/"   #path to analysis dir
-
-# simulations = ["prava_025_15", "prava_030_15", "prava_035_15", "prava_040_15" ]
-
-
-results_directory = "//home/josip/feap/FSG/automatizacija_13/"   #path to analysis dir
-simulations = ["prava_Newt_5", "prava_Newt_6" ]
-chosen_TimeSteps = [i for i in range(400)]
-
-# simulations = ["prava_040_14" ]
-# chosen_TimeSteps = [10, 200, 310]
-
-
-# simulations = ["prava_040_14"]
-
-
-
-
-
-
-
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_15.pickle"
+simulation_names = [
+                    "AAA_Newt_snizena_65",
+                    "AAA_Newt_snizena_75",
+                    "AAA_Newt_snizena_85",
+                    ]
 
 
 

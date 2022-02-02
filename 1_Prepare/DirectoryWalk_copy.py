@@ -1,12 +1,11 @@
-from SimulationsData import *
-
-
 import collections
 import os
 
 # import numpy as np
+# import pandas as pd
 import pandas as pd
 
+from SimulationsData import *
 
 
 
@@ -80,7 +79,7 @@ class FSG_Analysis:
                       ]
 
             all_simulations_data_df.loc[self.simulation_name] = dopuna
-        all_simulations_data_df.to_pickle(pickle_name)
+        all_simulations_data_df.to_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle")
 
 
     # Samo jednom se postavlja
@@ -128,7 +127,7 @@ class FSG_Analysis:
 
 
         # mogućnost odabira 1-7 radijalnog elementa, 1: skroz unutarnji
-        radial_layer = 7
+        radial_layer = 1
         assert radial_layer in [1,2,3,4,5,6,7],  "Nedopušteni layer elementa"
         self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * self.time_step + ((radial_layer-1)*TSLenght)
 
