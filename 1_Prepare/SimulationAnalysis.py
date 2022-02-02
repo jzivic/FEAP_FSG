@@ -231,17 +231,33 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        rast_S22()
+        # rast_S22()
 
 
+        def rast_ILT_thickness():
+            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            plt.plot(timeStep, ILT_thickness_max, label=(simul))
+            plt.title("Rast ILT_thickness: ")
+            plt.ylabel("ILT thickness [mm]")
+            plt.xlabel("timeStep [-]")
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            plt.legend()
+        # rast_ILT_thickness()
 
 
-        # plt.show()
+        # Ima li ovo smisla???
+        def rast_vein_thickness():
+            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            plt.plot(timeStep, vein_thickness_max, label=(simul))
+            plt.title("Rast vein thickness: ")
+            plt.ylabel("vein thickness [mm]")
+            plt.xlabel("timeStep [-]")
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            plt.legend()
+        rast_vein_thickness()
 
 
-
-
-
+    plt.show()
 
 growth_over_time()
 
