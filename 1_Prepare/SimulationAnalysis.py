@@ -37,11 +37,10 @@ def time_analysis(times):
                 continue
 
             index = all_data.loc[simul]["timeStep"].index(trenutak)
-
             inner_cont = all_data.loc[simul]["inner_contours"][index]
             ILT_cont = all_data.loc[simul]["ILT_contours"][index]
             outer_cont = all_data.loc[simul]["outer_contours"][index]
-            z = all_data.loc[simul]["z"][index]
+            Z_cont = all_data.loc[simul]["Z_contours"][index]
 
             ILT_thickness = all_data.loc[simul]["ILT_thickness_contours"][index]
             vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
@@ -51,8 +50,8 @@ def time_analysis(times):
 
             def plot_contours():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
-                plt.plot(z, inner_cont, c=color, label=simul)
-                plt.plot(z, ILT_cont, linestyle=':', c=color)
+                plt.plot(Z_cont, inner_cont, c=color, label=simul)
+                plt.plot(Z_cont, ILT_cont, linestyle=':', c=color)
                 # plt.plot(z, outer_cont, linestyle='--', c=color)
                 plt.title(str(trenutak)+". korak")
                 plt.ylabel("Radius [mm]")
@@ -66,7 +65,7 @@ def time_analysis(times):
 
             def plot_stress():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
-                plt.plot(z, S22_cont, c=color, label=simul)
+                plt.plot(Z_cont, S22_cont, c=color, label=simul)
                 plt.title(str(trenutak)+". korak")
                 plt.ylabel("Stress S22 [mm]")
                 plt.xlabel("Axial coordinate $z$ [mm]")
@@ -78,7 +77,7 @@ def time_analysis(times):
 
             def debljina_stijenke():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
-                plt.plot(z, vein_thickness, linestyle='-', c=color, label=simul)
+                plt.plot(Z_cont, vein_thickness, linestyle='-', c=color, label=simul)
                 plt.title("Debljina stijenke: "+ str(trenutak) + ". korak")
                 plt.ylabel("Thickness [mm]")
                 plt.xlabel("Axial coordinate $z$ [mm]")
@@ -88,7 +87,7 @@ def time_analysis(times):
 
             def debljina_ILTa():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
-                plt.plot(z, ILT_thickness, c=color, label=simul)
+                plt.plot(Z_cont, ILT_thickness, c=color, label=simul)
                 plt.title("Debljina ILTa: "+ str(trenutak)+ ". korak")
                 plt.ylabel("Thickness [mm]")
                 plt.xlabel("Axial coordinate $z$ [mm]")
@@ -109,25 +108,24 @@ wanted_D = r*2
 def diameter_analysis():
     for simul in simulation_names:
 
-        nearest_diameter = min (all_data.loc[simul]["D"], key=lambda x: abs(x-wanted_D))         # najbliža vrijednost
-        index = list(all_data.loc[simul]["D"]).index(nearest_diameter)
+        nearest_diameter = min (all_data.loc[simul]["D_max"], key=lambda x: abs(x-wanted_D))         # najbliža vrijednost
+        index = list(all_data.loc[simul]["D_max"]).index(nearest_diameter)
         time = all_data.loc[simul]["timeStep"][index]
         print(time, simul)
 
         inner_cont = all_data.loc[simul]["inner_contours"][index]
         ILT_cont = all_data.loc[simul]["ILT_contours"][index]
         outer_cont = all_data.loc[simul]["outer_contours"][index]
-        z = all_data.loc[simul]["z"][index]
+        Z_cont = all_data.loc[simul]["Z_contours"][index]
         ILT_thickness = all_data.loc[simul]["ILT_thickness_contours"][index]
         vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
         S22_cont = all_data.loc[simul]["S22_contours"][index]
 
 
-
         def plot_contours():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(z, inner_cont, c=color, label=(simul+", TS: "+str(time)))
-            plt.plot(z, ILT_cont, linestyle=':', c=color)
+            plt.plot(Z_cont, inner_cont, c=color, label=(simul+", TS: "+str(time)))
+            plt.plot(Z_cont, ILT_cont, linestyle=':', c=color)
             # plt.plot(z, outer_cont, linestyle='--', c=color)
             # plt.title(str(trenutak) + ". korak")
             plt.ylabel("Radius [mm]")
@@ -136,12 +134,12 @@ def diameter_analysis():
             plt.xlim([0, 250])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # plot_contours()
+        plot_contours()
 
 
         def plot_stress():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(z, S22_cont, c=color, label=(simul+", TS: "+str(time)))
+            plt.plot(Z_cont, S22_cont, c=color, label=(simul+", TS: "+str(time)))
             # plt.title(str(trenutak) + ". korak")
             plt.ylabel("Stress S22 [mm]")
             plt.xlabel("Axial coordinate $z$ [mm]")
@@ -153,7 +151,7 @@ def diameter_analysis():
 
         def debljina_stijenke():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(z, vein_thickness, linestyle='-', c=color, label=(simul+", TS: "+str(time)))
+            plt.plot(Z_cont, vein_thickness, linestyle='-', c=color, label=(simul+", TS: "+str(time)))
             plt.title("Debljina stijenke: ")
             plt.ylabel("Thickness [mm]")
             plt.xlabel("Axial coordinate $z$ [mm]")
@@ -164,13 +162,13 @@ def diameter_analysis():
 
         def debljina_ILTa():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(z, ILT_thickness, c=color, label=(simul+", TS: "+str(time)))
+            plt.plot(Z_cont, ILT_thickness, c=color, label=(simul+", TS: "+str(time)))
             plt.title("Debljina ILTa: ")
             plt.ylabel("Thickness [mm]")
             plt.xlabel("Axial coordinate $z$ [mm]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        debljina_ILTa()
+        # debljina_ILTa()
 
 
     plt.show()
@@ -178,22 +176,92 @@ def diameter_analysis():
 # diameter_analysis()
 
 
-
-# def growth_over_time()
-
+print(all_data.loc["AAA_Newt_snizena_85"])
 
 
-sim = all_data.loc["AAA_Newt_snizena_65"]
 
 
-print(sim)
+simulation_names = [
+                    "AAA_Newt_snizena_85",
+                    ]
 
-# plt.plot(sim["D"])
-# plt.show()
+
+def growth_over_time():
+    for simul in simulation_names:
+
+        timeStep = all_data.loc[simul]["timeStep"]
+        D_max = all_data.loc[simul]["D_max"]
+        H = all_data.loc[simul]["H"]
+
+        S22_max = all_data.loc[simul]["S22_max"]
+        ILT_thickness_max = all_data.loc[simul]["ILT_thickness_max"]
+        vein_thickness_max = all_data.loc[simul]["vein_thickness_max"]
 
 
-# for i in all_data:
-#     print(i)
+
+
+        def rast_D():
+            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            plt.plot(timeStep, D_max, label=(simul))
+            plt.title("Rast D: ")
+            plt.ylabel("D [mm]")
+            plt.xlabel("timeStep [-]")
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            plt.legend()
+        # rast_D()
+
+
+        def rast_H():
+            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            plt.plot(timeStep, H, label=(simul))
+            plt.title("Rast H: ")
+            plt.ylabel("H [mm]")
+            plt.xlabel("timeStep [-]")
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            plt.legend()
+        # rast_H()
+
+
+
+        def rast_S22():
+            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            plt.plot(timeStep, S22_max, label=(simul))
+            plt.title("Rast S22: ")
+            plt.ylabel("S22_max [N]")
+            plt.xlabel("timeStep [-]")
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            plt.legend()
+        rast_S22()
+
+
+
+
+        # plt.show()
+
+
+
+
+
+
+growth_over_time()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
