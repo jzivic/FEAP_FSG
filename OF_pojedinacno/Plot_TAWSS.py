@@ -5,6 +5,12 @@ import pandas as pd
 
 
 
+
+casson_nCor_2 = "//home/josip/foamOpen/cases/FSG/NOVI_axial/usporedba_Modela/Casson/casson_2"
+
+
+
+
 class VadenjePodataka:
     def __init__(self, Case, oblik, god="n"):
 
@@ -113,16 +119,39 @@ class VadenjePodataka:
 
 
     def Plot(self):
-        plt.plot(self.dobPodDF["z"], self.dobPodDF["tawss"], label=self.imeSim)
-        # plt.ylim(0, 1)
         plt.grid(color='k', linestyle=':', linewidth=0.5)
+
+        # plt.plot(self.dobPodDF["z"], self.dobPodDF["tawss"], label=self.imeSim)
+        # plt.ylim(0, 1)
+
+        plt.plot(self.dobPodDF["z"], self.dobPodDF["r"], label=self.imeSim)
+
+
+
         plt.legend()
-        # plt.show()
-
-        # plt.plot(self.dobPodDF["z"], self.dobPodDF["r"], label=self.imeSim)
-        # plt.grid(color='k', linestyle=':', linewidth=0.5)
-        # plt.legend()
-        # plt.show()
 
 
 
+
+case_casson_nCor_2 = VadenjePodataka(casson_nCor_2, oblik="axial")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+plt.show()

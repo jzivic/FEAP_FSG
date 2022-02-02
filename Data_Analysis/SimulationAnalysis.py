@@ -3,22 +3,21 @@ from SimulationsData import *
 import pandas as pd
 from matplotlib import pyplot as plt
 
+# simulation_names = [
+#                     "AAA_Newt_snizena_65",
+#                     "AAA_Newt_snizena_75",
+#                     "AAA_Newt_snizena_85",
+#                     ]
 
-# all_data = pd.read_pickle("//home/josip/PycharmProjects/FEAP_FSG/podaci_analize.pickle")
-# simulation_names = ["prava_025_14", "prava_030_14", "prava_035_14", "prava_040_14" ]
 
-
-
-# simulation_names = ["prava_Newt_5",  "Newt_5_4nodes", "Newt_5_NS", "prava_Newt_6",
-#                     "prava_Newt_55_n", "prava_BC_n2", "prava_BC_s2",  "prava_Casson_1"]
 
 
 
 simulation_names = [
-                    "AAA_Newt_snizena_65",
-                    "AAA_Newt_snizena_75",
-                    "AAA_Newt_snizena_85",
+                    "Newt_5_NS",
+                    "prava_Casson_NS",
                     ]
+
 
 
 
@@ -102,7 +101,10 @@ def time_analysis(times):
 
 
 
-r = 13.5
+
+
+
+r = 13
 wanted_D = r*2
 
 def diameter_analysis():
@@ -170,20 +172,11 @@ def diameter_analysis():
             plt.legend()
         # debljina_ILTa()
 
-
     plt.show()
-
 # diameter_analysis()
 
 
-print(all_data.loc["AAA_Newt_snizena_85"])
 
-
-
-
-simulation_names = [
-                    "AAA_Newt_snizena_85",
-                    ]
 
 
 def growth_over_time():
@@ -198,8 +191,6 @@ def growth_over_time():
         vein_thickness_max = all_data.loc[simul]["vein_thickness_max"]
 
 
-
-
         def rast_D():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, D_max, label=(simul))
@@ -208,8 +199,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # rast_D()
-
+        rast_D()
 
         def rast_H():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -221,40 +211,36 @@ def growth_over_time():
             plt.legend()
         # rast_H()
 
-
-
         def rast_S22():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, S22_max, label=(simul))
             plt.title("Rast S22: ")
-            plt.ylabel("S22_max [N]")
+            plt.ylabel("S22_max [kPa]")
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
         # rast_S22()
 
-
         def rast_ILT_thickness():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, ILT_thickness_max, label=(simul))
             plt.title("Rast ILT_thickness: ")
-            plt.ylabel("ILT thickness [mm]")
+            plt.ylabel("ILT_thickness_max [mm]")
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
         # rast_ILT_thickness()
-
 
         # Ima li ovo smisla???
         def rast_vein_thickness():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, vein_thickness_max, label=(simul))
             plt.title("Rast vein thickness: ")
-            plt.ylabel("vein thickness [mm]")
+            plt.ylabel("vein_thickness_max [mm]")
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        rast_vein_thickness()
+        # rast_vein_thickness()
 
 
     plt.show()
