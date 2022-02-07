@@ -40,7 +40,6 @@ class FSG_Analysis:
         for simulation_folder in simulation_names:                               # ulazi u folder simulacije
             simulation_path = results_directory + simulation_folder
             os.chdir(simulation_path)
-
             # Setting simulation
             self.simulation_name = simulation_folder
             self.set_files()
@@ -140,7 +139,7 @@ class FSG_Analysis:
                 (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
 
             R = float(line.strip().split()[0])
-            if R > 1 * self.r0:                                               # kako ovo definirati - mijenja se?
+            if R > 1.0 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
 
@@ -157,7 +156,7 @@ class FSG_Analysis:
             ILT_thickness = r_inner - r_ILT
             vein_thickness = r_outer - r_inner
             z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3])
-            S22 = float(self.whole_document_res_Y0_field[self.startLine_res_Y0_field+n_line].strip().split()[4])
+            S22 = float(self.whole_document_res_Y0_field[self.startLine_res_Y0_field+n_line].strip().split()[4])*1000 #kPa
 
             r_inner_list.append(r_inner)
             r_outer_list.append(r_outer)
@@ -166,6 +165,7 @@ class FSG_Analysis:
             vein_thickness_list.append(vein_thickness)
             z_list.append(z)
             S22_list.append(S22)
+            S22_list.append(0)
 
             if r_inner > 1.05 * self.r0:
                 h_list.append(z)
