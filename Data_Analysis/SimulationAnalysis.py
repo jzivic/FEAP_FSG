@@ -3,47 +3,41 @@ from SimulationsData import *
 import pandas as pd
 from matplotlib import pyplot as plt
 
+# barcelona?
+# simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4",]
+
+
+simulation_names = ["Newt_5_NS","Newt_6_NS","prava_Casson_NS",]
 
 # simulation_names = [
-#                     "Newt_5_NS",
-#                     "Newt_6_NS",
-#                     "prava_Casson_NS",
+#                         "a3=5",
+#                         "a3=40",
+#                         "org",
+#                         "pa=0.06",
+#                         "pc=1",
+#
+#                         # "ac=1.6",  # sve ac, ad izgledaju isto kao org
+#                         # "ac=2.8",
+#                         # "ad=2.5",
+#                         # "ad=4",
+#
+#                         "a3=30",
+#                         "pa=0.08",
 #                     ]
 
-# simulation_names = [
-#                     "a0=1.3",
-#                     "a3=10",
-#                     "a3=40",
-#                     "ab=100",
-#                     "ab=900",
-#                     "ac=1.67",
-#                     "ac=2.4",
-#                     ]
-
-
-simulation_names = [
-                        # "a3=5",
-                        # "a3=40",
-                        # "org",
-                        "pa=0.06",
-                        # "pc=1",
-
-                        # "ac=1.6",  # sve ac, ad izgledaju isto kao org
-                        # "ac=2.8",
-                        # "ad=2.5",
-                        # "ad=4",
-
-                        # "a3=30",
-                        "pa=0.08",
-                    ]
 
 
 
-
-
-times = [70]
+times = [200]
 
 all_data = pd.read_pickle(pickle_name)
+
+
+# print(len(all_data.S22_contours[0]))
+# print(len(all_data.inner_contours[0]))
+
+
+
 def time_analysis(times):
 
     for trenutak in times:
@@ -111,6 +105,7 @@ def time_analysis(times):
             # ILT_thickness()
 
         plt.show()
+        # plt.savefig(str(trenutak)+'.png')
 
 # time_analysis(times)
 
@@ -153,7 +148,7 @@ def diameter_analysis():
             plt.xlim([0, 250])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        ILT_inner_outer_cont()
+        # ILT_inner_outer_cont()
 
 
         def stress_cont():
@@ -165,7 +160,7 @@ def diameter_analysis():
             plt.xlim([0, 250])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # stress_cont()
+        stress_cont()
 
 
         def ILT_thickness_f():
@@ -212,6 +207,7 @@ def growth_over_time():
 
         def rast_D():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
+            plt.plot(timeStep, D_max, label=(simul))
             plt.plot(timeStep, D_max, label=(simul))
             plt.title("Rast D: ")
             plt.ylabel("D [mm]")

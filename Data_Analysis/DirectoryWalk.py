@@ -113,9 +113,7 @@ class FSG_Analysis:
         self.oneSim_data_dict = {"timeStep":[], "inner_contours":[], "outer_contours":[], "ILT_contours":[],
                                  "Z_contours":[], "ILT_thickness_contours":[], "vein_thickness_contours":[],
                                  "S22_contours": [],
-
                                  "H":[], "D_max":[],"S22_max":[], "ILT_thickness_max":[], "vein_thickness_max":[]
-
                                  }
 
 
@@ -128,7 +126,7 @@ class FSG_Analysis:
         self.startLine_res_Outer_lines = self.startLine_res_Inner_lines
 
         # mogućnost odabira 1-7 radijalnog elementa, 1: skroz unutarnji, 7: vanjski
-        radial_layer = 7
+        radial_layer = 1
         assert radial_layer in [1,2,3,4,5,6,7],  "Nedopušteni layer elementa"
         self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * self.time_step + ((radial_layer-1)*TSLenght)
 
@@ -165,7 +163,7 @@ class FSG_Analysis:
             vein_thickness_list.append(vein_thickness)
             z_list.append(z)
             S22_list.append(S22)
-            S22_list.append(0)
+            # S22_list.append(0)
 
             if r_inner > 1.05 * self.r0:
                 h_list.append(z)
