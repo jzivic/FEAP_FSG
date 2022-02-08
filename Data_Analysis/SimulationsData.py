@@ -1,24 +1,14 @@
 chosen_TimeSteps = [i for i in range(6666)]
 
 
-# results_directory = "//home/josip/feap/FSG/automatizacija_15/"   #path to analysis dir
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_15.pickle"
-# simulation_names = [
-#                     "AAA_Newt_snizena_65",
-#                     "AAA_Newt_snizena_75",
-#                     "AAA_Newt_snizena_85",
-#                     ]
-
 # results_directory = "//home/josip/feap/FSG/automatizacija_13/"   #path to analysis dir
 # simulation_names = [
 #                     "Newt_5_NS",
 #                     "Newt_6_NS",
 #                     "prava_Casson_NS",
 #                     ]
-#
-#
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
 
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
 
 
 
@@ -48,7 +38,11 @@ simulation_names = [
                         "ac=2.8",
                         "ad=2.5",
                         "ad=4",
-                    ]
+
+                        "a3=30",
+                        "pa=0.08",
+
+]
 
 
 

@@ -3,11 +3,7 @@ from SimulationsData import *
 import pandas as pd
 from matplotlib import pyplot as plt
 
-# simulation_names = [
-#                     "AAA_Newt_snizena_65",
-#                     "AAA_Newt_snizena_75",
-#                     "AAA_Newt_snizena_85",
-#                     ]
+
 # simulation_names = [
 #                     "Newt_5_NS",
 #                     "Newt_6_NS",
@@ -26,23 +22,26 @@ from matplotlib import pyplot as plt
 
 
 simulation_names = [
-                        "a3=5",
-                        "a3=40",
-                        "org",
+                        # "a3=5",
+                        # "a3=40",
+                        # "org",
                         "pa=0.06",
-                        "pc=1",
+                        # "pc=1",
 
                         # "ac=1.6",  # sve ac, ad izgledaju isto kao org
                         # "ac=2.8",
                         # "ad=2.5",
                         # "ad=4",
+
+                        # "a3=30",
+                        "pa=0.08",
                     ]
 
 
 
 
 
-times = [150]
+times = [70]
 
 all_data = pd.read_pickle(pickle_name)
 def time_analysis(times):
@@ -121,7 +120,7 @@ def time_analysis(times):
 
 
 
-r = 12
+r = 13
 wanted_D = r*2
 
 def diameter_analysis():
@@ -192,7 +191,7 @@ def diameter_analysis():
     
     plt.show()
 
-# diameter_analysis()
+diameter_analysis()
 
 
 
@@ -219,7 +218,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # rast_D()
+        rast_D()
 
 
         def rast_H():
@@ -241,7 +240,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        rast_S22()
+        # rast_S22()
 
 
         def ILT_thickness():
@@ -265,11 +264,9 @@ def growth_over_time():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
         # rast_vein_thickness()
-
-
     plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
 
