@@ -29,7 +29,7 @@ class FSG_Analysis:
                                                 "S22_contours": [],
 
                                                 "H": [],
-                                                "D_max": [],
+                                                "D_inner_max": [],
                                                 "S22_max": [],
                                                 "ILT_thickness_max": [],
                                                 "vein_thickness_max": [],
@@ -69,7 +69,7 @@ class FSG_Analysis:
                       self.oneSim_data_dict["S22_contours"],
 
                       self.oneSim_data_dict["H"],
-                      self.oneSim_data_dict["D_max"],
+                      self.oneSim_data_dict["D_inner_max"],
                       self.oneSim_data_dict["S22_max"],
                       self.oneSim_data_dict["ILT_thickness_max"],
                       self.oneSim_data_dict["vein_thickness_max"]
@@ -113,12 +113,17 @@ class FSG_Analysis:
         self.oneSim_data_dict = {"timeStep":[], "inner_contours":[], "outer_contours":[], "ILT_contours":[],
                                  "Z_contours":[], "ILT_thickness_contours":[], "vein_thickness_contours":[],
                                  "S22_contours": [],
-                                 "H":[], "D_max":[],"S22_max":[], "ILT_thickness_max":[], "vein_thickness_max":[]
+                                 "H":[], "D_inner_max":[],"S22_max":[], "ILT_thickness_max":[], "vein_thickness_max":[]
                                  }
 
 
 
+
+##########################################################################################################################
     # Svaki vremenski korak se vrti
+##########################################################################################################################
+
+
 
     def setting_start_lines(self):
         self.startLine_res_Inner_lines = 5 + TSLenght_res_Inner_lines * (self.time_step - 1)
@@ -126,7 +131,7 @@ class FSG_Analysis:
         self.startLine_res_Outer_lines = self.startLine_res_Inner_lines
 
         # mogućnost odabira 1-7 radijalnog elementa, 1: skroz unutarnji, 7: vanjski
-        radial_layer = 1
+        radial_layer = 7
         assert radial_layer in [1,2,3,4,5,6,7],  "Nedopušteni layer elementa"
         self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * self.time_step + ((radial_layer-1)*TSLenght)
 
@@ -137,6 +142,7 @@ class FSG_Analysis:
                 (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
 
             R = float(line.strip().split()[0])
+            
             if R > 1.0 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
@@ -169,7 +175,7 @@ class FSG_Analysis:
                 h_list.append(z)
 
         H = h_list[-1] - h_list[0]
-        D_max = max(r_inner_list)*2
+        D_inner_max = max(r_inner_list)*2
         S22_max = max(S22_list)
         ILT_thickness_max = max(ILT_thickness_list)
         vein_thickness_max = max(vein_thickness_list)
@@ -188,7 +194,7 @@ class FSG_Analysis:
         self.oneSim_data_dict["S22_contours"].append(S22_list)
 
         self.oneSim_data_dict["H"].append(H)
-        self.oneSim_data_dict["D_max"].append(D_max)
+        self.oneSim_data_dict["D_inner_max"].append(D_inner_max)
         self.oneSim_data_dict["S22_max"].append(S22_max)
 
         self.oneSim_data_dict["ILT_thickness_max"].append(ILT_thickness_max)
