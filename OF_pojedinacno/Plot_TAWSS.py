@@ -6,9 +6,16 @@ import pandas as pd
 
 
 
-casson_nCor_2 = "//home/josip/foamOpen/cases/FSG/NOVI_axial/usporedba_Modela/Casson/casson_2"
+# casson_nCor_2 = "//home/josip/foamOpen/cases/FSG/NOVI_axial/usporedba_Modela/Casson/casson_2"
+
+s1 = "//home/josip/feap/FSG/konferencijaKarsaj/rezultati/sve_simulacije/ab=900/simulacija68"
+
+s2 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_mrdanje"
+s3 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_Newt"
 
 
+
+barcelona = True
 
 
 class VadenjePodataka:
@@ -19,11 +26,14 @@ class VadenjePodataka:
         # self.imeSim = Case.split("/")[-2]
 
         self.oblik = oblik
-
-        korak = 1
+        korak = 2
+        if barcelona == True:
+            korak = 3
         self.koo_file = Case + "/"+str(korak)+"/koordinate"
         self.TAWSS_file = Case + "/"+str(korak)+"/TAWSS"
 
+        if barcelona == True:
+            self.koo_file = Case + "/" + str(korak) + "/kordinate"
 
         self.sviPodaciDict = {"r":[], "z":[],"tawss":[],   "x":[], "y":[]}
         self.CitanjeKoordinata()
@@ -36,7 +46,8 @@ class VadenjePodataka:
         elif self.oblik =="axial":
             self.Filtriranje()
 
-        self.Plot()
+        self.Plot_TAWSS()
+        # self.Plot_radius()
 
 
     def CitanjeKoordinata(self):
@@ -118,22 +129,45 @@ class VadenjePodataka:
         self.dobPodDF = dobPodDF.sort_values(by="z")
 
 
-    def Plot(self):
-        plt.grid(color='k', linestyle=':', linewidth=0.5)
+    def Plot_TAWSS(self):
+        plt.plot(self.dobPodDF["z"], self.dobPodDF["tawss"], label=self.imeSim)
+        plt.ylim(0, 1)
 
-        # plt.plot(self.dobPodDF["z"], self.dobPodDF["tawss"], label=self.imeSim)
-        # plt.ylim(0, 1)
-
-        plt.plot(self.dobPodDF["z"], self.dobPodDF["r"], label=self.imeSim)
-
-
-
+        plt.title("TAWSS ")
+        plt.ylabel("TAWSS [kPa]")
+        plt.xlabel("z [mm]")
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
         plt.legend()
 
 
 
+    def Plot_radius(self):
+        plt.plot(self.dobPodDF["z"], self.dobPodDF["r"], label=self.imeSim)
 
-case_casson_nCor_2 = VadenjePodataka(casson_nCor_2, oblik="axial")
+        plt.title("R ")
+        plt.ylabel("R [mm]")
+        plt.xlabel("z [mm]")
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
+        plt.legend()
+
+
+
+        # plt.plot(self.dobPodDF["z"], self.dobPodDF["r"], label=self.imeSim)
+
+
+
+
+
+
+
+# case_casson_nCor_2 = VadenjePodataka(casson_nCor_2, oblik="axial")
+
+
+
+# s1 = VadenjePodataka(s1, oblik="full")
+
+s2 = VadenjePodataka(s1, oblik="full")
+s3 = VadenjePodataka(s1, oblik="full")
 
 
 

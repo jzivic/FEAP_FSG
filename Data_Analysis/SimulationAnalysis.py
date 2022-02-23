@@ -3,9 +3,10 @@ from SimulationsData import *
 import pandas as pd
 from matplotlib import pyplot as plt
 
-# barcelona?
+# barcelona
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/barcelona.pickle"
 simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4",]
+# simulation_names = ["ac=1.67", "ac=2.4",]
 
 
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
@@ -13,22 +14,20 @@ simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4
 
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_16.pickle"
 # simulation_names = [
-#                         "a3=5",
-#                         "a3=40",
+#                         # "a3=5",
+#                         # "a3=40",
 #                         "org",
-#                         "pa=0.06",
-#                         "pc=1",
+#                         # "pa=0.06",
+#                         # "pc=1",
 #
 #                         # "ac=1.6",  # sve ac, ad izgledaju isto kao org
 #                         # "ac=2.8",
 #                         # "ad=2.5",
 #                         # "ad=4",
 #
-#                         "a3=30",
-#                         "pa=0.08",
+#                         # "a3=30",
+#                         # "pa=0.08",
 #                     ]
-
-
 
 
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_17.pickle"
@@ -60,15 +59,35 @@ simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4
 #                     # "k1=0_i4=115_i8=08_",
 # ]
 
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_18.pickle"
-simulation_names = [
-        # "foam_axial=1_2",
+
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_18.pickle"
+# simulation_names = [
+#         "foam_axial=1_2",
         # "foam_axial=2",
         # "foam_axial=3",
-        "restart_200",
-        "restart_250",
+        # "foam_axial=5",
+
+        # "restart_200",
+        # "restart_250",
         # "tawss=055",
-]
+
+        # "Newtn_33",
+        # "Newt_detaljno",
+
+        # "foam_axial=3_4nodes",
+        # "foam_axial=2_4nodes",
+
+        # "foam_axial=2_smooth",
+
+        # "rest_200_smooth",
+
+
+
+
+        # "no_ILT",
+        # "noILT_barcelona",
+# ]
 
 
 
@@ -143,7 +162,7 @@ def time_analysis(times):
 
         plt.show()
 
-time_analysis(times)
+# time_analysis(times)
 
 
 
@@ -151,7 +170,7 @@ time_analysis(times)
 
 
 
-r = 18
+r = 16
 wanted_D = r*2
 
 def diameter_analysis():
@@ -201,7 +220,7 @@ def diameter_analysis():
         def ILT_thickness_f():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(Z_cont, ILT_thickness_cont, c=color, label=(simul+", TS: "+str(time)))
-            plt.title("Debljina ILTa: ")
+            plt.title("Debljina ILT-a za D="+str(wanted_D)+"mm")
             plt.ylabel("Thickness [mm]")
             plt.xlabel("Axial coordinate $z$ [mm]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
@@ -239,7 +258,7 @@ def growth_over_time():
 
 
         def rast_D():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            # color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, D_inner_max, label=(simul))
             plt.title("Rast D inner: ")
             plt.ylabel("D [mm]")
@@ -294,7 +313,7 @@ def growth_over_time():
         # rast_vein_thickness()
     plt.show()
 
-# growth_over_time()
+growth_over_time()
 
 
 

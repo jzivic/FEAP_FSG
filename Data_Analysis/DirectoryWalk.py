@@ -11,7 +11,6 @@ TSLlenght_res_Outer_lines = TSLenght + 1
 TSLlenght_res_ILT_lines = TSLenght + 1
 TSLlenght_rN0841 = 1
 TSLlenght_res_Y0__field = 850
-# suffix_list = ["89-5"]
 
 
 class FSG_Analysis:
@@ -102,9 +101,10 @@ class FSG_Analysis:
         self.whole_document_ILT_lines = opening_res_ILT_lines.readlines()  # whole txt read in self.wholeDocument_eIW
         self.nl_res_ILT_lines = sum(1 for line in open("res__ILT_lines__89-5"))  # number of lines in export Inner Wall
 
-        opening_res_Y0_field = open("res__Y0_field__89-5", "r")  # open txt file
-        self.whole_document_res_Y0_field = opening_res_Y0_field.readlines()  # whole txt read in self.wholeDocument_eIW
-        self.nl_res_Y0_field = sum(1 for line in open("res__Y0_field__89-5"))  # number of lines in export Inner Wall
+        if barcelona == False:
+            opening_res_Y0_field = open("res__Y0_field__89-5", "r")  # open txt file
+            self.whole_document_res_Y0_field = opening_res_Y0_field.readlines()  # whole txt read in self.wholeDocument_eIW
+            self.nl_res_Y0_field = sum(1 for line in open("res__Y0_field__89-5"))  # number of lines in export Inner Wall
 
 
 
@@ -160,7 +160,11 @@ class FSG_Analysis:
             ILT_thickness = r_inner - r_ILT
             vein_thickness = r_outer - r_inner
             z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3])
-            S22 = float(self.whole_document_res_Y0_field[self.startLine_res_Y0_field+n_line].strip().split()[4])*1000 #kPa
+            if barcelona == False:
+                S22 = float(self.whole_document_res_Y0_field[self.startLine_res_Y0_field+n_line].strip().split()[4])*1000 #kPa
+            elif barcelona == True:
+                S22 = 0
+
 
             r_inner_list.append(r_inner)
             r_outer_list.append(r_outer)
