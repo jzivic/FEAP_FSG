@@ -6,7 +6,7 @@ import pandas as pd
 
 
 
-s1 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija16/"
+s1 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija25"
 
 
 
@@ -16,7 +16,7 @@ class VadenjePodataka:
     def __init__(self, Case, avg_neighbors):
 
         korak = 2
-        self.imeSim = Case.split("/")[-1]
+        self.imeSim = Case.split("/")[-2]
 
         self.avg_neighbors = avg_neighbors   # koliko susjeda sudjeluje u prosjeku (3= čvor + susjed sa svake strane)
 
@@ -26,11 +26,14 @@ class VadenjePodataka:
         self.citanje_koordinata()
         self.citanje_TAWSS()
         self.podaci_df = pd.DataFrame(self.podaci_dict)
+        # self.averaging_TAWSS()
 
-        self.average_TAWSS_1()
+
+        self.plot_TAWSS()
+        self.averaging_TAWSS_additional(3)
+        self.averaging_TAWSS_additional(5)
 
 
-        # self.plot_TAWSS()
         # self.plot_radius()
 
 
@@ -55,9 +58,6 @@ class VadenjePodataka:
                 self.podaci_dict["r"].append(r)
                 self.podaci_dict["z"].append(float(red[2]))
 
-                # self.podaci_df["x"].append(float(red[0]))
-                # self.podaci_df["y"].append(float(red[1]))
-                
 
     def citanje_TAWSS(self):
         zapTawss = False
@@ -74,48 +74,59 @@ class VadenjePodataka:
 
 
 
-    def average_TAWSS_1(self):
-        tawss_list = []
-        assert self.avg_neighbors % 2 == 1, "broj susjeda za osrednjavanje mora biti neparan"
+    # def averaging_TAWSS(self):  # ovo će se korisitit kada bude potvrđeno broj susjeda
+    #     assert self.avg_neighbors % 2 == 1, "broj susjeda za osrednjavanje mora biti neparan"
+    #     avg_tawss_list = list(self.podaci_df["tawss"])
+    #
+    #     skip = 0
+    #     start_index = int((self.avg_neighbors-1)/2)     # početni index da se izbjegnu rubovi
+    #
+    #     for n in range(skip+start_index, (len(self.podaci_df["tawss"])-start_index-skip), 1):
+    #         neighbours = [self.podaci_df["tawss"][(n-start_index)  + i] for i in range(self.avg_neighbors)]
+    #         tawss_avg = sum(neighbours)/len(neighbours)
+    #         avg_tawss_list[n] = tawss_avg
+    #     self.podaci_df["tawss_avg"] = avg_tawss_list
+
+
+
+
+
+
+
+
+
+    def averaging_TAWSS_additional(self, n_neighb):
+        assert n_neighb % 2 == 1, "broj susjeda za osrednjavanje mora biti neparan"
+        avg_tawss_list = list(self.podaci_df["tawss"])
 
         skip = 0
-        start_index = int((self.avg_neighbors-1)/2)     # početni index da se izbjegnu rubovi
-
+        start_index = int((n_neighb-1)/2)     # početni index da se izbjegnu rubovi
 
         for n in range(skip+start_index, (len(self.podaci_df["tawss"])-start_index-skip), 1):
-
-            neighbours = [self.podaci_df["z"][(n-(self.avg_neighbors-1)/2)  + i] for i in range(self.avg_neighbors)]
+            neighbours = [self.podaci_df["tawss"][(n-start_index)  + i] for i in range(n_neighb)]
             tawss_avg = sum(neighbours)/len(neighbours)
+            avg_tawss_list[n] = tawss_avg
+
+        plt.plot(self.podaci_df["z"], avg_tawss_list, label=n_neighb)
 
 
-            print(neighbours)
-
-
-            break
-
-
-
-
-
-        print(self.podaci_df)
 
 
 
     def plot_TAWSS(self):
-        plt.plot(self.podaci_df["z"], self.podaci_df["tawss"], label=self.imeSim)
+        # plt.plot(self.podaci_df["z"], self.podaci_df["tawss_avg"], label=self.avg_neighbors)
+        plt.plot(self.podaci_df["z"], self.podaci_df["tawss"], label="org")
         plt.ylim(0, 1)
 
-        plt.title("TAWSS ")
+        plt.title(self.imeSim)
         plt.ylabel("TAWSS [kPa]")
         plt.xlabel("z [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         plt.legend()
 
 
-
     def plot_radius(self):
         plt.plot(self.podaci_df["z"], self.podaci_df["r"], label=self.imeSim)
-
         plt.title("R ")
         plt.ylabel("R [mm]")
         plt.xlabel("z [mm]")
@@ -135,7 +146,7 @@ class VadenjePodataka:
 
 
 
-case_3 = VadenjePodataka(s1, 5)         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
+case_3 = VadenjePodataka(s1, 3)         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
 
 
 
