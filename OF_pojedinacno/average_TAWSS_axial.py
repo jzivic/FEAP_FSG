@@ -24,18 +24,19 @@ class VadenjePodataka:
 
 
 
-        # self.svi_podaci_dict = {"r":[], "z":[],"tawss":[],   "x":[], "y":[]}
-        self.svi_podaci_dict = {"r":[], "z":[],"tawss":[]}
+        # self.podaci_df = {"r":[], "z":[],"tawss":[],   "x":[], "y":[]}
+        self.podaci_dict = {"r":[], "z":[],"tawss":[]}
+
+
 
         self.citanje_koordinata()
         self.citanje_TAWSS()
-        self.svi_podaci_df = pd.DataFrame(self.svi_podaci_dict)
 
-        self.svi_podaci_df = self.svi_podaci_df.sort_values(by="z")
-        # self.filtriranje()
+        self.podaci_df = pd.DataFrame(self.podaci_dict)
 
 
-        self.plot_TAWSS()
+
+        # self.plot_TAWSS()
         # self.plot_radius()
 
 
@@ -55,11 +56,11 @@ class VadenjePodataka:
             if zapKoo == True:
                 red = red.strip("(", ).strip(")").split()
                 r = math.sqrt(float(red[0])**2 + float(red[1])**2)
-                self.svi_podaci_dict["r"].append(r)
-                self.svi_podaci_dict["z"].append(float(red[2]))
+                self.podaci_dict["r"].append(r)
+                self.podaci_dict["z"].append(float(red[2]))
 
-                # self.svi_podaci_dict["x"].append(float(red[0]))
-                # self.svi_podaci_dict["y"].append(float(red[1]))
+                # self.podaci_df["x"].append(float(red[0]))
+                # self.podaci_df["y"].append(float(red[1]))
                 
 
     def citanje_TAWSS(self):
@@ -73,22 +74,7 @@ class VadenjePodataka:
                 zapTawss = False
                 continue
             if zapTawss == True:
-                self.svi_podaci_dict["tawss"].append(float(red))
-
-
-
-    def filtriranje(self):
-        dobriPodaci = {"r":[], "z":[], "tawss":[]}
-
-        for n in range(len(self.svi_podaci_dict["x"])):
-            if abs(self.svi_podaci_df["y"].iloc[n]) < 1e-3 and self.svi_podaci_df["x"].iloc[n] > 0:
-
-                dobriPodaci["r"].append(self.svi_podaci_df["x"].iloc[n])
-                dobriPodaci["z"].append(self.svi_podaci_df["z"].iloc[n])
-                dobriPodaci["tawss"].append(self.svi_podaci_df["tawss"].iloc[n])
-        dobri_podaci_df = pd.DataFrame(dobriPodaci)
-        self.dobri_podaci_df = dobri_podaci_df.sort_values(by="z")
-
+                self.podaci_dict["tawss"].append(float(red))
 
 
     def average_TAWSS_1(self):
@@ -102,7 +88,7 @@ class VadenjePodataka:
 
 
     def plot_TAWSS(self):
-        plt.plot(self.dobri_podaci_df["z"], self.dobri_podaci_df["tawss"], label=self.imeSim)
+        plt.plot(self.podaci_df["z"], self.podaci_df["tawss"], label=self.imeSim)
         plt.ylim(0, 1)
 
         plt.title("TAWSS ")
@@ -114,7 +100,7 @@ class VadenjePodataka:
 
 
     def plot_radius(self):
-        plt.plot(self.dobri_podaci_df["z"], self.dobri_podaci_df["r"], label=self.imeSim)
+        plt.plot(self.podaci_df["z"], self.podaci_df["r"], label=self.imeSim)
 
         plt.title("R ")
         plt.ylabel("R [mm]")
@@ -124,7 +110,7 @@ class VadenjePodataka:
 
 
 
-        # plt.plot(self.dobri_podaci_df["z"], self.dobri_podaci_df["r"], label=self.imeSim)
+        # plt.plot(self.podaci_df["z"], self.podaci_df["r"], label=self.imeSim)
 
 
 
