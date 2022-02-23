@@ -13,27 +13,21 @@ s1 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija16/"
 
 
 class VadenjePodataka:
-    def __init__(self, Case, ):
-
-        self.imeSim = Case.split("/")[-1]
+    def __init__(self, Case, avg_neighbors):
 
         korak = 2
+        self.imeSim = Case.split("/")[-1]
+
+        self.avg_neighbors = avg_neighbors   # koliko susjeda sudjeluje u prosjeku (3= čvor + susjed sa svake strane)
 
         self.koo_file = Case + "/"+str(korak)+"/koordinate"
         self.TAWSS_file = Case + "/"+str(korak)+"/TAWSS"
 
-
-
-        # self.podaci_df = {"r":[], "z":[],"tawss":[],   "x":[], "y":[]}
-        self.podaci_dict = {"r":[], "z":[],"tawss":[]}
-
-
-
         self.citanje_koordinata()
         self.citanje_TAWSS()
-
         self.podaci_df = pd.DataFrame(self.podaci_dict)
 
+        self.average_TAWSS_1()
 
 
         # self.plot_TAWSS()
@@ -44,6 +38,8 @@ class VadenjePodataka:
 
 
     def citanje_koordinata(self):
+        self.podaci_dict = {"r":[], "z":[],"tawss":[]}
+
         zapKoo = False
         for red in open(self.koo_file).readlines():
             red = red.strip()
@@ -77,13 +73,31 @@ class VadenjePodataka:
                 self.podaci_dict["tawss"].append(float(red))
 
 
+
     def average_TAWSS_1(self):
-        print(4)
+        tawss_list = []
+        assert self.avg_neighbors % 2 == 1, "broj susjeda za osrednjavanje mora biti neparan"
+
+        skip = 0
+        start_index = int((self.avg_neighbors-1)/2)     # početni index da se izbjegnu rubovi
+
+
+        for n in range(skip+start_index, (len(self.podaci_df["tawss"])-start_index-skip), 1):
+
+            neighbours = [self.podaci_df["z"][(n-(self.avg_neighbors-1)/2)  + i] for i in range(self.avg_neighbors)]
+            tawss_avg = sum(neighbours)/len(neighbours)
+
+
+            print(neighbours)
+
+
+            break
 
 
 
 
 
+        print(self.podaci_df)
 
 
 
@@ -121,7 +135,7 @@ class VadenjePodataka:
 
 
 
-case_3 = VadenjePodataka(s1)
+case_3 = VadenjePodataka(s1, 5)         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
 
 
 
