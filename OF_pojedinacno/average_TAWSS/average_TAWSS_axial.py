@@ -6,7 +6,8 @@ import pandas as pd
 
 
 
-s1 = "/home/josip/feap/FSG/automatizacija_19/simulacija20_5"
+
+simulacija_foam = "/home/josip/feap/FSG/automatizacija_19/simulacija20_5"
 
 
 
@@ -29,9 +30,9 @@ class VadenjePodataka:
         self.podaci_df = pd.DataFrame(self.podaci_dict)
 
 
-        # self.plot_TAWSS()
+        self.plot_TAWSS()
         self.podaci_df["tawss_avg"] = self.averaging_TAWSS(3)
-        # plt.show()
+        plt.show()
 
 
         self.write_TAWSS()
@@ -82,7 +83,7 @@ class VadenjePodataka:
             neighbours = [self.podaci_df["tawss"][(n-start_index) + i] for i in range(n_neighb)]
             tawss_avg = sum(neighbours)/len(neighbours)
             avg_tawss_list[n] = tawss_avg
-        plt.plot(self.podaci_df["z"], avg_tawss_list, label=n_neighb)
+        plt.plot(self.podaci_df["z"], avg_tawss_list, label="avg")
         return avg_tawss_list
 
 
@@ -103,22 +104,19 @@ class VadenjePodataka:
         text_file = open(self.TAWSS_file, "r").readlines()
         number_lines = sum(1 for line in text_file)
 
-        start = 52
-        finish = number_lines-8
 
+        start_line = 52
+        finish_line = number_lines-7
 
-        # for n_line in range(start, finish):
-            # print(n_line)
+        intro_tawss = text_file[0:start_line]
+        outro_tawss = text_file[finish_line::]
+        tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg"]]
 
-            # text_file[n_line] = n_line
-
-        text_file.write[0] = "eeeeeeeeeeeee"
-
-
-
-
-
-
+        novi = open("pero",  "w")
+        novi.writelines(intro_tawss)
+        novi.writelines(tawss_avg)
+        novi.writelines(outro_tawss)
+        novi.close()
 
 
 
@@ -127,7 +125,9 @@ class VadenjePodataka:
 
 
 
-case_3 = VadenjePodataka(s1, 3, foam_Z_elements=5)         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
+
+
+case_3 = VadenjePodataka(simulacija_foam, 3, foam_Z_elements=5)         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
 
 
 
