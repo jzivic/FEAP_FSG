@@ -2,38 +2,27 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pandas as pd
-
-
-
-
-
-simulacija_foam = "/home/josip/feap/FSG/automatizacija_19/simulacija20_5"
-
-
+# simulacija_foam = "/home/josip/feap/FSG/automatizacija_19/simulacija20_5"     # ovo je isključeno za foam siimulacije
 
 
 
 
 class VadenjePodataka:
-    def __init__(self, Case, avg_neighbors, foam_Z_elements):
+    def __init__(self, Case, foam_Z_elements):
 
         korak = 2
         self.imeSim = Case.split("/")[-1]
         self.foam_Z_elements = foam_Z_elements
-        self.avg_neighbors = avg_neighbors   # koliko susjeda sudjeluje u prosjeku (3= čvor + susjed sa svake strane)
 
         self.koo_file = Case + "/"+str(korak)+"/koordinate"
         self.TAWSS_file = Case + "/"+str(korak)+"/TAWSS"
 
         self.reading_koordinate()
         self.reading_TAWSS()
+
         self.podaci_df = pd.DataFrame(self.podaci_dict)
-
-
-        self.plot_TAWSS()
         self.podaci_df["tawss_avg"] = self.averaging_TAWSS(3)
-        plt.show()
-
+        self.plot_TAWSS()
 
         self.write_TAWSS()
 
@@ -42,7 +31,6 @@ class VadenjePodataka:
 
     def reading_koordinate(self):
         self.podaci_dict = {"r":[], "z":[],"tawss":[]}
-
         zapKoo = False
         for red in open(self.koo_file).readlines():
             red = red.strip()
@@ -83,27 +71,27 @@ class VadenjePodataka:
             neighbours = [self.podaci_df["tawss"][(n-start_index) + i] for i in range(n_neighb)]
             tawss_avg = sum(neighbours)/len(neighbours)
             avg_tawss_list[n] = tawss_avg
-        plt.plot(self.podaci_df["z"], avg_tawss_list, label="avg")
         return avg_tawss_list
 
 
-
     def plot_TAWSS(self):
+        fig = plt.gcf()
         plt.plot(self.podaci_df["z"], self.podaci_df["tawss"], label="org")
+        plt.plot(self.podaci_df["z"], self.podaci_df["tawss_avg"], label="avg")
         plt.ylim(0, 1)
         plt.title(self.imeSim)
         plt.ylabel("TAWSS [kPa]")
         plt.xlabel("z [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         plt.legend()
-
+        plt.draw()
+        plt.close()
+        fig.savefig('TAWSS_avg.png', dpi=300)
 
 
     def write_TAWSS(self):
-
         text_file = open(self.TAWSS_file, "r").readlines()
         number_lines = sum(1 for line in text_file)
-
 
         start_line = 52
         finish_line = number_lines-7
@@ -112,7 +100,7 @@ class VadenjePodataka:
         outro_tawss = text_file[finish_line::]
         tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg"]]
 
-        novi = open("pero",  "w")
+        novi = open("TAWSS",  "w")
         novi.writelines(intro_tawss)
         novi.writelines(tawss_avg)
         novi.writelines(outro_tawss)
@@ -121,13 +109,7 @@ class VadenjePodataka:
 
 
 
-
-
-
-
-
-
-case_3 = VadenjePodataka(simulacija_foam, 3, foam_Z_elements=5)         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
+avg = VadenjePodataka(simulacija_foam, foam_Z_elements=1)         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
 
 
 
@@ -148,4 +130,3 @@ case_3 = VadenjePodataka(simulacija_foam, 3, foam_Z_elements=5)         # 1 == b
 
 
 
-# plt.show()
