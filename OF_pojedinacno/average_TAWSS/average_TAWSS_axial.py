@@ -2,10 +2,8 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pandas as pd
-# simulacija_foam = "/home/josip/feap/FSG/automatizacija_19/simulacija20_5"     # ovo je isključeno za foam siimulacije
 
-
-
+simulacija_foam = "/home/josip/feap/FSG/automatizacija_19/simulacija20_5"     # ovo je isključeno za foam siimulacije
 
 class VadenjePodataka:
     def __init__(self, Case, foam_Z_elements):
@@ -100,11 +98,12 @@ class VadenjePodataka:
         outro_tawss = text_file[finish_line::]
         tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg"]]
 
-        novi = open("TAWSS",  "w")
-        novi.writelines(intro_tawss)
-        novi.writelines(tawss_avg)
-        novi.writelines(outro_tawss)
-        novi.close()
+        new_tawss_file = open(self.TAWSS_file,  "w")
+        new_tawss_file = open("TAWSS_file",  "w")
+        new_tawss_file.writelines(intro_tawss)
+        new_tawss_file.writelines(tawss_avg)
+        new_tawss_file.writelines(outro_tawss)
+        new_tawss_file.close()
 
 
 
