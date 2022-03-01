@@ -32,13 +32,14 @@ class FSG_Analysis:
                                                 "S22_max": [],
                                                 "ILT_thickness_max": [],
                                                 "vein_thickness_max": [],
+                                                "ILT_surface": [],
                                                 },
                                             index= [])
-
 
         for simulation_folder in simulation_names:                               # ulazi u folder simulacije
             simulation_path = results_directory + simulation_folder
             os.chdir(simulation_path)
+
             # Setting simulation
             self.simulation_name = simulation_folder
             self.set_files()
@@ -47,14 +48,18 @@ class FSG_Analysis:
             for self.time_step in chosen_TimeSteps:
                 self.setting_start_lines()
 
+                # print(self.check_AAA_formation(), self.time_step)
+
                 if self.check_AAA_formation() == True:
-                    try:
-                        self.timeStep_extraction()
-                    except IndexError:
-                        pass
+                    # try:
+                    self.timeStep_extraction()
+                    # except IndexError:
+                    #     pass
 
                 elif self.check_AAA_formation() == False:
-                    dopuna = [None for i in range(len(all_simulations_data_df))]
+                    dopuna = [None for i in all_simulations_data_df]
+
+                # break
 
             dopuna = [self.oneSim_data_dict["timeStep"],
 
@@ -71,7 +76,8 @@ class FSG_Analysis:
                       self.oneSim_data_dict["D_inner_max"],
                       self.oneSim_data_dict["S22_max"],
                       self.oneSim_data_dict["ILT_thickness_max"],
-                      self.oneSim_data_dict["vein_thickness_max"]
+                      self.oneSim_data_dict["vein_thickness_max"],
+                      self.oneSim_data_dict["ILT_surface"]
                       ]
 
 
@@ -113,7 +119,8 @@ class FSG_Analysis:
         self.oneSim_data_dict = {"timeStep":[], "inner_contours":[], "outer_contours":[], "ILT_contours":[],
                                  "Z_contours":[], "ILT_thickness_contours":[], "vein_thickness_contours":[],
                                  "S22_contours": [],
-                                 "H":[], "D_inner_max":[],"S22_max":[], "ILT_thickness_max":[], "vein_thickness_max":[]
+                                 "H":[], "D_inner_max":[],"S22_max":[], "ILT_thickness_max":[], "vein_thickness_max":[],
+                                 "ILT_surface":[]
                                  }
 
 
@@ -131,18 +138,20 @@ class FSG_Analysis:
         self.startLine_res_Outer_lines = self.startLine_res_Inner_lines
 
         # mogućnost odabira 1-7 radijalnog elementa, 1: skroz unutarnji, 7: vanjski
-        radial_layer = 7
+        radial_layer = 1
         assert radial_layer in [1,2,3,4,5,6,7],  "Nedopušteni layer elementa"
-        self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * self.time_step + ((radial_layer-1)*TSLenght)
 
+        dodatak = 0
+        if self.time_step >=100:
+            dodatak = 132
+
+        self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * self.time_step + ((radial_layer-1)*TSLenght)+dodatak
 
 
     def check_AAA_formation(self):
         for line in self.whole_document_Inner_lines[self.startLine_res_Inner_lines:
                 (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
-
             R = float(line.strip().split()[0])
-            
             if R > 1.0 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
@@ -150,7 +159,9 @@ class FSG_Analysis:
 
     def timeStep_extraction(self):
         timeSteps_list, r_inner_list, z_list, r_outer_list, r_ILT_list = [], [], [], [], []
-        ILT_thickness_list, vein_thickness_list, h_list, S22_list = [], [], [], [],
+        ILT_thickness_list, vein_thickness_list, h_list, S22_list, ILT_surface = [], [], [], [], 0
+
+        # print(self.startLine_res_Y0_field)
 
         for n_line in range(TSLenght_res_Inner_lines-1):
 
@@ -161,9 +172,17 @@ class FSG_Analysis:
             vein_thickness = r_outer - r_inner
             z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3])
             if barcelona == False:
+
                 S22 = float(self.whole_document_res_Y0_field[self.startLine_res_Y0_field+n_line].strip().split()[4])*1000 #kPa
+
             elif barcelona == True:
                 S22 = 0
+
+            if n_line > 0:
+                delta_z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3]) - \
+                float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line-1].strip().split()[3])
+                ilt_surface = delta_z * (r_inner-r_ILT)/2
+                ILT_surface += ilt_surface
 
 
             r_inner_list.append(r_inner)
@@ -177,14 +196,14 @@ class FSG_Analysis:
 
             if r_inner > 1.05 * self.r0:
                 h_list.append(z)
+                H = h_list[-1] - h_list[0]
+            else:
+                H = 0
 
-        H = h_list[-1] - h_list[0]
         D_inner_max = max(r_inner_list)*2
         S22_max = max(S22_list)
         ILT_thickness_max = max(ILT_thickness_list)
         vein_thickness_max = max(vein_thickness_list)
-
-
 
         self.oneSim_data_dict["timeStep"].append(self.time_step)
 
@@ -203,6 +222,8 @@ class FSG_Analysis:
 
         self.oneSim_data_dict["ILT_thickness_max"].append(ILT_thickness_max)
         self.oneSim_data_dict["vein_thickness_max"].append(vein_thickness_max)
+
+        self.oneSim_data_dict["ILT_surface"].append(ILT_surface)
 
 
 

@@ -1,4 +1,5 @@
 chosen_TimeSteps = [i for i in range(6666)]
+chosen_TimeSteps = [i for i in range(1,152)]
 barcelona = False
 
 
@@ -19,20 +20,17 @@ barcelona = False
 #                     "ab=900",
 #                     "ac=1.67",
 #                     "ac=2.4",
-
-                        # < org pokrenuto
-
 #                     ]
 
 
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
-results_directory = "//home/josip/feap/FSG/automatizacija_13/"   #path to analysis dir
-simulation_names = [
-                    "Newt_5_NS",
-                    "Newt_6_NS",
-                    "prava_Casson_NS",
-                    "BS_NS",
-                    ]
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
+# results_directory = "//home/josip/feap/FSG/automatizacija_13/"   #path to analysis dir
+# simulation_names = [
+#                     "Newt_5_NS",
+#                     "Newt_6_NS",
+#                     "prava_Casson_NS",
+#                     "BS_NS",
+#                     ]
 
 
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_16.pickle"
@@ -85,34 +83,68 @@ simulation_names = [
 # ]
 
 
+# barcelona = False
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_18.pickle"
+# results_directory = "//home/josip/feap/FSG/automatizacija_18/"
+# simulation_names = [
+#
+#         "foam_axial=1_2",
+#         "foam_axial=2",
+#         "foam_axial=3",
+#         "restart_200",
+#         "restart_250",
+#         "tawss=055",
+#
+#         "Newtn_33",
+#         "Newt_detaljno",
+#
+#         "foam_axial=3_4nodes",
+#         "foam_axial=2_4nodes",
+#         "foam_axial=5",
+#
+#         "foam_axial=2_smooth",
+#
+#         "AAA_Newt033",
+#         "rest_200_smooth",
+#
+#         # "no_ILT",
+#         # "noILT_barcelona",
+# ]
+
+
+
 barcelona = False
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_18.pickle"
-results_directory = "//home/josip/feap/FSG/automatizacija_18/"
+results_directory = "//home/josip/feap/FSG/automatizacija_19/"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_19.pickle"
 simulation_names = [
 
-        "foam_axial=1_2",
-        "foam_axial=2",
-        "foam_axial=3",
-        "restart_200",
-        "restart_250",
-        "tawss=055",
+            "avg_1",
+            "avg_smooth_1",
+            "Newt33_avg",
+            "no_average",
 
-        "Newtn_33",
-        "Newt_detaljno",
-
-        "foam_axial=3_4nodes",
-        "foam_axial=2_4nodes",
-        "foam_axial=5",
-
-        "foam_axial=2_smooth",
-
-        "AAA_Newt033",
-        # "rest_200_smooth",
-
-        # "no_ILT",
-        # "noILT_barcelona",
-
+            "Newt_5_avg",
+            "Newt_5_avg_smooth",
 ]
 
+# barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_20/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
+# simulation_names = [
+#     # "4_nodes",
+#     # "loop2_4nodes",
+#     "loop_1",
+#     # "loop_2_",
+#
+#     # "i4=115_loop2",
+#     # "i4=115_loop2_4nodes",
+# ]
 
 
+# barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_21/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_21.pickle"
+# simulation_names = [
+#
+#         "p1"
+# ]

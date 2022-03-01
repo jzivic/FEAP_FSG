@@ -42,52 +42,74 @@ simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4
 #                     # "TAWSS=035_i4=108_i8=08",
 #                     # "TAWSS=035_i4=108_i8=065",
 #                     # "TAWSS=035_i4=115_i8=08",
-#                     "TAWSS=035_i4=115_i8=065",
+#                     # "TAWSS=035_i4=115_i8=065",
 #
 #                     # "TAWSS=030_i4=108_i8=08",
 #                     # "TAWSS=030_i4=108_i8=065",
 #                     # "TAWSS=030_i4=115_i8=08",
-#                     "TAWSS=030_i4=115_i8=065",
+#                     # "TAWSS=030_i4=115_i8=065",
 #
 #                     # "i4=125",
 #                     # "i4=120",
 #
 #                     # "i4=115_",
-#                     # "i4=115_deb015_",
-#                     # "i4=115_deb01_",
+#                     "i4=115_deb015_",
+#                     "i4=115_deb01_",
 #                     # "k1=0_i4=115=i8=1_",
 #                     # "k1=0_i4=115_i8=08_",
 # ]
 
 
-
+#
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_18.pickle"
 # simulation_names = [
 #         "foam_axial=1_2",
-        # "foam_axial=2",
-        # "foam_axial=3",
-        # "foam_axial=5",
-
-        # "restart_200",
-        # "restart_250",
-        # "tawss=055",
-
-        # "Newtn_33",
-        # "Newt_detaljno",
-
-        # "foam_axial=3_4nodes",
-        # "foam_axial=2_4nodes",
-
-        # "foam_axial=2_smooth",
-
-        # "rest_200_smooth",
-
-
-
-
-        # "no_ILT",
-        # "noILT_barcelona",
+#         # "foam_axial=2",
+#         # "foam_axial=3",
+#         # "foam_axial=5",
+#
+#         "restart_200",
+#         "restart_250",
+#         # "tawss=055",
+#
+#         # "Newtn_33",
+#         # "Newt_detaljno",
+#
+#         # "foam_axial=3_4nodes",
+#         # "foam_axial=2_4nodes",
+#
+#         # "foam_axial=2_smooth",
+#         # "rest_200_smooth",
+#
+#         # "no_ILT",
+#         # "noILT_barcelona",
 # ]
+
+# barcelona = False
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_19.pickle"
+# simulation_names = [
+#             "avg_1",
+#             "avg_smooth_1",
+#             # "Newt33_avg",
+#             "no_average",
+#
+#             "Newt_5_avg",
+#             "Newt_5_avg_smooth",
+# ]
+
+
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
+simulation_names = [
+    "4_nodes",
+    "loop2_4nodes",
+    "loop_1",
+    "loop_2_",
+
+    "i4=115_loop2",
+    "i4=115_loop2_4nodes",
+]
+
+
 
 
 
@@ -170,7 +192,7 @@ def time_analysis(times):
 
 
 
-r = 16
+r = 13
 wanted_D = r*2
 
 def diameter_analysis():
@@ -265,7 +287,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        rast_D()
+        # rast_D()
 
 
         def rast_H():
@@ -298,7 +320,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # ILT_thickness()
+        ILT_thickness()
 
 
         # Ima li ovo smisla???
@@ -313,9 +335,27 @@ def growth_over_time():
         # rast_vein_thickness()
     plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
+
+
+
+ic = all_data.loc["loop_1"]["inner_contours"][-1]
+il = all_data.loc["loop_1"]["ILT_contours"][-1]
+z = all_data.loc["loop_1"]["Z_contours"][-1]
+
+# print(il)
+# print(z)
+
+
+area = all_data.loc["loop_1"]["ILT_surface"]
+ts = all_data.loc["loop_1"]["timeStep"]
+
+print(ts)
+
+plt.plot(ts, area)
+plt.show()
 
 
 
