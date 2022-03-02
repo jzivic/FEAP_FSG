@@ -278,6 +278,8 @@ def growth_over_time():
         ILT_thickness_max = all_data.loc[simul]["ILT_thickness_max"]
         vein_thickness_max = all_data.loc[simul]["vein_thickness_max"]
 
+        ILT_surface = all_data.loc[simul]["ILT_surface"]
+
 
         def rast_D():
             # color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -287,7 +289,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        rast_D()
+        # rast_D()
 
 
         def rast_H():
@@ -321,6 +323,18 @@ def growth_over_time():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
         # ILT_thickness()
+
+
+        def ILT_surface_f():
+            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            plt.plot(timeStep, ILT_surface, label=(simul))
+            plt.title("Rast površine ILT-a: ")
+            plt.ylabel("ILT surface [mm$^2$]")
+            plt.xlabel("timeStep [-]")
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            plt.legend()
+        ILT_surface_f()
+
 
 
         # Ima li ovo smisla???

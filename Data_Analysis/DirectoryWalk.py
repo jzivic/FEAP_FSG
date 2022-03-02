@@ -138,20 +138,15 @@ class FSG_Analysis:
         assert radial_layer in [1,2,3,4,5,6,7],  "Nedopušteni layer elementa"
 
         self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * (self.time_step-1) + ((radial_layer - 1) * TSLenght)
-
         if self.time_step >= 100:
             Y0_corrention = 132
             self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * (self.time_step-1) + ((radial_layer-1)*TSLenght) + Y0_corrention
-
-
-
-
 
     def check_AAA_formation(self):
         for line in self.whole_document_Inner_lines[self.startLine_res_Inner_lines:
                 (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
             R = float(line.strip().split()[0])
-            if R > 0.9 * self.r0:                                               # kako ovo definirati - mijenja se?
+            if R > 0.99 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
 
@@ -160,10 +155,7 @@ class FSG_Analysis:
         timeSteps_list, r_inner_list, z_list, r_outer_list, r_ILT_list = [], [], [], [], []
         ILT_thickness_list, vein_thickness_list, h_list, S22_list, ILT_surface = [], [], [], [], 0
 
-        print(self.startLine_res_Y0_field, self.time_step, self.startLine_res_Inner_lines)
-
         for n_line in range(TSLenght_res_Inner_lines-1):
-
             r_inner = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[0])
             r_outer = float(self.whole_document_Outer_lines[self.startLine_res_Outer_lines + n_line].strip().split()[0])
             r_ILT = float(self.whole_document_ILT_lines[self.startLine_res_ILT_lines + n_line].strip().split()[0])
@@ -172,7 +164,6 @@ class FSG_Analysis:
             z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3])
 
             if barcelona == False:
-                # print(self.startLine_res_Y0_field+n_line, self.startLine_res_Inner_lines + n_line)
                 S22 = float(self.whole_document_res_Y0_field[self.startLine_res_Y0_field+n_line].strip().split()[4])*1000 #kPa
             elif barcelona == True:
                 S22 = 0
@@ -182,7 +173,6 @@ class FSG_Analysis:
                 float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line-1].strip().split()[3])
                 ilt_surface = delta_z * (r_inner-r_ILT)/2
                 ILT_surface += ilt_surface
-
 
             r_inner_list.append(r_inner)
             r_outer_list.append(r_outer)
