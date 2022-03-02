@@ -48,7 +48,7 @@ class FSG_Analysis:
             for self.time_step in chosen_TimeSteps:
                 self.setting_start_lines()
 
-                print(self.check_AAA_formation(), self.time_step)
+                # print(self.check_AAA_formation(), self.time_step)
 
                 if self.check_AAA_formation() == True:
                     self.timeStep_extraction()              # ovdje je bio try!!!
@@ -137,18 +137,21 @@ class FSG_Analysis:
         radial_layer = 1
         assert radial_layer in [1,2,3,4,5,6,7],  "Nedopušteni layer elementa"
 
-        Y0_corrention = 0
-        if self.time_step >=100:
-            Y0_corrention = 132
+        self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * (self.time_step-1) + ((radial_layer - 1) * TSLenght)
 
-        self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * self.time_step + ((radial_layer-1)*TSLenght)+Y0_corrention
+        if self.time_step >= 100:
+            Y0_corrention = 132
+            self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * (self.time_step-1) + ((radial_layer-1)*TSLenght) + Y0_corrention
+
+
+
 
 
     def check_AAA_formation(self):
         for line in self.whole_document_Inner_lines[self.startLine_res_Inner_lines:
                 (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
             R = float(line.strip().split()[0])
-            if R > 1.0 * self.r0:                                               # kako ovo definirati - mijenja se?
+            if R > 0.9 * self.r0:                                               # kako ovo definirati - mijenja se?
                 return True
         return False
 
@@ -157,7 +160,7 @@ class FSG_Analysis:
         timeSteps_list, r_inner_list, z_list, r_outer_list, r_ILT_list = [], [], [], [], []
         ILT_thickness_list, vein_thickness_list, h_list, S22_list, ILT_surface = [], [], [], [], 0
 
-        # print(self.startLine_res_Y0_field)
+        print(self.startLine_res_Y0_field, self.time_step, self.startLine_res_Inner_lines)
 
         for n_line in range(TSLenght_res_Inner_lines-1):
 
@@ -167,8 +170,9 @@ class FSG_Analysis:
             ILT_thickness = r_inner - r_ILT
             vein_thickness = r_outer - r_inner
             z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3])
+
             if barcelona == False:
-                print(self.startLine_res_Y0_field+n_line, self.startLine_res_Inner_lines + n_line)
+                # print(self.startLine_res_Y0_field+n_line, self.startLine_res_Inner_lines + n_line)
                 S22 = float(self.whole_document_res_Y0_field[self.startLine_res_Y0_field+n_line].strip().split()[4])*1000 #kPa
             elif barcelona == True:
                 S22 = 0

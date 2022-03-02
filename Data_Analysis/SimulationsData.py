@@ -1,5 +1,5 @@
-chosen_TimeSteps = [i for i in range(6666)]
-# chosen_TimeSteps = [i for i in range(1,152)]
+# chosen_TimeSteps = [i for i in range(666)]
+chosen_TimeSteps = [i for i in range(1,300)]
 barcelona = False
 
 
