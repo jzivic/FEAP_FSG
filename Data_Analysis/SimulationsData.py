@@ -127,24 +127,24 @@ barcelona = False
 #             "Newt_5_avg_smooth",
 # ]
 
-barcelona = False
-results_directory = "//home/josip/feap/FSG/automatizacija_20/"
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
-simulation_names = [
-    "4_nodes",
-    "loop2_4nodes",
-    "loop_1",
-    "loop_2_",
-
-    "i4=115_loop2",
-    "i4=115_loop2_4nodes",
-]
-
-
 # barcelona = False
-# results_directory = "//home/josip/feap/FSG/automatizacija_21/"
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_21.pickle"
+# results_directory = "//home/josip/feap/FSG/automatizacija_20/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
 # simulation_names = [
+#     "4_nodes",
+#     "loop2_4nodes",
+#     "loop_1",
+#     "loop_2_",
 #
-#         "p1"
+#     "i4=115_loop2",
+#     "i4=115_loop2_4nodes",
 # ]
+
+
+barcelona = False
+results_directory = "//home/josip/feap/FSG/automatizacija_21/"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_21.pickle"
+simulation_names = [
+
+        "p1"
+]

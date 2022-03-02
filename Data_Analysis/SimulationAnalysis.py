@@ -4,8 +4,8 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 # barcelona
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/barcelona.pickle"
-simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4",]
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/barcelona.pickle"
+# simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4",]
 # simulation_names = ["ac=1.67", "ac=2.4",]
 
 
@@ -90,7 +90,7 @@ simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4
 # simulation_names = [
 #             "avg_1",
 #             "avg_smooth_1",
-#             # "Newt33_avg",
+#             "Newt33_avg",
 #             "no_average",
 #
 #             "Newt_5_avg",
@@ -104,13 +104,13 @@ simulation_names = [
     "loop2_4nodes",
     "loop_1",
     "loop_2_",
-
     "i4=115_loop2",
     "i4=115_loop2_4nodes",
 ]
 
 
-
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_21.pickle"
+# simulation_names = ["p1"]
 
 
 all_data = pd.read_pickle(pickle_name)
@@ -217,10 +217,9 @@ def diameter_analysis():
             plt.plot(Z_cont, inner_cont, c=color, label=(simul+", TS: "+str(time)))
             plt.plot(Z_cont, ILT_cont, linestyle=':', c=color)
             # plt.plot(Z_cont, outer_cont, linestyle='--', c=color)
-            # plt.title(str(trenutak) + ". korak")
+            plt.title("Konture")
             plt.ylabel("Radius [mm]")
             plt.xlabel("Axial coordinate $z$ [mm]")
-            # plt.ylim([9, 18])
             plt.xlim([0, 250])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
@@ -311,7 +310,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # rast_S22()
+        rast_S22()
 
 
         def ILT_thickness():
@@ -333,7 +332,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        ILT_surface_f()
+        # ILT_surface_f()
 
 
 
@@ -347,6 +346,7 @@ def growth_over_time():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
         # rast_vein_thickness()
+
     plt.show()
 
 growth_over_time()
