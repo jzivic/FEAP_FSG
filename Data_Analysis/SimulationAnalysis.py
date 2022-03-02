@@ -287,7 +287,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # rast_D()
+        rast_D()
 
 
         def rast_H():
@@ -320,7 +320,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        ILT_thickness()
+        # ILT_thickness()
 
 
         # Ima li ovo smisla???
@@ -335,27 +335,12 @@ def growth_over_time():
         # rast_vein_thickness()
     plt.show()
 
-# growth_over_time()
+growth_over_time()
 
 
 
 
 
-ic = all_data.loc["loop_1"]["inner_contours"][-1]
-il = all_data.loc["loop_1"]["ILT_contours"][-1]
-z = all_data.loc["loop_1"]["Z_contours"][-1]
-
-# print(il)
-# print(z)
-
-
-area = all_data.loc["loop_1"]["ILT_surface"]
-ts = all_data.loc["loop_1"]["timeStep"]
-
-print(ts)
-
-plt.plot(ts, area)
-plt.show()
 
 
 

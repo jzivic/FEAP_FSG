@@ -48,18 +48,14 @@ class FSG_Analysis:
             for self.time_step in chosen_TimeSteps:
                 self.setting_start_lines()
 
-                # print(self.check_AAA_formation(), self.time_step)
+                print(self.check_AAA_formation(), self.time_step)
 
                 if self.check_AAA_formation() == True:
-                    # try:
-                    self.timeStep_extraction()
-                    # except IndexError:
-                    #     pass
+                    self.timeStep_extraction()              # ovdje je bio try!!!
+
 
                 elif self.check_AAA_formation() == False:
                     dopuna = [None for i in all_simulations_data_df]
-
-                # break
 
             dopuna = [self.oneSim_data_dict["timeStep"],
 
@@ -141,11 +137,11 @@ class FSG_Analysis:
         radial_layer = 1
         assert radial_layer in [1,2,3,4,5,6,7],  "Nedopušteni layer elementa"
 
-        dodatak = 0
+        Y0_corrention = 0
         if self.time_step >=100:
-            dodatak = 132
+            Y0_corrention = 132
 
-        self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * self.time_step + ((radial_layer-1)*TSLenght)+dodatak
+        self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * self.time_step + ((radial_layer-1)*TSLenght)+Y0_corrention
 
 
     def check_AAA_formation(self):
@@ -172,9 +168,8 @@ class FSG_Analysis:
             vein_thickness = r_outer - r_inner
             z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3])
             if barcelona == False:
-
+                print(self.startLine_res_Y0_field+n_line, self.startLine_res_Inner_lines + n_line)
                 S22 = float(self.whole_document_res_Y0_field[self.startLine_res_Y0_field+n_line].strip().split()[4])*1000 #kPa
-
             elif barcelona == True:
                 S22 = 0
 

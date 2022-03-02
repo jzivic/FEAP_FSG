@@ -1,5 +1,5 @@
 chosen_TimeSteps = [i for i in range(6666)]
-chosen_TimeSteps = [i for i in range(1,152)]
+# chosen_TimeSteps = [i for i in range(1,152)]
 barcelona = False
 
 
@@ -113,32 +113,32 @@ barcelona = False
 
 
 
-barcelona = False
-results_directory = "//home/josip/feap/FSG/automatizacija_19/"
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_19.pickle"
-simulation_names = [
-
-            "avg_1",
-            "avg_smooth_1",
-            "Newt33_avg",
-            "no_average",
-
-            "Newt_5_avg",
-            "Newt_5_avg_smooth",
-]
-
 # barcelona = False
-# results_directory = "//home/josip/feap/FSG/automatizacija_20/"
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
+# results_directory = "//home/josip/feap/FSG/automatizacija_19/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_19.pickle"
 # simulation_names = [
-#     # "4_nodes",
-#     # "loop2_4nodes",
-#     "loop_1",
-#     # "loop_2_",
 #
-#     # "i4=115_loop2",
-#     # "i4=115_loop2_4nodes",
+#             "avg_1",
+#             "avg_smooth_1",
+#             "Newt33_avg",
+#             "no_average",
+#
+#             "Newt_5_avg",
+#             "Newt_5_avg_smooth",
 # ]
+
+barcelona = False
+results_directory = "//home/josip/feap/FSG/automatizacija_20/"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
+simulation_names = [
+    # "4_nodes",
+    # "loop2_4nodes",
+    # "loop_1",
+    # "loop_2_",
+
+    # "i4=115_loop2",
+    "i4=115_loop2_4nodes",
+]
 
 
 # barcelona = False
