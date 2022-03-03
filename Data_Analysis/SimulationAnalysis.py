@@ -85,17 +85,17 @@ from matplotlib import pyplot as plt
 #         # "noILT_barcelona",
 # ]
 
-# barcelona = False
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_19.pickle"
-# simulation_names = [
-#             "avg_1",
-#             "avg_smooth_1",
-#             "Newt33_avg",
-#             "no_average",
-#
-#             "Newt_5_avg",
-#             "Newt_5_avg_smooth",
-# ]
+barcelona = False
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_19.pickle"
+simulation_names = [
+            "avg_1",
+            "avg_smooth_1",
+            "Newt33_avg",
+            "no_average",
+
+            "Newt_5_avg",
+            "Newt_5_avg_smooth",
+]
 
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
@@ -146,7 +146,7 @@ def time_analysis(times):
                 plt.xlim([0,250])
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
-            ILT_inner_outer_cont()
+            # ILT_inner_outer_cont()
 
 
             def stress_cont():
@@ -192,7 +192,7 @@ def time_analysis(times):
 
 
 
-r = 13
+r = 14
 wanted_D = r*2
 
 def diameter_analysis():
@@ -288,7 +288,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # rast_D()
+        rast_D()
 
 
         def rast_H():
@@ -310,7 +310,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        rast_S22()
+        # rast_S22()
 
 
         def ILT_thickness():

@@ -2,10 +2,10 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pandas as pd
-simulacija_foam = "//home/josip/feap/FSG/sranje"     # ovo je isključeno za foam siimulacije
 
+simulacija_foam = "/home/josip/feap/FSG/automatizacija_19/simulacija20_5"     # ovo je isključeno za foam siimulacije
 
-
+simulacija_foam = "//home/josip/feap/FSG/sranje"
 
 
 class VadenjePodataka:
@@ -22,7 +22,8 @@ class VadenjePodataka:
         self.reading_TAWSS()
 
         self.podaci_df = pd.DataFrame(self.podaci_dict)
-        self.podaci_df["tawss_avg"] = self.averaging_TAWSS(3)
+        self.podaci_df["tawss_avg"] = self.averaging_TAWSS(n_neighb=3)
+
         self.podaci_df["tawss_avg_Lana"] = self.averaging_TAWSS_Lana()
 
         self.plot_TAWSS()
@@ -77,6 +78,7 @@ class VadenjePodataka:
         return avg_tawss_list
 
 
+
     # Uprosječuje sve fomove elemente u jednom feapovom i u te fomove zapisuje isto
     def averaging_TAWSS_Lana(self):
         tawss_avg_Lana = []
@@ -87,6 +89,8 @@ class VadenjePodataka:
             element_average = sum(foam_in_feap_element)/len(foam_in_feap_element)
             tawss_avg_Lana.extend([element_average for i in range(self.foam_Z_elements)])
         return tawss_avg_Lana
+
+
 
 
     def plot_TAWSS(self):
@@ -103,6 +107,7 @@ class VadenjePodataka:
         plt.close()
         fig.savefig('TAWSS_avg.png', dpi=300)
 
+        print(self.podaci_df)
 
     def write_TAWSS(self):
         text_file = open(self.TAWSS_file, "r").readlines()
@@ -113,11 +118,12 @@ class VadenjePodataka:
 
         intro_tawss = text_file[0:start_line]
         outro_tawss = text_file[finish_line::]
+
         # tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg"]]
         tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg_Lana"]]
 
-        new_tawss_file = open(self.TAWSS_file,  "w")
-        # new_tawss_file = open("ae",  "w")
+        # new_tawss_file = open(self.TAWSS_file,  "w")
+        new_tawss_file = open("modificirani",  "w")
         new_tawss_file.writelines(intro_tawss)
         new_tawss_file.writelines(tawss_avg)
         new_tawss_file.writelines(outro_tawss)
