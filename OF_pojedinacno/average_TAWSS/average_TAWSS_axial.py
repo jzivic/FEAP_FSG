@@ -9,11 +9,13 @@ simulacija_foam = "//home/josip/feap/FSG/sranje"     # ovo je isključeno za foa
 
 
 class VadenjePodataka:
-    def __init__(self, Case, foam_Z_elements):
+    def __init__(self, Case, foam_Z_elements, average_way):
 
         korak = 2
         self.imeSim = Case.split("/")[-1]
         self.foam_Z_elements = foam_Z_elements
+        assert average_way in ["Lana", "Josip"], "popravi način osrednjavanja"  # "Lana" ili "Josip" mora biti
+        self.average_way = average_way
 
         self.koo_file = Case + "/"+str(korak)+"/koordinate"
         self.TAWSS_file = Case + "/"+str(korak)+"/TAWSS"
@@ -113,11 +115,14 @@ class VadenjePodataka:
 
         intro_tawss = text_file[0:start_line]
         outro_tawss = text_file[finish_line::]
-        # tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg"]]
-        tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg_Lana"]]
 
-        new_tawss_file = open(self.TAWSS_file,  "w")
-        # new_tawss_file = open("ae",  "w")
+        if self.average_way == "Josip":
+            tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg"]]
+        elif self.average_way == "Lana":
+            tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg_Lana"]]
+
+        # new_tawss_file = open(self.TAWSS_file,  "w")
+        new_tawss_file = open("ae",  "w")
         new_tawss_file.writelines(intro_tawss)
         new_tawss_file.writelines(tawss_avg)
         new_tawss_file.writelines(outro_tawss)
@@ -126,7 +131,7 @@ class VadenjePodataka:
 
 
 
-avg = VadenjePodataka(simulacija_foam, foam_Z_elements=5)         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
+avg = VadenjePodataka(simulacija_foam, foam_Z_elements=5, average_way="Lana")         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
 
 
 
