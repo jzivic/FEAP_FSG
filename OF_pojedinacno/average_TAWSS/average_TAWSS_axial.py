@@ -2,7 +2,7 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pandas as pd
-simulacija_foam = "//home/josip/feap/FSG/sranje"     # ovo je isključeno za foam siimulacije
+# simulacija_foam = "//home/josip/feap/FSG/sranje"     # ovo je isključeno za foam siimulacije
 
 
 
@@ -10,11 +10,10 @@ simulacija_foam = "//home/josip/feap/FSG/sranje"     # ovo je isključeno za foa
 
 class VadenjePodataka:
     def __init__(self, Case, foam_Z_elements, average_way):
-
         korak = 2
         self.imeSim = Case.split("/")[-1]
         self.foam_Z_elements = foam_Z_elements
-        assert average_way in ["Lana", "Josip"], "popravi način osrednjavanja"  # "Lana" ili "Josip" mora biti
+        assert average_way in ["Lana", "Josip", "Oboje"], "popravi način osrednjavanja"  # "Lana" ili "Josip" mora biti
         self.average_way = average_way
 
         self.koo_file = Case + "/"+str(korak)+"/koordinate"
@@ -24,13 +23,12 @@ class VadenjePodataka:
         self.reading_TAWSS()
 
         self.podaci_df = pd.DataFrame(self.podaci_dict)
-        self.podaci_df["tawss_avg"] = self.averaging_TAWSS(3)
+        self.podaci_df["tawss_avg_Josip"] = self.averaging_TAWSS_Josip(3)
         self.podaci_df["tawss_avg_Lana"] = self.averaging_TAWSS_Lana()
+        self.podaci_df["tawss_avg_Oboje"] = self.averaging_TAWSS_Oboje()
 
         self.plot_TAWSS()
-
         self.write_TAWSS()
-
 
 
 
@@ -66,17 +64,18 @@ class VadenjePodataka:
                 self.podaci_dict["tawss"].append(float(red))
 
 
-    def averaging_TAWSS(self, n_neighb):
-        n_neighb *= self.foam_Z_elements
-        if n_neighb % 2 == 0:
-            n_neighb +=1
-        avg_tawss_list = list(self.podaci_df["tawss"])
-        start_index = int((n_neighb-1)/2)     # početni index da se izbjegnu rubovi
-        for n in range(start_index, (len(self.podaci_df["tawss"])-start_index), 1):
-            neighbours = [self.podaci_df["tawss"][(n-start_index) + i] for i in range(n_neighb)]
+    def averaging_TAWSS_Josip(self, n_neighb):
+        self.n_neighb = n_neighb
+        self.n_neighb *= self.foam_Z_elements
+        if self.n_neighb % 2 == 0:
+            self.n_neighb +=1
+        avg_tawss_list_Josip = list(self.podaci_df["tawss"])
+        self.start_index = int((self.n_neighb-1)/2)     # početni index da se izbjegnu rubovi
+        for n in range(self.start_index, (len(self.podaci_df["tawss"])-self.start_index), 1):
+            neighbours = [self.podaci_df["tawss"][(n-self.start_index) + i] for i in range(self.n_neighb)]
             tawss_avg = sum(neighbours)/len(neighbours)
-            avg_tawss_list[n] = tawss_avg
-        return avg_tawss_list
+            avg_tawss_list_Josip[n] = tawss_avg
+        return avg_tawss_list_Josip
 
 
     # Uprosječuje sve fomove elemente u jednom feapovom i u te fomove zapisuje isto
@@ -91,10 +90,35 @@ class VadenjePodataka:
         return tawss_avg_Lana
 
 
+    def averaging_TAWSS_Oboje(self):
+        tawss_avg_Oboje = []
+        for f_n in range(self.foam_Z_elements-1, len(self.podaci_df["tawss"])+1, self.foam_Z_elements):
+            foam_in_feap_element = []
+            for n in range(f_n-4, f_n+1):
+                foam_in_feap_element.append(self.podaci_df["tawss"][n])
+            element_average = sum(foam_in_feap_element)/len(foam_in_feap_element)
+            tawss_avg_Oboje.extend([element_average for i in range(self.foam_Z_elements)])
+
+        avg_tawss_list_Oboje = tawss_avg_Oboje
+
+        for n in range(self.start_index, (len(self.podaci_df["tawss"])-self.start_index), 1):
+            neighbours = [self.podaci_df["tawss"][(n-self.start_index) + i] for i in range(self.n_neighb)]
+            tawss_avg = sum(neighbours)/len(neighbours)
+            avg_tawss_list_Oboje[n] = tawss_avg
+        return avg_tawss_list_Oboje
+
+
     def plot_TAWSS(self):
         fig = plt.gcf()
         plt.plot(self.podaci_df["z"], self.podaci_df["tawss"], label="org")
-        plt.plot(self.podaci_df["z"], self.podaci_df["tawss_avg"], label="avg")
+
+        if self.average_way == "Josip":
+            plt.plot(self.podaci_df["z"], self.podaci_df["tawss_avg_Josip"], label="avg_Josip")
+        elif self.average_way == "Lana":
+            plt.plot(self.podaci_df["z"], self.podaci_df["tawss_avg_Lana"], label="avg_Lana")
+        elif self.average_way == "Oboje":
+            plt.plot(self.podaci_df["z"], self.podaci_df["tawss_avg_Oboje"], label="avg_Oboje")
+
         plt.ylim(0, 1)
         plt.title(self.imeSim)
         plt.ylabel("TAWSS [kPa]")
@@ -117,21 +141,21 @@ class VadenjePodataka:
         outro_tawss = text_file[finish_line::]
 
         if self.average_way == "Josip":
-            tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg"]]
+            tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg_Josip"]]
         elif self.average_way == "Lana":
             tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg_Lana"]]
+        elif self.average_way == "Oboje":
+            tawss_avg = [str(i)+"\n" for i in self.podaci_df["tawss_avg_Oboje"]]
 
-        # new_tawss_file = open(self.TAWSS_file,  "w")
-        new_tawss_file = open("ae",  "w")
+        new_tawss_file = open(self.TAWSS_file,  "w")
+        # new_tawss_file = open("proba",  "w")
         new_tawss_file.writelines(intro_tawss)
         new_tawss_file.writelines(tawss_avg)
         new_tawss_file.writelines(outro_tawss)
         new_tawss_file.close()
 
 
-
-
-avg = VadenjePodataka(simulacija_foam, foam_Z_elements=5, average_way="Lana")         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
+avg = VadenjePodataka(simulacija_foam, foam_Z_elements=5, average_way="Oboje")         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
 
 
 

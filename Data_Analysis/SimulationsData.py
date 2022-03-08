@@ -141,10 +141,22 @@ simulation_names = [
 ]
 
 
-# barcelona = False
-# results_directory = "//home/josip/feap/FSG/automatizacija_21/"
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_21.pickle"
-# simulation_names = [
-#
-#         "p1"
-# ]
+barcelona = False
+results_directory = "//home/josip/feap/FSG/automatizacija_22/"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_22.pickle"
+simulation_names = [
+    "ax5_i4=108_i8=08",
+    "ax_5_novi_avg",
+    "feap_5_foam1",
+    "feap_5_foam_maloSporije",
+    "feap_5_foam_sporije_Josip",
+    "feap_5_foam_sporije_Lana",
+    "loop2",
+    "loop3",
+    "restart_150",
+    "restart_200",
+    "TAWSS_035",
+]
+
+
+

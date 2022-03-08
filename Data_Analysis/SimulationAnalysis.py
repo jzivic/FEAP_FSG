@@ -85,32 +85,45 @@ from matplotlib import pyplot as plt
 #         # "noILT_barcelona",
 # ]
 
-barcelona = False
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_19.pickle"
-simulation_names = [
-            "avg_1",
-            "avg_smooth_1",
-            "Newt33_avg",
-            "no_average",
+# barcelona = False
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_19.pickle"
+# simulation_names = [
+#             "avg_1",
+#             "avg_smooth_1",
+#             "Newt33_avg",
+#             "no_average",
+#
+#             "Newt_5_avg",
+#             "Newt_5_avg_smooth",
+# ]
 
-            "Newt_5_avg",
-            "Newt_5_avg_smooth",
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
+# simulation_names = [
+#     "4_nodes",
+#     "loop2_4nodes",
+#     "loop_1",
+#     "loop_2_",
+#     "i4=115_loop2",
+#     "i4=115_loop2_4nodes",
+# ]
+
+
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_22.pickle"
+simulation_names = [
+    "ax5_i4=108_i8=08",
+    "ax_5_novi_avg",
+    "feap_5_foam1",
+    "feap_5_foam_maloSporije",
+    "feap_5_foam_sporije_Josip",
+    "feap_5_foam_sporije_Lana",
+    "loop2",
+    "loop3",
+    "restart_150",
+    "restart_200",
+    "TAWSS_035",
 ]
 
-
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
-simulation_names = [
-    "4_nodes",
-    "loop2_4nodes",
-    "loop_1",
-    "loop_2_",
-    "i4=115_loop2",
-    "i4=115_loop2_4nodes",
-]
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_21.pickle"
-# simulation_names = ["p1"]
 
 
 all_data = pd.read_pickle(pickle_name)
@@ -192,7 +205,7 @@ def time_analysis(times):
 
 
 
-r = 14
+r = 13
 wanted_D = r*2
 
 def diameter_analysis():
@@ -281,7 +294,6 @@ def growth_over_time():
 
 
         def rast_D():
-            # color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, D_inner_max, label=(simul))
             plt.title("Rast D inner: ")
             plt.ylabel("D [mm]")
@@ -292,7 +304,6 @@ def growth_over_time():
 
 
         def rast_H():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, H, label=(simul))
             plt.title("Rast H: ")
             plt.ylabel("H [mm]")
@@ -303,7 +314,6 @@ def growth_over_time():
 
 
         def rast_S22():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, S22_max, label=(simul))
             plt.title("Rast S22: ")
             plt.ylabel("S22 [kPa]")
@@ -314,7 +324,6 @@ def growth_over_time():
 
 
         def ILT_thickness():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, ILT_thickness_max, label=(simul))
             plt.title("Rast ILT_thickness: ")
             plt.ylabel("ILT thickness [mm]")
@@ -325,7 +334,6 @@ def growth_over_time():
 
 
         def ILT_surface_f():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, ILT_surface, label=(simul))
             plt.title("Rast površine ILT-a: ")
             plt.ylabel("ILT surface [mm$^2$]")

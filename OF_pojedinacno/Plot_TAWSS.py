@@ -13,9 +13,10 @@ s1 = "//home/josip/feap/FSG/konferencijaKarsaj/rezultati/sve_simulacije/ab=900/s
 s2 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_mrdanje"
 s3 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_Newt"
 
+s4 = "//home/josip/foamOpen/cases/problemi/simulacija61"
 
 
-barcelona = True
+barcelona = False
 
 
 class VadenjePodataka:
@@ -131,7 +132,7 @@ class VadenjePodataka:
 
     def Plot_TAWSS(self):
         plt.plot(self.dobPodDF["z"], self.dobPodDF["tawss"], label=self.imeSim)
-        plt.ylim(0, 1)
+        # plt.ylim(0, 1)
 
         plt.title("TAWSS ")
         plt.ylabel("TAWSS [kPa]")
@@ -166,8 +167,10 @@ class VadenjePodataka:
 
 # s1 = VadenjePodataka(s1, oblik="full")
 
-s2 = VadenjePodataka(s1, oblik="full")
-s3 = VadenjePodataka(s1, oblik="full")
+# s2 = VadenjePodataka(s1, oblik="full")
+# s3 = VadenjePodataka(s1, oblik="full")
+
+p4 = VadenjePodataka(s4, oblik="axial")
 
 
 
