@@ -111,17 +111,17 @@ from matplotlib import pyplot as plt
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_22.pickle"
 simulation_names = [
-    "ax5_i4=108_i8=08",
-    "ax_5_novi_avg",
-    "feap_5_foam1",
+    # "ax5_i4=108_i8=08",
+    # "ax_5_novi_avg",
+    # "feap_5_foam1",
     "feap_5_foam_maloSporije",
     "feap_5_foam_sporije_Josip",
     "feap_5_foam_sporije_Lana",
-    "loop2",
-    "loop3",
-    "restart_150",
-    "restart_200",
-    "TAWSS_035",
+    # "loop2",
+    # "loop3",
+    # "restart_150",
+    # "restart_200",
+    # "TAWSS_035",
 ]
 
 
