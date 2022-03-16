@@ -2,7 +2,7 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pandas as pd
-# simulacija_foam = "//home/josip/feap/FSG/sranje"     # ovo je isključeno za foam siimulacije
+# simulacija_foam = "//home/josip/feap/FSG/automatizacija_23/avg_Josip_3/simulacija1"     # ovo je isključeno za foam siimulacije
 
 
 
@@ -152,7 +152,7 @@ class VadenjePodataka:
         new_tawss_file.close()
 
 
-avg = VadenjePodataka(simulacija_foam, foam_Z_elements=1, average_way="Oboje")         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
+avg = VadenjePodataka(simulacija_foam, foam_Z_elements=1, average_way="Josip")         # 1 == bez osrednjavanja, samo taj jedan čvor se gleda
 
 
 

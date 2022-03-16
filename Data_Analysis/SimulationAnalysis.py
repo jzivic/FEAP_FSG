@@ -109,19 +109,49 @@ from matplotlib import pyplot as plt
 # ]
 
 
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_22.pickle"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_22.pickle"
+# simulation_names = [
+#     "ax5_i4=108_i8=08",
+#     "ax_5_novi_avg",
+#     "feap_5_foam1",
+#     "feap_5_foam_maloSporije",
+#     "feap_5_foam_maloSporije_Oboje",
+#     "feap_5_foam_sporije_Josip",
+#     "feap_5_foam_sporije_Lana",
+#     "loop2",
+#     "loop3",
+#     "restart_150",
+#     "restart_200",
+#     "TAWSS_035",
+# ]
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_23.pickle"
+# simulation_names = [
+#         "avg_Josip_4",
+#         "avg_Lana",
+#         "avg_Oboje",
+# ]
+
+
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_24.pickle"
 simulation_names = [
-    # "ax5_i4=108_i8=08",
-    # "ax_5_novi_avg",
-    # "feap_5_foam1",
-    "feap_5_foam_maloSporije",
-    "feap_5_foam_sporije_Josip",
-    "feap_5_foam_sporije_Lana",
-    # "loop2",
-    # "loop3",
-    # "restart_150",
-    # "restart_200",
-    # "TAWSS_035",
+            "loop1_Josip",
+            "loop1_Oboje",
+
+            "loop2_Josip",
+            "loop2_Oboje",
+
+            "loop3_Josip",
+            "loop3_Lana",
+            "loop3_Oboje",
+
+            "loop5_Josip_2",
+            "loop5_Lana_2",
+            "loop5_Oboje_2",
+
+            "restart_150_loop2_Oboje",
+            "restart_150_loop3_Oboje",
+            "restart_150_loop5_Oboje",
 ]
 
 
@@ -159,7 +189,7 @@ def time_analysis(times):
                 plt.xlim([0,250])
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
-            # ILT_inner_outer_cont()
+            ILT_inner_outer_cont()
 
 
             def stress_cont():
@@ -205,7 +235,7 @@ def time_analysis(times):
 
 
 
-r = 13
+r = 17.5
 wanted_D = r*2
 
 def diameter_analysis():
@@ -300,7 +330,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        rast_D()
+        # rast_D()
 
 
         def rast_H():
@@ -340,7 +370,7 @@ def growth_over_time():
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # ILT_surface_f()
+        ILT_surface_f()
 
 
 

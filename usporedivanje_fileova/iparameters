@@ -579,7 +579,7 @@ PARAmeter
 
 PARAmeter   ! -- I L T   n u m e r ic a l   m e t h o d   p a r a m e t e r s -- !
    d8=100         ! Maximal number of ILT element in radial direction
-   d9=0.2         ! ILT element thickness
+   d9=0.1         ! ILT element thickness
    d0=0.2       ! Required distance from wall to lumen surface to exit loop and add ILT elements
    da=-0.0        ! Delta_ilt_thickness - change of lumen surface radius in each modfeap simulation
    db=2           ! ILT elements material number
@@ -600,11 +600,11 @@ PARAmeter   ! -- I L T   T o n g   m a t e r i a l   m o d e l -- !
    i1=0.0082      ! luminal mu parameter [MPa]        (0.0065 - 0.0082 - 0.0099)
    i2=0.0123      ! luminal k1 parameter [MPa]        (0.0086 - 0.0123 - 0.0160)
    i3=0.6         ! luminal k2 parameter              (0.3 - 0.6 - 0.9)
-   i4=1.30        ! luminal ILT prestretch
+   i4=1.08        ! luminal ILT prestretch
    i5=0.0051      ! abluminal mu parameter [MPa]      (0.0040 - 0.0051 - 0.0062)
    i6=0.0029      ! abluminal k1 parameter [MPa]      (0.0019 - 0.0029 - 0.0039)
    i7=0.03        ! abluminal k2 parameter            (0.02 - 0.03 - 0.04)
-   i8=1.00        ! abluminal ILT prestretch
+   i8=0.8        ! abluminal ILT prestretch
    i9=2.0         ! depth of luminal layer [mm]
    i0=0.2         ! function curvature parameter
    ia=1        ! factor for reducing parameters of ruptured ILT elements

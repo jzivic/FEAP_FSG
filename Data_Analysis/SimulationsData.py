@@ -149,6 +149,9 @@ simulation_names = [
     "ax_5_novi_avg",
     "feap_5_foam1",
     "feap_5_foam_maloSporije",
+
+    "feap_5_foam_maloSporije_Oboje",
+
     "feap_5_foam_sporije_Josip",
     "feap_5_foam_sporije_Lana",
     "loop2",
@@ -160,3 +163,36 @@ simulation_names = [
 
 
 
+barcelona = False
+results_directory = "//home/josip/feap/FSG/automatizacija_23/"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_23.pickle"
+simulation_names = [
+        "avg_Josip_4",
+        "avg_Lana",
+        "avg_Oboje",
+
+]
+
+
+barcelona = False
+results_directory = "//home/josip/feap/FSG/automatizacija_24/"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_24.pickle"
+simulation_names = [
+        "loop1_Josip",
+        "loop1_Oboje",
+
+        "loop2_Josip",
+        "loop2_Oboje",
+
+        "loop3_Josip",
+        "loop3_Lana",
+        "loop3_Oboje",
+
+        "loop5_Josip_2",
+        "loop5_Lana_2",
+        "loop5_Oboje_2",
+
+        "restart_150_loop2_Oboje",
+        "restart_150_loop3_Oboje",
+        "restart_150_loop5_Oboje",
+]
