@@ -181,7 +181,7 @@ class FSG_Analysis:
             vein_thickness_list.append(vein_thickness)
             z_list.append(z)
             S22_list.append(S22)
-            # S22_list.append(0)
+
 
             if r_inner > 1.05 * self.r0:
                 h_list.append(z)

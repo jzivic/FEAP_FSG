@@ -4,7 +4,22 @@ barcelona = False
 
 
 
-
+# barcelona = True
+# results_directory = "//home/josip/feap/FSG/automatizacija_8/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_8.pickle"
+# simulation_names = [
+#         "prava_020_14",
+#         "prava_025_14",
+#         "prava_030_14",
+#         "prava_035_14",
+#         "prava_040_14",
+#
+#         "prava_020_15",
+#         "prava_025_15",
+#         "prava_030_15",
+#         "prava_035_15",
+#         "prava_040_15",
+# ]
 
 
 
@@ -23,14 +38,14 @@ barcelona = False
 #                     ]
 
 
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
-# results_directory = "//home/josip/feap/FSG/automatizacija_13/"   #path to analysis dir
-# simulation_names = [
-#                     "Newt_5_NS",
-#                     "Newt_6_NS",
-#                     "prava_Casson_NS",
-#                     "BS_NS",
-#                     ]
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
+results_directory = "//home/josip/feap/FSG/automatizacija_13/"   #path to analysis dir
+simulation_names = [
+                    "Newt_5_NS",
+                    "Newt_6_NS",
+                    "prava_Casson_NS",
+                    "BS_NS",
+                    ]
 
 
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_16.pickle"
@@ -84,9 +99,10 @@ barcelona = False
 
 
 # barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_18_foamAxial/"
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_18.pickle"
-# results_directory = "//home/josip/feap/FSG/automatizacija_18/"
 # simulation_names = [
+#
 #
 #         "foam_axial=1_2",
 #         "foam_axial=2",
@@ -127,72 +143,144 @@ barcelona = False
 #             "Newt_5_avg_smooth",
 # ]
 
-barcelona = False
-results_directory = "//home/josip/feap/FSG/automatizacija_20/"
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
-simulation_names = [
-    "4_nodes",
-    "loop2_4nodes",
-    "loop_1",
-    "loop_2_",
+# barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_20/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
+# simulation_names = [
+#     "4_nodes",
+#     "loop2_4nodes",
+#     "loop_1",
+#     "loop_2_",
+#
+#     "i4=115_loop2",
+#     "i4=115_loop2_4nodes",
+# ]
 
-    "i4=115_loop2",
-    "i4=115_loop2_4nodes",
+
+# barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_22/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_22.pickle"
+# simulation_names = [
+#     "ax5_i4=108_i8=08",
+#     "ax_5_novi_avg",
+#     "feap_5_foam1",
+#     "feap_5_foam_maloSporije",
+#
+#     "feap_5_foam_maloSporije_Oboje",
+#
+#     "feap_5_foam_sporije_Josip",
+#     "feap_5_foam_sporije_Lana",
+#     "loop2",
+#     "loop3",
+#     "restart_150",
+#     "restart_200",
+#     "TAWSS_035",
+# ]
+
+
+# usporedba osrednjavanja
+# barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_23/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_23.pickle"
+# simulation_names = [
+#         "avg_Josip",
+#         "avg_Lana",
+#         "avg_Oboje",
+#
+# ]
+
+
+# uspoređivanje Feap-Foam omjera simulacija
+# barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_24/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_24.pickle"
+# simulation_names = [
+#         "loop1_Josip",
+#
+#         "loop2_Josip",
+#
+#         "loop3_Josip",
+#         "loop3_Lana",
+#
+#         "loop5_Josip_2",
+#         "loop5_Lana_2",
+#
+#         "restart_150_loop1_Josip_2",
+#         "restart_150_loop2_Josip",
+#         "restart_150_loop3_Josip",
+#         "restart_150_loop5_Josip",
+#
+#
+#         "loop_3_foam=1_Josip",
+#         "loop_3_foam=3_Josip",
+#         "loop_3_foam=4_Josip",
+# ]
+
+
+barcelona = False
+results_directory = "//home/josip/feap/FSG/automatizacija_25/"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
+simulation_names = [
+        "a3=30",
+        "a3=40",
+        "ac=16",
+        "ac=25",
+        "ae=1",
+        "ae=4",
+
+        "ab=100",
+        "ab=900",
+
+        "tawss=020",
+        "tawss=025",
+        "tawss=030",
+        "tawss=035",
+        "tawss=040",
+
+        "BC",
+        "Casson",
+        "Newt_5",
+        "Newt_6",
+        "Newt_33",
+
+        "debljina_010",
+        "debljina_015",
+        "debljina_020",
+        "debljina_025",
+
+        "no_ILT",
+
 ]
 
 
-barcelona = False
-results_directory = "//home/josip/feap/FSG/automatizacija_22/"
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_22.pickle"
-simulation_names = [
-    "ax5_i4=108_i8=08",
-    "ax_5_novi_avg",
-    "feap_5_foam1",
-    "feap_5_foam_maloSporije",
 
-    "feap_5_foam_maloSporije_Oboje",
 
-    "feap_5_foam_sporije_Josip",
-    "feap_5_foam_sporije_Lana",
-    "loop2",
-    "loop3",
-    "restart_150",
-    "restart_200",
-    "TAWSS_035",
-]
+# barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_26/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_26.pickle"
+# simulation_names = [
+#             "03",
+#             "04",
+#             "05",
+#             "07",
+#             "09",
+#             "12",
+# ]
 
 
 
-barcelona = False
-results_directory = "//home/josip/feap/FSG/automatizacija_23/"
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_23.pickle"
-simulation_names = [
-        "avg_Josip_4",
-        "avg_Lana",
-        "avg_Oboje",
-
-]
 
 
-barcelona = False
-results_directory = "//home/josip/feap/FSG/automatizacija_24/"
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_24.pickle"
-simulation_names = [
-        "loop1_Josip",
-        "loop1_Oboje",
 
-        "loop2_Josip",
-        "loop2_Oboje",
 
-        "loop3_Josip",
-        "loop3_Lana",
-        "loop3_Oboje",
 
-        "loop5_Josip_2",
-        "loop5_Lana_2",
-        "loop5_Oboje_2",
 
-        "restart_150_loop2_Oboje",
-        "restart_150_loop3_Oboje",
-        "restart_150_loop5_Oboje",
-]
+
+
+
+
+
+
+
+
+

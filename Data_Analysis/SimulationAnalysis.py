@@ -3,6 +3,23 @@ from SimulationsData import *
 import pandas as pd
 from matplotlib import pyplot as plt
 
+
+# Usporedba TAWSS-a
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_8.pickle"
+# simulation_names = [
+#         # "prava_020_14",
+#         # "prava_025_14",
+#         # "prava_030_14",
+#         # "prava_035_14",
+#         # "prava_040_14",
+#
+#         "prava_020_15",
+#         "prava_025_15",
+#         "prava_030_15",
+#         "prava_035_15",
+#         "prava_040_15",
+# ]
+
 # barcelona
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/barcelona.pickle"
 # simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4",]
@@ -10,7 +27,12 @@ from matplotlib import pyplot as plt
 
 
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
-# simulation_names = ["Newt_5_NS","Newt_6_NS","prava_Casson_NS", "BS_NS" ]
+# simulation_names = ["Newt_5_NS",
+#                     "Newt_6_NS",
+#                     "prava_Casson_NS",
+#                     "BS_NS" ]
+
+
 
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_16.pickle"
 # simulation_names = [
@@ -64,25 +86,25 @@ from matplotlib import pyplot as plt
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_18.pickle"
 # simulation_names = [
 #         "foam_axial=1_2",
-#         # "foam_axial=2",
-#         # "foam_axial=3",
-#         # "foam_axial=5",
-#
-#         "restart_200",
-#         "restart_250",
-#         # "tawss=055",
-#
-#         # "Newtn_33",
-#         # "Newt_detaljno",
-#
-#         # "foam_axial=3_4nodes",
-#         # "foam_axial=2_4nodes",
-#
-#         # "foam_axial=2_smooth",
-#         # "rest_200_smooth",
-#
-#         # "no_ILT",
-#         # "noILT_barcelona",
+        # "foam_axial=2",
+        # "foam_axial=3",
+        # "foam_axial=5",
+
+        # "restart_200",
+        # "restart_250",
+        # "tawss=055",
+
+        # "Newtn_33",
+        # "Newt_detaljno",
+
+        # "foam_axial=3_4nodes",
+        # "foam_axial=2_4nodes",
+
+        # "foam_axial=2_smooth",
+        # "rest_200_smooth",
+
+        # "no_ILT",
+        # "noILT_barcelona",
 # ]
 
 # barcelona = False
@@ -127,38 +149,85 @@ from matplotlib import pyplot as plt
 
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_23.pickle"
 # simulation_names = [
-#         "avg_Josip_4",
+#         "avg_Josip",
 #         "avg_Lana",
-#         "avg_Oboje",
+#         # "avg_Oboje",
 # ]
 
 
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_24.pickle"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_24.pickle"
+# simulation_names = [
+            # "loop1_Josip",
+            # "loop2_Josip",
+            # "loop3_Josip",
+            # "loop3_Lana",
+            # "loop5_Josip_2",
+            # "loop5_Lana_2",
+
+            # "restart_150_loop1_Josip_2",
+            # "restart_150_loop2_Josip",
+            # "restart_150_loop3_Josip",
+            # "restart_150_loop5_Josip",
+
+            # "loop_3_foam=1_Josip",
+            # "loop_3_foam=3_Josip",
+            # "loop_3_foam=4_Josip",
+            # "loop3_Josip",
+# ]
+
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
 simulation_names = [
-            "loop1_Josip",
-            "loop1_Oboje",
+#
+        # "a3=30",
+        # "a3=40",
+        # "ac=16",
+        # "ac=25",
+        # "ae=1",
+        # "ae=4",
 
-            "loop2_Josip",
-            "loop2_Oboje",
+        # "ab=100",
+        # "ab=900",
 
-            "loop3_Josip",
-            "loop3_Lana",
-            "loop3_Oboje",
+        # "tawss=020",
+        # "tawss=025",
+        # "tawss=030",
+        # "tawss=035",
+        # "tawss=040",
 
-            "loop5_Josip_2",
-            "loop5_Lana_2",
-            "loop5_Oboje_2",
+        # "BC",
+        "Casson",
+        # "Newt_5",
+        # "Newt_6",
+        # "Newt_33",
 
-            "restart_150_loop2_Oboje",
-            "restart_150_loop3_Oboje",
-            "restart_150_loop5_Oboje",
+        "no_ILT",
+
+        # "debljina_010",
+        # "debljina_015",
+        # "debljina_020",
+        # "debljina_025",
+
 ]
+
+
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_26.pickle"
+# simulation_names = [
+            # "03",
+#             "04",
+#             "05",
+#             "07",
+#             "09",
+#             "12",
+# ]
 
 
 
 all_data = pd.read_pickle(pickle_name)
 
-times = [270]
+
+
+times = [222]
 def time_analysis(times):
     for trenutak in times:
         for simul in simulation_names:
@@ -232,10 +301,13 @@ def time_analysis(times):
 
 
 
+font = {'family' : 'Times New Roman',
+        'size'   : 22}
+plt.rc('font', **font)
+plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-
-r = 17.5
+r = 16
 wanted_D = r*2
 
 def diameter_analysis():
@@ -268,6 +340,28 @@ def diameter_analysis():
             plt.legend()
         ILT_inner_outer_cont()
 
+        def cont_oneSim():
+            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            # plt.plot(Z_cont, inner_cont, c=color, label="inner cont")
+            # plt.plot(Z_cont, ILT_cont, linestyle=':', c=color, label="ILT cont")
+            # plt.plot(Z_cont, outer_cont, linestyle='--', c=color, label="outer cont")
+
+            # plt.plot(inner_cont, Z_cont, c=color, label="inner cont")
+            plt.plot(inner_cont, Z_cont, c=color, label=(simul))
+            # plt.plot(inner_cont, Z_cont, c=color, label=(simul+", TS: "+str(time)))
+            # plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, label="ILT cont")
+            plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
+            plt.plot(outer_cont, Z_cont, linestyle='--', c=color)
+            # plt.plot(outer_cont, Z_cont, linestyle='--', c=color, label="outer cont")
+
+            plt.title("Contours")
+            plt.xlabel("Radius $r$ [mm]")
+            plt.ylabel("Axial coordinate $z$ [mm]")
+            plt.ylim([0, 250])
+            plt.xlim([7, 20])
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            plt.legend()
+        # cont_oneSim()
 
         def stress_cont():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -304,7 +398,7 @@ def diameter_analysis():
     
     plt.show()
 
-# diameter_analysis()
+diameter_analysis()
 
 
 
@@ -325,7 +419,8 @@ def growth_over_time():
 
         def rast_D():
             plt.plot(timeStep, D_inner_max, label=(simul))
-            plt.title("Rast D inner: ")
+            # plt.plot(timeStep, D_inner_max, )
+            plt.title("Inner diameter growth ")
             plt.ylabel("D [mm]")
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
@@ -355,21 +450,21 @@ def growth_over_time():
 
         def ILT_thickness():
             plt.plot(timeStep, ILT_thickness_max, label=(simul))
-            plt.title("Rast ILT_thickness: ")
+            plt.title("Max ILT thickness ")
             plt.ylabel("ILT thickness [mm]")
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
-            plt.legend()
+            # plt.legend()
         # ILT_thickness()
 
 
         def ILT_surface_f():
             plt.plot(timeStep, ILT_surface, label=(simul))
-            plt.title("Rast površine ILT-a: ")
+            plt.title("ILT surface")
             plt.ylabel("ILT surface [mm$^2$]")
             plt.xlabel("timeStep [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
-            plt.legend()
+            # plt.legend()
         ILT_surface_f()
 
 
@@ -387,7 +482,7 @@ def growth_over_time():
 
     plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
 
