@@ -236,6 +236,8 @@ simulation_names = [
         "tawss=030",
         "tawss=035",
         "tawss=040",
+        "tawss=045",
+        "tawss=050",
 
         "BC",
         "Casson",
