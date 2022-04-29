@@ -227,7 +227,6 @@ simulation_names = [
         "ac=25",
         "ae=1",
         "ae=4",
-
         "ab=100",
         "ab=900",
 
@@ -249,6 +248,14 @@ simulation_names = [
         "debljina_015",
         "debljina_020",
         "debljina_025",
+
+        "i4=102",
+        "i4=108",
+        "i4=114",
+        "i4=120",
+        "i4=126",
+        "i4=132",
+
 
         "no_ILT",
 
