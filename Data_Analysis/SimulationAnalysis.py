@@ -205,7 +205,7 @@ simulation_names = [
             # "debljina_020",
             # "debljina_025",
             #
-            "i4=102",
+            # "i4=102",
             "i4=108",
             "i4=114",
             "i4=120",
@@ -232,7 +232,7 @@ simulation_names = [
 # ]
 
 
-diagramsDir = "//home/josip/feap/FSG/slike/auto_26/proba/"
+diagramsDir = "//home/josip/feap/FSG/slike/auto_26/krutost/"
 
 all_data = pd.read_pickle(pickle_name)
 
@@ -319,7 +319,7 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 12
+r = 14
 wanted_D = r*2
 
 def diameter_analysis():
@@ -369,8 +369,8 @@ def diameter_analysis():
             fig.subplots_adjust(left=0.20)
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-            # fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
-        vertical_contours()
+            fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
+        # vertical_contours()
 
 
         def stress_cont():
@@ -412,10 +412,10 @@ def diameter_analysis():
             plt.legend()
         # vein_thickness_f()
 
-    plt.show()
+    # plt.show()
 
 
-diameter_analysis()
+# diameter_analysis()
 
 
 
