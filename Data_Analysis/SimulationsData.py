@@ -221,55 +221,55 @@ barcelona = False
 results_directory = "//home/josip/feap/FSG/automatizacija_25/"
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
 simulation_names = [
-        "a3=30",
-        "a3=40",
-        "ac=16",
-        "ac=25",
-        "ae=1",
-        "ae=4",
+        # "a3=30",
+        # "a3=40",
+        # "ac=16",
+        # "ac=25",
+        # "ae=1",
+        # "ae=4",
         # "ab=100",
-        "ab=900",
-
-        "tawss=020",
-        "tawss=025",
-        "tawss=030",
+        # "ab=900",
+        #
+        # "tawss=020",
+        # "tawss=025",
+        # "tawss=030",
         "tawss=035",
         "tawss=040",
         "tawss=045",
         "tawss=050",
 
-        "BC",
-        "Casson",
-        "Newt_5",
-        "Newt_6",
-        "Newt_33",
-
-
-        "turb_Newt_3",
-        "turbulent_Newt_3",
-        "turbulent_Newt_5",
-        "turbulent_Newt_6",
-        "turbulent_Casson",
-
-
-
-        "debljina_010",
-        "debljina_015",
-        "debljina_020",
-        "debljina_025",
-
-        "i4=102",
-        "i4=108",
-        "i4=114",
-        "i4=120",
-        "i4=126",
-        "i4=132",
-
-        "stari_case_provjera_pocetak_2",
-
-
-
-        "no_ILT",
+        # "BC",
+        # "Casson",
+        # "Newt_5",
+        # "Newt_6",
+        # "Newt_33",
+        #
+        #
+        # "turb_Newt_3",
+        # "turbulent_Newt_3",
+        # "turbulent_Newt_5",
+        # "turbulent_Newt_6",
+        # "turbulent_Casson",
+        #
+        #
+        #
+        # "debljina_010",
+        # "debljina_015",
+        # "debljina_020",
+        # "debljina_025",
+        #
+        # "i4=102",
+        # "i4=108",
+        # "i4=114",
+        # "i4=120",
+        # "i4=126",
+        # "i4=132",
+        #
+        # "stari_case_provjera_pocetak_2",
+        #
+        #
+        #
+        # "no_ILT",
 
 ]
 
@@ -330,15 +330,16 @@ simulation_names = [
 
 
 barcelona = False
-results_directory = "//home/josip/feap/FSG/automatizacija_33/radial/"
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_33.pickle"
+
+results_directory = "//home/josip/feap/FSG/automatizacija_33/radial/"
 simulation_names = [
 
-                       # "radial_a3_30",
-                       # "radial_a3_40",
-                       # "radial_tawss_35_d02",
-                       # "radial_tawss_40_d01",
-                       # "radial_tawss_40_d02",
+               "radial_a3_30",
+               "radial_a3_40",
+               "radial_tawss_35_d02",
+               "radial_tawss_40_d01",
+               "radial_tawss_40_d02",
                "radial_tawss_45_d02",
 
 ]
@@ -347,7 +348,28 @@ simulation_names = [
 
 
 
+podaci_dict = {
+                "//home/josip/feap/FSG/automatizacija_33/radial/":
+                ["radial_a3_30",
+                "radial_a3_40",
+                "radial_tawss_35_d02",
+                "radial_tawss_40_d01",
+                "radial_tawss_40_d02",
+                "radial_tawss_45_d02"],
 
+                "//home/josip/feap/FSG/automatizacija_33/3D/":
+                [
+                    "3D_a3=30",
+                    "3D_a3=40",
+                    "3D_tawss_35_d_02",
+                    "3D_tawss_40_d_01",
+                    "3D_tawss_40_d_02",
+                    "3D_tawss_45_d_02",
+                ],
+
+
+
+          }
 
 
 

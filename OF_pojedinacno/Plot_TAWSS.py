@@ -2,47 +2,31 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pandas as pd
-
-
-
-
-# casson_nCor_2 = "//home/josip/foamOpen/cases/FSG/NOVI_axial/usporedba_Modela/Casson/casson_2"
-
-# s1 = "//home/josip/feap/FSG/konferencijaKarsaj/rezultati/sve_simulacije/ab=900/simulacija68"
-# s2 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_mrdanje"
-# s3 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_Newt"
-# s4 = "//home/josip/foamOpen/cases/problemi/simulacija61"
-
-
-s5 = "//home/josip/foamOpen/cases/turbulencija/laminar_Newt"
-s6 = "//home/josip/foamOpen/cases/turbulencija/turb_moje_dugacka_Newton"
-
-
-
-# s7 = "//home/josip/foamOpen/cases/turbulencija/laminar_Casson"
-# s8 = "//home/josip/foamOpen/cases/turbulencija/turb_moje_dugacka_Casson"
-
-
-
-
-
-
 barcelona = False
+
+
+broj_simulacije = 40
+
+
+case = "//home/josip/feap/FSG/automatizacija_33/radial/radial_tawss_40_d02"
+sim_broj = 20
+
 
 
 class VadenjePodataka:
     def __init__(self, Case, oblik, god="n"):
 
-        # self.imeSim = Case.split("/")[-2]+ " - " + Case.split("/")[-1]
-        self.imeSim = Case.split("/")[-1]
-        # self.imeSim = Case.split("/")[-2]
-
         self.oblik = oblik
-        korak = 3
+        korak = 2
         if barcelona == True:
             korak = 3
-        self.koo_file = Case + "/"+str(korak)+"/koordinate"
-        self.TAWSS_file = Case + "/"+str(korak)+"/TAWSS"
+
+        self.imeSim = Case.split("/")[-1]
+
+
+        self.koo_file = Case + "/simulacija"+str(sim_broj)+"/"+str(korak)+"/koordinate"
+        self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/"+str(korak)+"/TAWSS"
+
 
         if barcelona == True:
             self.koo_file = Case + "/" + str(korak) + "/kordinate"
@@ -80,10 +64,10 @@ class VadenjePodataka:
                 if self.oblik == "full":
                     self.sviPodaciDict["z"].append(float(red[2])+0.05342)
                 elif self.oblik == "axial":
-                    self.sviPodaciDict["z"].append(float(red[2]))
+                    self.sviPodaciDict["z"].append(float(red[2])*1000)
 
-                self.sviPodaciDict["x"].append(float(red[0]))
-                self.sviPodaciDict["y"].append(float(red[1]))
+                self.sviPodaciDict["x"].append(float(red[0])*1000)
+                self.sviPodaciDict["y"].append(float(red[1])*1000)
 
     def CitanjeTAWSS(self):
         zapTawss = False
@@ -169,8 +153,9 @@ class VadenjePodataka:
 
 
 
-p7 = VadenjePodataka(s5, oblik="axial")
-p8 = VadenjePodataka(s6, oblik="axial")
+
+
+p9 = VadenjePodataka(case, oblik="axial")
 
 
 

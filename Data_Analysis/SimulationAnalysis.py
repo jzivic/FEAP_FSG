@@ -296,11 +296,40 @@ simulation_names = [
 # ]
 
 
+# podaci_dict = {
+#                 "//home/josip/feap/FSG/automatizacija_33/radial/":
+#                 ["radial_a3_30",
+#                 "radial_a3_40",
+#                 "radial_tawss_35_d02",
+#                 "radial_tawss_40_d01",
+#                 "radial_tawss_40_d02",
+#                 "radial_tawss_45_d02"]
+#           }
+
+auto_name = "automatizacija_33"
+simulation_names = [
+
+               # "radial_a3_30",
+               # "radial_a3_40",
+               # "radial_tawss_35_d02",
+               # "radial_tawss_40_d01",
+               # "radial_tawss_40_d02",
+               "radial_tawss_45_d02",
+
+                # "3D_a3=30",
+                # "3D_a3=40",
+                # "3D_tawss_35_d_02",
+                # "3D_tawss_40_d_01",
+                # "3D_tawss_40_d_02",
+                "3D_tawss_45_d_02",
 
 
+]
 
 
-diagramsDir = "//home/josip/feap/FSG/slike/auto_25/prestretch/"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
+
+diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/prestretch/"
 all_data = pd.read_pickle(pickle_name)
 
 
@@ -434,7 +463,7 @@ def diameter_analysis():
             fig.subplots_adjust(left=0.20)
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-            fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
+            # fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
         vertical_contours()
 
 
@@ -539,7 +568,7 @@ def growth_over_time():
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             fig.savefig(diagramsDir + 'rast_S22.png', dpi=300)
-        rast_S22()
+        # rast_S22()
 
 
         def ILT_thickness():
@@ -566,7 +595,7 @@ def growth_over_time():
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             fig.savefig(diagramsDir + 'rast_ILT_surface_f.png', dpi=300)
 
-        # ILT_surface_f()
+        ILT_surface_f()
 
 
 
