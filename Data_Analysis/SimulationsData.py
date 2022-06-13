@@ -227,7 +227,7 @@ simulation_names = [
         "ac=25",
         "ae=1",
         "ae=4",
-        "ab=100",
+        # "ab=100",
         "ab=900",
 
         "tawss=020",
@@ -244,6 +244,15 @@ simulation_names = [
         "Newt_6",
         "Newt_33",
 
+
+        "turb_Newt_3",
+        "turbulent_Newt_3",
+        "turbulent_Newt_5",
+        "turbulent_Newt_6",
+        "turbulent_Casson",
+
+
+
         "debljina_010",
         "debljina_015",
         "debljina_020",
@@ -255,6 +264,9 @@ simulation_names = [
         "i4=120",
         "i4=126",
         "i4=132",
+
+        "stari_case_provjera_pocetak_2",
+
 
 
         "no_ILT",
@@ -268,12 +280,48 @@ simulation_names = [
 # results_directory = "//home/josip/feap/FSG/automatizacija_26/"
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_26.pickle"
 # simulation_names = [
-#             "03",
-#             "04",
-#             "05",
-#             "07",
-#             "09",
-#             "12",
+#
+#                 "stiffness_low",
+#                 "stiffness_low_01",
+#                 "stiffness_low_05",
+#                 "stiffness_low_10",
+#                 "stiffness_low_25",
+#                 "stiffness_low_50",
+#                 "stiffness_low_75",
+#                 "stifness_normal",
+#
+# ]
+
+
+
+# barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_29/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_26.pickle"
+# simulation_names = [
+#
+#     "a3=30",
+#     "a3=40",
+#     "ac=16",
+#     "ac=25",
+#     "ae=1",
+#     "ae=4",
+#     "flow_laminar_BC",
+#     "flow_laminar_Casson",
+#     "flow_laminar_Newt_3",
+#     "flow_laminar_Newt_5",
+#     "flow_laminar_Newt_6",
+#     "flow_turbulent_BC",
+#     "flow_turbulent_Casson",
+#     "flow_turbulent_Newt_3",
+#     "flow_turbulent_Newt_5",
+#     "flow_turbulent_Newt_6",
+#     "tawss_025",
+#     "tawss_030",
+#     "tawss_035",
+#     "tawss_040",
+#     "tawss_045",
+#     "tawss_050",
+#
 # ]
 
 
@@ -281,6 +329,19 @@ simulation_names = [
 
 
 
+barcelona = False
+results_directory = "//home/josip/feap/FSG/automatizacija_33/radial/"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_33.pickle"
+simulation_names = [
+
+                       # "radial_a3_30",
+                       # "radial_a3_40",
+                       # "radial_tawss_35_d02",
+                       # "radial_tawss_40_d01",
+                       # "radial_tawss_40_d02",
+               "radial_tawss_45_d02",
+
+]
 
 
 

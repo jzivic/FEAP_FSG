@@ -8,12 +8,23 @@ import pandas as pd
 
 # casson_nCor_2 = "//home/josip/foamOpen/cases/FSG/NOVI_axial/usporedba_Modela/Casson/casson_2"
 
-s1 = "//home/josip/feap/FSG/konferencijaKarsaj/rezultati/sve_simulacije/ab=900/simulacija68"
+# s1 = "//home/josip/feap/FSG/konferencijaKarsaj/rezultati/sve_simulacije/ab=900/simulacija68"
+# s2 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_mrdanje"
+# s3 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_Newt"
+# s4 = "//home/josip/foamOpen/cases/problemi/simulacija61"
 
-s2 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_mrdanje"
-s3 = "//home/josip/feap/FSG/automatizacija_18/foam_axial=1_2/simulacija56_Newt"
 
-s4 = "//home/josip/foamOpen/cases/problemi/simulacija61"
+s5 = "//home/josip/foamOpen/cases/turbulencija/laminar_Newt"
+s6 = "//home/josip/foamOpen/cases/turbulencija/turb_moje_dugacka_Newton"
+
+
+
+# s7 = "//home/josip/foamOpen/cases/turbulencija/laminar_Casson"
+# s8 = "//home/josip/foamOpen/cases/turbulencija/turb_moje_dugacka_Casson"
+
+
+
+
 
 
 barcelona = False
@@ -27,7 +38,7 @@ class VadenjePodataka:
         # self.imeSim = Case.split("/")[-2]
 
         self.oblik = oblik
-        korak = 2
+        korak = 3
         if barcelona == True:
             korak = 3
         self.koo_file = Case + "/"+str(korak)+"/koordinate"
@@ -135,7 +146,7 @@ class VadenjePodataka:
         # plt.ylim(0, 1)
 
         plt.title("TAWSS ")
-        plt.ylabel("TAWSS [kPa]")
+        plt.ylabel("TAWSS [Pa]")
         plt.xlabel("z [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         plt.legend()
@@ -150,9 +161,6 @@ class VadenjePodataka:
         plt.xlabel("z [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         plt.legend()
-
-
-
         # plt.plot(self.dobPodDF["z"], self.dobPodDF["r"], label=self.imeSim)
 
 
@@ -161,16 +169,8 @@ class VadenjePodataka:
 
 
 
-# case_casson_nCor_2 = VadenjePodataka(casson_nCor_2, oblik="axial")
-
-
-
-# s1 = VadenjePodataka(s1, oblik="full")
-
-# s2 = VadenjePodataka(s1, oblik="full")
-# s3 = VadenjePodataka(s1, oblik="full")
-
-p4 = VadenjePodataka(s4, oblik="axial")
+p7 = VadenjePodataka(s5, oblik="axial")
+p8 = VadenjePodataka(s6, oblik="axial")
 
 
 

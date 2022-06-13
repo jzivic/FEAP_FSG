@@ -7,8 +7,9 @@ import matplotlib.pyplot as plt
 # input = "//home/josip/foamOpen/cases/FSG/NOVI_axial/usporedbaTolerancija/res__ILT_lines__89-5"
 # simulacija = "//home/josip/foamOpen/cases/FSG/NOVI_axial/dizanjeTAWSS/prava1"
 
-input = "//home/josip/foamOpen/cases/FSG/NOVI_axial/usporedba_z/res__ILT_lines__89-5"
-simulacija = "///home/josip/foamOpen/cases/FSG/NOVI_axial/usporedba_z/B/z=1"
+input = "/home/josip/feap/FSG/automatizacija_27/proba_1/res__ILT_lines__172-22"
+
+simulacija = "//home/josip/feap/FSG/automatizacija_27/proba_1/probavanjemreze"
 
 
 class Mesh:
@@ -254,7 +255,7 @@ class Mesh:
 # Mesh(input, nRel=2, nZel=1, grading=1, smooth=True, negTS=-1)
 
 
-Mesh(input, nRel=30, nZel=1, grading=0.2, smooth=False, negTS=-150)
+Mesh(input, nRel=30, nZel=1, grading=0.2, smooth=False, negTS=-1)
 
 
 

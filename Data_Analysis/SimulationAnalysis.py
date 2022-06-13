@@ -190,28 +190,37 @@ simulation_names = [
             # "tawss=025",
             # "tawss=030",
             # "tawss=035",
-            # "tawss=040",
+            "tawss=040",
             # "tawss=045",
             # "tawss=050",
 
             # "BC",
-            # "Casson",
+            "Casson",
             # "Newt_5",
             # "Newt_6",
             # "Newt_33",
-            #
+
+            # "turb_Newt_3",
+            # "turbulent_Newt_3",
+            # "turbulent_Newt_5",
+            # "turbulent_Newt_6",
+            # "turbulent_Casson",
+
+
             # "debljina_010",
             # "debljina_015",
             # "debljina_020",
             # "debljina_025",
-            #
-            # "i4=102",
-            "i4=108",
-            "i4=114",
-            "i4=120",
-            "i4=126",
-            "i4=132",
-            #
+
+            # "i4=108",
+            # "i4=114",
+            # "i4=120",
+            # "i4=126",
+            # "i4=132",
+
+            "stari_case_provjera_pocetak_2",
+
+
             # "no_ILT",
 ]
 
@@ -232,14 +241,70 @@ simulation_names = [
 # ]
 
 
-diagramsDir = "//home/josip/feap/FSG/slike/auto_26/krutost/"
+# diagramsDir = "//home/josip/feap/FSG/slike/auto_25/krutost/"
 
+
+
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_26.pickle"
+# simulation_names = [
+#
+#                 "stiffness_low",
+#                 # "stiffness_low_01",
+#                 # "stiffness_low_05",
+#                 # "stiffness_low_10",
+#                 # "stiffness_low_25",
+#                 "stiffness_low_50",
+#                 # "stiffness_low_75",
+#                 "stifness_normal",
+#
+# ]
+
+
+
+
+
+
+
+
+
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_29.pickle"
+# simulation_names = [
+#         "a3=30",
+#         "a3=40",
+#         "ac=16",
+#         "ac=25",
+#         "ae=1",
+#         "ae=4",
+#         "flow_laminar_BC",
+#         "flow_laminar_Casson",
+#         "flow_laminar_Newt_3",
+#         "flow_laminar_Newt_5",
+#         "flow_laminar_Newt_6",
+#         "flow_turbulent_BC",
+#         "flow_turbulent_Casson",
+#         "flow_turbulent_Newt_3",
+#         "flow_turbulent_Newt_5",
+#         "flow_turbulent_Newt_6",
+#         "tawss_025",
+#         "tawss_030",
+#         "tawss_035",
+#         "tawss_040",
+#         "tawss_045",
+#         "tawss_050"
+# ]
+
+
+
+
+
+
+diagramsDir = "//home/josip/feap/FSG/slike/auto_25/prestretch/"
 all_data = pd.read_pickle(pickle_name)
 
 
-
-
-times = [222]
+times = [230]
 def time_analysis(times):
     for trenutak in times:
         for simul in simulation_names:
@@ -319,7 +384,7 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 14
+r = 16
 wanted_D = r*2
 
 def diameter_analysis():
@@ -348,7 +413,7 @@ def diameter_analysis():
             plt.title("Inner and ILT contours")
             plt.ylabel("Radius [mm]")
             plt.xlabel("Axial coordinate $z$ [mm]")
-            plt.xlim([0, 250])
+            # plt.xlim([0, 250])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
         # ILT_inner_outer_cont_staro()
@@ -370,7 +435,7 @@ def diameter_analysis():
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
             fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
-        # vertical_contours()
+        vertical_contours()
 
 
         def stress_cont():
@@ -412,7 +477,7 @@ def diameter_analysis():
             plt.legend()
         # vein_thickness_f()
 
-    # plt.show()
+    plt.show()
 
 
 # diameter_analysis()
@@ -449,7 +514,6 @@ def growth_over_time():
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             fig.savefig(diagramsDir + 'rast_D.png', dpi=300)
-
         # rast_D()
 
 
@@ -475,7 +539,7 @@ def growth_over_time():
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             fig.savefig(diagramsDir + 'rast_S22.png', dpi=300)
-        # rast_S22()
+        rast_S22()
 
 
         def ILT_thickness():
@@ -517,9 +581,9 @@ def growth_over_time():
             plt.legend()
         # rast_vein_thickness()
 
-    # plt.show()
+    plt.show()
 
-# growth_over_time()
+growth_over_time()
 
 
 
