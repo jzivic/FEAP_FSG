@@ -1,6 +1,6 @@
 # chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
 
-chosen_TimeSteps = [i for i in range(245,246)]
+chosen_TimeSteps = [i for i in range(352,353)]
 
 barcelona = False
 
