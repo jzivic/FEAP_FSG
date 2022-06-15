@@ -1,6 +1,6 @@
-# chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
+chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
 
-chosen_TimeSteps = [i for i in range(352,353)]
+chosen_TimeSteps = [i for i in range(151,170)]
 
 barcelona = False
 
@@ -428,18 +428,16 @@ simulationsData_dict = {
                          # "radial_tawss_45_d02",
                      ]
                  },
-
-
-                "//home/josip/feap/FSG/automatizacija_25/":
-                    {"version"  :  "old",
-
-                     "simulations":
-                        [
-                         "a3_30",
+                #
+                # "//home/josip/feap/FSG/automatizacija_25/":
+                #     {"version"  :  "old",
+                #
+                #      "simulations":
+                #         [
+                #          "a3_30",
                 #          "a3_40",
                 #          "Casson",
-                        ]
-                     }
-
+                #         ]
+                #      }
 
           }

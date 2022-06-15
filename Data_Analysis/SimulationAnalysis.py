@@ -167,15 +167,15 @@ simulation_names = [
             # "3D_tawss_40_d_02",
             # "3D_tawss_45_d_02",
 
-            # "radial_a3_30",
-            # "radial_a3_40",
-            # "radial_tawss_35_d02",
-            # "radial_tawss_40_d01",
-            # "radial_tawss_40_d02",
-            # "radial_tawss_45_d02",
+            "radial_a3_30",
+            "radial_a3_40",
+            "radial_tawss_35_d02",
+            "radial_tawss_40_d01",
+            "radial_tawss_40_d02",
+            "radial_tawss_45_d02",
 
-            # "a3_30",
-            # "a3_40",
+            "a3_30",
+            "a3_40",
             "Casson",
 
 ]
