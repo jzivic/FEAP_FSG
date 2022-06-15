@@ -1,5 +1,7 @@
-# chosen_TimeSteps = [i for i in range(666)]
-chosen_TimeSteps = [i for i in range(1,300)]
+chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
+
+# chosen_TimeSteps = [i for i in range(225,226)]
+
 barcelona = False
 
 
@@ -347,32 +349,83 @@ simulation_names = [
 
 
 
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_33.pickle"
+# simulaitonsData_dict = {
+#                 "//home/josip/feap/FSG/automatizacija_33/radial/":
+#                 ["radial_a3_30",
+#                 "radial_a3_40",
+#                 "radial_tawss_35_d02",
+#                 "radial_tawss_40_d01",
+#                 "radial_tawss_40_d02",
+#                 "radial_tawss_45_d02"],
 
-podaci_dict = {
+
+
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25_novo.pickle"
+# simulaitonsData_dict = {
+#                 "//home/josip/feap/FSG/automatizacija_25/":
+#                 [
+#                     "a3_30",
+#                     "a3_40",
+#                     "ac_16",],
+#           }
+
+
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/auto_FSG_usporedba.pickle"
+# simulaitonsData_dict = {
+#
+#                 "//home/josip/feap/FSG/automatizacija_33/NO_biochemo_FSG/x3_2/":
+#                 ["x3_2_a3_20",
+#                 "x3_2_a3_30",
+#                 "x3_2_a3_40",],
+#
+#                 "//home/josip/feap/FSG/automatizacija_33/NO_biochemo_FSG/x3_3/":
+#                 [  "x3_3_a3_20",
+#                    "x3_3_a3_30",
+#                    "x3_3_a3_40"],
+#
+#                 "//home/josip/feap/FSG/automatizacija_25/":
+#                 ["a3_30",
+#                  "a3_40",
+#                  "Casson"]
+#
+#           }
+
+
+
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_biochemo.pickle"
+simulaitonsData_dict = {
+
+                # "//home/josip/feap/FSG/automatizacija_33/3D/":
+                # [
+                #     # "3D_a3_30",
+                #     "3D_a3_40",
+                #     "3D_tawss_35_d_02",
+                #     "3D_tawss_40_d_01",
+                #     "3D_tawss_40_d_02",
+                #     "3D_tawss_45_d_02",
+                #
+                # ],
+
                 "//home/josip/feap/FSG/automatizacija_33/radial/":
-                ["radial_a3_30",
+                [
+
+                "radial_a3_30",      #__b označava begin, odnosno da nema restart opcije
                 "radial_a3_40",
                 "radial_tawss_35_d02",
                 "radial_tawss_40_d01",
                 "radial_tawss_40_d02",
-                "radial_tawss_45_d02"],
+                "radial_tawss_45_d02",
 
-                "//home/josip/feap/FSG/automatizacija_33/3D/":
-                [
-                    "3D_a3=30",
-                    "3D_a3=40",
-                    "3D_tawss_35_d_02",
-                    "3D_tawss_40_d_01",
-                    "3D_tawss_40_d_02",
-                    "3D_tawss_45_d_02",
                 ],
 
 
+                # "//home/josip/feap/FSG/automatizacija_25/":
+                # [
+                #     "a3_30",
+                #     "a3_40",
+                #     "ac_16", ],
 
           }
-
-
-
-
-
-

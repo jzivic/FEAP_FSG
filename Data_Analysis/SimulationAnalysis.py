@@ -4,179 +4,8 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 
-# Usporedba TAWSS-a
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_8.pickle"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
 # simulation_names = [
-#         # "prava_020_14",
-#         # "prava_025_14",
-#         # "prava_030_14",
-#         # "prava_035_14",
-#         # "prava_040_14",
-#
-#         "prava_020_15",
-#         "prava_025_15",
-#         "prava_030_15",
-#         "prava_035_15",
-#         "prava_040_15",
-# ]
-
-# barcelona
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/barcelona.pickle"
-# simulation_names = ["a0=1.3","a3=10","a3=40","ab=100","ab=900","ac=1.67","ac=2.4",]
-# simulation_names = ["ac=1.67", "ac=2.4",]
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
-# simulation_names = ["Newt_5_NS",
-#                     "Newt_6_NS",
-#                     "prava_Casson_NS",
-#                     "BS_NS" ]
-
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_16.pickle"
-# simulation_names = [
-#                         # "a3=5",
-#                         # "a3=40",
-#                         "org",
-#                         # "pa=0.06",
-#                         # "pc=1",
-#
-#                         # "ac=1.6",  # sve ac, ad izgledaju isto kao org
-#                         # "ac=2.8",
-#                         # "ad=2.5",
-#                         # "ad=4",
-#
-#                         # "a3=30",
-#                         # "pa=0.08",
-#                     ]
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_17.pickle"
-# simulation_names = [
-#                     # "TAWSS=04_i4=130",
-#
-#                     # "TAWSS=04_i4=108_i8=08",
-#                     # "TAWSS=04_i4=108_i8=065",
-#                     # "TAWSS=04_i4=115_i8=08",
-#                     "TAWSS=04_i4=115_i8=065",
-#
-#                     # "TAWSS=035_i4=108_i8=08",
-#                     # "TAWSS=035_i4=108_i8=065",
-#                     # "TAWSS=035_i4=115_i8=08",
-#                     # "TAWSS=035_i4=115_i8=065",
-#
-#                     # "TAWSS=030_i4=108_i8=08",
-#                     # "TAWSS=030_i4=108_i8=065",
-#                     # "TAWSS=030_i4=115_i8=08",
-#                     # "TAWSS=030_i4=115_i8=065",
-#
-#                     # "i4=125",
-#                     # "i4=120",
-#
-#                     # "i4=115_",
-#                     "i4=115_deb015_",
-#                     "i4=115_deb01_",
-#                     # "k1=0_i4=115=i8=1_",
-#                     # "k1=0_i4=115_i8=08_",
-# ]
-
-
-#
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_18.pickle"
-# simulation_names = [
-#         "foam_axial=1_2",
-        # "foam_axial=2",
-        # "foam_axial=3",
-        # "foam_axial=5",
-
-        # "restart_200",
-        # "restart_250",
-        # "tawss=055",
-
-        # "Newtn_33",
-        # "Newt_detaljno",
-
-        # "foam_axial=3_4nodes",
-        # "foam_axial=2_4nodes",
-
-        # "foam_axial=2_smooth",
-        # "rest_200_smooth",
-
-        # "no_ILT",
-        # "noILT_barcelona",
-# ]
-
-# barcelona = False
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_19.pickle"
-# simulation_names = [
-#             "avg_1",
-#             "avg_smooth_1",
-#             "Newt33_avg",
-#             "no_average",
-#
-#             "Newt_5_avg",
-#             "Newt_5_avg_smooth",
-# ]
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_20.pickle"
-# simulation_names = [
-#     "4_nodes",
-#     "loop2_4nodes",
-#     "loop_1",
-#     "loop_2_",
-#     "i4=115_loop2",
-#     "i4=115_loop2_4nodes",
-# ]
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_22.pickle"
-# simulation_names = [
-#     "ax5_i4=108_i8=08",
-#     "ax_5_novi_avg",
-#     "feap_5_foam1",
-#     "feap_5_foam_maloSporije",
-#     "feap_5_foam_maloSporije_Oboje",
-#     "feap_5_foam_sporije_Josip",
-#     "feap_5_foam_sporije_Lana",
-#     "loop2",
-#     "loop3",
-#     "restart_150",
-#     "restart_200",
-#     "TAWSS_035",
-# ]
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_23.pickle"
-# simulation_names = [
-#         "avg_Josip",
-#         "avg_Lana",
-#         # "avg_Oboje",
-# ]
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_24.pickle"
-# simulation_names = [
-            # "loop1_Josip",
-            # "loop2_Josip",
-            # "loop3_Josip",
-            # "loop3_Lana",
-            # "loop5_Josip_2",
-            # "loop5_Lana_2",
-
-            # "restart_150_loop1_Josip_2",
-            # "restart_150_loop2_Josip",
-            # "restart_150_loop3_Josip",
-            # "restart_150_loop5_Josip",
-
-            # "loop_3_foam=1_Josip",
-            # "loop_3_foam=3_Josip",
-            # "loop_3_foam=4_Josip",
-            # "loop3_Josip",
-# ]
-
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
-simulation_names = [
             # "a3=30",
             # "a3=40",
             # "ac=16",
@@ -190,12 +19,12 @@ simulation_names = [
             # "tawss=025",
             # "tawss=030",
             # "tawss=035",
-            "tawss=040",
+            # "tawss=040",
             # "tawss=045",
             # "tawss=050",
 
             # "BC",
-            "Casson",
+            # "Casson",
             # "Newt_5",
             # "Newt_6",
             # "Newt_33",
@@ -218,34 +47,19 @@ simulation_names = [
             # "i4=126",
             # "i4=132",
 
-            "stari_case_provjera_pocetak_2",
-
-
-            # "no_ILT",
-]
-
-
-
-
-
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_26.pickle"
-# simulation_names = [
-            # "03",
-#             "04",
-#             "05",
-#             "07",
-#             "09",
-#             "12",
+            # "stari_case_provjera_pocetak_2",
+            # "no_ILT"
 # ]
 
 
+
+
+
+
+
+
+
 # diagramsDir = "//home/josip/feap/FSG/slike/auto_25/krutost/"
-
-
-
-
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_26.pickle"
 # simulation_names = [
 #
@@ -306,25 +120,67 @@ simulation_names = [
 #                 "radial_tawss_45_d02"]
 #           }
 
-auto_name = "automatizacija_33"
+# auto_name = "automatizacija_33"
+# simulation_names = [
+#
+#                # "radial_a3_30",
+#                # "radial_a3_40",
+#                # "radial_tawss_35_d02",
+#                # "radial_tawss_40_d01",
+#                # "radial_tawss_40_d02",
+#                "radial_tawss_45_d02",
+#
+#                 # "3D_a3=30",
+#                 # "3D_a3=40",
+#                 # "3D_tawss_35_d_02",
+#                 # "3D_tawss_40_d_01",
+#                 # "3D_tawss_40  _d_02",
+#                 "3D_tawss_45_d_02",
+#
+# ]
+
+
+auto_name = "auto_FSG_usporedba"
 simulation_names = [
 
-               # "radial_a3_30",
-               # "radial_a3_40",
-               # "radial_tawss_35_d02",
-               # "radial_tawss_40_d01",
-               # "radial_tawss_40_d02",
-               "radial_tawss_45_d02",
+        "x3_2_a3_20",
+         "x3_2_a3_30",
+         "x3_2_a3_40",
 
-                # "3D_a3=30",
-                # "3D_a3=40",
-                # "3D_tawss_35_d_02",
-                # "3D_tawss_40_d_01",
-                # "3D_tawss_40_d_02",
-                "3D_tawss_45_d_02",
+        # "x3_3_a3_20",
+        #  "x3_3_a3_30",
+        #  "x3_3_a3_40",
 
+        # "a3_30",
+        #  "a3_40",
+        #  "Casson"
+]
+
+
+auto_name = "automatizacija_biochemo"
+simulation_names = [
+
+            # "3D_a3_30",
+            # "3D_a3_40",
+            # "3D_tawss_35_d_02",
+            # "3D_tawss_40_d_01",
+            # "3D_tawss_40_d_02",
+            # "3D_tawss_45_d_02",
+
+            "radial_a3_30",
+            "radial_a3_40",
+            "radial_tawss_35_d02",
+            "radial_tawss_40_d01",
+            "radial_tawss_40_d02",
+            "radial_tawss_45_d02",
+
+            # "a3_30",
+            # "a3_40",
+            # "ac_16",
 
 ]
+
+
 
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
@@ -403,6 +259,13 @@ def time_analysis(times):
         plt.show()
 
 # time_analysis(times)
+
+
+
+
+
+
+
 
 
 
@@ -509,7 +372,7 @@ def diameter_analysis():
     plt.show()
 
 
-# diameter_analysis()
+diameter_analysis()
 
 
 
@@ -543,7 +406,7 @@ def growth_over_time():
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             fig.savefig(diagramsDir + 'rast_D.png', dpi=300)
-        # rast_D()
+        rast_D()
 
 
         def rast_H():
@@ -595,7 +458,7 @@ def growth_over_time():
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             fig.savefig(diagramsDir + 'rast_ILT_surface_f.png', dpi=300)
 
-        ILT_surface_f()
+        # ILT_surface_f()
 
 
 
@@ -612,7 +475,7 @@ def growth_over_time():
 
     plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
 
