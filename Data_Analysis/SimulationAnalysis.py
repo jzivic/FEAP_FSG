@@ -415,7 +415,7 @@ def growth_over_time():
             plt.xlabel("Days [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # rast_H()
+        rast_H()
 
 
         def rast_S22():
@@ -430,7 +430,7 @@ def growth_over_time():
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             fig.savefig(diagramsDir + 'rast_S22.png', dpi=300)
-        rast_S22()
+        # rast_S22()
 
 
         def ILT_thickness():

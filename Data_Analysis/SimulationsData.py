@@ -1,6 +1,6 @@
 chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
 
-chosen_TimeSteps = [i for i in range(151,170)]
+# chosen_TimeSteps = [i for i in range(1,2)]
 
 barcelona = False
 
@@ -421,23 +421,23 @@ simulationsData_dict = {
                  "simulations":
                      [
                          "radial_a3_30",      #__b označava begin, odnosno da nema restart opcije
-                         # "radial_a3_40",
-                         # "radial_tawss_35_d02",
-                         # "radial_tawss_40_d01",
-                         # "radial_tawss_40_d02",
-                         # "radial_tawss_45_d02",
+                         "radial_a3_40",
+                         "radial_tawss_35_d02",
+                         "radial_tawss_40_d01",
+                         "radial_tawss_40_d02",
+                         "radial_tawss_45_d02",
                      ]
                  },
-                #
-                # "//home/josip/feap/FSG/automatizacija_25/":
-                #     {"version"  :  "old",
-                #
-                #      "simulations":
-                #         [
-                #          "a3_30",
-                #          "a3_40",
-                #          "Casson",
-                #         ]
-                #      }
+
+                "//home/josip/feap/FSG/automatizacija_25/":
+                    {"version"  :  "old",
+
+                     "simulations":
+                        [
+                         "a3_30",
+                         "a3_40",
+                         "Casson",
+                        ]
+                     }
 
           }
