@@ -167,16 +167,16 @@ simulation_names = [
             # "3D_tawss_40_d_02",
             # "3D_tawss_45_d_02",
 
-            "radial_a3_30",
-            "radial_a3_40",
-            "radial_tawss_35_d02",
-            "radial_tawss_40_d01",
-            "radial_tawss_40_d02",
-            "radial_tawss_45_d02",
+            # "radial_a3_30",
+            # "radial_a3_40",
+            # "radial_tawss_35_d02",
+            # "radial_tawss_40_d01",
+            # "radial_tawss_40_d02",
+            # "radial_tawss_45_d02",
 
             # "a3_30",
             # "a3_40",
-            # "ac_16",
+            "Casson",
 
 ]
 
@@ -185,7 +185,8 @@ simulation_names = [
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 
-diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/prestretch/"
+# diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/tawss/"
+diagramsDir = "//home/josip/feap/FSG/slike/proba/"
 all_data = pd.read_pickle(pickle_name)
 
 
@@ -326,8 +327,8 @@ def diameter_analysis():
             fig.subplots_adjust(left=0.20)
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-            # fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
-        vertical_contours()
+            fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
+        # vertical_contours()
 
 
         def stress_cont():
@@ -357,8 +358,6 @@ def diameter_analysis():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
         # ILT_thickness_f()
-
-
         def vein_thickness_f():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(Z_cont, vein_thickness, linestyle='-', c=color, label=(simul+", TS: "+str(time)))
@@ -372,7 +371,7 @@ def diameter_analysis():
     plt.show()
 
 
-diameter_analysis()
+# diameter_analysis()
 
 
 
@@ -406,7 +405,7 @@ def growth_over_time():
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             fig.savefig(diagramsDir + 'rast_D.png', dpi=300)
-        rast_D()
+        # rast_D()
 
 
         def rast_H():
@@ -431,7 +430,7 @@ def growth_over_time():
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             fig.savefig(diagramsDir + 'rast_S22.png', dpi=300)
-        # rast_S22()
+        rast_S22()
 
 
         def ILT_thickness():
@@ -475,7 +474,7 @@ def growth_over_time():
 
     plt.show()
 
-# growth_over_time()
+growth_over_time()
 
 
 
