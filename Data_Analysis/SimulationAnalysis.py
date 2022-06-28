@@ -4,8 +4,9 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
-# simulation_names = [
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
+auto_name = "automatizacija_25"
+simulation_names = [
             # "a3=30",
             # "a3=40",
             # "ac=16",
@@ -14,7 +15,7 @@ from matplotlib import pyplot as plt
             # "ae=4",
             # "ab=100",
             # "ab=900",
-
+            #
             # "tawss=020",
             # "tawss=025",
             # "tawss=030",
@@ -22,13 +23,13 @@ from matplotlib import pyplot as plt
             # "tawss=040",
             # "tawss=045",
             # "tawss=050",
-
+            #
             # "BC",
             # "Casson",
             # "Newt_5",
             # "Newt_6",
             # "Newt_33",
-
+            #
             # "turb_Newt_3",
             # "turbulent_Newt_3",
             # "turbulent_Newt_5",
@@ -37,8 +38,8 @@ from matplotlib import pyplot as plt
 
 
             # "debljina_010",
-            # "debljina_015",
-            # "debljina_020",
+            "debljina_015",
+            "debljina_020",
             # "debljina_025",
 
             # "i4=108",
@@ -46,10 +47,10 @@ from matplotlib import pyplot as plt
             # "i4=120",
             # "i4=126",
             # "i4=132",
-
+            #
             # "stari_case_provjera_pocetak_2",
             # "no_ILT"
-# ]
+]
 
 
 
@@ -140,54 +141,61 @@ from matplotlib import pyplot as plt
 # ]
 
 
-auto_name = "auto_FSG_usporedba"
-simulation_names = [
-
-        "x3_2_a3_20",
-         "x3_2_a3_30",
-         "x3_2_a3_40",
-
-        # "x3_3_a3_20",
-        #  "x3_3_a3_30",
-        #  "x3_3_a3_40",
-
-        # "a3_30",
-        #  "a3_40",
-        #  "Casson"
-]
-
-
-auto_name = "automatizacija_biochemo"
-simulation_names = [
-
-            # "3D_a3_30",
-            # "3D_a3_40",
-            # "3D_tawss_35_d_02",
-            # "3D_tawss_40_d_01",
-            # "3D_tawss_40_d_02",
-            # "3D_tawss_45_d_02",
-
-            "radial_a3_30",
-            "radial_a3_40",
-            "radial_tawss_35_d02",
-            "radial_tawss_40_d01",
-            "radial_tawss_40_d02",
-            "radial_tawss_45_d02",
-
-            "a3_30",
-            "a3_40",
-            "Casson",
-
-]
+# auto_name = "auto_FSG_usporedba"
+# simulation_names = [
+#
+#         "x3_2_a3_20",
+#          # "x3_2_a3_30",
+#          # "x3_2_a3_40",
+#
+#         "x3_3_a3_20",
+#          # "x3_3_a3_30",
+#          # "x3_3_a3_40",
+#
+#         # "a3_30",
+#         #  "a3_40",
+#          "Casson"
+# ]
 
 
+# auto_name = "automatizacija_biochemo"
+# simulation_names = [
+#
+#             # "3D_a3_30",
+#             # "3D_a3_40",
+#             # "3D_tawss_35_d_02",
+#             # "3D_tawss_40_d_01",
+#             # "3D_tawss_40_d_02",
+#             # "3D_tawss_45_d_02",
+#
+#             # "radial_a3_30",
+#             # "radial_a3_40",
+#             # "radial_tawss_35_d02",
+#             # "radial_tawss_40_d01",
+#             "radial_tawss_40_d02",
+#             # "radial_tawss_45_d02",
+#
+#             # "a3_30",
+#             # "a3_40",
+#             # "Casson",
+#
+#             "standard_3D",
+#
+# ]
 
 
+
+
+
+
+
+picture_save = False
+#
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
-
-# diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/tawss/"
-diagramsDir = "//home/josip/feap/FSG/slike/proba/"
 all_data = pd.read_pickle(pickle_name)
+#
+# diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/pressure/"
+diagramsDir = "//home/josip/feap/FSG/slike/proba/"
 
 
 times = [230]
@@ -277,7 +285,7 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 16
+r = 15
 wanted_D = r*2
 
 def diameter_analysis():
@@ -298,19 +306,6 @@ def diameter_analysis():
         S22_cont = all_data.loc[simul]["S22_contours"][index]
 
 
-        def ILT_inner_outer_cont_staro():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(Z_cont, inner_cont, c=color, label=(simul+", TS: "+str(time)))
-            plt.plot(Z_cont, ILT_cont, linestyle=':', c=color)
-            # plt.plot(Z_cont, outer_cont, linestyle='--', c=color)
-            plt.title("Inner and ILT contours")
-            plt.ylabel("Radius [mm]")
-            plt.xlabel("Axial coordinate $z$ [mm]")
-            # plt.xlim([0, 250])
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            plt.legend()
-        # ILT_inner_outer_cont_staro()
-
         def vertical_contours():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(inner_cont, Z_cont, c=color, label=(simul))
@@ -327,8 +322,9 @@ def diameter_analysis():
             fig.subplots_adjust(left=0.20)
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-            fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
-        # vertical_contours()
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
+        vertical_contours()
 
 
         def stress_cont():
@@ -345,7 +341,8 @@ def diameter_analysis():
             fig.subplots_adjust(left=0.20)
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-            fig.savefig(diagramsDir + 'stress_cont.png', dpi=300)
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'stress_cont.png', dpi=300)
         # stress_cont()
 
 
@@ -367,11 +364,11 @@ def diameter_analysis():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
         # vein_thickness_f()
+    if picture_save == False:
+        plt.show()
 
-    plt.show()
 
-
-# diameter_analysis()
+diameter_analysis()
 
 
 
@@ -404,7 +401,8 @@ def growth_over_time():
             fig.subplots_adjust(bottom=0.15)
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
-            fig.savefig(diagramsDir + 'rast_D.png', dpi=300)
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'rast_D.png', dpi=300)
         # rast_D()
 
 
@@ -414,8 +412,13 @@ def growth_over_time():
             plt.ylabel("H [mm]")
             plt.xlabel("Days [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
+            fig = plt.gcf()
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.15)
             plt.legend()
-        rast_H()
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'rast_H.png', dpi=300)
+        # rast_H()
 
 
         def rast_S22():
@@ -429,7 +432,8 @@ def growth_over_time():
             fig.subplots_adjust(bottom=0.15)
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
-            fig.savefig(diagramsDir + 'rast_S22.png', dpi=300)
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'rast_S22.png', dpi=300)
         # rast_S22()
 
 
@@ -455,9 +459,10 @@ def growth_over_time():
             fig.subplots_adjust(bottom=0.15)
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
-            fig.savefig(diagramsDir + 'rast_ILT_surface_f.png', dpi=300)
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'rast_ILT_surface_f.png', dpi=300)
 
-        # ILT_surface_f()
+        ILT_surface_f()
 
 
 
@@ -472,9 +477,10 @@ def growth_over_time():
             plt.legend()
         # rast_vein_thickness()
 
-    plt.show()
+    if picture_save == False:
+        plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
 

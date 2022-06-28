@@ -373,30 +373,45 @@ simulation_names = [
 
 
 
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/auto_FSG_usporedba.pickle"
-# simulationsData_dict = {
-#
-#                 "//home/josip/feap/FSG/automatizacija_33/NO_biochemo_FSG/x3_2/":
-#                 ["x3_2_a3_20",
-#                 "x3_2_a3_30",
-#                 "x3_2_a3_40",],
-#
-#                 "//home/josip/feap/FSG/automatizacija_33/NO_biochemo_FSG/x3_3/":
-#                 [  "x3_3_a3_20",
-#                    "x3_3_a3_30",
-#                    "x3_3_a3_40"],
-#
-#                 "//home/josip/feap/FSG/automatizacija_25/":
-#                 ["a3_30",
-#                  "a3_40",
-#                  "Casson"]
-#
-#           }
-
-
-
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_biochemo.pickle"
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/auto_FSG_usporedba.pickle"
 simulationsData_dict = {
+
+                "//home/josip/feap/FSG/automatizacija_25/":
+                    {"version": "old",
+
+                     "simulations":
+                         ["a3_30",
+                          "a3_40",
+                          "Casson"]
+                     },
+
+
+
+                "//home/josip/feap/FSG/automatizacija_33/NO_biochemo_FSG/x3_2/":
+                {"version": "new",
+
+                 "simulations":
+                     ["x3_2_a3_20",
+                      "x3_2_a3_30",
+                      "x3_2_a3_40"]
+                },
+
+
+                "//home/josip/feap/FSG/automatizacija_33/NO_biochemo_FSG/x3_3/":
+                    {"version": "new",
+
+                     "simulations":
+                         ["x3_3_a3_20",
+                          "x3_3_a3_30",
+                          "x3_3_a3_40"]
+                     },
+
+          }
+
+
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_biochemo.pickle"
+# simulationsData_dict = {
                 #
                 # "//home/josip/feap/FSG/automatizacija_33/3D/":
                 # {"version": "new",
@@ -415,29 +430,66 @@ simulationsData_dict = {
 
 
 
-                "//home/josip/feap/FSG/automatizacija_33/radial/":
-                {"version": "new",
+          #       "//home/josip/feap/FSG/automatizacija_33/radial/":
+          #       {"version": "new",
+          #
+          #        "simulations":
+          #            [
+          #                "radial_a3_30",      #__b označava begin, odnosno da nema restart opcije
+          #                "radial_a3_40",
+          #                "radial_tawss_35_d02",
+          #                "radial_tawss_40_d01",
+          #                "radial_tawss_40_d02",
+          #                "radial_tawss_45_d02",
+          #            ]
+          #        },
+          #
+          #       "//home/josip/feap/FSG/automatizacija_25/":
+          #           {"version"  :  "old",
+          #
+          #            "simulations":
+          #               [
+          #                "a3_30",
+          #                "a3_40",
+          #                "Casson",
+          #               ]
+          #            },
+          #
+          #
+          #       "//home/josip/feap/FSG/automatizacija_33/3D/":
+          #           {"version": "new",
+          #
+          #            "simulations":
+          #                [
+          #                    "standard_3D",
+          #                    # "a3_40",
+          #                    # "Casson",
+          #                ]
+          #            }
+          #
+          #
+          #
+          #
+          # }
 
-                 "simulations":
-                     [
-                         "radial_a3_30",      #__b označava begin, odnosno da nema restart opcije
-                         "radial_a3_40",
-                         "radial_tawss_35_d02",
-                         "radial_tawss_40_d01",
-                         "radial_tawss_40_d02",
-                         "radial_tawss_45_d02",
-                     ]
-                 },
+
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
+simulationsData_dict = {
 
                 "//home/josip/feap/FSG/automatizacija_25/":
-                    {"version"  :  "old",
+                    {"version": "old",
 
                      "simulations":
-                        [
-                         "a3_30",
-                         "a3_40",
-                         "Casson",
-                        ]
-                     }
+                         [
+                            "debljina_010",
+                            "debljina_015",
+                            "debljina_020",
+                            "debljina_025",
+
+                          ]
+                     },
+
+
+
 
           }
