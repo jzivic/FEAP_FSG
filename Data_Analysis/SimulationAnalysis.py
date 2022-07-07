@@ -1,5 +1,6 @@
 from SimulationsData import *
 
+import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
@@ -38,13 +39,14 @@ simulation_names = [
 
 
             # "debljina_010",
-            "debljina_015",
-            "debljina_020",
+            # "debljina_015",
+            # "debljina_020",
             # "debljina_025",
 
+            # "i4=102",
             # "i4=108",
             # "i4=114",
-            # "i4=120",
+            "i4=120",
             # "i4=126",
             # "i4=132",
             #
@@ -184,6 +186,16 @@ simulation_names = [
 # ]
 
 
+# auto_name = "automatizacija_avg_vs_NOavg"
+# simulation_names = [
+#                 "x3_2_a3_20_novo",
+#                 "x3_2_a3_20",
+# ]
+
+
+chosen_layer = 1
+
+
 
 
 
@@ -194,8 +206,8 @@ picture_save = False
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 all_data = pd.read_pickle(pickle_name)
 #
-# diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/pressure/"
-diagramsDir = "//home/josip/feap/FSG/slike/proba/"
+diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/prestretch/"
+# diagramsDir = "//home/josip/feap/FSG/slike/proba/"
 
 
 times = [230]
@@ -213,7 +225,27 @@ def time_analysis(times):
             Z_cont = all_data.loc[simul]["Z_contours"][index]
             ILT_thickness_cont = all_data.loc[simul]["ILT_thickness_contours"][index]
             vein_thickness_cont = all_data.loc[simul]["vein_thickness_contours"][index]
-            S22_cont = all_data.loc[simul]["S22_contours"][index]
+            S22_cont = all_data.loc[simul]["S22_contours"][index][:,chosen_layer]
+
+            height_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["height"]
+            index_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["index"]
+
+
+            S22_by_layer = all_data.loc[simul]["S22_contours"][index][index_S22_is_max]
+
+
+
+            def stress_by_layers():
+                # color = next(plt.gca()._get_lines.prop_cycler)['color']
+                plt.plot(range(1,8), S22_by_layer, label=simul)
+                plt.title("Stress by layers")
+                plt.ylabel("Stress S22 [kPa]")
+                plt.xlabel("Radial layer")
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+                plt.legend()
+
+            stress_by_layers()
+
 
 
 
@@ -229,7 +261,7 @@ def time_analysis(times):
                 plt.xlim([0,250])
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
-            ILT_inner_outer_cont()
+            # ILT_inner_outer_cont()
 
 
             def stress_cont():
@@ -285,9 +317,11 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 15
+r = 14
 wanted_D = r*2
 
+
+assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
 def diameter_analysis():
     plt.figure(figsize=(7, 14), dpi=100)
     fig = plt.gcf()
@@ -303,7 +337,7 @@ def diameter_analysis():
         Z_cont = all_data.loc[simul]["Z_contours"][index]
         ILT_thickness_cont = all_data.loc[simul]["ILT_thickness_contours"][index]
         vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
-        S22_cont = all_data.loc[simul]["S22_contours"][index]
+        S22_cont = all_data.loc[simul]["S22_contours"][index][:,chosen_layer]
 
 
         def vertical_contours():
@@ -367,8 +401,7 @@ def diameter_analysis():
     if picture_save == False:
         plt.show()
 
-
-diameter_analysis()
+# diameter_analysis()
 
 
 
@@ -376,17 +409,18 @@ diameter_analysis()
 def growth_over_time():
     plt.figure(figsize=(8, 6), dpi=100)
 
-
     for simul in simulation_names:
-
         timeStep = all_data.loc[simul]["timeStep"]
         days = [i*10 for i in all_data.loc[simul]["timeStep"]]
         D_inner_max = all_data.loc[simul]["D_inner_max"]
         H = all_data.loc[simul]["H"]
-        S22_max = all_data.loc[simul]["S22_max"]
+        S22_max = np.array(all_data.loc[simul]["S22_max"])[:,chosen_layer-1]
+        Z_S22_is_max = [i["height"] for i in all_data.loc[simul]["Z_S22_is_max"]]
+
         ILT_thickness_max = all_data.loc[simul]["ILT_thickness_max"]
         vein_thickness_max = all_data.loc[simul]["vein_thickness_max"]
         ILT_surface = all_data.loc[simul]["ILT_surface"]
+
 
 
         def rast_D():
@@ -423,7 +457,7 @@ def growth_over_time():
 
         def rast_S22():
             plt.plot(days, S22_max, label=(simul))
-            plt.title("S22 growth")
+            plt.title("S22 growth,  " + str(chosen_layer) + ". layer")
             plt.ylabel("S22 [kPa]")
             plt.xlabel("Days [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
@@ -435,6 +469,23 @@ def growth_over_time():
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_S22.png', dpi=300)
         # rast_S22()
+
+
+        def rast_Z_max_naprezanja():
+            plt.plot(days, Z_S22_is_max, label=(simul))
+            plt.title("Rast pozicije maksimalnog S22 max ")
+            plt.ylabel("Z for S22 max [mm]")
+            plt.xlabel("Days [-]")
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            fig = plt.gcf()
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.15)
+            plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'rast_Z_for_S22_max.png', dpi=300)
+        rast_Z_max_naprezanja()
+
 
 
         def ILT_thickness():
@@ -462,7 +513,7 @@ def growth_over_time():
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_ILT_surface_f.png', dpi=300)
 
-        ILT_surface_f()
+        # ILT_surface_f()
 
 
 
@@ -480,7 +531,7 @@ def growth_over_time():
     if picture_save == False:
         plt.show()
 
-# growth_over_time()
+growth_over_time()
 
 
 
@@ -543,6 +594,25 @@ staro
 
         vertical_contours()
 """
+
+
+
+
+
+
+a = all_data.loc["i4=120"]
+
+# print(a)
+
+S22_max = np.array(all_data.loc["i4=120"]["S22_max"])
+
+
+a = np.array(all_data.loc["i4=120"]["S22_max"])[:,]
+
+
+# print(a)
+
+
 
 
 

@@ -1,6 +1,8 @@
 chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
 
-# chosen_TimeSteps = [i for i in range(1,2)]
+
+# x = 100
+# chosen_TimeSteps = [i for i in range(x,x+1)]
 
 barcelona = False
 
@@ -40,14 +42,14 @@ barcelona = False
 #                     ]
 
 
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
-results_directory = "//home/josip/feap/FSG/automatizacija_13/"   #path to analysis dir
-simulation_names = [
-                    "Newt_5_NS",
-                    "Newt_6_NS",
-                    "prava_Casson_NS",
-                    "BS_NS",
-                    ]
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/podaci_automatizacije_13.pickle"
+# results_directory = "//home/josip/feap/FSG/automatizacija_13/"   #path to analysis dir
+# simulation_names = [
+#                     "Newt_5_NS",
+#                     "Newt_6_NS",
+#                     "prava_Casson_NS",
+#                     "BS_NS",
+#                     ]
 
 
 # pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_16.pickle"
@@ -219,10 +221,10 @@ simulation_names = [
 # ]
 
 
-barcelona = False
-results_directory = "//home/josip/feap/FSG/automatizacija_25/"
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
-simulation_names = [
+# barcelona = False
+# results_directory = "//home/josip/feap/FSG/automatizacija_25/"
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
+# simulation_names = [
         # "a3=30",
         # "a3=40",
         # "ac=16",
@@ -235,10 +237,10 @@ simulation_names = [
         # "tawss=020",
         # "tawss=025",
         # "tawss=030",
-        "tawss=035",
-        "tawss=040",
-        "tawss=045",
-        "tawss=050",
+        # "tawss=035",
+        # "tawss=040",
+        # "tawss=045",
+        # "tawss=050",
 
         # "BC",
         # "Casson",
@@ -273,7 +275,7 @@ simulation_names = [
         #
         # "no_ILT",
 
-]
+# ]
 
 
 
@@ -331,20 +333,20 @@ simulation_names = [
 
 
 
-barcelona = False
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_33.pickle"
-
-results_directory = "//home/josip/feap/FSG/automatizacija_33/radial/"
-simulation_names = [
-
-               "radial_a3_30",
-               "radial_a3_40",
-               "radial_tawss_35_d02",
-               "radial_tawss_40_d01",
-               "radial_tawss_40_d02",
-               "radial_tawss_45_d02",
-
-]
+# barcelona = False
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_33.pickle"
+#
+# results_directory = "//home/josip/feap/FSG/automatizacija_33/radial/"
+# simulation_names = [
+#
+#                "radial_a3_30",
+#                "radial_a3_40",
+#                "radial_tawss_35_d02",
+#                "radial_tawss_40_d01",
+#                "radial_tawss_40_d02",
+#                "radial_tawss_45_d02",
+#
+# ]
 
 
 
@@ -481,15 +483,35 @@ simulationsData_dict = {
 
                      "simulations":
                          [
-                            "debljina_010",
-                            "debljina_015",
-                            "debljina_020",
-                            "debljina_025",
+                             # "debljina_010",
+                             # "debljina_015",
+                             # "debljina_020",
+                             # "debljina_025",
+
+                            "i4=102",
+                            "i4=108",
+                            "i4=114",
+                            "i4=120",
+                            "i4=126",
+                            "i4=132",
 
                           ]
                      },
-
-
-
-
           }
+
+
+
+
+# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_avg_vs_NOavg.pickle"
+# simulationsData_dict = {
+#
+#                 "//home/josip/feap/FSG/automatizacija_33_N_AVERAGE!!/NO_biochemo_FSG/x3_2/":
+#                     {"version": "new",
+#
+#                      "simulations":
+#                          [
+#                             "x3_2_a3_20_novo",
+#                             "x3_2_a3_20",
+#                           ]
+#                      },
+#           }
