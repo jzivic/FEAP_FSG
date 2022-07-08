@@ -3,6 +3,9 @@ from SimulationsData import *
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
+import matplotlib.animation as ani
+
+
 
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
@@ -230,7 +233,6 @@ def time_analysis(times):
             height_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["height"]
             index_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["index"]
 
-
             S22_by_layer = all_data.loc[simul]["S22_contours"][index][index_S22_is_max]
 
 
@@ -244,7 +246,7 @@ def time_analysis(times):
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
 
-            stress_by_layers()
+            # stress_by_layers()
 
 
 
@@ -262,8 +264,6 @@ def time_analysis(times):
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
             # ILT_inner_outer_cont()
-
-
             def stress_cont():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(Z_cont, S22_cont, c=color, label=simul)
@@ -274,8 +274,6 @@ def time_analysis(times):
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
             # stress_cont()
-
-
             def ILT_thickness_f():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(Z_cont, ILT_thickness_cont, c=color, label=simul)
@@ -285,8 +283,6 @@ def time_analysis(times):
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend()
             # ILT_thickness_f()
-
-
             def vein_thickness_f():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(Z_cont, vein_thickness_cont, linestyle='-', c=color, label=simul)
@@ -300,6 +296,54 @@ def time_analysis(times):
         plt.show()
 
 # time_analysis(times)
+
+
+
+
+
+
+
+# fig = plt.figure(figsize=(7, 14), dpi=100)
+fig = plt.figure()
+
+def animate_radial_stress_by_layers(i_help=int):
+
+    # one_simulation = all_data.loc["i4=120"]
+    one_simulation = all_data.loc["i4=132"]
+    times = range(max(one_simulation.loc["timeStep"]))
+
+    # print(one_simulation)
+
+
+    for trenutak in times:
+        if trenutak not in one_simulation.timeStep:
+            continue
+
+        index_S22_is_max = one_simulation["Z_S22_is_max"][trenutak]["index"]
+        S22_by_layer = one_simulation["S22_contours"][i_help][index_S22_is_max]
+
+
+    plt.clf()
+    color = next(plt.gca()._get_lines.prop_cycler)['color']
+    plt.title(str(i_help*10)+" day")
+    plt.xlabel("Radial layer ")
+    plt.ylabel("Stress [Pa]")
+    plt.ylim([80, 450])
+    plt.grid(which='both', linestyle='--', linewidth='0.5')
+
+    plt.plot(range(1,8), S22_by_layer, linestyle=':', color=color, label="ajaj", linewidth='2')
+
+    plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+               handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+
+
+# animator_cont = ani.FuncAnimation(fig, animate_radial_stress_by_layers, interval=5)
+# plt.show()
+
+
+
+# animate_radial_stress_by_layers(2)
+
 
 
 
@@ -407,7 +451,7 @@ def diameter_analysis():
 
 
 def growth_over_time():
-    plt.figure(figsize=(8, 6), dpi=100)
+    # plt.figure(figsize=(8, 6), dpi=100)
 
     for simul in simulation_names:
         timeStep = all_data.loc[simul]["timeStep"]
@@ -531,7 +575,7 @@ def growth_over_time():
     if picture_save == False:
         plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
 
