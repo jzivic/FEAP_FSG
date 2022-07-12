@@ -1,8 +1,8 @@
-chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
+# chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
 
 
-# x = 97
-# chosen_TimeSteps = [i for i in range(x,x+10)]
+x = 222
+chosen_TimeSteps = [i for i in range(x,x+1)]
 
 barcelona = False
 
@@ -272,31 +272,55 @@ simulationsData_dict = {
 
                      "simulations":
                          [
-                             # "debljina_010",
-                             # "debljina_015",
-                             # "debljina_020",
-                             # "debljina_025",
-
-                            "i4=102",
-                            "i4=108",
-                            "i4=114",
+                            # "a3_30",
+                            # "a3_40",
+                            # "ab=900",
+                            # "ac=25",
+                            # "ac_16",
+                            # "ae=1",
+                            # "ae=4",
+                            # "BC",
+                            # "Casson",
+                            # "debljina_010",
+                            # "debljina_015",
+                            # "debljina_020",
+                            # "debljina_025",
+                            # "i4=102",
+                            # "i4=108",
+                            # "i4=114",
                             "i4=120",
-                            "i4=126",
-                            "i4=132",
-
-                          ]
+                            # "i4=126",
+                            # "i4=132",
+                            # "Newt_5",
+                            # "Newt_6",
+                            # "Newt_33",
+                            # "no_ILT",
+                            # "stari_case_provjera_pocetak_2",
+                            # "tawss=020",
+                            # "tawss=025",
+                            # "tawss=030",
+                            # "tawss=035",
+                            # "tawss=040",
+                            # "tawss=045",
+                            # "tawss=050",
+                            # "turb_Newt_3",
+                            # "turbulent_Casson",
+                            # "turbulent_Newt_3",
+                            # "turbulent_Newt_5",
+                            # "turbulent_Newt_6",
+                            ]
                      },
 
 
-                "//home/josip/feap/FSG/automatizacija_33_N_AVERAGE!!/NO_biochemo_FSG/x3_2/":
-                    {"version": "new",
-
-                     "simulations":
-                         [
-                            "x3_2_a3_20_novo",
-                            # "x3_2_a3_20",
-                          ]
-                     },
+                # "//home/josip/feap/FSG/automatizacija_33_N_AVERAGE!!/NO_biochemo_FSG/x3_2/":
+                #     {"version": "new",
+                #
+                #      "simulations":
+                #          [
+                #             "x3_2_a3_20_novo",
+                #             # "x3_2_a3_20",
+                #           ]
+                #      },
 
 
           }

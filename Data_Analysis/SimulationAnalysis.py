@@ -11,50 +11,42 @@ import matplotlib.animation as ani
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
 auto_name = "automatizacija_25"
 simulation_names = [
-            # "a3=30",
-            # "a3=40",
-            # "ac=16",
-            # "ac=25",
-            # "ae=1",
-            # "ae=4",
-            # "ab=100",
-            # "ab=900",
-            #
-            # "tawss=020",
-            # "tawss=025",
-            # "tawss=030",
-            # "tawss=035",
-            # "tawss=040",
-            # "tawss=045",
-            # "tawss=050",
-            #
-            # "BC",
-            # "Casson",
-            # "Newt_5",
-            # "Newt_6",
-            # "Newt_33",
-            #
-            # "turb_Newt_3",
-            # "turbulent_Newt_3",
-            # "turbulent_Newt_5",
-            # "turbulent_Newt_6",
-            # "turbulent_Casson",
-
-
-            # "debljina_010",
-            # "debljina_015",
-            # "debljina_020",
-            # "debljina_025",
-
-            # "i4=102",
-            # "i4=108",
-            # "i4=114",
-            "i4=120",
-            # "i4=126",
-            # "i4=132",
-            #
-            # "stari_case_provjera_pocetak_2",
-            # "no_ILT"
+                        # "a3_30",
+                        # "a3_40",
+                        # "ab=900",
+                        # "ac=25",
+                        # "ac_16",
+                        # "ae=1",
+                        # "ae=4",
+                        # "BC",
+                        "Casson",
+                        # "debljina_010",
+                        # "debljina_015",
+                        # "debljina_020",
+                        # "debljina_025",
+                        # "i4=102",
+                        # "i4=108",
+                        # "i4=114",
+                        # "i4=120",
+                        # "i4=126",
+                        # "i4=132",
+                        # "Newt_5",
+                        # "Newt_6",
+                        # "Newt_33",
+                        # "no_ILT",
+                        # "stari_case_provjera_pocetak_2",
+                        # "tawss=020",
+                        # "tawss=025",
+                        # "tawss=030",
+                        # "tawss=035",
+                        # "tawss=040",
+                        # "tawss=045",
+                        # "tawss=050",
+                        # "turb_Newt_3",
+                        # "turbulent_Casson",
+                        # "turbulent_Newt_3",
+                        # "turbulent_Newt_5",
+                        # "turbulent_Newt_6",
 ]
 
 
@@ -304,12 +296,12 @@ def time_analysis(times):
 
 
 # fig = plt.figure(figsize=(7, 14), dpi=100)
-fig = plt.figure()
+# fig = plt.figure()
 
 def animate_radial_stress_by_layers(i_help=int):
 
-    # one_simulation = all_data.loc["i4=120"]
-    one_simulation = all_data.loc["i4=132"]
+    one_simulation = all_data.loc["i4=120"]
+    # one_simulation = all_data.loc["Casson"]
     times = range(max(one_simulation.loc["timeStep"]))
 
     # print(one_simulation)
@@ -336,13 +328,13 @@ def animate_radial_stress_by_layers(i_help=int):
     plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
 
-
+# fig = plt.figure()
 # animator_cont = ani.FuncAnimation(fig, animate_radial_stress_by_layers, interval=5)
 # plt.show()
 
 
 
-# animate_radial_stress_by_layers(2)
+# animate_radial_stress_by_layers()
 
 
 
@@ -355,15 +347,14 @@ def animate_radial_stress_by_layers(i_help=int):
 
 
 
-font = {'family' : 'Times New Roman',
-        'size'   : 25}
-plt.rc('font', **font)
-plt.rcParams['mathtext.fontset'] = 'stix'
+# font = {'family' : 'Times New Roman',
+#         'size'   : 25}
+# plt.rc('font', **font)
+# plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 14
+r = 16
 wanted_D = r*2
-
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
 def diameter_analysis():
@@ -575,7 +566,7 @@ def growth_over_time():
     if picture_save == False:
         plt.show()
 
-# growth_over_time()
+growth_over_time()
 
 
 
@@ -644,14 +635,12 @@ staro
 
 
 
-a = all_data.loc["i4=120"]
+# a = all_data.loc["i4=120"]
 
 # print(a)
 
-S22_max = np.array(all_data.loc["i4=120"]["S22_max"])
-
-
-a = np.array(all_data.loc["i4=120"]["S22_max"])[:,]
+# S22_max = np.array(all_data.loc["i4=120"]["S22_max"])
+# a = np.array(all_data.loc["i4=120"]["S22_max"])[:,]
 
 
 # print(a)
