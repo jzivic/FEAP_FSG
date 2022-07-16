@@ -5,12 +5,20 @@ import pandas as pd
 barcelona = False
 
 
-broj_simulacije = 40
 
 
-case = "//home/josip/feap/FSG/automatizacija_33/radial/radial_tawss_40_d02"
-sim_broj = 20
+# case = "//home/josip/feap/FSG/automatizacija_33/radial/radial_tawss_40_d02"
+case = "//home/josip/feap/FSG/automatizacija_25/Casson"
+sim_broj = 48
 
+
+
+
+
+font = {'family' : 'Times New Roman',
+        'size'   : 18}
+plt.rc('font', **font)
+plt.rcParams['mathtext.fontset'] = 'stix'
 
 
 class VadenjePodataka:
@@ -24,8 +32,17 @@ class VadenjePodataka:
         self.imeSim = Case.split("/")[-1]
 
 
-        self.koo_file = Case + "/simulacija"+str(sim_broj)+"/"+str(korak)+"/koordinate"
-        self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/"+str(korak)+"/TAWSS"
+        self.koo_file = Case + "/simulacija"+str(sim_broj)+"/"+str(korak)+"/koordinate"  # bez uprosječavanja
+
+        self.OSI_file = Case + "/simulacija"+str(sim_broj)+"/"+str(korak)+"/OSI"
+        self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(korak)+"/ECAP"
+
+
+
+        self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/proba"                   # s uprosječavanjem
+        self.OSI_file = Case + "/simulacija"+str(sim_broj)+"/"+str(korak)+"/OSI"
+        self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(korak)+"/ECAP"
+
 
 
         if barcelona == True:
@@ -38,7 +55,7 @@ class VadenjePodataka:
         self.sviPodaciDF = self.sviPodaciDF.sort_values(by="z")
 
         if self.oblik == "full":
-            self.Osrednjavanje()
+            self.Osrednjavanje_sakularne_geometrije()
         elif self.oblik =="axial":
             self.Filtriranje()
 
@@ -88,7 +105,31 @@ class VadenjePodataka:
                 #     self.sviPodaciDict["tawss"].append(float(red)*1.998)
 
 
-    def Osrednjavanje(self):
+
+    def CitanjeOSI(self):
+        zapTawss = False
+        for red in open(self.OSI_file).readlines():
+            red = red.strip()
+            if red =="(":
+                zapTawss = True
+                continue
+            if red ==")":
+                zapTawss = False
+                continue
+            if zapTawss == True:
+                self.sviPodaciDict["osi"].append(float(red))
+
+
+
+
+
+
+
+
+
+
+
+    def Osrednjavanje_sakularne_geometrije(self):
         nPodrucja = 100
         dobriPodaci = {"r":[] , "z":[], "tawss":[]}
         tocaka_u_pojasu = len(self.sviPodaciDF)//nPodrucja       # broj točaka u svakom pojasu
@@ -111,6 +152,7 @@ class VadenjePodataka:
 
         self.dobPodDF = pd.DataFrame(dobriPodaci)
 
+        print(self.dobPodDF)
 
     def Filtriranje(self):
         dobriPodaci = {"r":[], "z":[], "tawss":[]}
@@ -127,13 +169,18 @@ class VadenjePodataka:
 
     def Plot_TAWSS(self):
         plt.plot(self.dobPodDF["z"], self.dobPodDF["tawss"], label=self.imeSim)
-        # plt.ylim(0, 1)
+        plt.ylim(0.3, 0.9)
 
-        plt.title("TAWSS ")
+        plt.title("TAWSS when R=16 mm")
         plt.ylabel("TAWSS [Pa]")
         plt.xlabel("z [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
-        plt.legend()
+        fig = plt.gcf()
+        fig.subplots_adjust(left=0.15)
+        fig.subplots_adjust(bottom=0.15)
+        # plt.legend()
+
+        fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
 
 
 

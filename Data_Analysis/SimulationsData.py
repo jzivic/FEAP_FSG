@@ -1,7 +1,7 @@
 chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
 
 
-# x = 1
+x = 100
 # chosen_TimeSteps = [i for i in range(x,x+1)]
 
 barcelona = False

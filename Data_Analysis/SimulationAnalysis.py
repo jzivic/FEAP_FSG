@@ -186,7 +186,7 @@ chosen_layer = 1
 
 
 
-
+# u kojem trenutku je casson r=16
 
 
 
@@ -197,8 +197,8 @@ all_data = pd.read_pickle(pickle_name)
 
 #            viskoznost tawss  geometrija
 
-diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/geometrija/"
-# diagramsDir = "//home/josip/feap/FSG/slike/proba/"
+# diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/geometrija/"
+diagramsDir = "//home/josip/feap/FSG/slike/FSG_model/"
 
 
 font = {'family' : 'Times New Roman',
@@ -297,7 +297,7 @@ def time_analysis(times):
         if picture_save == False:
             plt.show()
 
-time_analysis(times)
+# time_analysis(times)
 
 
 
@@ -329,7 +329,7 @@ def animate_radial_stress_by_layers(i_help=int):
     plt.ylim([80, 450])
     plt.grid(which='both', linestyle='--', linewidth='0.5')
 
-    plt.plot(range(1,8), S22_by_layer, linestyle=':', color=color, label="ajaj", linewidth='2')
+    plt.plot(range(1,8), S22_by_layer, linestyle=':', color=color, label=".", linewidth='2')
 
     plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
@@ -474,6 +474,12 @@ def growth_over_time():
         S22_max_7 = np.array(all_data.loc[simul]["S22_max"])[:,7-1]
         Z_S22_is_max = [i["height"] for i in all_data.loc[simul]["Z_S22_is_max"]]
 
+        S22_max_abs = [i["S22"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
+        Z_S22_abs_is_max = [i["height"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
+
+
+
+
         ILT_thickness_max = all_data.loc[simul]["ILT_thickness_max"]
         vein_thickness_max = all_data.loc[simul]["vein_thickness_max"]
         ILT_surface = all_data.loc[simul]["ILT_surface"]
@@ -486,7 +492,7 @@ def growth_over_time():
             elif sinonimi_u_legendi == True:
                 plt.plot(days, D_inner_max, label=(sinonimi[simul]))
 
-            plt.title("Inner diameter growth ")
+            plt.title("Inner diameter")
             plt.ylabel("D [mm]")
             plt.xlabel("Time [days]")
             plt.text(-400, 17, "$b)$" )
@@ -508,8 +514,8 @@ def growth_over_time():
             elif sinonimi_u_legendi == True:
                 plt.plot(days, H, label=(sinonimi[simul]))
 
-            plt.title("H growth: ")
-            plt.ylabel("H [mm]")
+            plt.title("Aneurysm height: ")
+            plt.ylabel("Height [mm]")
             plt.xlabel("Time [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
@@ -546,7 +552,7 @@ def growth_over_time():
 
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_S22_1.png', dpi=300)
-        rast_S22_1()
+        # rast_S22_1()
 
 
         def rast_S22_7():
@@ -580,19 +586,39 @@ def growth_over_time():
             elif sinonimi_u_legendi == True:
                 plt.plot(days, Z_S22_is_max, label=(sinonimi[simul]))
 
-            plt.title("Rast pozicije maksimalnog S22 max ")
-            plt.ylabel("Z for S22 max [mm]")
+            plt.title("Height for maximal circumferential stress")
+            plt.ylabel("Height [mm]")
             plt.xlabel("Time [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
             fig.subplots_adjust(bottom=0.15)
-            plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
+            # plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+            #            handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Z_for_S22_max.png', dpi=300)
         # rast_Z_max_naprezanja()
 
+
+
+        def rast_Z_over_S22_abs():
+            if sinonimi_u_legendi == False:
+                plt.plot(days, Z_S22_abs_is_max, label=(simul))
+            elif sinonimi_u_legendi == True:
+                plt.plot(days, Z_S22_abs_is_max, label=(sinonimi[simul]))
+
+            plt.title("Height for maximal circumferential stress")
+            plt.ylabel("Height [mm]")
+            plt.xlabel("Time [days]")
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            fig = plt.gcf()
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.15)
+            # plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+            #            handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'rast_Z_over_S22_abs.png', dpi=300)
+        rast_Z_over_S22_abs()
 
 
         def ILT_thickness():
