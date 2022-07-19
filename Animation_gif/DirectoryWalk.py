@@ -1,0 +1,298 @@
+from SimulationsData import *
+
+
+import os
+import pandas as pd
+
+
+TSLenght = 121
+TSLenght_res_Inner_lines = TSLenght + 1
+TSLlenght_res_Outer_lines = TSLenght + 1
+TSLlenght_res_ILT_lines = TSLenght + 1
+TSLlenght_rN0841 = 1
+TSLlenght_res_Y0__field = 850
+Y0_corrention = 132                 # pomak Y0 file za broj redova nakon restarta
+
+suffixes = ["89-5", "172-22"]
+
+
+calculate_TS = lambda x: 104 + x*3          # pretvara if foam-ovih simulacija u timeStep
+chosen_TimeSteps = [i for i in range(calculate_TS(0), calculate_TS(max_OF_simulacija), 3)]
+
+
+
+
+class FSG_Analysis:
+
+    def __init__(self):
+
+        # Podaci svih simulacija i svih vremenskih koraka
+        all_simulations_data_df = pd.DataFrame({"timeStep":[],
+                                                "inner_contours":[],
+                                                "outer_contours": [],
+                                                "ILT_contours": [],
+                                                "Z_contours":[],
+                                                "ILT_thickness_contours":[],
+                                                "vein_thickness_contours": [],
+                                                "S22_contours": [],
+
+                                                "TAWSS_contours": [],
+
+                                                "H": [],
+                                                "D_inner_max": [],
+                                                "S22_max": [],
+                                                "ILT_thickness_max": [],
+                                                "vein_thickness_max": [],
+                                                "ILT_surface": [],
+
+
+
+                                                },
+                                            index= [])
+
+        for subdirectory in simulationsData_dict.keys():                               # ulazi u folder simulacije
+            self.Y0_version = simulationsData_dict[subdirectory]["version"]
+            simulations_in_directory = simulationsData_dict[subdirectory]["simulations"]
+
+            for simulation_name in simulations_in_directory:
+                simulation_path = subdirectory + simulation_name
+                os.chdir(simulation_path)
+
+                # Setting simulation
+                self.simulation_name = simulation_name
+
+                self.set_files()
+                self.data_construction()
+
+
+                # for self.time_step in chosen_TimeSteps:
+                for self.n_OF_simulation in range(1,max_OF_simulacija):
+                    self.time_step = calculate_TS(self.n_OF_simulation)
+
+                    if self.time_step > self.max_TS: break                # prekida vađenje podataka za TS == maxTS
+
+                    self.setting_start_lines()
+                    if self.check_AAA_formation() == True:
+                        self.FEAP_extraction()
+                        self.OpenFOAM_extraction()
+
+                    elif self.check_AAA_formation() == False:
+                        dopuna = [None for i in all_simulations_data_df]
+
+                dopuna = [self.oneSim_data_dict["timeStep"],
+
+                          self.oneSim_data_dict["inner_contours"],
+                          self.oneSim_data_dict["outer_contours"],
+                          self.oneSim_data_dict["ILT_contours"],
+                          self.oneSim_data_dict["Z_contours"],
+
+                          self.oneSim_data_dict["ILT_thickness_contours"],
+                          self.oneSim_data_dict["vein_thickness_contours"],
+                          self.oneSim_data_dict["S22_contours"],
+                          self.oneSim_data_dict["TAWSS_contours"],
+
+                          self.oneSim_data_dict["H"],
+                          self.oneSim_data_dict["D_inner_max"],
+                          self.oneSim_data_dict["S22_max"],
+                          self.oneSim_data_dict["ILT_thickness_max"],
+                          self.oneSim_data_dict["vein_thickness_max"],
+                          self.oneSim_data_dict["ILT_surface"]
+                          ]
+
+                all_simulations_data_df.loc[self.simulation_name] = dopuna
+            all_simulations_data_df.to_pickle(pickle_name)
+
+
+#     # Samo jednom se postavlja
+    def set_files(self):
+        self.restart_sign = False
+
+        for suffix in suffixes:
+            try:
+                opening_res_NODE_0841 = open("res__NODE_0841_"+suffix, "r")  # open txt file
+                self.whole_document_res_NODE_0841 = opening_res_NODE_0841.readlines()  # whole txt read in self.wholeDocument_eIW
+                self.nl_res_NODE = sum(1 for line in open("res__NODE_0841_"+suffix))  # number of lines in export Inner Wall
+
+                self.max_TS = self.nl_res_NODE - 5
+
+                opening_res_Inner_lines = open("res__INNER_lines__"+suffix, "r")  # open txt file
+                self.whole_document_Inner_lines = opening_res_Inner_lines.readlines()  # whole txt read in self.wholeDocument_eIW
+                self.nl_res_Inner_lines = sum(1 for line in open("res__INNER_lines__"+suffix))  # number of lines in export Inner Wall
+
+                opening_res_Outer_lines = open("res__OUTER_lines__"+suffix, "r")  # open txt file
+                self.whole_document_Outer_lines = opening_res_Outer_lines.readlines()  # whole txt read in self.wholeDocument_eIW
+                self.nl_res_Outer_lines = sum(1 for line in open("res__OUTER_lines__"+suffix))  # number of lines in export Inner Wall
+
+
+                opening_res_ILT_lines = open("res__ILT_lines__"+suffix, "r")  # open txt file
+                self.whole_document_ILT_lines = opening_res_ILT_lines.readlines()  # whole txt read in self.wholeDocument_eIW
+                self.nl_res_ILT_lines = sum(1 for line in open("res__ILT_lines__"+suffix))  # number of lines in export Inner Wall
+
+                if barcelona == False:
+                    opening_res_Y0_field = open("res__Y0_field__"+suffix, "r")  # open txt file
+                    self.whole_document_res_Y0_field = opening_res_Y0_field.readlines()  # whole txt read in self.wholeDocument_eIW
+                    self.nl_res_Y0_field = sum(1 for line in open("res__Y0_field__"+suffix))  # number of lines in export Inner Wall
+
+            except FileNotFoundError:
+                continue
+
+
+
+    def data_construction(self):
+        self.case_path = os.getcwd()+"/"
+
+        self.r0 = float(self.whole_document_Inner_lines[5].strip().split()[0])
+        self.oneSim_data_dict = {"timeStep":[], "inner_contours":[], "outer_contours":[], "ILT_contours":[],
+                                 "Z_contours":[], "ILT_thickness_contours":[], "vein_thickness_contours":[],
+                                 "S22_contours": [], "TAWSS_contours": [],
+                                 "H":[], "D_inner_max":[],"S22_max":[], "ILT_thickness_max":[], "vein_thickness_max":[],
+                                 "ILT_surface":[]
+                                 }
+
+
+
+
+##########################################################################################################################
+    # Svaki vremenski korak se vrti
+##########################################################################################################################
+
+
+
+    def setting_start_lines(self):
+        self.startLine_res_Inner_lines = 5 + TSLenght_res_Inner_lines * (self.time_step - 1)
+        self.startLine_res_ILT_lines = self.startLine_res_Inner_lines
+        self.startLine_res_Outer_lines = self.startLine_res_Inner_lines
+
+        # mogućnost odabira 1-7 radijalnog elementa, 1: skroz unutarnji, 7: vanjski
+        self.radial_layer = 1
+        assert self.radial_layer in [1,2,3,4,5,6,7],  "Nedopušteni layer elementa"
+
+        # ovo će biti startni red koraka: uvijek je prazna linija:
+        self.startLine_res_Y0_field = 139 + TSLlenght_res_Y0__field * (self.time_step-1)
+
+        first_node_row = self.whole_document_res_Y0_field[self.startLine_res_Y0_field].strip().split()
+        if first_node_row[0] == "o--->":    # dodatak ako postoji restart opcija jer zapiše zaglavlje za restart TS
+            self.restart_sign = True
+
+        if self.restart_sign == True:
+            self.startLine_res_Y0_field += Y0_corrention
+
+
+    def check_AAA_formation(self):
+        for line in self.whole_document_Inner_lines[self.startLine_res_Inner_lines:
+                (self.startLine_res_Inner_lines + TSLenght_res_Inner_lines -1)]:
+            R = float(line.strip().split()[0])
+            if R > 0.99 * self.r0:                                               # kako ovo definirati - mijenja se?
+                return True
+        return False
+
+
+    def FEAP_extraction(self):
+        timeSteps_list, r_inner_list, z_list, r_outer_list, r_ILT_list = [], [], [], [], []
+        ILT_thickness_list, vein_thickness_list, h_list, S22_list, ILT_surface = [], [], [], [], 0
+
+        for n_line in range(TSLenght_res_Inner_lines-1):
+            r_inner = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[0])
+            r_outer = float(self.whole_document_Outer_lines[self.startLine_res_Outer_lines + n_line].strip().split()[0])
+            r_ILT = float(self.whole_document_ILT_lines[self.startLine_res_ILT_lines + n_line].strip().split()[0])
+            ILT_thickness = r_inner - r_ILT
+            vein_thickness = r_outer - r_inner
+            z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3])
+
+            if barcelona == False:
+                if self.Y0_version == "old":
+                    n_row = self.startLine_res_Y0_field + TSLenght*(self.radial_layer-1) + n_line
+                    row = self.whole_document_res_Y0_field[n_row].strip().split()
+                    S22 = float(row[4])*1000 #kPa
+
+                elif self.Y0_version == "new":
+                    n_row = self.startLine_res_Y0_field + (self.radial_layer-1) + 7 * (n_line)
+                    row = self.whole_document_res_Y0_field[n_row].strip().split()
+                    S22 = float(row[4])*1000
+
+            elif barcelona == True:
+                S22 = 0
+
+            if n_line > 0:
+                delta_z = float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line].strip().split()[3]) - \
+                float(self.whole_document_Inner_lines[self.startLine_res_Inner_lines + n_line-1].strip().split()[3])
+                ilt_surface = delta_z * (r_inner-r_ILT)/2
+                ILT_surface += ilt_surface
+
+            r_inner_list.append(r_inner)
+            r_outer_list.append(r_outer)
+            r_ILT_list.append(r_ILT)
+            ILT_thickness_list.append(ILT_thickness)
+            vein_thickness_list.append(vein_thickness)
+            z_list.append(z)
+            S22_list.append(S22)
+
+
+            if r_inner > 1.05 * self.r0:
+                h_list.append(z)
+                H = h_list[-1] - h_list[0]
+
+
+
+        D_inner_max = max(r_inner_list)*2
+        S22_max = max(S22_list)
+        ILT_thickness_max = max(ILT_thickness_list)
+        vein_thickness_max = max(vein_thickness_list)
+
+        self.oneSim_data_dict["timeStep"].append(self.time_step)
+
+        self.oneSim_data_dict["inner_contours"].append(r_inner_list)
+        self.oneSim_data_dict["outer_contours"].append(r_outer_list)
+        self.oneSim_data_dict["ILT_contours"].append(r_ILT_list)
+        self.oneSim_data_dict["Z_contours"].append(z_list)
+
+        self.oneSim_data_dict["ILT_thickness_contours"].append(ILT_thickness_list)
+        self.oneSim_data_dict["vein_thickness_contours"].append(vein_thickness_list)
+        self.oneSim_data_dict["S22_contours"].append(S22_list)
+
+        try:
+            self.oneSim_data_dict["H"].append(H)
+        except UnboundLocalError:
+            self.oneSim_data_dict["H"].append(0)
+
+        self.oneSim_data_dict["D_inner_max"].append(D_inner_max)
+        self.oneSim_data_dict["S22_max"].append(S22_max)
+
+        self.oneSim_data_dict["ILT_thickness_max"].append(ILT_thickness_max)
+        self.oneSim_data_dict["vein_thickness_max"].append(vein_thickness_max)
+
+        self.oneSim_data_dict["ILT_surface"].append(ILT_surface)
+
+
+    def OpenFOAM_extraction(self):
+        # TAWSS_file = self.case_path + "simulacija"+str(self.n_OF_simulation)+"/2/TAWSS"
+        TAWSS_file = self.case_path + "simulacija"+str(self.n_OF_simulation)+"/proba"
+
+        opening_TAWSS = open(TAWSS_file, "r")
+        self.whole_document_TAWSS = opening_TAWSS.readlines()
+
+        TAWSS_list = []
+        read_TAWSS = False
+        for row in self.whole_document_TAWSS:
+            row = row.strip()
+            if row =="(":
+                read_TAWSS = True
+                continue
+            if row ==")":
+                read_TAWSS = False
+                continue
+            if read_TAWSS == True:
+                TAWSS_list.append(float(row))
+
+        TAWSS_list.pop()
+        self.oneSim_data_dict["TAWSS_contours"].append(TAWSS_list)
+
+
+
+FSG_Analysis()
+
+
+
+
+
+

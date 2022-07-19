@@ -189,8 +189,7 @@ chosen_layer = 1
 # u kojem trenutku je casson r=16
 
 
-
-picture_save = True
+picture_save = False
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 all_data = pd.read_pickle(pickle_name)
@@ -703,7 +702,6 @@ def growth_over_time():
         plt.show()
 
 growth_over_time()
-
 
 
 
