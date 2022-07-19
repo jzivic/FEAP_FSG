@@ -8,10 +8,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija48"
+simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija50"
 
 
 
+FF_system = False
 
 class AveragingParameters:
     
@@ -40,7 +41,6 @@ class AveragingParameters:
         self.write_parameter("TAWSS")
         self.write_parameter("ECAP")
         self.write_parameter("OSI")
-
 
         self.plot_parameter("TAWSS")
         self.plot_parameter("OSI")
@@ -136,21 +136,28 @@ class AveragingParameters:
         outro_file = text_file[finish_line::]
         parameter_avg = [str(i)+"\n" for i in self.data_DF[parameter_name+"_avg"]]
 
-        if parameter_name == "TAWSS":
-            new_text_file = open(self.TAWSS_file+"_avg",  "w")
-        elif parameter_name == "OSI":
-            new_text_file = open(self.OSI_file+"_avg",  "w")
-        elif parameter_name == "ECAP":
-            new_text_file = open(self.ECAP_file+"_avg",  "w")
+        if FF_system == True:
+            if parameter_name == "TAWSS":
+                new_text_file = open(self.TAWSS_file, "w")
+            elif parameter_name == "OSI":
+                new_text_file = open(self.OSI_file, "w")
+            elif parameter_name == "ECAP":
+                new_text_file = open(self.ECAP_file, "w")
+
+
+        elif FF_system == False:
+            if parameter_name == "TAWSS":
+                new_text_file = open(self.TAWSS_file+"_avg",  "w")
+            elif parameter_name == "OSI":
+                new_text_file = open(self.OSI_file+"_avg",  "w")
+            elif parameter_name == "ECAP":
+                new_text_file = open(self.ECAP_file+"_avg",  "w")
+
 
         new_text_file.writelines(intro_file)
         new_text_file.writelines(parameter_avg)
         new_text_file.writelines(outro_file)
         new_text_file.close()
-
-
-
-
 
 
 
@@ -167,14 +174,13 @@ class AveragingParameters:
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         plt.legend()
 
+        if FF_system == True:
+            plt.draw()
+            plt.close()
+            fig.savefig(simulacija_foam+"/"+parameter_name+'_avging.png', dpi=300)
 
-        plt.draw()
-        plt.close()
-        fig.savefig(simulacija_foam+"/"+parameter_name+'_avging.png', dpi=300)
-
-        # plt.show()
-
-
+        elif FF_system == False:
+            plt.show()
 
 
 
