@@ -203,4 +203,3 @@ avg = AveragingParameters(simulacija_foam)
 
 
 
-
