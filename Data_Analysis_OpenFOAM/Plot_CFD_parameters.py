@@ -8,9 +8,9 @@ import pandas as pd
 
 
 case = "//home/josip/feap/FSG/automatizacija_25/Casson"
-sim_broj = 50
+sim_broj = 1
 
-
+picture_save = True
 
 
 
@@ -25,12 +25,10 @@ class VadenjePodataka:
         foam_time = 2
         self.simulation_name = Case.split("/")[-1]
 
-        self.koo_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/koordinate"  # bez uprosječavanja
+        self.koo_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/koordinate"
+        self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/TAWSS"
         self.OSI_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/OSI"
         self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/ECAP"
-
-        self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/proba"                   # s uprosječavanjem
-        # self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/TAWSS"
 
 
 
@@ -42,8 +40,8 @@ class VadenjePodataka:
 
         self.data_DF = pd.DataFrame(self.data_dict)
         self.Plot_TAWSS()
-        # self.Plot_OSI()
-        # self.Plot_ECAP()
+        self.Plot_OSI()
+        self.Plot_ECAP()
 
 
     def Koordinate_reading(self):
@@ -63,8 +61,6 @@ class VadenjePodataka:
                 self.data_dict["z"].append(float(red[2])*1000)
 
 
-
-
     def TAWSS_reading(self):
         write_TAWSS = False
         for red in open(self.TAWSS_file).readlines():
@@ -78,7 +74,6 @@ class VadenjePodataka:
             if write_TAWSS == True:
                 self.data_dict["TAWSS"].append(float(red))
 
-
     def OSI_reading(self):
         write_OSI = False
         for red in open(self.OSI_file).readlines():
@@ -91,7 +86,6 @@ class VadenjePodataka:
                 continue
             if write_OSI == True:
                 self.data_dict["OSI"].append(float(red))
-
 
     def ECAP_reading(self):
         write_ECAP = False
@@ -107,61 +101,81 @@ class VadenjePodataka:
                 self.data_dict["ECAP"].append(float(red))
 
 
-
     def Plot_TAWSS(self):
+        plt.clf()
         plt.plot(self.data_DF["z"], self.data_DF["TAWSS"], label=self.simulation_name)
         plt.ylim(0.3, 0.9)
 
-        plt.title("TAWSS when R=16 mm")
+        plt.title("Time averaged wall shear stress")
         plt.ylabel("TAWSS [Pa]")
         plt.xlabel("z [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
         fig.subplots_adjust(left=0.15)
         fig.subplots_adjust(bottom=0.15)
-        plt.show()
-        # fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
+        if picture_save == True:
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.15)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
+        elif picture_save == False:
+            plt.show()
 
 
 
     def Plot_OSI(self):
+        plt.clf()
         plt.plot(self.data_DF["z"], self.data_DF["OSI"], label=self.simulation_name)
-        plt.title("OSI ")
+        plt.title("Oscillatory shear index ")
         plt.ylabel("OSI [-]")
         plt.xlabel("z [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
         fig.subplots_adjust(left=0.15)
         fig.subplots_adjust(bottom=0.15)
-        plt.show()
-        # fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
+
+        if picture_save == True:
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.15)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/OSI.png", dpi=300)
+        elif picture_save == False:
+            plt.show()
 
     def Plot_ECAP(self):
+        plt.clf()
         plt.plot(self.data_DF["z"], self.data_DF["ECAP"], label=self.simulation_name)
-        plt.title("ECAP")
+        plt.title("Endothelium cell activation potential")
         plt.ylabel("ECAP [Pa]")
         plt.xlabel("z [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
         fig.subplots_adjust(left=0.15)
         fig.subplots_adjust(bottom=0.15)
-        plt.show()
-        # fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
-
+        if picture_save == True:
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.15)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/ECAP.png", dpi=300)
+        elif picture_save == False:
+            plt.show()
 
 
 
     def Plot_radius(self):
+        plt.clf()
         plt.plot(self.dobPodDF["z"], self.dobPodDF["r"], label=self.simulation_name)
-
-        plt.title("R ")
+        plt.title("Radius ")
         plt.ylabel("R [mm]")
         plt.xlabel("z [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         plt.legend()
-        # plt.plot(self.dobPodDF["z"], self.dobPodDF["r"], label=self.simulation_name)
-
-
+        fig = plt.gcf()
+        fig.subplots_adjust(left=0.15)
+        fig.subplots_adjust(bottom=0.15)
+        if picture_save == True:
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.15)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
+        elif picture_save == False:
+            plt.show()
 
 
 
@@ -190,4 +204,3 @@ p9 = VadenjePodataka(case)
 
 
 
-plt.show()

@@ -12,7 +12,9 @@ simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija1"
 
 
 
-FF_system = True
+FF_system = False
+pictures_save = True
+
 
 class AveragingParameters:
     
@@ -174,12 +176,12 @@ class AveragingParameters:
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         plt.legend()
 
-        if FF_system == True:
+        if pictures_save == True:
             plt.draw()
             plt.close()
             fig.savefig(simulacija_foam+"/"+parameter_name+'_avging.png', dpi=300)
 
-        elif FF_system == False:
+        elif pictures_save == False:
             plt.show()
 
 
