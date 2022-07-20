@@ -8,11 +8,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija50"
+simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija1"
 
 
 
-FF_system = False
+FF_system = True
 
 class AveragingParameters:
     
@@ -33,7 +33,7 @@ class AveragingParameters:
         self.OSI_reading()
         self.ECAP_reading()
 
-        self.data_dict["TAWSS_avg"] = self.parameter_averaging("TAWSS")
+        self.data_dict["TAWSS_avg"] = self.parameter_averaging("TAWSS")   # ovdje se mijenja ako se hoće lažirati
         self.data_dict["OSI_avg"] = self.parameter_averaging("OSI")
         self.data_dict["ECAP_avg"] = self.parameter_averaging("ECAP")
 
@@ -50,16 +50,16 @@ class AveragingParameters:
 
 
     def Koordinate_reading(self):
-        zapKoo = False
+        write_koordinate = False
         for red in open(self.koo_file).readlines():
             red = red.strip()
             if red == "(":
-                zapKoo = True
+                write_koordinate = True
                 continue
             if red == ")":
-                zapKoo = False
+                write_koordinate = False
                 continue
-            if zapKoo == True:
+            if write_koordinate == True:
                 red = red.strip("(", ).strip(")").split()
                 self.data_dict["r"].append(float(red[0])*1000)
                 self.data_dict["z"].append(float(red[2])*1000)
