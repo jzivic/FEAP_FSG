@@ -23,163 +23,8 @@ sinonimi = {
             }
 
 
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
 auto_name = "automatizacija_25"
-simulation_names = [
 
-                        # "Newt_33",
-                        # "Newt_5",
-                        # "Newt_6",
-                        # "Casson",
-                        # "BC",
-
-                        # "tawss=030",
-                        # "tawss=035",
-                        # "tawss=040",
-                        # "tawss=045",
-                        # "tawss=050",
-
-                        # "a3_30",
-                        # "a3_40",
-                        # "ab=900",
-                        # "ac=25",
-                        # "ac_16",
-                        # "ae=1",
-                        # "ae=4",
-
-]
-
-
-
-# diagramsDir = "//home/josip/feap/FSG/slike/auto_25/krutost/"
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_26.pickle"
-# simulation_names = [
-#
-#                 "stiffness_low",
-#                 # "stiffness_low_01",
-#                 # "stiffness_low_05",
-#                 # "stiffness_low_10",
-#                 # "stiffness_low_25",
-#                 "stiffness_low_50",
-#                 # "stiffness_low_75",
-#                 "stifness_normal",
-#
-# ]
-
-
-
-
-
-
-
-
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_29.pickle"
-# simulation_names = [
-#         "a3=30",
-#         "a3=40",
-#         "ac=16",
-#         "ac=25",
-#         "ae=1",
-#         "ae=4",
-#         "flow_laminar_BC",
-#         "flow_laminar_Casson",
-#         "flow_laminar_Newt_3",
-#         "flow_laminar_Newt_5",
-#         "flow_laminar_Newt_6",
-#         "flow_turbulent_BC",
-#         "flow_turbulent_Casson",
-#         "flow_turbulent_Newt_3",
-#         "flow_turbulent_Newt_5",
-#         "flow_turbulent_Newt_6",
-#         "tawss_025",
-#         "tawss_030",
-#         "tawss_035",
-#         "tawss_040",
-#         "tawss_045",
-#         "tawss_050"
-# ]
-
-
-# podaci_dict = {
-#                 "//home/josip/feap/FSG/automatizacija_33/radial/":
-#                 ["radial_a3_30",
-#                 "radial_a3_40",
-#                 "radial_tawss_35_d02",
-#                 "radial_tawss_40_d01",
-#                 "radial_tawss_40_d02",
-#                 "radial_tawss_45_d02"]
-#           }
-
-# auto_name = "automatizacija_33"
-# simulation_names = [
-#
-#                # "radial_a3_30",
-#                # "radial_a3_40",
-#                # "radial_tawss_35_d02",
-#                # "radial_tawss_40_d01",
-#                # "radial_tawss_40_d02",
-#                "radial_tawss_45_d02",
-#
-#                 # "3D_a3=30",
-#                 # "3D_a3=40",
-#                 # "3D_tawss_35_d_02",
-#                 # "3D_tawss_40_d_01",
-#                 # "3D_tawss_40  _d_02",
-#                 "3D_tawss_45_d_02",
-#
-# ]
-
-
-# auto_name = "auto_FSG_usporedba"
-# simulation_names = [
-#
-#         "x3_2_a3_20",
-#          # "x3_2_a3_30",
-#          # "x3_2_a3_40",
-#
-#         "x3_3_a3_20",
-#          # "x3_3_a3_30",
-#          # "x3_3_a3_40",
-#
-#         # "a3_30",
-#         #  "a3_40",
-#          "Casson"
-# ]
-
-
-# auto_name = "automatizacija_biochemo"
-# simulation_names = [
-#
-#             # "3D_a3_30",
-#             # "3D_a3_40",
-#             # "3D_tawss_35_d_02",
-#             # "3D_tawss_40_d_01",
-#             # "3D_tawss_40_d_02",
-#             # "3D_tawss_45_d_02",
-#
-#             # "radial_a3_30",
-#             # "radial_a3_40",
-#             # "radial_tawss_35_d02",
-#             # "radial_tawss_40_d01",
-#             "radial_tawss_40_d02",
-#             # "radial_tawss_45_d02",
-#
-#             # "a3_30",
-#             # "a3_40",
-#             # "Casson",
-#
-#             "standard_3D",
-#
-# ]
-
-
-# auto_name = "automatizacija_avg_vs_NOavg"
-# simulation_names = [
-#                 "x3_2_a3_20_novo",
-#                 "x3_2_a3_20",
-# ]
 
 
 chosen_layer = 1
@@ -189,7 +34,7 @@ chosen_layer = 1
 # u kojem trenutku je casson r=16
 
 
-picture_save = False
+picture_save = True
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 all_data = pd.read_pickle(pickle_name)
@@ -201,12 +46,16 @@ diagramsDir = "//home/josip/feap/FSG/slike/FSG_model/"
 
 
 font = {'family' : 'Times New Roman',
-        'size'   : 15}
+        'size'   : 18}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
+#104, 200
 
-times = [260]
+ts = lambda sim: 104 + sim*3
+
+
+times = [ts(1)]
 def time_analysis(times):
     for trenutak in times:
         for simul in sinonimi.keys():
@@ -222,7 +71,6 @@ def time_analysis(times):
             ILT_thickness_cont = all_data.loc[simul]["ILT_thickness_contours"][index]
             vein_thickness_cont = all_data.loc[simul]["vein_thickness_contours"][index]
             S22_cont = all_data.loc[simul]["S22_contours"][index][:,chosen_layer]
-
             height_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["height"]
             index_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["index"]
 
@@ -239,31 +87,65 @@ def time_analysis(times):
                 plt.ylim([170, 290])
                 fig = plt.gcf()
                 fig.subplots_adjust(left=0.15)
-                fig.subplots_adjust(bottom=0.15)
-
+                fig.subplots_adjust(bottom=0.18)
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
 
                 if picture_save == True:
                     fig.savefig(diagramsDir + '../stress_through_layers', dpi=300)
 
-            stress_by_layers()
+            # stress_by_layers()
 
+                # color = next(plt.gca()._get_lines.prop_cycler)['color']
+                # if sinonimi_u_legendi == False:
+                #     plt.plot(inner_cont, Z_cont, c=color, label=(simul))
+                # elif sinonimi_u_legendi == True:
+                #     plt.plot(inner_cont, Z_cont, c=color, label=(sinonimi[simul]))
+                # plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
+                #
+                # plt.title("ILT and inner contours")
+                # plt.xlabel("Radius $r$ [mm]")
+                # plt.ylabel("Axial coordinate $z$ [mm]")
+                # plt.text(5, -15, "$a)$")
+                # plt.ylim([0, 220])
+                # plt.xlim([7, 18])
+                # plt.grid(which='both', linestyle='--', linewidth='0.5')
+                # fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
+                # # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                # #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+                # if picture_save == True:
+                #     fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
 
-
+            # vertical_contours()
 
             def ILT_inner_outer_cont():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
-                plt.plot(Z_cont, inner_cont, c=color, label=simul)
-                plt.plot(Z_cont, ILT_cont, linestyle=':', c=color)
-                # plt.plot(z, outer_cont, linestyle='--', c=color)
-                plt.title(str(trenutak)+". TS")
-                plt.ylabel("Radius [mm]")
-                plt.xlabel("Axial coordinate $z$ [mm]")
-                # plt.ylim([9,18])
-                plt.xlim([0,250])
+
+                plt.plot(inner_cont, Z_cont, c=color, label="inner wall")
+                plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, label="ILT wall")
+
+                plt.title("ILT and inner contours")
+                plt.xlabel("Radius $r$ [mm]")
+                plt.ylabel("$z$ [mm]")
+                plt.text(5, -15, "$a)$")
+                plt.ylim([30, 220])
+                # plt.xlim([9, 15])
+                plt.xlim([9, 13])
+
+                fig = plt.gcf()
+                fig.subplots_adjust(left=0.15)
+                fig.subplots_adjust(bottom=0.18)
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
-                plt.legend()
-            # ILT_inner_outer_cont()
+                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                           handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+                if picture_save == True:
+                    fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
+                elif picture_save == False:
+                    plt.show()
+
+            ILT_inner_outer_cont()
+
+
+
             def stress_cont():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(Z_cont, S22_cont, c=color, label=simul)
@@ -296,7 +178,7 @@ def time_analysis(times):
         if picture_save == False:
             plt.show()
 
-# time_analysis(times)
+time_analysis(times)
 
 
 
@@ -397,8 +279,8 @@ def diameter_analysis():
             plt.xlim([7, 18])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+            # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+            #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
         vertical_contours()
@@ -451,7 +333,7 @@ def diameter_analysis():
 
 
 font = {'family' : 'Times New Roman',
-        'size'   : 15}
+        'size'   : 18}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
@@ -499,7 +381,8 @@ def growth_over_time():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(bottom=0.18)
+
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
@@ -519,7 +402,8 @@ def growth_over_time():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(bottom=0.18)
+
             plt.legend()
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_H.png', dpi=300)
@@ -544,7 +428,8 @@ def growth_over_time():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(bottom=0.18)
+
 
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
@@ -569,7 +454,8 @@ def growth_over_time():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(bottom=0.18)
+
 
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
@@ -586,12 +472,13 @@ def growth_over_time():
                 plt.plot(days, Z_S22_is_max, label=(sinonimi[simul]))
 
             plt.title("Height for maximal circumferential stress")
-            plt.ylabel("Height [mm]")
+            plt.ylabel("H [mm]")
             plt.xlabel("Time [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(bottom=0.18)
+
             # plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
             #            handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
@@ -607,17 +494,17 @@ def growth_over_time():
                 plt.plot(days, Z_S22_abs_is_max, label=(sinonimi[simul]))
 
             plt.title("Height for maximal circumferential stress")
-            plt.ylabel("Height [mm]")
+            plt.ylabel("H [mm]")
             plt.xlabel("Time [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(bottom=0.18)
             # plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
             #            handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Z_over_S22_abs.png', dpi=300)
-        rast_Z_over_S22_abs()
+        # rast_Z_over_S22_abs()
 
 
         def ILT_thickness():
@@ -633,7 +520,8 @@ def growth_over_time():
 
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(bottom=0.18)
+
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
@@ -654,8 +542,9 @@ def growth_over_time():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             # plt.legend()
             fig = plt.gcf()
-            fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(left=0.18)
+            fig.subplots_adjust(bottom=0.18)
+
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
@@ -669,21 +558,22 @@ def growth_over_time():
             elif sinonimi_u_legendi == True:
                 plt.plot(days, Volume_ILT, label=(sinonimi[simul]))
 
-            plt.title("ILT Volume growth")
-            plt.ylabel("ILT volume [mm$^3$]")
+            plt.title("ILT Volume")
+            plt.ylabel("$V_{\mathrm{ILT}}$ [mm$^3$]")
             plt.xlabel("Time [days]")
             plt.text(-600, -2600, "$c)$" )
 
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
-            fig.subplots_adjust(left=0.17)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(left=0.20)
+            fig.subplots_adjust(bottom=0.18)
+
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Volume_ILT.png', dpi=300)
 
-        # ILT_volume_f()
+        ILT_volume_f()
 
 
 
@@ -701,7 +591,7 @@ def growth_over_time():
     if picture_save == False:
         plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
 

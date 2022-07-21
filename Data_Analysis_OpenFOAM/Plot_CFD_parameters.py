@@ -8,7 +8,7 @@ import pandas as pd
 
 
 case = "//home/josip/feap/FSG/automatizacija_25/Casson"
-sim_broj = 1
+sim_broj = 32
 
 picture_save = True
 
@@ -26,9 +26,9 @@ class VadenjePodataka:
         self.simulation_name = Case.split("/")[-1]
 
         self.koo_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/koordinate"
-        self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/TAWSS"
-        self.OSI_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/OSI"
-        self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/ECAP"
+        self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/TAWSS_avg"
+        self.OSI_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/OSI_avg"
+        self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/ECAP_avg"
 
 
 
@@ -40,9 +40,9 @@ class VadenjePodataka:
 
         self.data_DF = pd.DataFrame(self.data_dict)
         self.Plot_radius()
-        self.Plot_TAWSS()
-        self.Plot_OSI()
-        self.Plot_ECAP()
+        # self.Plot_TAWSS()
+        # self.Plot_OSI()
+        # self.Plot_ECAP()
 
 
     def Koordinate_reading(self):
@@ -103,10 +103,12 @@ class VadenjePodataka:
 
     def Plot_radius(self):
         plt.clf()
-        plt.plot(self.data_DF["z"], self.data_DF["r"], label=self.simulation_name)
+        plt.plot(self.data_DF["r"], self.data_DF["z"], label=self.simulation_name)
         plt.title("Radius")
-        plt.ylabel("$r$ [mm]")
-        plt.xlabel("$z$ [mm]")
+        plt.ylabel("$z$ [mm]")
+        plt.xlabel("$r$ [mm]")
+        plt.ylim([0, 220])
+        plt.xlim([7, 18])
 
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
