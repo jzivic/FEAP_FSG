@@ -6,7 +6,7 @@ Ako nije ništa osrednjeno u foam-u, ovo treba samo jednom provrtiti i TAWSS, OS
 
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import numpy as np
 
 simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija1"
 
@@ -14,6 +14,8 @@ simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija1"
 
 FF_system = False
 pictures_save = True
+prepravljanje_OSI = True
+
 
 
 class AveragingParameters:
@@ -33,11 +35,18 @@ class AveragingParameters:
         self.Koordinate_reading()
         self.TAWSS_reading()
         self.OSI_reading()
+
+        self.data_dict["OSI"][-7::] = [1 for i in range(7)]
+
         self.ECAP_reading()
 
-        self.data_dict["TAWSS_avg"] = self.parameter_averaging("TAWSS")   # ovdje se mijenja ako se hoće lažirati
+        self.data_dict["TAWSS_avg"] = self.parameter_averaging("OSI")   # ovdje se mijenja ako se hoće lažirati
         self.data_dict["OSI_avg"] = self.parameter_averaging("OSI")
         self.data_dict["ECAP_avg"] = self.parameter_averaging("ECAP")
+
+
+
+
 
         self.data_DF = pd.DataFrame(self.data_dict)
         self.write_parameter("TAWSS")

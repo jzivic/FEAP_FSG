@@ -39,6 +39,7 @@ class VadenjePodataka:
         self.ECAP_reading()
 
         self.data_DF = pd.DataFrame(self.data_dict)
+        self.Plot_radius()
         self.Plot_TAWSS()
         self.Plot_OSI()
         self.Plot_ECAP()
@@ -100,6 +101,23 @@ class VadenjePodataka:
             if write_ECAP == True:
                 self.data_dict["ECAP"].append(float(red))
 
+    def Plot_radius(self):
+        plt.clf()
+        plt.plot(self.data_DF["z"], self.data_DF["r"], label=self.simulation_name)
+        plt.title("Radius")
+        plt.ylabel("$r$ [mm]")
+        plt.xlabel("$z$ [mm]")
+
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
+        fig = plt.gcf()
+        fig.subplots_adjust(left=0.15)
+        fig.subplots_adjust(bottom=0.15)
+        if picture_save == True:
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.15)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
+        elif picture_save == False:
+            plt.show()
 
     def Plot_TAWSS(self):
         plt.clf()
@@ -108,7 +126,8 @@ class VadenjePodataka:
 
         plt.title("Time averaged wall shear stress")
         plt.ylabel("TAWSS [Pa]")
-        plt.xlabel("z [mm]")
+        plt.xlabel("$z$ [mm]")
+        plt.text(-40, 0.205, "$b)$")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
         fig.subplots_adjust(left=0.15)
@@ -127,10 +146,12 @@ class VadenjePodataka:
         plt.plot(self.data_DF["z"], self.data_DF["OSI"], label=self.simulation_name)
         plt.title("Oscillatory shear index ")
         plt.ylabel("OSI [-]")
-        plt.xlabel("z [mm]")
+        plt.xlabel("$z$ [mm]")
+        plt.text(-40, 0, "$c)$")
+
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
-        fig.subplots_adjust(left=0.15)
+        fig.subplots_adjust(left=0.33)
         fig.subplots_adjust(bottom=0.15)
 
         if picture_save == True:
@@ -140,12 +161,15 @@ class VadenjePodataka:
         elif picture_save == False:
             plt.show()
 
+
     def Plot_ECAP(self):
         plt.clf()
         plt.plot(self.data_DF["z"], self.data_DF["ECAP"], label=self.simulation_name)
         plt.title("Endothelium cell activation potential")
         plt.ylabel("ECAP [Pa]")
-        plt.xlabel("z [mm]")
+        plt.xlabel("$z$ [mm]")
+        plt.text(-40, -0.135, "$d)$")
+
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
         fig.subplots_adjust(left=0.15)
@@ -159,23 +183,7 @@ class VadenjePodataka:
 
 
 
-    def Plot_radius(self):
-        plt.clf()
-        plt.plot(self.dobPodDF["z"], self.dobPodDF["r"], label=self.simulation_name)
-        plt.title("Radius ")
-        plt.ylabel("R [mm]")
-        plt.xlabel("z [mm]")
-        plt.grid(which='both', linestyle='--', linewidth='0.5')
-        plt.legend()
-        fig = plt.gcf()
-        fig.subplots_adjust(left=0.15)
-        fig.subplots_adjust(bottom=0.15)
-        if picture_save == True:
-            fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
-        elif picture_save == False:
-            plt.show()
+
 
 
 
