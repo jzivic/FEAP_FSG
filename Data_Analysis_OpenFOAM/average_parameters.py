@@ -115,6 +115,10 @@ class AveragingParameters:
                 continue
             if write_ECAP == True:
                 self.data_dict["ECAP"].append(float(red))
+        ECAP_distal = self.data_dict["ECAP"][3]
+        self.data_dict["ECAP"] = [i/ECAP_distal for i in self.data_dict["ECAP"]]
+
+
 
 
     def parameter_averaging(self, parameter_name):

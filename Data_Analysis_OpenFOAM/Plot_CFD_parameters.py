@@ -1,5 +1,3 @@
-import math
-import os
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -8,14 +6,14 @@ import pandas as pd
 
 
 case = "//home/josip/feap/FSG/automatizacija_25/Casson"
-sim_broj = 32
+sim_broj = 1
 
-picture_save = True
+picture_save = False
 
 
 
 font = {'family' : 'Times New Roman',
-        'size'   : 18}
+        'size'   : 20}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
@@ -40,9 +38,9 @@ class VadenjePodataka:
 
         self.data_DF = pd.DataFrame(self.data_dict)
         self.Plot_radius()
-        # self.Plot_TAWSS()
-        # self.Plot_OSI()
-        # self.Plot_ECAP()
+        self.Plot_TAWSS()
+        self.Plot_OSI()
+        self.Plot_ECAP()
 
 
     def Koordinate_reading(self):
@@ -108,6 +106,7 @@ class VadenjePodataka:
         plt.ylabel("$z$ [mm]")
         plt.xlabel("$r$ [mm]")
         plt.ylim([0, 220])
+        # plt.xlim([8, 14])
         plt.xlim([7, 18])
 
         plt.grid(which='both', linestyle='--', linewidth='0.5')
@@ -153,7 +152,7 @@ class VadenjePodataka:
 
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
-        fig.subplots_adjust(left=0.33)
+        fig.subplots_adjust(left=0.15)
         fig.subplots_adjust(bottom=0.15)
 
         if picture_save == True:
@@ -168,7 +167,8 @@ class VadenjePodataka:
         plt.clf()
         plt.plot(self.data_DF["z"], self.data_DF["ECAP"], label=self.simulation_name)
         plt.title("Endothelium cell activation potential")
-        plt.ylabel("ECAP [Pa]")
+        # plt.ylabel("ECAP [Pa$^{-1}$]")
+        plt.ylabel("ECAP [-]")
         plt.xlabel("$z$ [mm]")
         plt.text(-40, -0.135, "$d)$")
 

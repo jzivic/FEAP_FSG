@@ -114,41 +114,52 @@ simulationsData_dict = {
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
 simulationsData_dict = {
 
-                "//home/josip/feap/FSG/automatizacija_25/":
-                    {"version": "old",
-
-                     "simulations":
-                         [
-                            "a3_30",
-                            "a3_40",
-                            "ab=900",
-                            "BC",
-                            "Casson",
-
-
-                            "Newt_5",
-                            "Newt_6",
-                            "Newt_33",
-
-                            "tawss=030",
-                            "tawss=035",
-                            "tawss=040",
-                            "tawss=045",
-                            "tawss=050",
-
-                            ]
-                     },
-
-
-                # "//home/josip/feap/FSG/automatizacija_33_N_AVERAGE!!/NO_biochemo_FSG/x3_2/":
-                #     {"version": "new",
+                # "//home/josip/feap/FSG/automatizacija_25/":
+                #     {"version": "old",
                 #
                 #      "simulations":
                 #          [
-                #             "x3_2_a3_20_novo",
-                #             # "x3_2_a3_20",
-                #           ]
+                #             "a3_30",
+                #             "a3_40",
+                #             "ab=900",
+                #             "BC",
+                #             "Casson",
+                #
+                #
+                #             "Newt_5",
+                #             "Newt_6",
+                #             "Newt_33",
+                #
+                #             "tawss=030",
+                #             "tawss=035",
+                #             "tawss=040",
+                #             "tawss=045",
+                #             "tawss=050",
+                #
+                #                         ]
                 #      },
+
+
+                "//home/josip/feap/FSG/automatizacija_35/":
+                    {"version": "new",
+
+                     "simulations":
+                         [
+                            # "osi_le_035_3",
+                            # "osi_le_030_3",
+                            # "osi_le_025_3",
+                            # "osi_le_020_3",
+
+                            # "osi_gt_55",
+                            # "osi_gt_050",
+                            # "osi_gt_045",
+                            # "osi_gt_40",
+
+                            # "ecap_le_060",
+                            # "ecap_le_055",
+                            "ecap_le_050",
+                                                ]
+                     },
 
 
           }

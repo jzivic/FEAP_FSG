@@ -7,7 +7,7 @@ import matplotlib.animation as ani
 
 sinonimi_u_legendi = True
 sinonimi = {
-            "Casson": "Casson",
+            # "Casson": "Casson",
             # "BC":"Bird-Carreau",
             # "Newt_33": "Newt,  $\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
             # "Newt_5": "Newt,  $\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
@@ -20,10 +20,29 @@ sinonimi = {
             # "a3_30" : "$z-z_{\mathrm{down}}$= 30 mm",
             # "a3_40" : "$z-z_{\mathrm{down}}$= 40 mm",
 
-            }
+            # "Casson": "tawss",
+            # "osi_le_030_3": "osi_le_030_3",
+            # "Casson": "tawss",
+            # "Casson": "tawss",
+
+            "osi_le_035_3": "osi_le_035_3",
+            "osi_le_030_3": "osi_le_030_3",
+            "osi_le_025_3": "osi_le_025_3",
+            "osi_le_020_3": "osi_le_020_3",
+
+
+
+           "osi_gt_55": "osi_gt_55",
+           "osi_gt_050": "osi_gt_050",        # 50=55, 45= 40 ???
+           "osi_gt_045": "osi_gt_045",
+           "osi_gt_40": "osi_gt_40",
+
+
+}
 
 
 auto_name = "automatizacija_25"
+# auto_name = "automatizacija_35"
 
 
 
@@ -31,10 +50,12 @@ chosen_layer = 1
 
 
 
+
+
 # u kojem trenutku je casson r=16
 
 
-picture_save = True
+picture_save = False
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 all_data = pd.read_pickle(pickle_name)
@@ -46,16 +67,27 @@ diagramsDir = "//home/josip/feap/FSG/slike/FSG_model/"
 
 
 font = {'family' : 'Times New Roman',
-        'size'   : 18}
+        'size'   : 20}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 #104, 200
 
-ts = lambda sim: 104 + sim*3
 
 
-times = [ts(1)]
+
+
+
+
+ts_from_sim = lambda sim: 104 + sim*3
+
+
+# times = [ts_from_sim(0)]
+# times = [ts_from_sim(12)]
+# times = [ts_from_sim(32)]
+times = [ts_from_sim(48)]
+
+
 def time_analysis(times):
     for trenutak in times:
         for simul in sinonimi.keys():
@@ -81,17 +113,25 @@ def time_analysis(times):
             def stress_by_layers():
                 # color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(range(1,8), S22_by_layer, label=simul)
-                plt.title("Circumferential Stress through radial layers 1-7")
+                # plt.title("Circumferential stress through radial layers")
                 plt.xlabel("Radial layer [-]")
-                plt.ylabel("Circumferential Stress [Pa]")
-                plt.ylim([170, 290])
+                plt.ylabel("S22 [Pa]")
+                plt.xlim([0, 8])
+                # plt.ylim([170, 290])
+
+                # plt.text(-1, 152, "$a)$")
+                # plt.text(-1, 178, "$b)$")
+                # plt.text(-1, 205, "$c)$")
+                plt.text(-1, 195, "$d)$")
+
+
                 fig = plt.gcf()
                 fig.subplots_adjust(left=0.15)
                 fig.subplots_adjust(bottom=0.18)
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
 
                 if picture_save == True:
-                    fig.savefig(diagramsDir + '../stress_through_layers', dpi=300)
+                    fig.savefig(diagramsDir + '/stress_through_layers_'+str(times[0]), dpi=300)
 
             # stress_by_layers()
 
@@ -117,6 +157,7 @@ def time_analysis(times):
 
             # vertical_contours()
 
+
             def ILT_inner_outer_cont():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
 
@@ -130,6 +171,7 @@ def time_analysis(times):
                 plt.ylim([30, 220])
                 # plt.xlim([9, 15])
                 plt.xlim([9, 13])
+                plt.text(8.6, -8, "$a)$")
 
                 fig = plt.gcf()
                 fig.subplots_adjust(left=0.15)
@@ -178,7 +220,7 @@ def time_analysis(times):
         if picture_save == False:
             plt.show()
 
-time_analysis(times)
+# time_analysis(times)
 
 
 
@@ -279,8 +321,8 @@ def diameter_analysis():
             plt.xlim([7, 18])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
-            # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-            #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
         vertical_contours()
@@ -328,7 +370,7 @@ def diameter_analysis():
     if picture_save == False:
         plt.show()
 
-# diameter_analysis()
+diameter_analysis()
 
 
 
@@ -355,11 +397,28 @@ def growth_over_time():
         S22_max_7 = np.array(all_data.loc[simul]["S22_max"])[:,7-1]
         Z_S22_is_max = [i["height"] for i in all_data.loc[simul]["Z_S22_is_max"]]
 
+
+        def parameter_averaging():
+            n_neighb = 58
+            if n_neighb % 2 == 0:
+                n_neighb += 1
+            average_list = list(Z_S22_is_max)
+            start_index = int((n_neighb - 1) / 2)  # početni index da se izbjegnu rubovi
+            for n in range(start_index, (len(Z_S22_is_max) - start_index), 1):
+                neighbours = [Z_S22_is_max[(n - start_index) + i] for i in range(n_neighb)]
+                parameter_avg = sum(neighbours) / len(neighbours)
+                average_list[n] = parameter_avg
+            return average_list
+        # proba = parameter_averaging()
+
+
+
+
+
+
+
         S22_max_abs = [i["S22"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
         Z_S22_abs_is_max = [i["height"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
-
-
-
 
         ILT_thickness_max = all_data.loc[simul]["ILT_thickness_max"]
         vein_thickness_max = all_data.loc[simul]["vein_thickness_max"]
@@ -415,7 +474,6 @@ def growth_over_time():
                 plt.plot(days, S22_max_1, label=(simul))
             elif sinonimi_u_legendi == True:
                 plt.plot(days, S22_max_1, label=(sinonimi[simul]))
-
             # plt.title("S22 growth,  " + str(chosen_layer) + ". layer")
 
             plt.title("Circumferential Stress growth")
@@ -423,17 +481,12 @@ def growth_over_time():
             plt.xlabel("Time [days]")
             plt.ylim([30,400])
             plt.text(-500, -20, "$d)$" )
-
-
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
             fig.subplots_adjust(bottom=0.18)
-
-
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_S22_1.png', dpi=300)
         # rast_S22_1()
@@ -466,11 +519,11 @@ def growth_over_time():
 
 
         def rast_Z_max_naprezanja():
+
             if sinonimi_u_legendi == False:
                 plt.plot(days, Z_S22_is_max, label=(simul))
             elif sinonimi_u_legendi == True:
                 plt.plot(days, Z_S22_is_max, label=(sinonimi[simul]))
-
             plt.title("Height for maximal circumferential stress")
             plt.ylabel("H [mm]")
             plt.xlabel("Time [days]")

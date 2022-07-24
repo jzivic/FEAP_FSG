@@ -211,6 +211,7 @@ class FSG_Analysis:
                     for node in range(7):
                         n_row = self.startLine_res_Y0_field + 7*n_line + node
                         row = self.whole_document_res_Y0_field[n_row].strip().split()
+                        # print(n_row)
                         S22 = float(row[4])*1000
                         S22_list_by_thickness.append(S22)
 
