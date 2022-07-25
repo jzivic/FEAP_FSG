@@ -30,32 +30,29 @@ sinonimi = {
             "osi_le_025_3": "osi_le_025_3",
             "osi_le_020_3": "osi_le_020_3",
 
+           # "osi_gt_55": "osi_gt_55",
+           # "osi_gt_050": "osi_gt_050",        # 50=55, 45= 40 ???
+           # "osi_gt_045": "osi_gt_045",
+           # "osi_gt_40": "osi_gt_40",
+
+           # "ecap_le_060": "ecap_le_060",
+           # "ecap_le_055": "ecap_le_055",
+           # "ecap_le_050": "ecap_le_050",
 
 
-           "osi_gt_55": "osi_gt_55",
-           "osi_gt_050": "osi_gt_050",        # 50=55, 45= 40 ???
-           "osi_gt_045": "osi_gt_045",
-           "osi_gt_40": "osi_gt_40",
+
 
 
 }
-
 
 auto_name = "automatizacija_25"
 # auto_name = "automatizacija_35"
 
 
-
 chosen_layer = 1
 
 
-
-
-
-# u kojem trenutku je casson r=16
-
-
-picture_save = False
+picture_save = True
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 all_data = pd.read_pickle(pickle_name)
@@ -170,7 +167,7 @@ def time_analysis(times):
                 plt.text(5, -15, "$a)$")
                 plt.ylim([30, 220])
                 # plt.xlim([9, 15])
-                plt.xlim([9, 13])
+                # plt.xlim([9, 13])
                 plt.text(8.6, -8, "$a)$")
 
                 fig = plt.gcf()
@@ -281,7 +278,7 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 16
+r = 14
 wanted_D = r*2
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
@@ -318,7 +315,7 @@ def diameter_analysis():
             plt.ylabel("Axial coordinate $z$ [mm]")
             plt.text(5, -15, "$a)$" )
             plt.ylim([0, 220])
-            plt.xlim([7, 18])
+            # plt.xlim([7, 18])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
@@ -532,8 +529,8 @@ def growth_over_time():
             fig.subplots_adjust(left=0.15)
             fig.subplots_adjust(bottom=0.18)
 
-            # plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-            #            handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
+            plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Z_for_S22_max.png', dpi=300)
         # rast_Z_max_naprezanja()

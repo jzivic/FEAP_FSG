@@ -145,18 +145,18 @@ simulationsData_dict = {
 
                      "simulations":
                          [
-                            # "osi_le_035_3",
-                            # "osi_le_030_3",
-                            # "osi_le_025_3",
-                            # "osi_le_020_3",
+                            "osi_le_035_3",
+                            "osi_le_030_3",
+                            "osi_le_025_3",
+                            "osi_le_020_3",
 
-                            # "osi_gt_55",
-                            # "osi_gt_050",
-                            # "osi_gt_045",
-                            # "osi_gt_40",
+                            "osi_gt_55",
+                            "osi_gt_050",
+                            "osi_gt_045",
+                            "osi_gt_40",
 
-                            # "ecap_le_060",
-                            # "ecap_le_055",
+                            "ecap_le_060",
+                            "ecap_le_055",
                             "ecap_le_050",
                                                 ]
                      },
