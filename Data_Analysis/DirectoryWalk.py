@@ -61,6 +61,7 @@ class FSG_Analysis:
 
                 # Setting simulation
                 self.simulation_name = simulation_name
+                print(simulation_name)
 
                 self.set_files()
                 self.data_construction()
@@ -115,7 +116,7 @@ class FSG_Analysis:
                 self.whole_document_res_NODE_0841 = opening_res_NODE_0841.readlines()  # whole txt read in self.wholeDocument_eIW
                 self.nl_res_NODE = sum(1 for line in open("res__NODE_0841_"+suffix))  # number of lines in export Inner Wall
 
-                self.max_TS = self.nl_res_NODE - 5
+                self.max_TS = self.nl_res_NODE - 8 # (-5 org)
 
                 opening_res_Inner_lines = open("res__INNER_lines__"+suffix, "r")  # open txt file
                 self.whole_document_Inner_lines = opening_res_Inner_lines.readlines()  # whole txt read in self.wholeDocument_eIW
@@ -211,7 +212,7 @@ class FSG_Analysis:
                     for node in range(7):
                         n_row = self.startLine_res_Y0_field + 7*n_line + node
                         row = self.whole_document_res_Y0_field[n_row].strip().split()
-                        # print(n_row)
+                        # print(n_row, row)
                         S22 = float(row[4])*1000
                         S22_list_by_thickness.append(S22)
 
@@ -270,9 +271,6 @@ class FSG_Analysis:
         ind_S22_Z_max_abs = int(sum(list_ind_abs) / ( len(list_ind_abs)))
         S22_Z_max_abs = {"S22":S22_Z_max_abs,  "height": z_list[ind_S22_Z_max_abs]}
 
-
-
-
         ILT_thickness_max = max(ILT_thickness_list)
         vein_thickness_max = max(vein_thickness_list)
 
@@ -300,8 +298,6 @@ class FSG_Analysis:
         self.oneSim_data_dict["vein_thickness_max"].append(vein_thickness_max)
         self.oneSim_data_dict["ILT_surface"].append(ILT_surface)
         self.oneSim_data_dict["Volume_ILT"].append(Volume_ILT)
-
-
 
 
 FSG_Analysis()

@@ -5,8 +5,9 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import matplotlib.animation as ani
 
-sinonimi_u_legendi = True
-sinonimi = {
+sinonimi_u_legendi = False
+
+# sinonimi = {
             # "Casson": "Casson",
             # "BC":"Bird-Carreau",
             # "Newt_33": "Newt,  $\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
@@ -25,10 +26,10 @@ sinonimi = {
             # "Casson": "tawss",
             # "Casson": "tawss",
 
-            "osi_le_035_3": "osi_le_035_3",
-            "osi_le_030_3": "osi_le_030_3",
-            "osi_le_025_3": "osi_le_025_3",
-            "osi_le_020_3": "osi_le_020_3",
+            # "osi_le_035_3": "osi_le_035_3",
+            # "osi_le_030_3": "osi_le_030_3",
+            # "osi_le_025_3": "osi_le_025_3",
+            # "osi_le_020_3": "osi_le_020_3",
 
            # "osi_gt_55": "osi_gt_55",
            # "osi_gt_050": "osi_gt_050",        # 50=55, 45= 40 ???
@@ -38,24 +39,104 @@ sinonimi = {
            # "ecap_le_060": "ecap_le_060",
            # "ecap_le_055": "ecap_le_055",
            # "ecap_le_050": "ecap_le_050",
+# }
 
 
 
 
+sinonimi = {
+
+                # "tawss=030" : "staro",
+                # "tawss=035" : "staro",
+                # "tawss=040" : "staro",
+                # "tawss=045" : "staro",
+                # "tawss=050" : "staro",
+
+                 # "tawss_le_030":0,
+                 # "tawss_le_035":0,
+                 "tawss_le_040":0,
+                 # "tawss_le_045":0,
+                # "tawss_le_04625":0,
+                # "tawss_le_0475":0,
+                # "tawss_le_04825":0,
+                #  "tawss_le_050":0,
+
+                 # "osi_gt_0375":0,
+                 # "osi_gt_0400":0,
+                 # "osi_gt_0425":0,
+                 # "osi_gt_0450":0,
+                 "osi_gt_04625":0,              # najsličniji
+
+                ## "osi_gt_04675":0,           # NOVO, VRTI SE
+                ## "osi_gt_04725":0,
+
+                 # "osi_gt_0475":0,
+                 # "osi_gt_0500":0,
+
+
+
+
+                 # "osi_le_0250":0,
+                 # "osi_le_0275":0,
+                 # "osi_le_0300":0,
+                 # "osi_le_0325":0,
+                 # osi_le_0350_2:0,
+                 ### "osi_le_0350":0,
+
+
+                 # "ecap_gt_145":0,
+
+                # "ecap_gt_14625_2":0,
+                # "ecap_gt_14750_2":0,
+                # "ecap_gt_14825_3":0,
+
+
+                 "ecap_gt_150":0,               # NAJSLIČNIJI tawss=0.4
+                 "ecap_gt_150_2":0,               # NAJSLIČNIJI tawss=0.4
+                 # "ecap_gt_155":0,
+                 # "ecap_gt_160":0,
+
+                 # "ecap_gt_14625":0,
+                 # "ecap_gt_14750": 0,
+                 # "ecap_gt_14825":0,
+
+
+
+
+                 # "ecap_le_065":0,
+                 # "ecap_le_070":0,
+                 # "ecap_le_075":0,
+                 # "ecap_le_080":0,
 
 }
 
-auto_name = "automatizacija_25"
-# auto_name = "automatizacija_35"
 
 
-chosen_layer = 1
 
 
-picture_save = True
+
+
+
+
+
+
+
+
+
+
+
+
+# auto_name = "automatizacija_25"
+auto_name = "automatizacija_36"
+
+
+
+
+picture_save = False
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 all_data = pd.read_pickle(pickle_name)
+
 
 #            viskoznost tawss  geometrija
 
@@ -63,27 +144,26 @@ all_data = pd.read_pickle(pickle_name)
 diagramsDir = "//home/josip/feap/FSG/slike/FSG_model/"
 
 
+
+
+
+
+
+
 font = {'family' : 'Times New Roman',
         'size'   : 20}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
-
-#104, 200
-
-
-
-
-
-
-
 ts_from_sim = lambda sim: 104 + sim*3
-
 
 # times = [ts_from_sim(0)]
 # times = [ts_from_sim(12)]
-# times = [ts_from_sim(32)]
-times = [ts_from_sim(48)]
+times = [ts_from_sim(32)]
+# times = [ts_from_sim(48)]
 
+
+
+chosen_layer = 1
 
 def time_analysis(times):
     for trenutak in times:
@@ -132,25 +212,27 @@ def time_analysis(times):
 
             # stress_by_layers()
 
-                # color = next(plt.gca()._get_lines.prop_cycler)['color']
-                # if sinonimi_u_legendi == False:
-                #     plt.plot(inner_cont, Z_cont, c=color, label=(simul))
-                # elif sinonimi_u_legendi == True:
-                #     plt.plot(inner_cont, Z_cont, c=color, label=(sinonimi[simul]))
-                # plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
-                #
-                # plt.title("ILT and inner contours")
-                # plt.xlabel("Radius $r$ [mm]")
-                # plt.ylabel("Axial coordinate $z$ [mm]")
-                # plt.text(5, -15, "$a)$")
-                # plt.ylim([0, 220])
-                # plt.xlim([7, 18])
-                # plt.grid(which='both', linestyle='--', linewidth='0.5')
-                # fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
-                # # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                # #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-                # if picture_save == True:
-                #     fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
+            def vertical_contours():
+
+                color = next(plt.gca()._get_lines.prop_cycler)['color']
+                if sinonimi_u_legendi == False:
+                    plt.plot(inner_cont, Z_cont, c=color, label=(simul))
+                elif sinonimi_u_legendi == True:
+                    plt.plot(inner_cont, Z_cont, c=color, label=(sinonimi[simul]))
+                plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
+
+                plt.title("ILT and inner contours")
+                plt.xlabel("Radius $r$ [mm]")
+                plt.ylabel("Axial coordinate $z$ [mm]")
+                plt.text(5, -15, "$a)$")
+                plt.ylim([0, 220])
+                plt.xlim([7, 18])
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+                fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
+                # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+                if picture_save == True:
+                    fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
 
             # vertical_contours()
 
@@ -176,12 +258,14 @@ def time_analysis(times):
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+
+                # ovo zakomentirati ako želim sve odjednom plotati
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
                 elif picture_save == False:
                     plt.show()
 
-            ILT_inner_outer_cont()
+            # ILT_inner_outer_cont()
 
 
 
@@ -278,7 +362,7 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 14
+r = 11.6
 wanted_D = r*2
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
@@ -355,6 +439,7 @@ def diameter_analysis():
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
         # ILT_thickness_f()
+
         def vein_thickness_f():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(Z_cont, vein_thickness, linestyle='-', c=color, label=(simul+", TS: "+str(time)))
@@ -368,6 +453,10 @@ def diameter_analysis():
         plt.show()
 
 diameter_analysis()
+
+
+
+
 
 
 
@@ -443,8 +532,6 @@ def growth_over_time():
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_D.png', dpi=300)
-        # rast_D()
-
 
         def rast_H():
             if sinonimi_u_legendi == False:
@@ -463,8 +550,6 @@ def growth_over_time():
             plt.legend()
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_H.png', dpi=300)
-        # rast_H()
-
 
         def rast_S22_1():
             if sinonimi_u_legendi == False:
@@ -487,7 +572,6 @@ def growth_over_time():
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_S22_1.png', dpi=300)
         # rast_S22_1()
-
 
         def rast_S22_7():
             if sinonimi_u_legendi == False:
@@ -514,7 +598,6 @@ def growth_over_time():
                 fig.savefig(diagramsDir + 'rast_S22_7.png', dpi=300)
         # rast_S22_7()
 
-
         def rast_Z_max_naprezanja():
 
             if sinonimi_u_legendi == False:
@@ -533,9 +616,6 @@ def growth_over_time():
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Z_for_S22_max.png', dpi=300)
-        # rast_Z_max_naprezanja()
-
-
 
         def rast_Z_over_S22_abs():
             if sinonimi_u_legendi == False:
@@ -550,12 +630,10 @@ def growth_over_time():
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
             fig.subplots_adjust(bottom=0.18)
-            # plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-            #            handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
+            plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Z_over_S22_abs.png', dpi=300)
-        # rast_Z_over_S22_abs()
-
 
         def ILT_thickness():
             if sinonimi_u_legendi == False:
@@ -576,9 +654,7 @@ def growth_over_time():
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_ILT_th.png', dpi=300)
-
         # ILT_thickness()
-
 
         def ILT_surface_f():
             if sinonimi_u_legendi == False:
@@ -599,7 +675,6 @@ def growth_over_time():
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_ILT_surface_f.png', dpi=300)
-
         # ILT_surface_f()
 
         def ILT_volume_f():
@@ -623,10 +698,6 @@ def growth_over_time():
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Volume_ILT.png', dpi=300)
 
-        ILT_volume_f()
-
-
-
         # Ima li ovo smisla???
         def rast_vein_thickness():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -636,7 +707,24 @@ def growth_over_time():
             plt.xlabel("Time Step [-]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
+
+
+
+
+        rast_D()
+        # ILT_volume_f()
+
+        # rast_H()
+        # rast_Z_max_naprezanja()
+        # rast_Z_over_S22_abs()
         # rast_vein_thickness()
+
+
+
+
+
+
+
 
     if picture_save == False:
         plt.show()

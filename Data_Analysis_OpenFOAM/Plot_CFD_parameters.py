@@ -5,11 +5,12 @@ import pandas as pd
 
 
 
-case = "//home/josip/feap/FSG/automatizacija_25/Casson"
-sim_broj = 1
+# case = "//home/josip/feap/FSG/automatizacija_25/Casson"
+case = "//home/josip/feap/FSG/automatizacija_36/TAWSS/tawss_le_040"
+sim_broj = 12
 
 picture_save = False
-
+already_averaged = True
 
 
 font = {'family' : 'Times New Roman',
@@ -23,10 +24,20 @@ class VadenjePodataka:
         foam_time = 2
         self.simulation_name = Case.split("/")[-1]
 
+
+
         self.koo_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/koordinate"
-        self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/TAWSS_avg"
-        self.OSI_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/OSI_avg"
-        self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/ECAP_avg"
+
+        if already_averaged == True:
+            self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/TAWSS"
+            self.OSI_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/OSI"
+            self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/ECAP"
+
+        elif already_averaged == False:
+            self.TAWSS_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/TAWSS_avg"
+            self.OSI_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/OSI_avg"
+            self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/ECAP_avg"
+
 
 
 
