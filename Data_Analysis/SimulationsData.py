@@ -195,7 +195,8 @@ simulationsData_dict = {
                             "tawss_le_035",
                             "tawss_le_040",
                             "tawss_le_045",
-                            "tawss_le_0475",
+                             "tawss_le_0475",
+                             "tawss_le_0475",
                             "tawss_le_04825",
                             "tawss_le_050",
                           ]
@@ -217,6 +218,13 @@ simulationsData_dict = {
 
                              "osi_gt_0475",
                              "osi_gt_0500",
+
+
+                             "osi_gt_04650_from_0",
+                             "osi_gt_04675_from_0",
+                             "osi_gt_046250_from_0",
+
+
                          ]
                      },
 
@@ -230,7 +238,7 @@ simulationsData_dict = {
                              "osi_le_0300",
                              "osi_le_0325",
 
-                             "osi_le_0350",     # staro
+                             # "osi_le_0350",     # staro
                              "osi_le_0350_2",     # 2. runda
                          ]
                      },
@@ -242,18 +250,21 @@ simulationsData_dict = {
                      "simulations":
                          [
                             "ecap_gt_145",
-                            "ecap_gt_14625",    # ovo
-                            "ecap_gt_14750",
-                            "ecap_gt_14825",
+                            ###"ecap_gt_14625",    # ovo
+                            ###"ecap_gt_14750",
+                            ###"ecap_gt_14825",
 
                              "ecap_gt_14625_2",     # 2. runda
                              "ecap_gt_14750_2",     # 2. runda
                              "ecap_gt_14825_3",     # 2. runda
 
-                             "ecap_gt_150",
+                             # "ecap_gt_150",
                              "ecap_gt_150_2",       # 3. runda
                              "ecap_gt_155",
                              "ecap_gt_160",
+
+                             "ecap_gt_150_from_0",
+
                          ]
                      },
 
@@ -271,3 +282,62 @@ simulationsData_dict = {
                      },
 
           }
+
+
+
+
+pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_37.pickle"
+
+
+simulationsData_dict = {
+
+                "//home/josip/feap/FSG/automatizacija_36/TAWSS/":
+                    {"version": "new",
+
+                     "simulations":
+                         [
+                            "tawss_le_030",
+                            "tawss_le_035",
+                            "tawss_le_040",
+                            "tawss_le_045",
+                             "tawss_le_0475",
+                             "tawss_le_0475",
+                            "tawss_le_04825",
+                            "tawss_le_050",
+                          ]
+                     },
+
+                "//home/josip/feap/FSG/automatizacija_37/OSI/":
+                    {"version": "new",
+                         "simulations":
+                             [
+                                "osi_f70_gt_04700",
+                                "osi_f0_gt_04650",
+                                "osi_f0_gt_04625",
+                                "osi_f0_gt_04600",
+                                "osi_f0_gt_04575",
+                                "osi_f0_gt_04550",
+                             ]
+                     },
+
+
+                "//home/josip/feap/FSG/automatizacija_37/ECAP/":
+                    {"version": "new",
+                         "simulations":
+                             [
+                                "ecap_f0_gt_150",
+                                "ecap_f0_gt_151",
+                                "ecap_f0_gt_152",
+                                "ecap_f0_gt_153",
+                                "ecap_f0_gt_154",
+                                "ecap_f0_gt_155",
+                                "ecap_f0_gt_156",
+                                "ecap_f0_gt_157",
+                                "ecap_f0_gt_158",
+                                "ecap_f0_gt_159",
+                                "ecap_f0_gt_160",
+                             ]
+                     },
+
+          }
+

@@ -56,57 +56,95 @@ sinonimi = {
                  # "tawss_le_035":0,
                  "tawss_le_040":0,
                  # "tawss_le_045":0,
-                # "tawss_le_04625":0,
-                # "tawss_le_0475":0,
-                # "tawss_le_04825":0,
-                #  "tawss_le_050":0,
+                 # "tawss_le_04625":0,
+                 # "tawss_le_0475":0,
+                 # "tawss_le_04825":0,
+                 # "tawss_le_050":0,
 
-                 # "osi_gt_0375":0,
-                 # "osi_gt_0400":0,
-                 # "osi_gt_0425":0,
-                 # "osi_gt_0450":0,
-                 "osi_gt_04625":0,              # najsličniji
+                 ###"osi_gt_0375":0,
+                 ###"osi_gt_0400":0,
+                 ###"osi_gt_0425":0,
+                 ###"osi_gt_0450":0,
+                 # "osi_gt_04625":0,              # najsličniji
 
-                ## "osi_gt_04675":0,           # NOVO, VRTI SE
-                ## "osi_gt_04725":0,
-
+                 # "osi_gt_04675":0,
+                 # "osi_gt_04725":0,
                  # "osi_gt_0475":0,
-                 # "osi_gt_0500":0,
+
+                # "osi_gt_046250_from_0": 0,
+                #  "osi_gt_04650_from_0": 0,
+                 # "osi_gt_04675_from_0_2": 0,          # NOVO, VRTI SE
+                 # "osi_gt_04750_from_0_2": 0,          # NOVO, VRTI SE
 
 
+                 ##"osi_gt_0500":0,
 
-
-                 # "osi_le_0250":0,
-                 # "osi_le_0275":0,
-                 # "osi_le_0300":0,
-                 # "osi_le_0325":0,
-                 # osi_le_0350_2:0,
+                 ###"osi_le_0250":0,
+                 ###"osi_le_0275":0,
+                 ###"osi_le_0300":0,
+                 ###"osi_le_0325":0,
+                 ###"osi_le_0350_2":0,
                  ### "osi_le_0350":0,
 
 
-                 # "ecap_gt_145":0,
-
+                 "ecap_gt_145":0,
                 # "ecap_gt_14625_2":0,
                 # "ecap_gt_14750_2":0,
                 # "ecap_gt_14825_3":0,
 
 
-                 "ecap_gt_150":0,               # NAJSLIČNIJI tawss=0.4
                  "ecap_gt_150_2":0,               # NAJSLIČNIJI tawss=0.4
+                 "ecap_gt_150_from_0":0,
+
                  # "ecap_gt_155":0,
                  # "ecap_gt_160":0,
 
-                 # "ecap_gt_14625":0,
-                 # "ecap_gt_14750": 0,
-                 # "ecap_gt_14825":0,
+
+
+                 ###"ecap_gt_14625":0,
+                 ###"ecap_gt_14750": 0,
+                 ###"ecap_gt_14825":0,
+
+                 ###"ecap_le_065":0,
+                 ###"ecap_le_070":0,
+                 ###"ecap_le_075":0,
+                 ###"ecap_le_080":0,
+
+}
 
 
 
 
-                 # "ecap_le_065":0,
-                 # "ecap_le_070":0,
-                 # "ecap_le_075":0,
-                 # "ecap_le_080":0,
+
+sinonimi = {
+
+                # "tawss_le_030":0,
+                # "tawss_le_035":0,
+                "tawss_le_040":0,
+                # "tawss_le_045":0,
+                # "tawss_le_0475":0,
+                # "tawss_le_0475":0,
+                # "tawss_le_04825":0,
+                # "tawss_le_050":0,
+
+                "osi_f70_gt_04700":0,
+                # "osi_f0_gt_04650":0,
+                # "osi_f0_gt_04625":0,
+                # "osi_f0_gt_04600":0,
+                # "osi_f0_gt_04575":0,
+                # "osi_f0_gt_04550":0,
+
+                # "ecap_f0_gt_150":0,
+                # "ecap_f0_gt_151":0,
+                # "ecap_f0_gt_152":0,
+                # "ecap_f0_gt_153":0,
+                # "ecap_f0_gt_154":0,
+                # "ecap_f0_gt_155":0,
+                # "ecap_f0_gt_156":0,
+                # "ecap_f0_gt_157":0,
+                # "ecap_f0_gt_158":0,
+                # "ecap_f0_gt_159":0,
+                # "ecap_f0_gt_160":0,
 
 }
 
@@ -126,8 +164,14 @@ sinonimi = {
 
 
 
+
+
+
+
+
 # auto_name = "automatizacija_25"
 auto_name = "automatizacija_36"
+auto_name = "automatizacija_37"
 
 
 
@@ -362,7 +406,7 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 11.6
+r = 16
 wanted_D = r*2
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
@@ -405,7 +449,7 @@ def diameter_analysis():
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
             if picture_save == True:
-                fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
+                fig.savefig(diagramsDir + 'vertical_contours_'+str(r)+'.png', dpi=300)
         vertical_contours()
 
 
@@ -452,7 +496,7 @@ def diameter_analysis():
     if picture_save == False:
         plt.show()
 
-diameter_analysis()
+# diameter_analysis()
 
 
 
@@ -711,8 +755,8 @@ def growth_over_time():
 
 
 
-        rast_D()
-        # ILT_volume_f()
+        # rast_D()
+        ILT_volume_f()
 
         # rast_H()
         # rast_Z_max_naprezanja()
@@ -729,7 +773,7 @@ def growth_over_time():
     if picture_save == False:
         plt.show()
 
-# growth_over_time()
+growth_over_time()
 
 
 

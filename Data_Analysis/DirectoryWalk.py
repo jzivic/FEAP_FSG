@@ -116,7 +116,7 @@ class FSG_Analysis:
                 self.whole_document_res_NODE_0841 = opening_res_NODE_0841.readlines()  # whole txt read in self.wholeDocument_eIW
                 self.nl_res_NODE = sum(1 for line in open("res__NODE_0841_"+suffix))  # number of lines in export Inner Wall
 
-                self.max_TS = self.nl_res_NODE - 8 # (-5 org)
+                self.max_TS = self.nl_res_NODE - 5 # (-5 org)
 
                 opening_res_Inner_lines = open("res__INNER_lines__"+suffix, "r")  # open txt file
                 self.whole_document_Inner_lines = opening_res_Inner_lines.readlines()  # whole txt read in self.wholeDocument_eIW
