@@ -167,11 +167,9 @@ simulationsData_dict = {
 
 
 
-#
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_36.pickle"
 
-
-simulationsData_dict = {
+pickle_name_36 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_36.pickle"
+simulationsData_dict_36 = {
                 # "//home/josip/feap/FSG/automatizacija_25/":
                 #     {"version": "old",
                 #
@@ -191,14 +189,14 @@ simulationsData_dict = {
 
                      "simulations":
                          [
-                            "tawss_le_030",
-                            "tawss_le_035",
+                            # "tawss_le_030",
+                            # "tawss_le_035",
                             "tawss_le_040",
-                            "tawss_le_045",
-                             "tawss_le_0475",
-                             "tawss_le_0475",
-                            "tawss_le_04825",
-                            "tawss_le_050",
+                            # "tawss_le_045",
+                            #  "tawss_le_0475",
+                            #  "tawss_le_0475",
+                            # "tawss_le_04825",
+                            # "tawss_le_050",
                           ]
                      },
 
@@ -207,22 +205,25 @@ simulationsData_dict = {
 
                      "simulations":
                          [
-                             "osi_gt_0375",
-                             "osi_gt_0400",
-                             "osi_gt_0425",
-                             "osi_gt_0450",
-                             "osi_gt_04625",
+                             # "osi_gt_0375",
+                             # "osi_gt_0400",
+                             # "osi_gt_0425",
+                             # "osi_gt_0450",
+                             # "osi_gt_04625",
+                #
+                             # "osi_gt_04675",        # 3. runda
+                             # "osi_gt_04725",        # 3. runda
+                #
+                #              "osi_gt_0475",
+                #              "osi_gt_0500",
 
-                             "osi_gt_04675",        # 3. runda
-                             "osi_gt_04725",        # 3. runda
 
-                             "osi_gt_0475",
-                             "osi_gt_0500",
+                             # "osi_gt_046250_from_0",
+                             # "osi_gt_04650_from_0",
+                             # "osi_gt_04675_from_0_2",
+                            #
 
-
-                             "osi_gt_04650_from_0",
-                             "osi_gt_04675_from_0",
-                             "osi_gt_046250_from_0",
+                            # "osi_gt_f70_04700_n_2"
 
 
                          ]
@@ -233,13 +234,12 @@ simulationsData_dict = {
 
                      "simulations":
                          [
-                             "osi_le_0250",
-                             "osi_le_0275",
-                             "osi_le_0300",
-                             "osi_le_0325",
 
-                             # "osi_le_0350",     # staro
-                             "osi_le_0350_2",     # 2. runda
+                                "osi_le_0250",
+                                "osi_le_0275",
+                                "osi_le_0300",
+                                "osi_le_0325",
+                                "osi_le_0350_2",
                          ]
                      },
 
@@ -254,16 +254,16 @@ simulationsData_dict = {
                             ###"ecap_gt_14750",
                             ###"ecap_gt_14825",
 
-                             "ecap_gt_14625_2",     # 2. runda
-                             "ecap_gt_14750_2",     # 2. runda
-                             "ecap_gt_14825_3",     # 2. runda
+                             # "ecap_gt_14625_2",     # 2. runda
+                             # "ecap_gt_14750_2",     # 2. runda
+                             # "ecap_gt_14825_3",     # 2. runda
 
                              # "ecap_gt_150",
-                             "ecap_gt_150_2",       # 3. runda
-                             "ecap_gt_155",
-                             "ecap_gt_160",
+                             # "ecap_gt_150_2",       # 3. runda
+                             # "ecap_gt_155",
+                             # "ecap_gt_160",
 
-                             "ecap_gt_150_from_0",
+                             # "ecap_gt_150_from_0",
 
                          ]
                      },
@@ -286,24 +286,21 @@ simulationsData_dict = {
 
 
 
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_37.pickle"
-
-
-simulationsData_dict = {
+pickle_name_37 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_37.pickle"
+simulationsData_dict_37 = {
 
                 "//home/josip/feap/FSG/automatizacija_36/TAWSS/":
                     {"version": "new",
 
                      "simulations":
                          [
-                            "tawss_le_030",
+                            # "tawss_le_030",
                             "tawss_le_035",
                             "tawss_le_040",
                             "tawss_le_045",
-                             "tawss_le_0475",
-                             "tawss_le_0475",
-                            "tawss_le_04825",
-                            "tawss_le_050",
+                             # "tawss_le_0475",
+                            # "tawss_le_04825",
+                            # "tawss_le_050",
                           ]
                      },
 
@@ -311,12 +308,13 @@ simulationsData_dict = {
                     {"version": "new",
                          "simulations":
                              [
-                                "osi_f70_gt_04700",
+                                # "osi_f70_gt_04700",
                                 "osi_f0_gt_04650",
                                 "osi_f0_gt_04625",
                                 "osi_f0_gt_04600",
                                 "osi_f0_gt_04575",
                                 "osi_f0_gt_04550",
+
                              ]
                      },
 
@@ -341,3 +339,8 @@ simulationsData_dict = {
 
           }
 
+
+
+
+pickle_name =pickle_name_36
+simulationsData_dict = simulationsData_dict_36

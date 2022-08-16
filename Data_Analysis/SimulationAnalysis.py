@@ -5,46 +5,13 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import matplotlib.animation as ani
 
+
+picture_save = True
+
 sinonimi_u_legendi = False
 
-# sinonimi = {
-            # "Casson": "Casson",
-            # "BC":"Bird-Carreau",
-            # "Newt_33": "Newt,  $\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
-            # "Newt_5": "Newt,  $\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
-            # "Newt_6": "Newt,  $\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
 
-             # "tawss=030" : "TAWSS=0.30 Pa", "tawss=035" : "TAWSS=0.35 Pa", "tawss=040" : "TAWSS=0.40 Pa",
-             # "tawss=045" : "TAWSS=0.45 Pa", "tawss=050" : "TAWSS=0.50 Pa",
-
-            # "ae=1" : "$z-z_{\mathrm{down}}$= 20 mm",
-            # "a3_30" : "$z-z_{\mathrm{down}}$= 30 mm",
-            # "a3_40" : "$z-z_{\mathrm{down}}$= 40 mm",
-
-            # "Casson": "tawss",
-            # "osi_le_030_3": "osi_le_030_3",
-            # "Casson": "tawss",
-            # "Casson": "tawss",
-
-            # "osi_le_035_3": "osi_le_035_3",
-            # "osi_le_030_3": "osi_le_030_3",
-            # "osi_le_025_3": "osi_le_025_3",
-            # "osi_le_020_3": "osi_le_020_3",
-
-           # "osi_gt_55": "osi_gt_55",
-           # "osi_gt_050": "osi_gt_050",        # 50=55, 45= 40 ???
-           # "osi_gt_045": "osi_gt_045",
-           # "osi_gt_40": "osi_gt_40",
-
-           # "ecap_le_060": "ecap_le_060",
-           # "ecap_le_055": "ecap_le_055",
-           # "ecap_le_050": "ecap_le_050",
-# }
-
-
-
-
-sinonimi = {
+sinonimi_36 = {
 
                 # "tawss=030" : "staro",
                 # "tawss=035" : "staro",
@@ -73,42 +40,39 @@ sinonimi = {
 
                 # "osi_gt_046250_from_0": 0,
                 #  "osi_gt_04650_from_0": 0,
-                 # "osi_gt_04675_from_0_2": 0,          # NOVO, VRTI SE
+                #  "osi_gt_04675_from_0_2": 0,          # NOVO, VRTI SE
                  # "osi_gt_04750_from_0_2": 0,          # NOVO, VRTI SE
 
 
                  ##"osi_gt_0500":0,
 
-                 ###"osi_le_0250":0,
-                 ###"osi_le_0275":0,
-                 ###"osi_le_0300":0,
-                 ###"osi_le_0325":0,
-                 ###"osi_le_0350_2":0,
-                 ### "osi_le_0350":0,
+                 "osi_le_0250":0,
+                 # "osi_le_0275":0,
+                 # "osi_le_0300":0,
+                 # "osi_le_0325":0,
+                 # "osi_le_0350_2":0,
 
 
-                 "ecap_gt_145":0,
+                 # "ecap_gt_145":0,
                 # "ecap_gt_14625_2":0,
                 # "ecap_gt_14750_2":0,
                 # "ecap_gt_14825_3":0,
 
 
-                 "ecap_gt_150_2":0,               # NAJSLIČNIJI tawss=0.4
-                 "ecap_gt_150_from_0":0,
+                 # "ecap_gt_150_2":0,               # NAJSLIČNIJI tawss=0.4
+                 # "ecap_gt_150_from_0":0,
 
                  # "ecap_gt_155":0,
                  # "ecap_gt_160":0,
-
-
 
                  ###"ecap_gt_14625":0,
                  ###"ecap_gt_14750": 0,
                  ###"ecap_gt_14825":0,
 
-                 ###"ecap_le_065":0,
-                 ###"ecap_le_070":0,
-                 ###"ecap_le_075":0,
-                 ###"ecap_le_080":0,
+                # "ecap_le_080":0,
+                # "ecap_le_075": 0,
+                "ecap_le_070": 0,
+                # "ecap_le_065":0,
 
 }
 
@@ -116,7 +80,7 @@ sinonimi = {
 
 
 
-sinonimi = {
+sinonimi_37 = {
 
                 # "tawss_le_030":0,
                 # "tawss_le_035":0,
@@ -127,12 +91,12 @@ sinonimi = {
                 # "tawss_le_04825":0,
                 # "tawss_le_050":0,
 
-                "osi_f70_gt_04700":0,
-                # "osi_f0_gt_04650":0,
-                # "osi_f0_gt_04625":0,
-                # "osi_f0_gt_04600":0,
-                # "osi_f0_gt_04575":0,
-                # "osi_f0_gt_04550":0,
+                ###  "osi_f70_gt_04700":0,
+                "osi_f0_gt_04650":0,
+                "osi_f0_gt_04625":0,
+                "osi_f0_gt_04600":0,
+                "osi_f0_gt_04575":0,
+                "osi_f0_gt_04550":0,
 
                 # "ecap_f0_gt_150":0,
                 # "ecap_f0_gt_151":0,
@@ -169,18 +133,15 @@ sinonimi = {
 
 
 
-# auto_name = "automatizacija_25"
+
 auto_name = "automatizacija_36"
-auto_name = "automatizacija_37"
+sinonimi = sinonimi_36
 
 
 
-
-picture_save = False
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 all_data = pd.read_pickle(pickle_name)
-
 
 #            viskoznost tawss  geometrija
 
@@ -399,14 +360,13 @@ def animate_radial_stress_by_layers(i_help=int):
 
 
 
-
 font = {'family' : 'Times New Roman',
         'size'   : 25}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 16
+r = 13
 wanted_D = r*2
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
@@ -429,7 +389,6 @@ def diameter_analysis():
         vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
         S22_cont = all_data.loc[simul]["S22_contours"][index][:,chosen_layer]
 
-
         def vertical_contours():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             if sinonimi_u_legendi == False:
@@ -450,8 +409,6 @@ def diameter_analysis():
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'vertical_contours_'+str(r)+'.png', dpi=300)
-        vertical_contours()
-
 
         def stress_cont():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -471,8 +428,6 @@ def diameter_analysis():
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'stress_cont.png', dpi=300)
-        # stress_cont()
-
 
         def ILT_thickness_f():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -482,7 +437,6 @@ def diameter_analysis():
             plt.xlabel("Axial coordinate $z$ [mm]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
-        # ILT_thickness_f()
 
         def vein_thickness_f():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -492,11 +446,21 @@ def diameter_analysis():
             plt.xlabel("Axial coordinate $z$ [mm]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             plt.legend()
+
+
+
+        vertical_contours()
+        # stress_cont()
+        # ILT_thickness_f()
         # vein_thickness_f()
+
+
+
     if picture_save == False:
         plt.show()
 
-# diameter_analysis()
+
+diameter_analysis()
 
 
 
@@ -515,18 +479,15 @@ def growth_over_time():
     # for simul in simulation_names:
     for simul in sinonimi.keys():
 
-
         timeStep = all_data.loc[simul]["timeStep"]
         days = [i*10 for i in all_data.loc[simul]["timeStep"]]
         D_inner_max = all_data.loc[simul]["D_inner_max"]
         H = all_data.loc[simul]["H"]
-
         S22_max = np.array(all_data.loc[simul]["S22_max"])[:,chosen_layer-1]
 
         S22_max_1 = np.array(all_data.loc[simul]["S22_max"])[:,1-1]
         S22_max_7 = np.array(all_data.loc[simul]["S22_max"])[:,7-1]
         Z_S22_is_max = [i["height"] for i in all_data.loc[simul]["Z_S22_is_max"]]
-
 
         def parameter_averaging():
             n_neighb = 58
@@ -542,18 +503,18 @@ def growth_over_time():
         # proba = parameter_averaging()
 
 
-
-
-
-
-
         S22_max_abs = [i["S22"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
         Z_S22_abs_is_max = [i["height"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
 
         ILT_thickness_max = all_data.loc[simul]["ILT_thickness_max"]
         vein_thickness_max = all_data.loc[simul]["vein_thickness_max"]
         ILT_surface = all_data.loc[simul]["ILT_surface"]
+
         Volume_ILT = all_data.loc[simul]["Volume_ILT"]
+
+
+
+
 
 
         def rast_D():
@@ -754,9 +715,9 @@ def growth_over_time():
 
 
 
-
         # rast_D()
         ILT_volume_f()
+
 
         # rast_H()
         # rast_Z_max_naprezanja()
@@ -764,16 +725,10 @@ def growth_over_time():
         # rast_vein_thickness()
 
 
-
-
-
-
-
-
     if picture_save == False:
         plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
 
