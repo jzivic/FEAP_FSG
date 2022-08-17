@@ -111,55 +111,55 @@ simulationsData_dict = {
           # }
 
 
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
-simulationsData_dict = {
+pickle_name_25 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
+simulationsData_dict_25 = {
 
-                # "//home/josip/feap/FSG/automatizacija_25/":
-                #     {"version": "old",
-                #
-                #      "simulations":
-                #          [
-                #             "a3_30",
-                #             "a3_40",
-                #             "ab=900",
-                #             "BC",
-                #             "Casson",
-                #
-                #
-                #             "Newt_5",
-                #             "Newt_6",
-                #             "Newt_33",
-                #
-                #             "tawss=030",
-                #             "tawss=035",
-                #             "tawss=040",
-                #             "tawss=045",
-                #             "tawss=050",
-                #
-                #                         ]
-                #      },
-
-
-                "//home/josip/feap/FSG/automatizacija_35/":
-                    {"version": "new",
+                "//home/josip/feap/FSG/automatizacija_25/":
+                    {"version": "old",
 
                      "simulations":
                          [
-                            "osi_le_035_3",
-                            "osi_le_030_3",
-                            "osi_le_025_3",
-                            "osi_le_020_3",
+                            "a3_30",
+                            "a3_40",
+                            "ab=900",
+                            "BC",
+                            "Casson",
 
-                            "osi_gt_55",
-                            "osi_gt_050",
-                            "osi_gt_045",
-                            "osi_gt_40",
 
-                            "ecap_le_060",
-                            "ecap_le_055",
-                            "ecap_le_050",
-                                                ]
+                            "Newt_5",
+                            "Newt_6",
+                            "Newt_33",
+
+                            "tawss=030",
+                            "tawss=035",
+                            "tawss=040",
+                            "tawss=045",
+                            "tawss=050",
+
+                                        ]
                      },
+
+
+                # "//home/josip/feap/FSG/automatizacija_35/":
+                #     {"version": "new",
+                #
+                #      "simulations":
+                #          [
+                #             "osi_le_035_3",
+                #             "osi_le_030_3",
+                #             "osi_le_025_3",
+                #             "osi_le_020_3",
+                #
+                #             "osi_gt_55",
+                #             "osi_gt_050",
+                #             "osi_gt_045",
+                #             "osi_gt_40",
+                #
+                #             "ecap_le_060",
+                #             "ecap_le_055",
+                #             "ecap_le_050",
+                #                                 ]
+                #      },
 
 
           }
@@ -211,19 +211,18 @@ simulationsData_dict_36 = {
                              # "osi_gt_0450",
                              # "osi_gt_04625",
                 #
-                             # "osi_gt_04675",        # 3. runda
-                             # "osi_gt_04725",        # 3. runda
+                             "osi_gt_04675",        # 3. runda
+                             "osi_gt_04725",        # 3. runda
                 #
                 #              "osi_gt_0475",
                 #              "osi_gt_0500",
 
 
-                             # "osi_gt_046250_from_0",
-                             # "osi_gt_04650_from_0",
-                             # "osi_gt_04675_from_0_2",
-                            #
+                             "osi_gt_046250_from_0",
+                             "osi_gt_04650_from_0",
+                             "osi_gt_04675_from_0_2",
 
-                            # "osi_gt_f70_04700_n_2"
+                            "osi_gt_f70_04700_n_2"
 
 
                          ]
@@ -235,10 +234,10 @@ simulationsData_dict_36 = {
                      "simulations":
                          [
 
-                                "osi_le_0250",
-                                "osi_le_0275",
-                                "osi_le_0300",
-                                "osi_le_0325",
+                                # "osi_le_0250",
+                                # "osi_le_0275",
+                                # "osi_le_0300",
+                                # "osi_le_0325",
                                 "osi_le_0350_2",
                          ]
                      },
@@ -254,12 +253,12 @@ simulationsData_dict_36 = {
                             ###"ecap_gt_14750",
                             ###"ecap_gt_14825",
 
-                             # "ecap_gt_14625_2",     # 2. runda
-                             # "ecap_gt_14750_2",     # 2. runda
-                             # "ecap_gt_14825_3",     # 2. runda
+                             "ecap_gt_14625_2",     # 2. runda
+                             "ecap_gt_14750_2",     # 2. runda
+                             "ecap_gt_14825_3",     # 2. runda
 
                              # "ecap_gt_150",
-                             # "ecap_gt_150_2",       # 3. runda
+                             "ecap_gt_150_2",       # 3. runda
                              # "ecap_gt_155",
                              # "ecap_gt_160",
 
@@ -274,10 +273,10 @@ simulationsData_dict_36 = {
 
                      "simulations":
                          [
-                             "ecap_le_065",
-                             "ecap_le_070",
-                             "ecap_le_075",
-                             "ecap_le_080",
+                             # "ecap_le_065",
+                             # "ecap_le_070",
+                             # "ecap_le_075",
+                             # "ecap_le_080",
                          ]
                      },
 
@@ -342,5 +341,34 @@ simulationsData_dict_37 = {
 
 
 
-pickle_name =pickle_name_36
-simulationsData_dict = simulationsData_dict_36
+pickle_name_38 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_38.pickle"
+simulationsData_dict_38 = {
+
+                "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
+                    {"version": "new",
+
+                     "simulations":
+                         [
+                                "BC",
+                                "casson",
+                                "Newt_33",
+                                "Newt_50",
+                                "Newt_60",
+                                "tawss=030",
+                                "tawss=035",
+                                "tawss=040",
+                                "tawss=045",
+                                "tawss=050",
+
+                                 "a3=30"
+                                 "a3=40"
+
+                          ]
+                     },
+
+          }
+
+
+
+pickle_name =pickle_name_38
+simulationsData_dict = simulationsData_dict_38

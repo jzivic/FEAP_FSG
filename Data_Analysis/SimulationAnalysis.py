@@ -6,10 +6,31 @@ from matplotlib import pyplot as plt
 import matplotlib.animation as ani
 
 
-picture_save = True
+picture_save = False
 
 sinonimi_u_legendi = False
 
+
+sinonimi_25 = {
+    # "a3_30":0,
+    # "a3_40":0,
+    # "ab=900":0,
+
+    "Casson":0,
+    "BC": 0,
+
+    "Newt_5":0,
+    "Newt_6":0,
+    "Newt_33": "Newt,  $\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
+
+
+    # "tawss=030":0,
+    # "tawss=035":0,
+    # "tawss=040":0,
+    # "tawss=045":0,
+    # "tawss=050":0,
+
+}
 
 sinonimi_36 = {
 
@@ -38,15 +59,15 @@ sinonimi_36 = {
                  # "osi_gt_04725":0,
                  # "osi_gt_0475":0,
 
-                # "osi_gt_046250_from_0": 0,
-                #  "osi_gt_04650_from_0": 0,
-                #  "osi_gt_04675_from_0_2": 0,          # NOVO, VRTI SE
+                "osi_gt_046250_from_0": 0,
+                 "osi_gt_04650_from_0": 0,
+                 "osi_gt_04675_from_0_2": 0,          # NOVO, VRTI SE
                  # "osi_gt_04750_from_0_2": 0,          # NOVO, VRTI SE
 
 
                  ##"osi_gt_0500":0,
 
-                 "osi_le_0250":0,
+                 # "osi_le_0250":0,
                  # "osi_le_0275":0,
                  # "osi_le_0300":0,
                  # "osi_le_0325":0,
@@ -54,9 +75,9 @@ sinonimi_36 = {
 
 
                  # "ecap_gt_145":0,
-                # "ecap_gt_14625_2":0,
-                # "ecap_gt_14750_2":0,
-                # "ecap_gt_14825_3":0,
+                "ecap_gt_14625_2":0,
+                "ecap_gt_14750_2":0,
+                "ecap_gt_14825_3":0,
 
 
                  # "ecap_gt_150_2":0,               # NAJSLIČNIJI tawss=0.4
@@ -71,13 +92,10 @@ sinonimi_36 = {
 
                 # "ecap_le_080":0,
                 # "ecap_le_075": 0,
-                "ecap_le_070": 0,
+                # "ecap_le_070": 0,
                 # "ecap_le_065":0,
 
 }
-
-
-
 
 
 sinonimi_37 = {
@@ -92,11 +110,11 @@ sinonimi_37 = {
                 # "tawss_le_050":0,
 
                 ###  "osi_f70_gt_04700":0,
-                "osi_f0_gt_04650":0,
-                "osi_f0_gt_04625":0,
+                # "osi_f0_gt_04650":0,
+                # "osi_f0_gt_04625":0,
                 "osi_f0_gt_04600":0,
-                "osi_f0_gt_04575":0,
-                "osi_f0_gt_04550":0,
+                # "osi_f0_gt_04575":0,
+                # "osi_f0_gt_04550":0,
 
                 # "ecap_f0_gt_150":0,
                 # "ecap_f0_gt_151":0,
@@ -106,9 +124,31 @@ sinonimi_37 = {
                 # "ecap_f0_gt_155":0,
                 # "ecap_f0_gt_156":0,
                 # "ecap_f0_gt_157":0,
-                # "ecap_f0_gt_158":0,
-                # "ecap_f0_gt_159":0,
-                # "ecap_f0_gt_160":0,
+                "ecap_f0_gt_158":0,
+                "ecap_f0_gt_159":0,
+                "ecap_f0_gt_160":0,
+
+}
+
+
+sinonimi_38 = {
+                    "BC":"Bird-Carreau",
+                    "casson":"Casson",
+                    "Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
+                    "Newt_50":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
+                    "Newt_60":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
+
+                    "tawss=030":"TAWSS=0.30 Pa",
+                    "tawss=035":"TAWSS=0.35 Pa",
+                    "tawss=040":"TAWSS=0.40 Pa",
+                    "tawss=045":"TAWSS=0.45 Pa",
+                    "tawss=050":"TAWSS=0.50 Pa",
+
+                    "casson":"$z-z_{\mathrm{down}}$= 20 mm",
+                    "a3=30":"$z-z_{\mathrm{down}}$= 30 mm",
+                    "a3=40":"$z-z_{\mathrm{down}}$= 40 mm",
+
+
 
 }
 
@@ -134,8 +174,8 @@ sinonimi_37 = {
 
 
 
-auto_name = "automatizacija_36"
-sinonimi = sinonimi_36
+auto_name = "automatizacija_37"
+sinonimi = sinonimi_37
 
 
 
