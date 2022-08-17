@@ -137,18 +137,19 @@ sinonimi_38 = {
                     # "Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
                     # "Newt_50":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
                     # "Newt_60":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
+                    #
+                    # "tawss=030":"TAWSS=0.30 Pa",
+                    # "tawss=035":"TAWSS=0.35 Pa",
+                    # "tawss=040":"TAWSS=0.40 Pa",
+                    # "tawss=045":"TAWSS=0.45 Pa",
+                    # "tawss=050":"TAWSS=0.50 Pa",
+                    #
+                    # "casson":"$z-z_{\mathrm{down}}$= 20 mm",
+                    # "a3=30":"$z-z_{\mathrm{down}}$= 30 mm",
+                    # "a3=40":"$z-z_{\mathrm{down}}$= 40 mm",
 
-                    "tawss=030":"TAWSS=0.30 Pa",
-                    "tawss=035":"TAWSS=0.35 Pa",
-                    "tawss=040":"TAWSS=0.40 Pa",
-                    "tawss=045":"TAWSS=0.45 Pa",
-                    "tawss=050":"TAWSS=0.50 Pa",
 
-                    "casson":"$z-z_{\mathrm{down}}$= 20 mm",
-                    "a3=30":"$z-z_{\mathrm{down}}$= 30 mm",
-                    "a3=40":"$z-z_{\mathrm{down}}$= 40 mm",
-
-
+                    "casson": "Casson",
 
 }
 
@@ -158,27 +159,8 @@ sinonimi_38 = {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 auto_name = "automatizacija_38"
 sinonimi = sinonimi_38
-
-
-
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 all_data = pd.read_pickle(pickle_name)
@@ -199,13 +181,10 @@ font = {'family' : 'Times New Roman',
         'size'   : 20}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
-ts_from_sim = lambda sim: 104 + sim*3
+ts_from_sim = lambda sim: 100 + (sim-1)*3
 
-# times = [ts_from_sim(0)]
-# times = [ts_from_sim(12)]
-times = [ts_from_sim(32)]
-# times = [ts_from_sim(48)]
 
+times = [ts_from_sim(6)]
 
 
 chosen_layer = 1
@@ -230,8 +209,6 @@ def time_analysis(times):
 
             S22_by_layer = all_data.loc[simul]["S22_contours"][index][index_S22_is_max]
 
-
-
             def stress_by_layers():
                 # color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(range(1,8), S22_by_layer, label=simul)
@@ -254,52 +231,52 @@ def time_analysis(times):
 
                 if picture_save == True:
                     fig.savefig(diagramsDir + '/stress_through_layers_'+str(times[0]), dpi=300)
-
             # stress_by_layers()
 
-            def vertical_contours():
 
+            def vertical_contours():
+                print(index)
+                fig = plt.figure(figsize=(6, 8), dpi=100)
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
                 if sinonimi_u_legendi == False:
                     plt.plot(inner_cont, Z_cont, c=color, label=(simul))
                 elif sinonimi_u_legendi == True:
                     plt.plot(inner_cont, Z_cont, c=color, label=(sinonimi[simul]))
                 plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
-
-                plt.title("ILT and inner contours")
-                plt.xlabel("Radius $r$ [mm]")
-                plt.ylabel("Axial coordinate $z$ [mm]")
-                plt.text(5, -15, "$a)$")
-                plt.ylim([0, 220])
                 plt.xlim([7, 18])
+                plt.ylim(40, 210)
+                plt.title("ILT and inner contours")
+                plt.ylabel("Axial coordinate $z$ [mm]")
+                plt.xlabel("Radius $r$ [mm]")
+                plt.text(5, 20, "$a)$")
+
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
-                fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
-                # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+                fig.subplots_adjust(left=0.18, top=0.91, bottom=0.15, right=0.91)
+                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                           handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
 
-            # vertical_contours()
+            vertical_contours()
 
 
             def ILT_inner_outer_cont():
-                color = next(plt.gca()._get_lines.prop_cycler)['color']
+                fig = plt.figure(figsize=(6, 8), dpi=100)
 
+                color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(inner_cont, Z_cont, c=color, label="inner wall")
                 plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, label="ILT wall")
 
                 plt.title("ILT and inner contours")
+                plt.ylabel("Axial coordinate $z$ [mm]")
                 plt.xlabel("Radius $r$ [mm]")
-                plt.ylabel("$z$ [mm]")
                 plt.text(5, -15, "$a)$")
-                plt.ylim([30, 220])
-                # plt.xlim([9, 15])
-                # plt.xlim([9, 13])
-                plt.text(8.6, -8, "$a)$")
+                plt.xlim([7, 18])
+                plt.ylim(40, 210)
+                plt.text(5, 20, "$a)$")
 
-                fig = plt.gcf()
-                fig.subplots_adjust(left=0.15)
-                fig.subplots_adjust(bottom=0.18)
+                fig.subplots_adjust(left=0.18, top=0.91, bottom=0.15, right=0.91)
+
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
@@ -390,23 +367,16 @@ def animate_radial_stress_by_layers(i_help=int):
 
 
 
-
-
-
-
-
-
-
-
-
-
 font = {'family' : 'Times New Roman',
         'size'   : 25}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 16
+
+# 12:124,
+
+r = 11.6
 wanted_D = r*2
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
@@ -430,6 +400,7 @@ def diameter_analysis():
         S22_cont = all_data.loc[simul]["S22_contours"][index][:,chosen_layer]
 
         def vertical_contours():
+            print(index)
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             if sinonimi_u_legendi == False:
                 plt.plot(inner_cont, Z_cont, c=color, label=(simul))
@@ -441,7 +412,7 @@ def diameter_analysis():
             plt.xlabel("Radius $r$ [mm]")
             plt.ylabel("Axial coordinate $z$ [mm]")
             plt.text(5, -15, "$a)$" )
-            plt.ylim([0, 220])
+            plt.ylim([40, 210])
             # plt.xlim([7, 18])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
@@ -500,7 +471,7 @@ def diameter_analysis():
         plt.show()
 
 
-# diameter_analysis()
+diameter_analysis()
 
 
 
@@ -755,8 +726,8 @@ def growth_over_time():
 
 
 
-        # rast_D()
-        ILT_volume_f()
+        rast_D()
+        # ILT_volume_f()
 
 
         # rast_H()
@@ -768,7 +739,7 @@ def growth_over_time():
     if picture_save == False:
         plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
 

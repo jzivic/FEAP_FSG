@@ -1,22 +1,28 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
-
-
-
-case = "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson"
-sim_broj = 12
-
-picture_save = False
-already_averaged = True
-
-
 font = {'family' : 'Times New Roman',
         'size'   : 20}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
+case = "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson"
+sim_broj = 5
+
+picture_save = False
+already_averaged = True
+
+
+
+
+"""VREMENA:
+    tawss=0.4 .         sim6
+    r=14:               sim ?
+    r = 16:             sim ?
+"""
+
+adj_left = 0.18
+adj_bottom = 0.15
 
 class VadenjePodataka:
     def __init__(self, Case, god="n"):
@@ -45,12 +51,13 @@ class VadenjePodataka:
         self.ECAP_reading()
 
         self.data_DF = pd.DataFrame(self.data_dict)
+
+
         # self.Plot_radius()
-        # self.Plot_TAWSS()
+        self.Plot_TAWSS()
         # self.Plot_OSI()
         # self.Plot_ECAP()
 
-        self.Plot_TAWSS_2()
 
 
     def Koordinate_reading(self):
@@ -68,8 +75,6 @@ class VadenjePodataka:
 
                 self.data_dict["r"].append(float(red[0])*1000)
                 self.data_dict["z"].append(float(red[2])*1000)
-
-
     def TAWSS_reading(self):
         write_TAWSS = False
         for red in open(self.TAWSS_file).readlines():
@@ -82,7 +87,6 @@ class VadenjePodataka:
                 continue
             if write_TAWSS == True:
                 self.data_dict["TAWSS"].append(float(red))
-
     def OSI_reading(self):
         write_OSI = False
         for red in open(self.OSI_file).readlines():
@@ -95,7 +99,6 @@ class VadenjePodataka:
                 continue
             if write_OSI == True:
                 self.data_dict["OSI"].append(float(red))
-
     def ECAP_reading(self):
         write_ECAP = False
         for red in open(self.ECAP_file).readlines():
@@ -108,95 +111,28 @@ class VadenjePodataka:
                 continue
             if write_ECAP == True:
                 self.data_dict["ECAP"].append(float(red))
-
     def Plot_radius(self):
+        fig = plt.figure(figsize=(6, 8), dpi=100)
         plt.clf()
+
         plt.plot(self.data_DF["r"], self.data_DF["z"], label=self.simulation_name)
         plt.title("Radius")
         plt.ylabel("$z$ [mm]")
         plt.xlabel("$r$ [mm]")
-        plt.ylim([0, 220])
-        # plt.xlim([8, 14])
         plt.xlim([7, 18])
-
+        plt.ylim(40, 210)
+        plt.text(5.5, 20, "$a)$")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
-        fig.subplots_adjust(left=0.15)
-        fig.subplots_adjust(bottom=0.15)
+        fig.subplots_adjust(left=adj_left)
+        fig.subplots_adjust(bottom=adj_bottom)
         if picture_save == True:
-            fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(left=adj_left)
+            fig.subplots_adjust(bottom=adj_bottom)
             fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
         elif picture_save == False:
             plt.show()
-
     def Plot_TAWSS(self):
-        plt.clf()
-        plt.plot(self.data_DF["z"], self.data_DF["TAWSS"], label=self.simulation_name)
-        plt.ylim(0.3, 0.9)
-
-        plt.title("Time averaged wall shear stress")
-        plt.ylabel("TAWSS [Pa]")
-        plt.xlabel("$z$ [mm]")
-        plt.text(-40, 0.205, "$b)$")
-        plt.grid(which='both', linestyle='--', linewidth='0.5')
-        fig = plt.gcf()
-        fig.subplots_adjust(left=0.15)
-        fig.subplots_adjust(bottom=0.15)
-        if picture_save == True:
-            fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
-        elif picture_save == False:
-            plt.show()
-
-
-
-    def Plot_OSI(self):
-        plt.clf()
-        plt.plot(self.data_DF["z"], self.data_DF["OSI"], label=self.simulation_name)
-        plt.title("Oscillatory shear index ")
-        plt.ylabel("OSI [-]")
-        plt.xlabel("$z$ [mm]")
-        plt.text(-40, 0, "$c)$")
-
-        plt.grid(which='both', linestyle='--', linewidth='0.5')
-        fig = plt.gcf()
-        fig.subplots_adjust(left=0.15)
-        fig.subplots_adjust(bottom=0.15)
-
-        if picture_save == True:
-            fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/OSI.png", dpi=300)
-        elif picture_save == False:
-            plt.show()
-
-
-    def Plot_ECAP(self):
-        plt.clf()
-        plt.plot(self.data_DF["z"], self.data_DF["ECAP"], label=self.simulation_name)
-        plt.title("Endothelium cell activation potential")
-        # plt.ylabel("ECAP [Pa$^{-1}$]")
-        plt.ylabel("ECAP [-]")
-        plt.xlabel("$z$ [mm]")
-        plt.text(-40, -0.135, "$d)$")
-
-        plt.grid(which='both', linestyle='--', linewidth='0.5')
-        fig = plt.gcf()
-        fig.subplots_adjust(left=0.15)
-        fig.subplots_adjust(bottom=0.15)
-        if picture_save == True:
-            fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/ECAP.png", dpi=300)
-        elif picture_save == False:
-            plt.show()
-
-
-
-    def Plot_TAWSS_2(self):
-
         fig = plt.figure(figsize=(6, 8), dpi=100)
         plt.clf()
 
@@ -208,18 +144,67 @@ class VadenjePodataka:
         plt.title("Time averaged wall shear stress")
         plt.ylabel("$z$ [mm]")
         plt.xlabel("TAWSS [Pa]")
-        plt.text(0.305, -50, "$b)$")
+        plt.text(0.3, 20, "$b)$")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
-        fig.subplots_adjust(left=0.15)
-        fig.subplots_adjust(bottom=0.15)
+        fig.subplots_adjust(left=adj_left)
+        fig.subplots_adjust(bottom=adj_bottom)
 
         if picture_save == True:
-            fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.15)
+            fig.subplots_adjust(left=adj_left)
+            fig.subplots_adjust(bottom=adj_bottom)
             fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
 
         elif picture_save == False:
             plt.show()
+    def Plot_OSI(self):
+        fig = plt.figure(figsize=(6, 8), dpi=100)
+        plt.clf()
+
+        plt.plot(self.data_DF["OSI"], self.data_DF["z"],  label=self.simulation_name)
+        plt.xlim(0.1, 0.6)
+        plt.ylim(40, 210)
+
+        plt.title("Oscillatory shear index ")
+        plt.ylabel("$z$ [mm]")
+        plt.xlabel("OSI [-]")
+        plt.text(0, 20, "$c)$")
+
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
+        fig = plt.gcf()
+        fig.subplots_adjust(left=adj_left)
+        fig.subplots_adjust(bottom=adj_bottom)
+
+        if picture_save == True:
+            fig.subplots_adjust(left=adj_left)
+            fig.subplots_adjust(bottom=adj_bottom)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/OSI.png", dpi=300)
+        elif picture_save == False:
+            plt.show()
+    def Plot_ECAP(self):
+        fig = plt.figure(figsize=(6, 8), dpi=100)
+        plt.clf()
+
+        plt.plot(self.data_DF["ECAP"], self.data_DF["z"],  label=self.simulation_name)
+        plt.ylim(40, 210)
+
+        plt.title("Endothelium cell activation potential")
+        plt.ylabel("$z$ [mm]")
+        plt.xlabel("ECAP [-]")
+        plt.text(-0.165, 20, "$d)$")
+
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
+        fig = plt.gcf()
+        fig.subplots_adjust(left=adj_left)
+        fig.subplots_adjust(bottom=adj_bottom)
+        if picture_save == True:
+            fig.subplots_adjust(left=adj_left)
+            fig.subplots_adjust(bottom=adj_bottom)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/ECAP.png", dpi=300)
+        elif picture_save == False:
+            plt.show()
+
+
+
 
 
 
