@@ -132,11 +132,11 @@ sinonimi_37 = {
 
 
 sinonimi_38 = {
-                    "BC":"Bird-Carreau",
-                    "casson":"Casson",
-                    "Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
-                    "Newt_50":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
-                    "Newt_60":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
+                    # "BC":"Bird-Carreau",
+                    # "casson":"Casson",
+                    # "Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
+                    # "Newt_50":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
+                    # "Newt_60":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
 
                     "tawss=030":"TAWSS=0.30 Pa",
                     "tawss=035":"TAWSS=0.35 Pa",
@@ -174,8 +174,8 @@ sinonimi_38 = {
 
 
 
-auto_name = "automatizacija_37"
-sinonimi = sinonimi_37
+auto_name = "automatizacija_38"
+sinonimi = sinonimi_38
 
 
 
@@ -406,7 +406,7 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 
-r = 13
+r = 16
 wanted_D = r*2
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
@@ -500,7 +500,7 @@ def diameter_analysis():
         plt.show()
 
 
-diameter_analysis()
+# diameter_analysis()
 
 
 
@@ -768,7 +768,7 @@ def growth_over_time():
     if picture_save == False:
         plt.show()
 
-# growth_over_time()
+growth_over_time()
 
 
 

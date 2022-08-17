@@ -360,8 +360,8 @@ simulationsData_dict_38 = {
                                 "tawss=045",
                                 "tawss=050",
 
-                                 "a3=30"
-                                 "a3=40"
+                                 "a3=30",
+                                 "a3=40",
 
                           ]
                      },

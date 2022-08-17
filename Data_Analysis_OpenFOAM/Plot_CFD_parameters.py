@@ -5,8 +5,7 @@ import pandas as pd
 
 
 
-# case = "//home/josip/feap/FSG/automatizacija_25/Casson"
-case = "//home/josip/feap/FSG/automatizacija_36/TAWSS/tawss_le_040"
+case = "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson"
 sim_broj = 12
 
 picture_save = False
@@ -23,8 +22,6 @@ class VadenjePodataka:
     def __init__(self, Case, god="n"):
         foam_time = 2
         self.simulation_name = Case.split("/")[-1]
-
-
 
         self.koo_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/koordinate"
 
@@ -48,10 +45,12 @@ class VadenjePodataka:
         self.ECAP_reading()
 
         self.data_DF = pd.DataFrame(self.data_dict)
-        self.Plot_radius()
-        self.Plot_TAWSS()
-        self.Plot_OSI()
-        self.Plot_ECAP()
+        # self.Plot_radius()
+        # self.Plot_TAWSS()
+        # self.Plot_OSI()
+        # self.Plot_ECAP()
+
+        self.Plot_TAWSS_2()
 
 
     def Koordinate_reading(self):
@@ -196,6 +195,31 @@ class VadenjePodataka:
 
 
 
+    def Plot_TAWSS_2(self):
+
+        fig = plt.figure(figsize=(6, 8), dpi=100)
+        plt.clf()
+
+        plt.plot(self.data_DF["TAWSS"], self.data_DF["z"], label=self.simulation_name)
+        plt.axvline(x=0.4, linestyle='--', color="red", label='axvline - full height')
+        plt.xlim(0.35, 0.66)
+        plt.ylim(40, 210)
+
+        plt.title("Time averaged wall shear stress")
+        plt.ylabel("$z$ [mm]")
+        plt.xlabel("TAWSS [Pa]")
+        plt.text(0.305, -50, "$b)$")
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
+        fig.subplots_adjust(left=0.15)
+        fig.subplots_adjust(bottom=0.15)
+
+        if picture_save == True:
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.15)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
+
+        elif picture_save == False:
+            plt.show()
 
 
 
