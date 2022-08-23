@@ -234,10 +234,10 @@ simulationsData_dict_36 = {
                      "simulations":
                          [
 
-                                # "osi_le_0250",
-                                # "osi_le_0275",
-                                # "osi_le_0300",
-                                # "osi_le_0325",
+                                "osi_le_0250",
+                                "osi_le_0275",
+                                "osi_le_0300",
+                                "osi_le_0325",
                                 "osi_le_0350_2",
                          ]
                      },
@@ -248,7 +248,7 @@ simulationsData_dict_36 = {
 
                      "simulations":
                          [
-                            "ecap_gt_145",
+                            # "ecap_gt_145",
                             ###"ecap_gt_14625",    # ovo
                             ###"ecap_gt_14750",
                             ###"ecap_gt_14825",
@@ -257,12 +257,12 @@ simulationsData_dict_36 = {
                              "ecap_gt_14750_2",     # 2. runda
                              "ecap_gt_14825_3",     # 2. runda
 
-                             # "ecap_gt_150",
+                             "ecap_gt_150",
                              "ecap_gt_150_2",       # 3. runda
-                             # "ecap_gt_155",
-                             # "ecap_gt_160",
+                             "ecap_gt_155",
+                             "ecap_gt_160",
 
-                             # "ecap_gt_150_from_0",
+                             "ecap_gt_150_from_0",
 
                          ]
                      },
@@ -273,10 +273,10 @@ simulationsData_dict_36 = {
 
                      "simulations":
                          [
-                             # "ecap_le_065",
-                             # "ecap_le_070",
-                             # "ecap_le_075",
-                             # "ecap_le_080",
+                             "ecap_le_065",
+                             "ecap_le_070",
+                             "ecap_le_075",
+                             "ecap_le_080",
                          ]
                      },
 
@@ -293,13 +293,13 @@ simulationsData_dict_37 = {
 
                      "simulations":
                          [
-                            # "tawss_le_030",
+                            "tawss_le_030",
                             "tawss_le_035",
                             "tawss_le_040",
                             "tawss_le_045",
-                             # "tawss_le_0475",
-                            # "tawss_le_04825",
-                            # "tawss_le_050",
+                             "tawss_le_0475",
+                            "tawss_le_04825",
+                            "tawss_le_050",
                           ]
                      },
 
@@ -352,8 +352,10 @@ simulationsData_dict_38 = {
                                 "BC",
                                 "casson",
                                 "Newt_33",
-                                "Newt_50",
-                                "Newt_60",
+                                "Newt_40_2",
+                                "Newt_45",
+                                "Newt_50_4",
+                                "Newt_60_4",
                                 "tawss=030",
                                 "tawss=035",
                                 "tawss=040",

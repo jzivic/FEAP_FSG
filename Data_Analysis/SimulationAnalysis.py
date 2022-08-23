@@ -7,8 +7,7 @@ import matplotlib.animation as ani
 
 
 picture_save = False
-
-sinonimi_u_legendi = False
+sinonimi_u_legendi = True
 
 
 sinonimi_25 = {
@@ -42,7 +41,7 @@ sinonimi_36 = {
 
                  # "tawss_le_030":0,
                  # "tawss_le_035":0,
-                 "tawss_le_040":0,
+                 "tawss_le_040": "TAWSS",
                  # "tawss_le_045":0,
                  # "tawss_le_04625":0,
                  # "tawss_le_0475":0,
@@ -59,15 +58,15 @@ sinonimi_36 = {
                  # "osi_gt_04725":0,
                  # "osi_gt_0475":0,
 
-                "osi_gt_046250_from_0": 0,
-                 "osi_gt_04650_from_0": 0,
-                 "osi_gt_04675_from_0_2": 0,          # NOVO, VRTI SE
+                # "osi_gt_046250_from_0": 0,
+                #  "osi_gt_04650_from_0": 0,
+                #  "osi_gt_04675_from_0_2": 0,          # NOVO, VRTI SE
                  # "osi_gt_04750_from_0_2": 0,          # NOVO, VRTI SE
 
 
                  ##"osi_gt_0500":0,
 
-                 # "osi_le_0250":0,
+                 "osi_le_0250":     "OSI",
                  # "osi_le_0275":0,
                  # "osi_le_0300":0,
                  # "osi_le_0325":0,
@@ -75,9 +74,9 @@ sinonimi_36 = {
 
 
                  # "ecap_gt_145":0,
-                "ecap_gt_14625_2":0,
-                "ecap_gt_14750_2":0,
-                "ecap_gt_14825_3":0,
+                # "ecap_gt_14625_2":0,
+                # "ecap_gt_14750_2":0,
+                # "ecap_gt_14825_3":0,
 
 
                  # "ecap_gt_150_2":0,               # NAJSLIČNIJI tawss=0.4
@@ -92,7 +91,7 @@ sinonimi_36 = {
 
                 # "ecap_le_080":0,
                 # "ecap_le_075": 0,
-                # "ecap_le_070": 0,
+                "ecap_le_070": "ECAP",
                 # "ecap_le_065":0,
 
 }
@@ -103,16 +102,16 @@ sinonimi_37 = {
                 # "tawss_le_030":0,
                 # "tawss_le_035":0,
                 "tawss_le_040":0,
-                # "tawss_le_045":0,
-                # "tawss_le_0475":0,
-                # "tawss_le_0475":0,
-                # "tawss_le_04825":0,
-                # "tawss_le_050":0,
+                "tawss_le_045":0,
+                "tawss_le_0475":0,
+                "tawss_le_0475":0,
+                "tawss_le_04825":0,
+                "tawss_le_050":0,
 
                 ###  "osi_f70_gt_04700":0,
                 # "osi_f0_gt_04650":0,
                 # "osi_f0_gt_04625":0,
-                "osi_f0_gt_04600":0,
+                # "osi_f0_gt_04600":0,
                 # "osi_f0_gt_04575":0,
                 # "osi_f0_gt_04550":0,
 
@@ -124,32 +123,34 @@ sinonimi_37 = {
                 # "ecap_f0_gt_155":0,
                 # "ecap_f0_gt_156":0,
                 # "ecap_f0_gt_157":0,
-                "ecap_f0_gt_158":0,
-                "ecap_f0_gt_159":0,
-                "ecap_f0_gt_160":0,
+                # "ecap_f0_gt_158":0,
+                # "ecap_f0_gt_159":0,
+                # "ecap_f0_gt_160":0,
 
 }
 
 
 sinonimi_38 = {
+
                     # "BC":"Bird-Carreau",
                     # "casson":"Casson",
-                    # "Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
-                    # "Newt_50":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
-                    # "Newt_60":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
-                    #
+                    ###"Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
+                    # "Newt_40_2": "$\\nu=4\mathrm{x}10^{-6}$ m$^2$/s",
+                    # "Newt_45": "$\\nu=4.5\mathrm{x}10^{-6}$ m$^2$/s",
+                    # "Newt_50_4":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
+                    # "Newt_60_4":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
+
                     # "tawss=030":"TAWSS=0.30 Pa",
                     # "tawss=035":"TAWSS=0.35 Pa",
                     # "tawss=040":"TAWSS=0.40 Pa",
                     # "tawss=045":"TAWSS=0.45 Pa",
-                    # "tawss=050":"TAWSS=0.50 Pa",
-                    #
-                    # "casson":"$z-z_{\mathrm{down}}$= 20 mm",
-                    # "a3=30":"$z-z_{\mathrm{down}}$= 30 mm",
-                    # "a3=40":"$z-z_{\mathrm{down}}$= 40 mm",
+                    ### "tawss=050":"TAWSS=0.50 Pa",
 
+                    "casson":"$z-z_{\mathrm{down}}$= 20 mm",
+                    "a3=30":"$z-z_{\mathrm{down}}$= 30 mm",
+                    "a3=40":"$z-z_{\mathrm{down}}$= 40 mm",
 
-                    "casson": "Casson",
+                    # "casson": "Casson",
 
 }
 
@@ -183,8 +184,13 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 ts_from_sim = lambda sim: 100 + (sim-1)*3
 
+"""VREMENA:
+    tawss=0.4 .         sim6
+    r=14:               sim 34
+    r = 16:             sim 57
+"""
 
-times = [ts_from_sim(6)]
+times = [ts_from_sim(5)]
 
 
 chosen_layer = 1
@@ -217,11 +223,11 @@ def time_analysis(times):
                 plt.ylabel("S22 [Pa]")
                 plt.xlim([0, 8])
                 # plt.ylim([170, 290])
+                # plt.title("Circumferential stress through radial layers")
 
-                # plt.text(-1, 152, "$a)$")
-                # plt.text(-1, 178, "$b)$")
-                # plt.text(-1, 205, "$c)$")
-                plt.text(-1, 195, "$d)$")
+                plt.text(-1, 148, "$a)$")
+                # plt.text(-1, 186, "$b)$")
+                # plt.text(-1, 185, "$c)$")
 
 
                 fig = plt.gcf()
@@ -231,7 +237,7 @@ def time_analysis(times):
 
                 if picture_save == True:
                     fig.savefig(diagramsDir + '/stress_through_layers_'+str(times[0]), dpi=300)
-            # stress_by_layers()
+            stress_by_layers()
 
 
             def vertical_contours():
@@ -256,26 +262,27 @@ def time_analysis(times):
                            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
+            # vertical_contours()
 
-            vertical_contours()
 
+            def ILT_inner_cont():
+                adj_left, adj_bottom = 0.25, 0.15
+                fig_x, fig_y = 6.6, 6.6
 
-            def ILT_inner_outer_cont():
-                fig = plt.figure(figsize=(6, 8), dpi=100)
+                fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
 
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(inner_cont, Z_cont, c=color, label="inner wall")
                 plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, label="ILT wall")
 
-                plt.title("ILT and inner contours")
-                plt.ylabel("Axial coordinate $z$ [mm]")
-                plt.xlabel("Radius $r$ [mm]")
+                # plt.title("ILT and inner contours")
+                plt.ylabel("$z$ [mm]")
+                plt.xlabel("$r$ [mm]")
                 plt.text(5, -15, "$a)$")
                 plt.xlim([7, 18])
                 plt.ylim(40, 210)
                 plt.text(5, 20, "$a)$")
-
-                fig.subplots_adjust(left=0.18, top=0.91, bottom=0.15, right=0.91)
+                fig.subplots_adjust(left=adj_left, bottom=adj_bottom)
 
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
@@ -283,11 +290,10 @@ def time_analysis(times):
 
                 # ovo zakomentirati ako želim sve odjednom plotati
                 if picture_save == True:
-                    fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
+                    fig.savefig(diagramsDir + 'ILT_inner_cont.png', dpi=300)
                 elif picture_save == False:
                     plt.show()
-
-            # ILT_inner_outer_cont()
+            ILT_inner_cont()
 
 
 
@@ -376,12 +382,14 @@ plt.rcParams['mathtext.fontset'] = 'stix'
 
 # 12:124,
 
-r = 11.6
+r = 3
 wanted_D = r*2
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
 def diameter_analysis():
-    plt.figure(figsize=(7, 14), dpi=100)
+
+    plt.figure(figsize=(8, 16), dpi=100)
+    # plt.figure(figsize=(10, 20), dpi=400)
     fig = plt.gcf()
 
     # for simul in simulation_names:
@@ -400,6 +408,12 @@ def diameter_analysis():
         S22_cont = all_data.loc[simul]["S22_contours"][index][:,chosen_layer]
 
         def vertical_contours():
+            font = {'family': 'Times New Roman',
+                    'size': 32}
+            plt.rc('font', **font)
+            plt.rcParams['mathtext.fontset'] = 'stix'
+
+
             print(index)
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             if sinonimi_u_legendi == False:
@@ -408,18 +422,55 @@ def diameter_analysis():
                 plt.plot(inner_cont, Z_cont, c=color, label=(sinonimi[simul]))
             plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
 
-            plt.title("ILT and inner contours")
-            plt.xlabel("Radius $r$ [mm]")
-            plt.ylabel("Axial coordinate $z$ [mm]")
-            plt.text(5, -15, "$a)$" )
-            plt.ylim([40, 210])
+            # plt.title("ILT and inner contours")
+            plt.xlabel("$r$ [mm]")
+            plt.ylabel("$z$ [mm]")
+            # plt.text(7.8, 7, "$a)$" )
+            # plt.text(6, 7, "$b)$" )
+            # plt.text(4, 7, "$c)$" )
+
+            plt.text(8.5, 7, "$a)$" )
+
+            plt.ylim([20, 190])
             # plt.xlim([7, 18])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
             if picture_save == True:
-                fig.savefig(diagramsDir + 'vertical_contours_'+str(r)+'.png', dpi=300)
+                fig.savefig(diagramsDir + 'vertical_contours_'+str(r)+'.png', dpi=400)
+
+
+
+        def ILT_inner_cont():
+            print(index)
+            adj_left, adj_bottom = 0.25, 0.15
+            fig_x, fig_y = 6.6, 6.6
+
+            fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
+
+            color = next(plt.gca()._get_lines.prop_cycler)['color']
+            plt.plot(inner_cont, Z_cont, c=color, label="inner wall")
+            plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, label="ILT wall")
+
+            # plt.title("ILT and inner contours")
+            plt.ylabel("$z$ [mm]")
+            plt.xlabel("$r$ [mm]")
+            plt.text(5, -15, "$a)$")
+            plt.xlim([7, 18])
+            plt.ylim(40, 210)
+            plt.text(5, 20, "$a)$")
+            fig.subplots_adjust(left=adj_left, bottom=adj_bottom)
+
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+
+            # ovo zakomentirati ako želim sve odjednom plotati
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'ILT_inner_cont.png', dpi=300)
+            elif picture_save == False:
+                plt.show()
 
         def stress_cont():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -459,7 +510,7 @@ def diameter_analysis():
             plt.legend()
 
 
-
+        # ILT_inner_cont()
         vertical_contours()
         # stress_cont()
         # ILT_thickness_f()
@@ -471,7 +522,7 @@ def diameter_analysis():
         plt.show()
 
 
-diameter_analysis()
+# diameter_analysis()
 
 
 
@@ -480,12 +531,13 @@ diameter_analysis()
 
 
 font = {'family' : 'Times New Roman',
-        'size'   : 18}
+        'size'   : 17}
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 def growth_over_time():
-    plt.figure(figsize=(6, 4), dpi=100)
+    plt.figure(figsize=(5, 4), dpi=70)
+    # plt.figure(figsize=(2, 3), dpi=100)
 
     # for simul in simulation_names:
     for simul in sinonimi.keys():
@@ -513,17 +565,12 @@ def growth_over_time():
             return average_list
         # proba = parameter_averaging()
 
-
         S22_max_abs = [i["S22"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
         Z_S22_abs_is_max = [i["height"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
-
         ILT_thickness_max = all_data.loc[simul]["ILT_thickness_max"]
         vein_thickness_max = all_data.loc[simul]["vein_thickness_max"]
         ILT_surface = all_data.loc[simul]["ILT_surface"]
-
         Volume_ILT = all_data.loc[simul]["Volume_ILT"]
-
-
 
 
 
@@ -534,8 +581,8 @@ def growth_over_time():
             elif sinonimi_u_legendi == True:
                 plt.plot(days, D_inner_max, label=(sinonimi[simul]))
 
-            plt.title("Inner diameter")
-            plt.ylabel("D [mm]")
+            # plt.title("Inner diameter")
+            plt.ylabel("$D$ [mm]")
             plt.xlabel("Time [days]")
             plt.text(-400, 17, "$b)$" )
 
@@ -547,7 +594,7 @@ def growth_over_time():
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
-                fig.savefig(diagramsDir + 'rast_D.png', dpi=300)
+                fig.savefig(diagramsDir + 'rast_D.png', dpi=55)
 
         def rast_H():
             if sinonimi_u_legendi == False:
@@ -574,20 +621,25 @@ def growth_over_time():
                 plt.plot(days, S22_max_1, label=(sinonimi[simul]))
             # plt.title("S22 growth,  " + str(chosen_layer) + ". layer")
 
-            plt.title("Circumferential Stress growth")
-            plt.ylabel("Circumferential Stress [kPa]")
+            # plt.ylabel("$S_{22}$ [kPa]")
+            plt.ylabel("${\sigma}_{22}$ [kPa]")
             plt.xlabel("Time [days]")
             plt.ylim([30,400])
             plt.text(-500, -20, "$d)$" )
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
-            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(left=0.18)
             fig.subplots_adjust(bottom=0.18)
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+            # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+            #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+
+            plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
+
+
             if picture_save == True:
-                fig.savefig(diagramsDir + 'rast_S22_1.png', dpi=300)
-        # rast_S22_1()
+                fig.savefig(diagramsDir + 'rast_S22_1.png', dpi=55)
+
 
         def rast_S22_7():
             if sinonimi_u_legendi == False:
@@ -614,13 +666,15 @@ def growth_over_time():
                 fig.savefig(diagramsDir + 'rast_S22_7.png', dpi=300)
         # rast_S22_7()
 
+
+
         def rast_Z_max_naprezanja():
 
             if sinonimi_u_legendi == False:
                 plt.plot(days, Z_S22_is_max, label=(simul))
             elif sinonimi_u_legendi == True:
                 plt.plot(days, Z_S22_is_max, label=(sinonimi[simul]))
-            plt.title("Height for maximal circumferential stress")
+            # plt.title("Height for maximal circumferential stress")
             plt.ylabel("H [mm]")
             plt.xlabel("Time [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
@@ -639,15 +693,15 @@ def growth_over_time():
             elif sinonimi_u_legendi == True:
                 plt.plot(days, Z_S22_abs_is_max, label=(sinonimi[simul]))
 
-            plt.title("Height for maximal circumferential stress")
-            plt.ylabel("H [mm]")
+            # plt.title("Height for maximal circumferential stress")
+            plt.ylabel("$H$ [mm]")
             plt.xlabel("Time [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
             fig.subplots_adjust(bottom=0.18)
-            plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
+            # plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+            #            handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Z_over_S22_abs.png', dpi=300)
 
@@ -699,7 +753,7 @@ def growth_over_time():
             elif sinonimi_u_legendi == True:
                 plt.plot(days, Volume_ILT, label=(sinonimi[simul]))
 
-            plt.title("ILT Volume")
+            # plt.title("ILT Volume")
             plt.ylabel("$V_{\mathrm{ILT}}$ [mm$^3$]")
             plt.xlabel("Time [days]")
             plt.text(-600, -2600, "$c)$" )
@@ -712,7 +766,7 @@ def growth_over_time():
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
-                fig.savefig(diagramsDir + 'rast_Volume_ILT.png', dpi=300)
+                fig.savefig(diagramsDir + 'rast_Volume_ILT.png', dpi=55)
 
         # Ima li ovo smisla???
         def rast_vein_thickness():
@@ -726,8 +780,9 @@ def growth_over_time():
 
 
 
-        rast_D()
+        # rast_D()
         # ILT_volume_f()
+        rast_S22_1()
 
 
         # rast_H()
