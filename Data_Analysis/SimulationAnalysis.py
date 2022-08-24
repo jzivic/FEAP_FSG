@@ -339,23 +339,40 @@ def time_analysis(times):
             def dupli_graf():
 
                 Z_cont_DG, inner_cont_DG, ILT_cont_DG  = Z_cont, inner_cont, ILT_cont
-
                 Z_cont_DG.append(Z_cont_DG[-1])
                 inner_cont_DG.append(inner_cont_DG[-1])
                 ILT_cont_DG.append(ILT_cont_DG[-1])
 
 
-                fig, graf_tawss = plt.subplots()
+                fig, graf_radius = plt.subplots()
+
+                color_r = 'tab:blue'
+                graf_radius.set_xlabel('$r$ [mm]', color=color_r)  # we already handled the x-label with ax1
+                graf_radius.set_ylabel('$z$ [mm]')
+                graf_radius.plot(inner_cont_DG, Z_cont_DG, color=color_r)
+                graf_radius.plot(ILT_cont_DG, Z_cont_DG, color=color_r)
+                graf_radius.tick_params(axis='x', labelcolor=color_r)
+
+
+                # graf_radius.set_xlim([0.3, 0.7])
+                # graf_radius.set_ylim([50, 200])
+
+
+
+
+
+
+
+
+                graf_tawss = graf_radius.twiny()
 
                 color_tawss = 'tab:red'
                 graf_tawss.set_xlabel('TAWSS [Pa]', color=color_tawss)
-                graf_tawss.set_ylabel('$z$ [mm]')
-
                 graf_tawss.plot(TAWSS, Z_cont_DG, color=color_tawss)
                 graf_tawss.axvline(x=0.4, linestyle='--', color="red", label='axvline - full height')
                 graf_tawss.tick_params(axis='x', labelcolor=color_tawss)
 
-
+                # plt.grid(which='both', linestyle='--', linewidth='0.5')
 
                 graf_tawss.set_xlim([0.3, 0.7])
                 graf_tawss.set_ylim([50, 200])
@@ -364,18 +381,6 @@ def time_analysis(times):
 
 
 
-
-
-
-                graf_radius = graf_tawss.twiny()
-
-                color_r = 'tab:blue'
-                graf_radius.set_xlabel('$r$ [mm]', color=color_r)  # we already handled the x-label with ax1
-                graf_radius.plot(inner_cont_DG, Z_cont_DG, color=color_r)
-                graf_radius.plot(ILT_cont_DG, Z_cont_DG, color=color_r)
-                # plt.grid(which='both', linestyle='--', linewidth='0.5')
-
-                graf_radius.tick_params(axis='x', labelcolor=color_r)
 
                 fig.tight_layout()  # otherwise the right y-label is slightly clipped
                 plt.show()
