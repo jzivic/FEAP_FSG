@@ -146,9 +146,9 @@ sinonimi_38 = {
                     # "tawss=045":"TAWSS=0.45 Pa",
                     ### "tawss=050":"TAWSS=0.50 Pa",
 
-                    "casson":"$z-z_{\mathrm{down}}$= 20 mm",
-                    "a3=30":"$z-z_{\mathrm{down}}$= 30 mm",
-                    "a3=40":"$z-z_{\mathrm{down}}$= 40 mm",
+                    # "casson":"$z-z_{\mathrm{down}}$= 20 mm",
+                    # "a3=30":"$z-z_{\mathrm{down}}$= 30 mm",
+                    # "a3=40":"$z-z_{\mathrm{down}}$= 40 mm",
 
                     # "casson": "Casson",
 

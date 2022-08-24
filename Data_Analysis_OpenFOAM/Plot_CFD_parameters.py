@@ -26,7 +26,9 @@ already_averaged = True
 adj_left, adj_right, adj_bottom = 0.18, 0.84, 0.15
 fig_x, fig_y = 6.6, 6.6
 
-class VadenjePodataka:
+
+
+class VadenjePodataka_FOAM:
     def __init__(self, Case, god="n"):
         foam_time = 2
         self.simulation_name = Case.split("/")[-1]
@@ -44,8 +46,6 @@ class VadenjePodataka:
             self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/ECAP_avg"
 
 
-
-
         self.data_dict = {"r":[], "z":[], "TAWSS":[], "OSI":[],"ECAP":[] }
         self.Koordinate_reading()
         self.TAWSS_reading()
@@ -56,10 +56,11 @@ class VadenjePodataka:
 
 
         ##self.Plot_radius()
-        self.Plot_TAWSS()
-        self.Plot_OSI()
-        self.Plot_ECAP()
+        # self.Plot_TAWSS()
+        # self.Plot_OSI()
+        # self.Plot_ECAP()
 
+        print(self.data_DF)
 
 
     def Koordinate_reading(self):
@@ -113,6 +114,7 @@ class VadenjePodataka:
                 continue
             if write_ECAP == True:
                 self.data_dict["ECAP"].append(float(red))
+
     # def Plot_radius(self):
     #     fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
     #
@@ -206,6 +208,25 @@ class VadenjePodataka:
 
 
 
+    def dupli_graf(self, ):
+        fig, graf_tawss = plt.subplots()
+
+        color = 'tab:red'
+        graf_tawss.set_xlabel('tawss', color=color)
+        graf_tawss.set_ylabel('z')
+
+        graf_tawss.plot(tawss, z, color=color)
+        graf_tawss.tick_params(axis='x', labelcolor=color)
+
+        graf_radius = graf_tawss.twiny()
+
+        color = 'tab:blue'
+        graf_radius.set_xlabel('radius', color=color)  # we already handled the x-label with ax1
+        graf_radius.plot(rad, z, color=color)
+        graf_radius.tick_params(axis='x', labelcolor=color)
+
+        fig.tight_layout()  # otherwise the right y-label is slightly clipped
+        plt.show()
 
 
 
@@ -213,7 +234,9 @@ class VadenjePodataka:
 
 
 
-p9 = VadenjePodataka(case)
+
+
+p9 = VadenjePodataka_FOAM(case)
 
 
 

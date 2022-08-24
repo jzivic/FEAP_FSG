@@ -1,7 +1,7 @@
 chosen_TimeSteps = [i for i in range(1,666)]        # mora od 1 od nekog broja!!
 
 
-x = 100
+# x = 100
 # chosen_TimeSteps = [i for i in range(x,x+1)]
 
 barcelona = False
@@ -9,106 +9,6 @@ barcelona = False
 
 
 
-
-
-pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/auto_FSG_usporedba.pickle"
-simulationsData_dict = {
-
-                "//home/josip/feap/FSG/automatizacija_25/":
-                    {"version": "old",
-
-                     "simulations":
-                         ["a3_30",
-                          "a3_40",
-                          "Casson"]
-                     },
-
-
-
-                "//home/josip/feap/FSG/automatizacija_33/NO_biochemo_FSG/x3_2/":
-                {"version": "new",
-
-                 "simulations":
-                     ["x3_2_a3_20",
-                      "x3_2_a3_30",
-                      "x3_2_a3_40"]
-                },
-
-
-                "//home/josip/feap/FSG/automatizacija_33/NO_biochemo_FSG/x3_3/":
-                    {"version": "new",
-
-                     "simulations":
-                         ["x3_3_a3_20",
-                          "x3_3_a3_30",
-                          "x3_3_a3_40"]
-                     },
-
-          }
-
-
-
-# pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_biochemo.pickle"
-# simulationsData_dict = {
-                #
-                # "//home/josip/feap/FSG/automatizacija_33/3D/":
-                # {"version": "new",
-                #
-                #  "simulations":
-                #    [
-                #    "3D_a3_30",
-                #     "3D_a3_40",
-                #     "3D_tawss_35_d_02",
-                #     "3D_tawss_40_d_01",
-                #     "3D_tawss_40_d_02",
-                #     "3D_tawss_45_d_02",
-                #
-                #     ]
-                # },
-
-
-
-          #       "//home/josip/feap/FSG/automatizacija_33/radial/":
-          #       {"version": "new",
-          #
-          #        "simulations":
-          #            [
-          #                "radial_a3_30",      #__b označava begin, odnosno da nema restart opcije
-          #                "radial_a3_40",
-          #                "radial_tawss_35_d02",
-          #                "radial_tawss_40_d01",
-          #                "radial_tawss_40_d02",
-          #                "radial_tawss_45_d02",
-          #            ]
-          #        },
-          #
-          #       "//home/josip/feap/FSG/automatizacija_25/":
-          #           {"version"  :  "old",
-          #
-          #            "simulations":
-          #               [
-          #                "a3_30",
-          #                "a3_40",
-          #                "Casson",
-          #               ]
-          #            },
-          #
-          #
-          #       "//home/josip/feap/FSG/automatizacija_33/3D/":
-          #           {"version": "new",
-          #
-          #            "simulations":
-          #                [
-          #                    "standard_3D",
-          #                    # "a3_40",
-          #                    # "Casson",
-          #                ]
-          #            }
-          #
-          #
-          #
-          #
-          # }
 
 
 pickle_name_25 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_25.pickle"
@@ -163,10 +63,6 @@ simulationsData_dict_25 = {
 
 
           }
-
-
-
-
 
 pickle_name_36 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_36.pickle"
 simulationsData_dict_36 = {
@@ -282,9 +178,6 @@ simulationsData_dict_36 = {
 
           }
 
-
-
-
 pickle_name_37 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_37.pickle"
 simulationsData_dict_37 = {
 
@@ -338,9 +231,6 @@ simulationsData_dict_37 = {
 
           }
 
-
-
-
 pickle_name_38 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_38.pickle"
 simulationsData_dict_38 = {
 
@@ -349,21 +239,21 @@ simulationsData_dict_38 = {
 
                      "simulations":
                          [
-                                "BC",
+                                # "BC",
                                 "casson",
-                                "Newt_33",
-                                "Newt_40_2",
-                                "Newt_45",
-                                "Newt_50_4",
-                                "Newt_60_4",
-                                "tawss=030",
-                                "tawss=035",
-                                "tawss=040",
-                                "tawss=045",
-                                "tawss=050",
+                                # "Newt_33",
+                                # "Newt_40_2",
+                                # "Newt_45",
+                                # "Newt_50_4",
+                                # "Newt_60_4",
+                                # "tawss=030",
+                                # "tawss=035",
+                                # "tawss=040",
+                                # "tawss=045",
+                                # "tawss=050",
 
-                                 "a3=30",
-                                 "a3=40",
+                                 # "a3=30",
+                                 # "a3=40",
 
                           ]
                      },
@@ -372,5 +262,20 @@ simulationsData_dict_38 = {
 
 
 
-pickle_name =pickle_name_38
-simulationsData_dict = simulationsData_dict_38
+pickle_name_casson = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_38.pickle"
+simulationsData_dict_casson = {
+
+                "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
+                    {"version": "new",
+
+                     "simulations":
+                         [
+                                "casson",
+                          ]
+                     },
+
+          }
+
+
+pickle_name =pickle_name_casson
+simulationsData_dict = simulationsData_dict_casson

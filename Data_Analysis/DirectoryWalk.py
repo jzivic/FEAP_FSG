@@ -1,11 +1,14 @@
 import math
-
 from SimulationsData import *
+from VadenjePodatakaFOAM import VadenjePodataka_FOAM
+
 
 
 import os
 import numpy as  np
 import pandas as pd
+
+FOAM_analysis = True
 
 
 TSLenght = 121
@@ -19,6 +22,7 @@ Y0_corrention = 132                 # pomak Y0 file za broj redova nakon restart
 suffixes = ["89-5", "172-22"]
 
 
+n_sim_conv = lambda ts: (ts-100)/3 +1       # preračunavanje time stepa u broj simulacije
 
 
 
@@ -48,6 +52,10 @@ class FSG_Analysis:
                                                 "ILT_surface": [],
                                                 "Volume_ILT": [],
 
+                                                "TAWSS": [],
+                                                "OSI": [],
+                                                "ECAP": [],
+
                                                 },
                                             index= [])
 
@@ -74,10 +82,21 @@ class FSG_Analysis:
 
                     self.setting_start_lines()
                     if self.check_AAA_formation() == True:
-                        self.timeStep_extraction()              # ovdje je bio try!!!
+                        self.TAWSS, self.OSI, self.ECAP = None, None, None
+
+                        if (n_sim_conv(self.time_step)%1 == 0 and self.time_step >= 100) :
+                            sim_number = int(n_sim_conv(self.time_step))
+                            VadenjePodataka_object =  VadenjePodataka_FOAM(simulation_path, sim_number)
+
+                            self.TAWSS = VadenjePodataka_object.return_TAWSS()
+                            self.OSI = VadenjePodataka_object.return_OSI()
+                            self.ECAP = VadenjePodataka_object.return_ECAP()
+
+                        self.timeStep_extraction_FEAP()              # ovdje je bio try!!!
 
                     elif self.check_AAA_formation() == False:
                         dopuna = [None for i in all_simulations_data_df]
+
 
                 dopuna = [self.oneSim_data_dict["timeStep"],
 
@@ -98,11 +117,17 @@ class FSG_Analysis:
                           self.oneSim_data_dict["ILT_thickness_max"],
                           self.oneSim_data_dict["vein_thickness_max"],
                           self.oneSim_data_dict["ILT_surface"],
-                          self.oneSim_data_dict["Volume_ILT"]
+                          self.oneSim_data_dict["Volume_ILT"],
+
+                          self.oneSim_data_dict["TAWSS"],
+                          self.oneSim_data_dict["OSI"],
+                          self.oneSim_data_dict["ECAP"],
                           ]
+
 
                 all_simulations_data_df.loc[self.simulation_name] = dopuna
             all_simulations_data_df.to_pickle(pickle_name)
+
 
 
 #     # Samo jednom se postavlja
@@ -148,7 +173,7 @@ class FSG_Analysis:
                                  "S22_contours": [],
                                  "H":[], "D_inner_max":[],"S22_max":[], "Z_S22_is_max":[], "S22_Z_max_abs":[],
                                  "ILT_thickness_max":[], "vein_thickness_max":[],
-                                 "ILT_surface":[], "Volume_ILT":[]
+                                 "ILT_surface":[], "Volume_ILT":[], "TAWSS":[], "OSI":[], "ECAP":[]
                                  }
 
 
@@ -184,7 +209,7 @@ class FSG_Analysis:
         return False
 
 
-    def timeStep_extraction(self):
+    def timeStep_extraction_FEAP(self):
         timeSteps_list, r_inner_list, z_list, r_outer_list, r_ILT_list = [], [], [], [], []
         ILT_thickness_list, vein_thickness_list, h_list, S22_list, ILT_surface, Volume_ILT = [], [], [], [], 0, 0
 
@@ -247,11 +272,6 @@ class FSG_Analysis:
 
         D_inner_max = max(r_inner_list)*2
 
-
-        # S22_Z_max_abs = max(S22_list, key=max)
-        # ind_S22_Z_max_abs = S22_list.index(S22_Z_max_abs)
-
-
         S22_list = np.array(S22_list)
         S22_inner_nodes_list = S22_list[:,0]        # max index se uvijek vadi iz 1. čvora!!
         S22_max_inner = max(S22_inner_nodes_list)
@@ -260,7 +280,6 @@ class FSG_Analysis:
         z_ind_list = np.where(S22_inner_nodes_list == S22_max_inner)[0]
         Z_ind = int(sum(z_ind_list)/len(z_ind_list))
         Z_S22_is_max = {"height": z_list[Z_ind], "index": Z_ind}
-
 
         S22_Z_max_abs = max(max(S22_list, key=max))    # layer gdje se nalazi jendo max naprezanje za cijeli korak
 
@@ -298,6 +317,10 @@ class FSG_Analysis:
         self.oneSim_data_dict["vein_thickness_max"].append(vein_thickness_max)
         self.oneSim_data_dict["ILT_surface"].append(ILT_surface)
         self.oneSim_data_dict["Volume_ILT"].append(Volume_ILT)
+
+        self.oneSim_data_dict["TAWSS"].append(self.TAWSS)
+        self.oneSim_data_dict["OSI"].append(self.OSI)
+        self.oneSim_data_dict["ECAP"].append(self.ECAP)
 
 
 FSG_Analysis()
