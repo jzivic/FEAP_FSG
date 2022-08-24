@@ -154,14 +154,17 @@ sinonimi_38 = {
 
 }
 
+sinonimi_casson = {
+                    "casson": "Casson",
+}
 
 
 
 
 
+auto_name = "automatizacija_casson"
+sinonimi = sinonimi_casson
 
-auto_name = "automatizacija_38"
-sinonimi = sinonimi_38
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
 all_data = pd.read_pickle(pickle_name)
@@ -190,7 +193,9 @@ ts_from_sim = lambda sim: 100 + (sim-1)*3
     r = 16:             sim 57
 """
 
-times = [ts_from_sim(5)]
+times = [ts_from_sim(33)]
+
+print(times)
 
 
 chosen_layer = 1
@@ -212,8 +217,14 @@ def time_analysis(times):
             S22_cont = all_data.loc[simul]["S22_contours"][index][:,chosen_layer]
             height_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["height"]
             index_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["index"]
-
             S22_by_layer = all_data.loc[simul]["S22_contours"][index][index_S22_is_max]
+
+            Z_foam_cont = all_data.loc[simul]["Z_foam_cont"][index]
+            TAWSS = all_data.loc[simul]["TAWSS"][index]
+            OSI = all_data.loc[simul]["OSI"][index]
+            ECAP = all_data.loc[simul]["ECAP"][index]
+
+
 
             def stress_by_layers():
                 # color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -237,7 +248,7 @@ def time_analysis(times):
 
                 if picture_save == True:
                     fig.savefig(diagramsDir + '/stress_through_layers_'+str(times[0]), dpi=300)
-            stress_by_layers()
+            # stress_by_layers()
 
 
             def vertical_contours():
@@ -293,9 +304,7 @@ def time_analysis(times):
                     fig.savefig(diagramsDir + 'ILT_inner_cont.png', dpi=300)
                 elif picture_save == False:
                     plt.show()
-            ILT_inner_cont()
-
-
+            # ILT_inner_cont()
 
             def stress_cont():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -326,10 +335,68 @@ def time_analysis(times):
                 plt.legend()
             # vein_thickness_f()
 
+
+            def dupli_graf():
+
+                Z_cont_DG, inner_cont_DG, ILT_cont_DG  = Z_cont, inner_cont, ILT_cont
+
+                Z_cont_DG.append(Z_cont_DG[-1])
+                inner_cont_DG.append(inner_cont_DG[-1])
+                ILT_cont_DG.append(ILT_cont_DG[-1])
+
+
+                fig, graf_tawss = plt.subplots()
+
+                color_tawss = 'tab:red'
+                graf_tawss.set_xlabel('TAWSS [Pa]', color=color_tawss)
+                graf_tawss.set_ylabel('$z$ [mm]')
+
+                graf_tawss.plot(TAWSS, Z_cont_DG, color=color_tawss)
+                graf_tawss.axvline(x=0.4, linestyle='--', color="red", label='axvline - full height')
+                graf_tawss.tick_params(axis='x', labelcolor=color_tawss)
+
+
+
+                graf_tawss.set_xlim([0.3, 0.7])
+                graf_tawss.set_ylim([50, 200])
+
+
+
+
+
+
+
+
+                graf_radius = graf_tawss.twiny()
+
+                color_r = 'tab:blue'
+                graf_radius.set_xlabel('$r$ [mm]', color=color_r)  # we already handled the x-label with ax1
+                graf_radius.plot(inner_cont_DG, Z_cont_DG, color=color_r)
+                graf_radius.plot(ILT_cont_DG, Z_cont_DG, color=color_r)
+                # plt.grid(which='both', linestyle='--', linewidth='0.5')
+
+                graf_radius.tick_params(axis='x', labelcolor=color_r)
+
+                fig.tight_layout()  # otherwise the right y-label is slightly clipped
+                plt.show()
+
+
+
+
+
+
+
+
+
+            dupli_graf()
+
+
+
         if picture_save == False:
             plt.show()
 
-# time_analysis(times)
+
+time_analysis(times)
 
 
 

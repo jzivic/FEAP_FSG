@@ -52,6 +52,7 @@ class FSG_Analysis:
                                                 "ILT_surface": [],
                                                 "Volume_ILT": [],
 
+                                                "Z_foam_cont": [],
                                                 "TAWSS": [],
                                                 "OSI": [],
                                                 "ECAP": [],
@@ -82,12 +83,13 @@ class FSG_Analysis:
 
                     self.setting_start_lines()
                     if self.check_AAA_formation() == True:
-                        self.TAWSS, self.OSI, self.ECAP = None, None, None
+                        self.Z_foam_cont, self.TAWSS, self.OSI, self.ECAP = None, None, None, None
 
                         if (n_sim_conv(self.time_step)%1 == 0 and self.time_step >= 100) :
                             sim_number = int(n_sim_conv(self.time_step))
                             VadenjePodataka_object =  VadenjePodataka_FOAM(simulation_path, sim_number)
 
+                            self.Z_foam_cont = VadenjePodataka_object.return_Z_foam()
                             self.TAWSS = VadenjePodataka_object.return_TAWSS()
                             self.OSI = VadenjePodataka_object.return_OSI()
                             self.ECAP = VadenjePodataka_object.return_ECAP()
@@ -119,6 +121,7 @@ class FSG_Analysis:
                           self.oneSim_data_dict["ILT_surface"],
                           self.oneSim_data_dict["Volume_ILT"],
 
+                          self.oneSim_data_dict["Z_foam_cont"],
                           self.oneSim_data_dict["TAWSS"],
                           self.oneSim_data_dict["OSI"],
                           self.oneSim_data_dict["ECAP"],
@@ -173,7 +176,7 @@ class FSG_Analysis:
                                  "S22_contours": [],
                                  "H":[], "D_inner_max":[],"S22_max":[], "Z_S22_is_max":[], "S22_Z_max_abs":[],
                                  "ILT_thickness_max":[], "vein_thickness_max":[],
-                                 "ILT_surface":[], "Volume_ILT":[], "TAWSS":[], "OSI":[], "ECAP":[]
+                                 "ILT_surface":[], "Volume_ILT":[], "Z_foam_cont":[], "TAWSS":[], "OSI":[], "ECAP":[]
                                  }
 
 
@@ -318,6 +321,7 @@ class FSG_Analysis:
         self.oneSim_data_dict["ILT_surface"].append(ILT_surface)
         self.oneSim_data_dict["Volume_ILT"].append(Volume_ILT)
 
+        self.oneSim_data_dict["Z_foam_cont"].append(self.Z_foam_cont)
         self.oneSim_data_dict["TAWSS"].append(self.TAWSS)
         self.oneSim_data_dict["OSI"].append(self.OSI)
         self.oneSim_data_dict["ECAP"].append(self.ECAP)

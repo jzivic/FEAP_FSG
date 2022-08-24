@@ -262,7 +262,7 @@ simulationsData_dict_38 = {
 
 
 
-pickle_name_casson = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_38.pickle"
+pickle_name_casson = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_casson.pickle"
 simulationsData_dict_casson = {
 
                 "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
