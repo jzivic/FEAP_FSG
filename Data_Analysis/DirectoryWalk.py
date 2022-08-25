@@ -85,14 +85,15 @@ class FSG_Analysis:
                     if self.check_AAA_formation() == True:
                         self.Z_foam_cont, self.TAWSS, self.OSI, self.ECAP = None, None, None, None
 
-                        if (n_sim_conv(self.time_step)%1 == 0 and self.time_step >= 100) :
-                            sim_number = int(n_sim_conv(self.time_step))
-                            VadenjePodataka_object =  VadenjePodataka_FOAM(simulation_path, sim_number)
-
-                            self.Z_foam_cont = VadenjePodataka_object.return_Z_foam()
-                            self.TAWSS = VadenjePodataka_object.return_TAWSS()
-                            self.OSI = VadenjePodataka_object.return_OSI()
-                            self.ECAP = VadenjePodataka_object.return_ECAP()
+                        #   DIO ZA FOAM
+                        # if (n_sim_conv(self.time_step)%1 == 0 and self.time_step >= 100) :
+                        #     sim_number = int(n_sim_conv(self.time_step))
+                        #     VadenjePodataka_object =  VadenjePodataka_FOAM(simulation_path, sim_number)
+                        #
+                        #     self.Z_foam_cont = VadenjePodataka_object.return_Z_foam()
+                        #     self.TAWSS = VadenjePodataka_object.return_TAWSS()
+                        #     self.OSI = VadenjePodataka_object.return_OSI()
+                        #     self.ECAP = VadenjePodataka_object.return_ECAP()
 
                         self.timeStep_extraction_FEAP()              # ovdje je bio try!!!
 

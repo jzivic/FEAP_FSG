@@ -132,13 +132,13 @@ sinonimi_37 = {
 
 sinonimi_38 = {
 
-                    # "BC":"Bird-Carreau",
-                    # "casson":"Casson",
-                    ###"Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
-                    # "Newt_40_2": "$\\nu=4\mathrm{x}10^{-6}$ m$^2$/s",
-                    # "Newt_45": "$\\nu=4.5\mathrm{x}10^{-6}$ m$^2$/s",
-                    # "Newt_50_4":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
-                    # "Newt_60_4":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
+                    "BC":"Bird-Carreau",
+                    "casson":"Casson",
+                    ##"Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
+                    "Newt_40_2": "$\\nu=4\mathrm{x}10^{-6}$ m$^2$/s",
+                    ###"Newt_45": "$\\nu=4.5\mathrm{x}10^{-6}$ m$^2$/s",
+                    "Newt_50_4":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
+                    "Newt_60_4":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
 
                     # "tawss=030":"TAWSS=0.30 Pa",
                     # "tawss=035":"TAWSS=0.35 Pa",
@@ -162,8 +162,8 @@ sinonimi_casson = {
 
 
 
-auto_name = "automatizacija_casson"
-sinonimi = sinonimi_casson
+auto_name = "automatizacija_38"
+sinonimi = sinonimi_38
 
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
@@ -173,12 +173,6 @@ all_data = pd.read_pickle(pickle_name)
 
 # diagramsDir = "//home/josip/feap/FSG/slike/"+auto_name+"/geometrija/"
 diagramsDir = "//home/josip/feap/FSG/slike/FSG_model/"
-
-
-
-
-
-
 
 
 font = {'family' : 'Times New Roman',
@@ -193,7 +187,14 @@ ts_from_sim = lambda sim: 100 + (sim-1)*3
     r = 16:             sim 57
 """
 
-times = [ts_from_sim(33)]
+
+
+
+
+graf_slovo="c"
+# 1, 5,6, 40,
+
+times = [ts_from_sim(6)]
 
 print(times)
 
@@ -336,36 +337,31 @@ def time_analysis(times):
             # vein_thickness_f()
 
 
-            def dupli_graf():
 
+
+            def dupli_graf():
                 Z_cont_DG, inner_cont_DG, ILT_cont_DG  = Z_cont, inner_cont, ILT_cont
                 Z_cont_DG.append(Z_cont_DG[-1])
                 inner_cont_DG.append(inner_cont_DG[-1])
                 ILT_cont_DG.append(ILT_cont_DG[-1])
 
-
-                fig, graf_radius = plt.subplots()
-
+                fig, graf_radius = plt.subplots(figsize=(5,5))
                 color_r = 'tab:blue'
                 graf_radius.set_xlabel('$r$ [mm]', color=color_r)  # we already handled the x-label with ax1
                 graf_radius.set_ylabel('$z$ [mm]')
-                graf_radius.plot(inner_cont_DG, Z_cont_DG, color=color_r)
-                graf_radius.plot(ILT_cont_DG, Z_cont_DG, color=color_r)
+                graf_radius.plot(inner_cont_DG, Z_cont_DG, color=color_r, label="inner wall")
+                graf_radius.plot(ILT_cont_DG, Z_cont_DG,linestyle=':', color=color_r, label="ILT wall")
+
+
+
+
                 graf_radius.tick_params(axis='x', labelcolor=color_r)
-
-
-                # graf_radius.set_xlim([0.3, 0.7])
-                # graf_radius.set_ylim([50, 200])
-
-
-
-
-
+                graf_radius.set_xlim([8, 15])
+                graf_radius.set_ylim([50, 200])
 
 
 
                 graf_tawss = graf_radius.twiny()
-
                 color_tawss = 'tab:red'
                 graf_tawss.set_xlabel('TAWSS [Pa]', color=color_tawss)
                 graf_tawss.plot(TAWSS, Z_cont_DG, color=color_tawss)
@@ -377,20 +373,35 @@ def time_analysis(times):
                 graf_tawss.set_xlim([0.3, 0.7])
                 graf_tawss.set_ylim([50, 200])
 
+                if graf_slovo == "a":
+                    graf_radius.text(7, 15, "$a)$")
+                    plt.title("$s$ = 1000 days\n")
 
+                elif graf_slovo == "b":
+                    graf_radius.text(7, 15, "$b)$")
+                    plt.title("$s$ = 1120 days\n")
+                    graf_radius.axhline(y=127.5, linestyle='--', color="grey")
+                    graf_radius.axhline(y=117, linestyle='--', color="grey")
 
+                elif graf_slovo == "c":
+                    graf_radius.text(7, 15, "$c)$")
+                    plt.title("$s$ = 1150 days\n")
+                    graf_radius.axhline(y=127.5, linestyle='--', color="grey")
+                    graf_radius.axhline(y=116.5, linestyle='--', color="grey")
 
+                elif graf_slovo == "d":
+                    graf_radius.text(7, 15, "$d)$")
+                    plt.title("$s$ = 2170 days\n")
 
+                fig.tight_layout()
+                # fig.subplots_adjust(left=0.2, bottom=0.22, top=0.85)
+                fig.subplots_adjust(left=0.2, bottom=0.22, top=0.70)
 
-                fig.tight_layout()  # otherwise the right y-label is slightly clipped
-                plt.show()
+                if picture_save == True:
+                    fig.savefig(diagramsDir + 'dupli_graf_'+str(trenutak)+'.png', dpi=300)
 
-
-
-
-
-
-
+                elif picture_save == False:
+                    plt.show()
 
 
             dupli_graf()
@@ -399,9 +410,7 @@ def time_analysis(times):
 
         if picture_save == False:
             plt.show()
-
-
-time_analysis(times)
+# time_analysis(times)
 
 
 
@@ -454,7 +463,7 @@ plt.rcParams['mathtext.fontset'] = 'stix'
 
 # 12:124,
 
-r = 3
+r = 16
 wanted_D = r*2
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
@@ -497,6 +506,7 @@ def diameter_analysis():
             # plt.title("ILT and inner contours")
             plt.xlabel("$r$ [mm]")
             plt.ylabel("$z$ [mm]")
+
             # plt.text(7.8, 7, "$a)$" )
             # plt.text(6, 7, "$b)$" )
             # plt.text(4, 7, "$c)$" )
@@ -594,7 +604,7 @@ def diameter_analysis():
         plt.show()
 
 
-# diameter_analysis()
+diameter_analysis()
 
 
 
@@ -704,11 +714,8 @@ def growth_over_time():
             fig.subplots_adjust(bottom=0.18)
             # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
             #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
-
-
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_S22_1.png', dpi=55)
 
@@ -853,8 +860,8 @@ def growth_over_time():
 
 
         # rast_D()
-        # ILT_volume_f()
-        rast_S22_1()
+        ILT_volume_f()
+        # rast_S22_1()
 
 
         # rast_H()

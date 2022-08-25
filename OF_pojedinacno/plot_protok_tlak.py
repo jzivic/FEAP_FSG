@@ -41,12 +41,14 @@ def Plot_flow():
     plt.title("Volume flow inlet rate ")
     plt.ylabel("Volume flow rate [cm$^{3}$/s]")
     plt.xlabel("Time [sec]")
+    plt.text(-0.20, -45, "$a)$")
+
     plt.grid(which='both', linestyle='--', linewidth='0.5')
     fig.subplots_adjust(bottom=0.16)  # empty space on the bottom
     fig.subplots_adjust(left=0.16)
     plt.show()
 
-# Plot_flow()
+Plot_flow()
 
 
 
@@ -64,6 +66,8 @@ def Plot_pressure():
     plt.title("Pressure outlet ")
     plt.ylabel("Pressure [kPa]")
     plt.xlabel("Time [sec]")
+    plt.text(-0.20, 9.5, "$b)$")
+
     plt.grid(which='both', linestyle='--', linewidth='0.5')
     fig.subplots_adjust(bottom=0.16)  # empty space on the bottom
     fig.subplots_adjust(left=0.16)

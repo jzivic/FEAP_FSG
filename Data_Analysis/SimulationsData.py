@@ -239,21 +239,21 @@ simulationsData_dict_38 = {
 
                      "simulations":
                          [
-                                # "BC",
+                                "BC",
                                 "casson",
-                                # "Newt_33",
-                                # "Newt_40_2",
-                                # "Newt_45",
-                                # "Newt_50_4",
-                                # "Newt_60_4",
-                                # "tawss=030",
-                                # "tawss=035",
-                                # "tawss=040",
-                                # "tawss=045",
-                                # "tawss=050",
+                                "Newt_33",
+                                "Newt_40_2",
+                                "Newt_45",
+                                "Newt_50_4",
+                                "Newt_60_4",
+                                "tawss=030",
+                                "tawss=035",
+                                "tawss=040",
+                                "tawss=045",
+                                "tawss=050",
 
-                                 # "a3=30",
-                                 # "a3=40",
+                                 "a3=30",
+                                 "a3=40",
 
                           ]
                      },
@@ -277,5 +277,5 @@ simulationsData_dict_casson = {
           }
 
 
-pickle_name =pickle_name_casson
-simulationsData_dict = simulationsData_dict_casson
+pickle_name =pickle_name_38
+simulationsData_dict = simulationsData_dict_38
