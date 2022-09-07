@@ -257,7 +257,7 @@ class FSG_Analysis:
 
                 r_ILT_delta = r_inner - r_ILT
                 r_center = r_ILT + (r_ILT_delta) / 2
-                V_ILT = r_ILT_delta * r_center * 2 * math.pi    #Volumen ILT-a
+                V_ILT = r_ILT_delta * r_center * 2 * math.pi /1000    #Volumen ILT-a
                 Volume_ILT += V_ILT
 
             r_inner_list.append(r_inner)

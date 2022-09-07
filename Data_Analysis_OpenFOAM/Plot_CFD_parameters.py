@@ -6,15 +6,16 @@ font = {'family' : 'Times New Roman',
 plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
-case = "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson"
-# case = "//home/josip/feap/FSG/automatizacija_36/TAWSS/tawss_le_040"
+# case = "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson"
+case = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4"
 
-sim_broj = 57
+
+sim_broj = 60
 
 picture_save = False
 already_averaged = True
 
-
+viscosity = 5e-6*1060
 
 
 """VREMENA:
@@ -31,6 +32,7 @@ fig_x, fig_y = 6.6, 6.6
 class VadenjePodataka_FOAM:
     def __init__(self, Case, god="n"):
         foam_time = 2
+        foam_time = 1.3
         self.simulation_name = Case.split("/")[-1]
 
         self.koo_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/koordinate"
@@ -46,11 +48,13 @@ class VadenjePodataka_FOAM:
             self.ECAP_file = Case + "/simulacija"+str(sim_broj)+"/"+str(foam_time)+"/ECAP_avg"
 
 
-        self.data_dict = {"r":[], "z":[], "TAWSS":[], "OSI":[],"ECAP":[] }
+        self.data_dict = {"r":[], "z":[], "TAWSS":[], "OSI":[],"ECAP":[], "shear_rate":[] }
         self.Koordinate_reading()
         self.TAWSS_reading()
         self.OSI_reading()
         self.ECAP_reading()
+        self.calc_shear_rate()
+
 
         self.data_DF = pd.DataFrame(self.data_dict)
 
@@ -59,8 +63,9 @@ class VadenjePodataka_FOAM:
         # self.Plot_TAWSS()
         # self.Plot_OSI()
         # self.Plot_ECAP()
+        self.Plot_shear_rate()
 
-        print(self.data_DF)
+        # print(self.data_DF)
 
 
     def Koordinate_reading(self):
@@ -114,6 +119,12 @@ class VadenjePodataka_FOAM:
                 continue
             if write_ECAP == True:
                 self.data_dict["ECAP"].append(float(red))
+
+    def calc_shear_rate(self):
+        shear_rate = [i/viscosity for i in self.data_dict["TAWSS"]]
+        self.data_dict["shear_rate"] = shear_rate
+
+
 
     # def Plot_radius(self):
     #     fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
@@ -205,28 +216,49 @@ class VadenjePodataka_FOAM:
         elif picture_save == False:
             plt.show()
 
+    def Plot_shear_rate(self):
+        fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
+        plt.clf()
+        plt.plot(self.data_DF["shear_rate"], self.data_DF["z"],  label=self.simulation_name)
+        plt.axvline(x=140, linestyle='--', color="blue", label='Casson')
+        plt.axvline(x=160, linestyle='--', color="red", label='Newt')
+
+        plt.title("MAX shear rate, 2800. day")
+        plt.ylabel("$z$ [mm]")
+        plt.xlabel("shear rate [1/s]")
+        # plt.text(0.2, 20, "$d)$")
+
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
+        fig = plt.gcf()
+        fig.subplots_adjust(left=adj_left, right=adj_right, bottom=adj_bottom)
+        if picture_save == True:
+            fig.subplots_adjust(left=adj_left)
+            fig.subplots_adjust(bottom=adj_bottom)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/shear_rate.png", dpi=300)
+        elif picture_save == False:
+            plt.show()
 
 
 
-    def dupli_graf(self, ):
-        fig, graf_tawss = plt.subplots()
-
-        color = 'tab:red'
-        graf_tawss.set_xlabel('tawss', color=color)
-        graf_tawss.set_ylabel('z')
-
-        graf_tawss.plot(tawss, z, color=color)
-        graf_tawss.tick_params(axis='x', labelcolor=color)
-
-        graf_radius = graf_tawss.twiny()
-
-        color = 'tab:blue'
-        graf_radius.set_xlabel('radius', color=color)  # we already handled the x-label with ax1
-        graf_radius.plot(rad, z, color=color)
-        graf_radius.tick_params(axis='x', labelcolor=color)
-
-        fig.tight_layout()  # otherwise the right y-label is slightly clipped
-        plt.show()
+    # def dupli_graf(self, ):
+    #     fig, graf_tawss = plt.subplots()
+    #
+    #     color = 'tab:red'
+    #     graf_tawss.set_xlabel('tawss', color=color)
+    #     graf_tawss.set_ylabel('z')
+    #
+    #     graf_tawss.plot(tawss, z, color=color)
+    #     graf_tawss.tick_params(axis='x', labelcolor=color)
+    #
+    #     graf_radius = graf_tawss.twiny()
+    #
+    #     color = 'tab:blue'
+    #     graf_radius.set_xlabel('radius', color=color)  # we already handled the x-label with ax1
+    #     graf_radius.plot(rad, z, color=color)
+    #     graf_radius.tick_params(axis='x', labelcolor=color)
+    #
+    #     fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    #     plt.show()
 
 
 

@@ -132,25 +132,28 @@ sinonimi_37 = {
 
 sinonimi_38 = {
 
-                    "BC":"Bird-Carreau",
-                    "casson":"Casson",
-                    ##"Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
-                    "Newt_40_2": "$\\nu=4\mathrm{x}10^{-6}$ m$^2$/s",
+                    ###"Newt_33": "$\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
                     ###"Newt_45": "$\\nu=4.5\mathrm{x}10^{-6}$ m$^2$/s",
-                    "Newt_50_4":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
-                    "Newt_60_4":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
+
+
+                    # "BC":"Bird-Carreau",
+                    # "casson":"Casson",
+                    # "Newt_40_2": "$\\nu=4\mathrm{x}10^{-6}$ m$^2$/s",
+                    # "Newt_50_4":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
+                    # "Newt_60_4":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
 
                     # "tawss=030":"TAWSS=0.30 Pa",
                     # "tawss=035":"TAWSS=0.35 Pa",
                     # "tawss=040":"TAWSS=0.40 Pa",
-                    # "tawss=045":"TAWSS=0.45 Pa",
-                    ### "tawss=050":"TAWSS=0.50 Pa",
+                    "tawss=045":"TAWSS=0.45 Pa",
+                    # "tawss=050": "TAWSS=0.50 Pa",
 
-                    # "casson":"$z-z_{\mathrm{down}}$= 20 mm",
-                    # "a3=30":"$z-z_{\mathrm{down}}$= 30 mm",
-                    # "a3=40":"$z-z_{\mathrm{down}}$= 40 mm",
+                    # "casson":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 20 mm",
+                    # "a3=30":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 30 mm",
+                    # "a3=40":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 40 mm",
 
                     # "casson": "Casson",
+                    # "tawss_turbulent_3": "turbulent",
 
 }
 
@@ -352,14 +355,9 @@ def time_analysis(times):
                 graf_radius.plot(inner_cont_DG, Z_cont_DG, color=color_r, label="inner wall")
                 graf_radius.plot(ILT_cont_DG, Z_cont_DG,linestyle=':', color=color_r, label="ILT wall")
 
-
-
-
                 graf_radius.tick_params(axis='x', labelcolor=color_r)
                 graf_radius.set_xlim([8, 15])
                 graf_radius.set_ylim([50, 200])
-
-
 
                 graf_tawss = graf_radius.twiny()
                 color_tawss = 'tab:red'
@@ -402,8 +400,6 @@ def time_analysis(times):
 
                 elif picture_save == False:
                     plt.show()
-
-
             dupli_graf()
 
 
@@ -463,16 +459,19 @@ plt.rcParams['mathtext.fontset'] = 'stix'
 
 # 12:124,
 
+#15.71, 15.2, 16
+
 r = 16
 wanted_D = r*2
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
 def diameter_analysis():
 
-    plt.figure(figsize=(8, 16), dpi=100)
-    # plt.figure(figsize=(10, 20), dpi=400)
     fig = plt.gcf()
 
+    if picture_save == True:
+        plt.figure(figsize=(4.6, 4), dpi=70)
+    #
     # for simul in simulation_names:
     for simul in sinonimi.keys():
 
@@ -490,35 +489,29 @@ def diameter_analysis():
 
         def vertical_contours():
             font = {'family': 'Times New Roman',
-                    'size': 32}
+                    'size': 17}
             plt.rc('font', **font)
             plt.rcParams['mathtext.fontset'] = 'stix'
 
-
-            print(index)
+            # print(index)
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             if sinonimi_u_legendi == False:
                 plt.plot(inner_cont, Z_cont, c=color, label=(simul))
             elif sinonimi_u_legendi == True:
                 plt.plot(inner_cont, Z_cont, c=color, label=(sinonimi[simul]))
             plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
-
-            # plt.title("ILT and inner contours")
             plt.xlabel("$r$ [mm]")
             plt.ylabel("$z$ [mm]")
 
-            # plt.text(7.8, 7, "$a)$" )
-            # plt.text(6, 7, "$b)$" )
-            # plt.text(4, 7, "$c)$" )
-
-            plt.text(8.5, 7, "$a)$" )
+            plt.text(8.6, -13, "$a)$" )
 
             plt.ylim([20, 190])
-            # plt.xlim([7, 18])
+            plt.xlim([9.5, 16.1])
             plt.grid(which='both', linestyle='--', linewidth='0.5')
-            fig.subplots_adjust(left=0.20, top=0.91, bottom=0.1, right=0.91)
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+            fig.subplots_adjust(left=0.20, top=0.91, bottom=0.2, right=0.91)
+            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.03, handletextpad=0.1,
+                       handlelength=0.8, bbox_to_anchor=(1.026, -0.033))
+
             if picture_save == True:
                 fig.savefig(diagramsDir + 'vertical_contours_'+str(r)+'.png', dpi=400)
 
@@ -618,8 +611,10 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 def growth_over_time():
-    plt.figure(figsize=(5, 4), dpi=70)
-    # plt.figure(figsize=(2, 3), dpi=100)
+    # plt.figure(figsize=(5, 4), dpi=70)
+
+    plt.figure(figsize=(4.6, 4), dpi=70)
+
 
     # for simul in simulation_names:
     for simul in sinonimi.keys():
@@ -655,8 +650,6 @@ def growth_over_time():
         Volume_ILT = all_data.loc[simul]["Volume_ILT"]
 
 
-
-
         def rast_D():
             if sinonimi_u_legendi == False:
                 plt.plot(days, D_inner_max, label=(simul))
@@ -665,36 +658,17 @@ def growth_over_time():
 
             # plt.title("Inner diameter")
             plt.ylabel("$D$ [mm]")
-            plt.xlabel("Time [days]")
+            plt.xlabel("$s$ [days]")
             plt.text(-400, 17, "$b)$" )
 
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
-            fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.18)
-
+            fig.subplots_adjust(left=0.15, bottom=0.18)
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
+                       handlelength=1.8, bbox_to_anchor=(-0.027, 1.035))
+
             if picture_save == True:
-                fig.savefig(diagramsDir + 'rast_D.png', dpi=55)
-
-        def rast_H():
-            if sinonimi_u_legendi == False:
-                plt.plot(days, H, label=(simul))
-            elif sinonimi_u_legendi == True:
-                plt.plot(days, H, label=(sinonimi[simul]))
-
-            plt.title("Aneurysm height: ")
-            plt.ylabel("Height [mm]")
-            plt.xlabel("Time [days]")
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            fig = plt.gcf()
-            fig.subplots_adjust(left=0.15)
-            fig.subplots_adjust(bottom=0.18)
-
-            plt.legend()
-            if picture_save == True:
-                fig.savefig(diagramsDir + 'rast_H.png', dpi=300)
+                fig.savefig(diagramsDir + 'rast_D.png', dpi=400)
 
         def rast_S22_1():
             if sinonimi_u_legendi == False:
@@ -705,21 +679,57 @@ def growth_over_time():
 
             # plt.ylabel("$S_{22}$ [kPa]")
             plt.ylabel("${\sigma}_{22}$ [kPa]")
-            plt.xlabel("Time [days]")
-            plt.ylim([30,400])
-            plt.text(-500, -20, "$d)$" )
+            plt.xlabel("$s$ [days]")
+            plt.ylim([60,420])
+            plt.text(-500, 0, "$d)$" )
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
-            fig.subplots_adjust(left=0.18)
-            fig.subplots_adjust(bottom=0.18)
-            # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-            #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+            fig.subplots_adjust(left=0.18, bottom=0.18)
             plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
+                       handlelength=1.8, bbox_to_anchor=(-0.027, 1.035))
             if picture_save == True:
-                fig.savefig(diagramsDir + 'rast_S22_1.png', dpi=55)
+                fig.savefig(diagramsDir + 'rast_S22_1.png', dpi=400)
+
+        def ILT_volume_f():
+            if sinonimi_u_legendi == False:
+                plt.plot(days, Volume_ILT, label=(simul))
+            elif sinonimi_u_legendi == True:
+                plt.plot(days, Volume_ILT, label=(sinonimi[simul]))
+
+            plt.ylabel("$V_{\mathrm{ILT}}$ [cm$^3$]")
+            plt.xlabel("$s$ [days]")
+            plt.text(-600, -2.6, "$c)$" )
+
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            fig = plt.gcf()
+            fig.subplots_adjust(left=0.18, bottom=0.18)
+
+            plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(-0.027, 1.035))
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'rast_Volume_ILT.png', dpi=400)
 
 
+
+
+
+        def rast_H():
+            if sinonimi_u_legendi == False:
+                plt.plot(days, H, label=(simul))
+            elif sinonimi_u_legendi == True:
+                plt.plot(days, H, label=(sinonimi[simul]))
+
+            plt.title("Aneurysm height: ")
+            plt.ylabel("Height [mm]")
+            plt.xlabel("$s$ [days]")
+            plt.grid(which='both', linestyle='--', linewidth='0.5')
+            fig = plt.gcf()
+            fig.subplots_adjust(left=0.15)
+            fig.subplots_adjust(bottom=0.18)
+
+            plt.legend()
+            if picture_save == True:
+                fig.savefig(diagramsDir + 'rast_H.png', dpi=300)
         def rast_S22_7():
             if sinonimi_u_legendi == False:
                 plt.plot(days, S22_max_7, label=(simul))
@@ -728,7 +738,7 @@ def growth_over_time():
 
             plt.title("Circumferential Stress growth")
             plt.ylabel("Circumferential Stress [kPa]")
-            plt.xlabel("Time [days]")
+            plt.xlabel("$s$ [days]")
             plt.ylim([30,350])
             plt.text(-500, -20, "$d)$" )
 
@@ -744,9 +754,6 @@ def growth_over_time():
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_S22_7.png', dpi=300)
         # rast_S22_7()
-
-
-
         def rast_Z_max_naprezanja():
 
             if sinonimi_u_legendi == False:
@@ -755,7 +762,7 @@ def growth_over_time():
                 plt.plot(days, Z_S22_is_max, label=(sinonimi[simul]))
             # plt.title("Height for maximal circumferential stress")
             plt.ylabel("H [mm]")
-            plt.xlabel("Time [days]")
+            plt.xlabel("$s$ [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
@@ -765,7 +772,6 @@ def growth_over_time():
                        handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Z_for_S22_max.png', dpi=300)
-
         def rast_Z_over_S22_abs():
             if sinonimi_u_legendi == False:
                 plt.plot(days, Z_S22_abs_is_max, label=(simul))
@@ -774,7 +780,7 @@ def growth_over_time():
 
             # plt.title("Height for maximal circumferential stress")
             plt.ylabel("$H$ [mm]")
-            plt.xlabel("Time [days]")
+            plt.xlabel("$s$ [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             fig = plt.gcf()
             fig.subplots_adjust(left=0.15)
@@ -783,7 +789,6 @@ def growth_over_time():
             #            handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Z_over_S22_abs.png', dpi=300)
-
         def ILT_thickness():
             if sinonimi_u_legendi == False:
                 plt.plot(days, ILT_thickness_max, label=(simul))
@@ -792,7 +797,7 @@ def growth_over_time():
 
             plt.title("Maximal ILT thickness ")
             plt.ylabel("ILT thickness [mm]")
-            plt.xlabel("Time [days]")
+            plt.xlabel("$s$ [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
 
             fig = plt.gcf()
@@ -804,7 +809,6 @@ def growth_over_time():
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_ILT_th.png', dpi=300)
         # ILT_thickness()
-
         def ILT_surface_f():
             if sinonimi_u_legendi == False:
                 plt.plot(days, ILT_surface, label=(simul))
@@ -813,7 +817,7 @@ def growth_over_time():
 
             plt.title("ILT surface")
             plt.ylabel("ILT surface [mm$^2$]")
-            plt.xlabel("Time [days]")
+            plt.xlabel("$s$ [days]")
             plt.grid(which='both', linestyle='--', linewidth='0.5')
             # plt.legend()
             fig = plt.gcf()
@@ -825,29 +829,6 @@ def growth_over_time():
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_ILT_surface_f.png', dpi=300)
         # ILT_surface_f()
-
-        def ILT_volume_f():
-            if sinonimi_u_legendi == False:
-                plt.plot(days, Volume_ILT, label=(simul))
-            elif sinonimi_u_legendi == True:
-                plt.plot(days, Volume_ILT, label=(sinonimi[simul]))
-
-            # plt.title("ILT Volume")
-            plt.ylabel("$V_{\mathrm{ILT}}$ [mm$^3$]")
-            plt.xlabel("Time [days]")
-            plt.text(-600, -2600, "$c)$" )
-
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            fig = plt.gcf()
-            fig.subplots_adjust(left=0.20)
-            fig.subplots_adjust(bottom=0.18)
-
-            plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(-0.021, 1.028))
-            if picture_save == True:
-                fig.savefig(diagramsDir + 'rast_Volume_ILT.png', dpi=55)
-
-        # Ima li ovo smisla???
         def rast_vein_thickness():
             color = next(plt.gca()._get_lines.prop_cycler)['color']
             plt.plot(timeStep, vein_thickness_max, label=(simul))
@@ -858,9 +839,8 @@ def growth_over_time():
             plt.legend()
 
 
-
         # rast_D()
-        ILT_volume_f()
+        # ILT_volume_f()
         # rast_S22_1()
 
 

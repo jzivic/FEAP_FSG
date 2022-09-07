@@ -258,7 +258,18 @@ simulationsData_dict_38 = {
                           ]
                      },
 
+                "//home/josip/feap/FSG/automatizacija_38/":
+                    {"version": "new",
+
+                     "simulations":
+                         [
+                            "tawss_turbulent_3"
+                         ]
+                     },
+
+
           }
+
 
 
 

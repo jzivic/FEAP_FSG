@@ -8,20 +8,22 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija32"
+# simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija32"
+simulacija_foam = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4/simulacija60"
 
 
 
 FF_system = False
-prepravljanje_OSI_ECAP = False
-pictures_save = True
+prepravljanje_OSI_ECAP = False      # rješavanje skokova na ulazu
+pictures_save = False
 
 
 
 class AveragingParameters:
     
     def __init__(self, Case ):
-        foam_time = 2
+        # foam_time = 2
+        foam_time = 1.3
         self.simulation_name = Case.split("/")[-1]
 
 
@@ -52,9 +54,9 @@ class AveragingParameters:
         self.write_parameter("ECAP")
         self.write_parameter("OSI")
 
-        self.plot_parameter("TAWSS")
-        self.plot_parameter("OSI")
-        self.plot_parameter("ECAP")
+        # self.plot_parameter("TAWSS")
+        # self.plot_parameter("OSI")
+        # self.plot_parameter("ECAP")
 
 
 
