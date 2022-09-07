@@ -23,7 +23,7 @@ class AveragingParameters:
     
     def __init__(self, Case ):
         # foam_time = 2
-        foam_time = 1.3
+        foam_time = 1.5
         self.simulation_name = Case.split("/")[-1]
 
 
