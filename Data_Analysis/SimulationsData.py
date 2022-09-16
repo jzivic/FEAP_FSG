@@ -96,33 +96,33 @@ simulationsData_dict_36 = {
                           ]
                      },
 
-                "//home/josip/feap/FSG/automatizacija_36/OSI/GREATER/":
-                    {"version": "new",
-
-                     "simulations":
-                         [
-                             # "osi_gt_0375",
-                             # "osi_gt_0400",
-                             # "osi_gt_0425",
-                             # "osi_gt_0450",
-                             # "osi_gt_04625",
+                # "//home/josip/feap/FSG/automatizacija_36/OSI/GREATER/":
+                #     {"version": "new",
                 #
-                             "osi_gt_04675",        # 3. runda
-                             "osi_gt_04725",        # 3. runda
+                #      "simulations":
+                #          [
+                #              # "osi_gt_0375",
+                #              # "osi_gt_0400",
+                #              # "osi_gt_0425",
+                #              # "osi_gt_0450",
+                #              # "osi_gt_04625",
+                # #
+                #              "osi_gt_04675",        # 3. runda
+                #              "osi_gt_04725",        # 3. runda
+                # #
+                # #              "osi_gt_0475",
+                # #              "osi_gt_0500",
                 #
-                #              "osi_gt_0475",
-                #              "osi_gt_0500",
-
-
-                             "osi_gt_046250_from_0",
-                             "osi_gt_04650_from_0",
-                             "osi_gt_04675_from_0_2",
-
-                            "osi_gt_f70_04700_n_2"
-
-
-                         ]
-                     },
+                #
+                #              "osi_gt_046250_from_0",
+                #              "osi_gt_04650_from_0",
+                #              "osi_gt_04675_from_0_2",
+                #
+                #             "osi_gt_f70_04700_n_2"
+                #
+                #
+                #          ]
+                #      },
 
                 "//home/josip/feap/FSG/automatizacija_36/OSI/lower/":
                     {"version": "new",
@@ -131,37 +131,37 @@ simulationsData_dict_36 = {
                          [
 
                                 "osi_le_0250",
-                                "osi_le_0275",
-                                "osi_le_0300",
-                                "osi_le_0325",
-                                "osi_le_0350_2",
+                                # "osi_le_0275",
+                                # "osi_le_0300",
+                                # "osi_le_0325",
+                                # "osi_le_0350_2",
                          ]
                      },
 
 
-                "//home/josip/feap/FSG/automatizacija_36/ECAP/GREATER/":
-                    {"version": "new",
-
-                     "simulations":
-                         [
-                            # "ecap_gt_145",
-                            ###"ecap_gt_14625",    # ovo
-                            ###"ecap_gt_14750",
-                            ###"ecap_gt_14825",
-
-                             "ecap_gt_14625_2",     # 2. runda
-                             "ecap_gt_14750_2",     # 2. runda
-                             "ecap_gt_14825_3",     # 2. runda
-
-                             "ecap_gt_150",
-                             "ecap_gt_150_2",       # 3. runda
-                             "ecap_gt_155",
-                             "ecap_gt_160",
-
-                             "ecap_gt_150_from_0",
-
-                         ]
-                     },
+                # "//home/josip/feap/FSG/automatizacija_36/ECAP/GREATER/":
+                #     {"version": "new",
+                #
+                #      "simulations":
+                #          [
+                #             # "ecap_gt_145",
+                #             ###"ecap_gt_14625",    # ovo
+                #             ###"ecap_gt_14750",
+                #             ###"ecap_gt_14825",
+                #
+                #              "ecap_gt_14625_2",     # 2. runda
+                #              "ecap_gt_14750_2",     # 2. runda
+                #              "ecap_gt_14825_3",     # 2. runda
+                #
+                #              "ecap_gt_150",
+                #              "ecap_gt_150_2",       # 3. runda
+                #              "ecap_gt_155",
+                #              "ecap_gt_160",
+                #
+                #              "ecap_gt_150_from_0",
+                #
+                #          ]
+                #      },
 
 
                 "//home/josip/feap/FSG/automatizacija_36/ECAP/lower/":
@@ -169,10 +169,10 @@ simulationsData_dict_36 = {
 
                      "simulations":
                          [
-                             "ecap_le_065",
+                             # "ecap_le_065",
                              "ecap_le_070",
-                             "ecap_le_075",
-                             "ecap_le_080",
+                             # "ecap_le_075",
+                             # "ecap_le_080",
                          ]
                      },
 

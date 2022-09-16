@@ -7,19 +7,16 @@ plt.rc('font', **font)
 plt.rcParams['mathtext.fontset'] = 'stix'
 
 # case = "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson"
-# case = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_40_2"
 case = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4"
 
 
-# simulations_times = {60:[1.2, 1.3, 2]}     # broj simulacije -> korak u simulaciji
 
 simulations_times = {1:[2], 30:[2], 60:[2]}
-
-simulations_times = {60:[1.25, 1.35, 1.50]}
-
+# simulations_times = {60:[1.25,1.3, 1.50]}
 
 
-picture_save = False
+
+picture_save = True
 already_averaged = True
 
 viscosity = 5e-6*1060
@@ -38,12 +35,8 @@ fig_x, fig_y = 6.6, 6.6
 
 class VadenjePodataka_FOAM:
     def __init__(self, Case, god="n"):
-        # foam_time = 2
-        # foam_time = 1.3
 
         self.data_dict = {"r":[], "z":[], "TAWSS":[], "OSI":[],"ECAP":[], "shear_rate":[] }
-        # self.data_dict = {"r":[], "z":[], "TAWSS":[], "OSI":[],"ECAP":[]}
-
 
         for sim_broj in simulations_times.keys():
             for foam_time in simulations_times[sim_broj]:
@@ -75,8 +68,9 @@ class VadenjePodataka_FOAM:
             # self.Plot_OSI()
             # self.Plot_ECAP()
             # self.Plot_shear_rate()
-        # self.Plot_shear_rate_Average()
-        self.Plot_shear_rate_cycle()
+
+        self.Plot_shear_rate_Average()
+        # self.Plot_shear_rate_cycle()
 
 
 
@@ -279,9 +273,11 @@ class VadenjePodataka_FOAM:
         plt.ylabel("$z$ [mm]")
         plt.xlabel("TASR [1/s]")
 
-        plt.text(60, 190, "Casson")
-        plt.text(142, 190, "Tr.")
-        plt.text(200, 190, "Newtonian")
+        plt.text(60, 190, "C")
+        plt.text(144, 190, "T")
+        plt.text(200, 190, "N")
+        plt.text(20, 30, "$a)$")
+
 
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
@@ -290,11 +286,12 @@ class VadenjePodataka_FOAM:
         if picture_save == True:
             fig.subplots_adjust(left=adj_left)
             fig.subplots_adjust(bottom=adj_bottom)
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/shear_rate.png", dpi=300)
+            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0253))
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/shear_rate_Avg.png", dpi=300)
         elif picture_save == False:
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, -0.0253))
-
             plt.show()
 
 
@@ -306,8 +303,7 @@ class VadenjePodataka_FOAM:
         abc = ["A", "B", "C"]
         for sim in simulations_times.keys():
             for moment in simulations_times[sim]:
-                # plt.plot(self.data_DF["shear_rate"][n_count], self.data_DF["z"][n_count], label="$s=$"+str(round((moment-1),2))+"s")
-                plt.plot(self.data_DF["shear_rate"][n_count], self.data_DF["z"][n_count], label=abc[n_count])
+                plt.plot(self.data_DF["shear_rate"][n_count], self.data_DF["z"][n_count], label="$t=$"+str(round((moment-1),2))+"s")
                 n_count +=1
 
         plt.ylim(50,200)
@@ -317,11 +313,12 @@ class VadenjePodataka_FOAM:
         plt.axvline(x=160, linestyle='--', color="grey")
 
         plt.ylabel("$z$ [mm]")
-        plt.xlabel("shear rate [1/s]")
+        plt.xlabel("Shear rate [1/s]")
 
-        plt.text(-20, 190, "Casson")
-        plt.text(135, 190, "Tr.")
-        plt.text(230, 190, "Newt")
+        plt.text(-35, 190, "C")
+        plt.text(134, 190, "T")
+        plt.text(230, 190, "N")
+        plt.text(-150, 30, "$b)$")
 
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
@@ -330,7 +327,9 @@ class VadenjePodataka_FOAM:
         if picture_save == True:
             fig.subplots_adjust(left=adj_left)
             fig.subplots_adjust(bottom=adj_bottom)
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/shear_rate.png", dpi=300)
+            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(1.026, 0.795))
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/shear_rate_cycle.png", dpi=300)
         elif picture_save == False:
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, bbox_to_anchor=(1.026, 0.795))

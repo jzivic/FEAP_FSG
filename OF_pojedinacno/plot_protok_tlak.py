@@ -38,6 +38,14 @@ for row in read_flow:
 def Plot_flow():
     fig = plt.figure(dpi=200)
     plt.plot(time_flow, Q)
+
+    plt.scatter(0.243, 108, color="black", label="A")
+    plt.text(0.26, 106, "A")
+    plt.scatter(0.30, 80, color="black", label="A")
+    plt.text(0.32, 80, "B")
+    plt.scatter(0.475, -17.6, color="black", label="C")
+    plt.text(0.475, -14,"C")
+
     plt.title("Volume flow inlet rate ")
     plt.ylabel("Volume flow rate [cm$^{3}$/s]")
     plt.xlabel("Time [sec]")
@@ -63,6 +71,14 @@ for row in read_pressure:
 def Plot_pressure():
     fig = plt.figure(dpi=200)
     plt.plot(time_pressure, pressure, label="pressure")
+
+    plt.scatter(0.239, 14.48, color="black", label="A")
+    plt.text(0.239, 14.48, color="black", label="A")
+    plt.scatter(0.333, 15.48, color="black", label="A")
+    plt.text(0.333, 15.48, color="black", label="A")
+    plt.scatter(0.48, 13.65, color="black", label="C")
+
+
     plt.title("Pressure outlet ")
     plt.ylabel("Pressure [kPa]")
     plt.xlabel("Time [sec]")
@@ -73,7 +89,7 @@ def Plot_pressure():
     fig.subplots_adjust(left=0.16)
     plt.show()
 
-Plot_pressure()
+# Plot_pressure()
 
 
 
