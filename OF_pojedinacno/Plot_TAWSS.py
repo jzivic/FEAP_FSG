@@ -59,8 +59,8 @@ class VadenjePodataka:
         elif self.oblik =="axial":
             self.Filtriranje()
 
-        self.Plot_TAWSS()
-        # self.Plot_radius()
+        # self.Plot_TAWSS()
+        self.Plot_radius()
 
 
     def CitanjeKoordinata(self):

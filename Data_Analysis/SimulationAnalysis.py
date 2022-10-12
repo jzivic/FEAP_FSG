@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 import matplotlib.animation as ani
 
 
-picture_save = True
+picture_save = False
 sinonimi_u_legendi = True
 
 
@@ -152,8 +152,8 @@ sinonimi_38 = {
                     # "a3=40":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 40 mm",
 
                     "casson": "$\Delta z_{\mathrm{MED}}={\mathrm{20mm}}$",
-                    "a3=30": "$\Delta z_{\mathrm{MED}}={\mathrm{30mm}}$",
-                    "a3=40": "$\Delta z_{\mathrm{MED}}={\mathrm{40mm}}$",
+                    # "a3=30": "$\Delta z_{\mathrm{MED}}={\mathrm{30mm}}$",
+                    # "a3=40": "$\Delta z_{\mathrm{MED}}={\mathrm{40mm}}$",
 
                     # "casson": "Casson",
                     # "tawss_turbulent_3": "turbulent",
@@ -199,7 +199,7 @@ ts_from_sim = lambda sim: 100 + (sim-1)*3
 #   ZA ECAP_0.70:  6,20,45
 
 graf_slovo="a"
-times = [ts_from_sim(6)]
+times = [ts_from_sim(6), ts_from_sim(22)]
 
 chosen_layer = 1
 
@@ -336,6 +336,7 @@ def time_analysis(times):
                     fig.savefig(diagramsDir + 'ILT_inner_cont.png', dpi=300)
                 elif picture_save == False:
                     plt.show()
+
             # ILT_inner_cont()
             def stress_cont():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -367,8 +368,6 @@ def time_analysis(times):
             # vein_thickness_f()
 
             def dupli_graf_TAWSS():
-
-
 
                 Z_cont_DG, inner_cont_DG, ILT_cont_DG  = Z_cont, inner_cont, ILT_cont
                 Z_cont_DG.append(Z_cont_DG[-1])
@@ -541,11 +540,13 @@ def time_analysis(times):
 
                 elif picture_save == False:
                     plt.show()
-            dupli_graf_ECAP()
+            # dupli_graf_ECAP()
 
 
         if picture_save == False:
             plt.show()
+
+
 # time_analysis(times)
 
 
@@ -601,155 +602,163 @@ def animate_radial_stress_by_layers(i_help=int):
 
 # 12, 13.7, 15      # tawss
 
-r = 11.5
-wanted_D = r*2
+radii = [12, 15]
+diameters = [ i*2 for i in radii]
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
 
 # plt.figure(figsize=(4, 7), dpi=100)        # 3 in line
 plt.figure(figsize=(4.2, 7.4), dpi=100)       # 3 in line
 
-
 def diameter_analysis():
     fig = plt.gcf()
 
-    # for simul in simulation_names:
-    for simul in sinonimi.keys():
+    for r in radii:
 
-        nearest_diameter = min(all_data.loc[simul]["D_inner_max"], key=lambda x: abs(x-wanted_D))         # najbliža vrijednost
-        index = list(all_data.loc[simul]["D_inner_max"]).index(nearest_diameter)
-        time = all_data.loc[simul]["timeStep"][index]
+        # for simul in simulation_names:
+        for simul in sinonimi.keys():
 
-        inner_cont = all_data.loc[simul]["inner_contours"][index]
-        ILT_cont = all_data.loc[simul]["ILT_contours"][index]
-        outer_cont = all_data.loc[simul]["outer_contours"][index]
-        Z_cont = all_data.loc[simul]["Z_contours"][index]
-        ILT_thickness_cont = all_data.loc[simul]["ILT_thickness_contours"][index]
-        vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
-        S22_cont = all_data.loc[simul]["S22_contours"][index][:,chosen_layer]
+            nearest_diameter = min(all_data.loc[simul]["D_inner_max"], key=lambda x: abs(x-r*2))         # najbliža vrijednost
+            index = list(all_data.loc[simul]["D_inner_max"]).index(nearest_diameter)
+            time = all_data.loc[simul]["timeStep"][index]
 
-        def vertical_contours_3_in_line():
-            font = {'family': 'Times New Roman',
-                    'size': 22}
-            plt.rc('font', **font)
-            plt.rcParams['mathtext.fontset'] = 'stix'
+            inner_cont = all_data.loc[simul]["inner_contours"][index]
+            ILT_cont = all_data.loc[simul]["ILT_contours"][index]
+            outer_cont = all_data.loc[simul]["outer_contours"][index]
+            Z_cont = all_data.loc[simul]["Z_contours"][index]
+            ILT_thickness_cont = all_data.loc[simul]["ILT_thickness_contours"][index]
+            vein_thickness = all_data.loc[simul]["vein_thickness_contours"][index]
+            S22_cont = all_data.loc[simul]["S22_contours"][index][:,chosen_layer]
 
-            print(index)
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
-            if sinonimi_u_legendi == False:
-                plt.plot(inner_cont, Z_cont, c=color,linewidth='2', label=(simul))
-            elif sinonimi_u_legendi == True:
-                plt.plot(inner_cont, Z_cont, c=color,linewidth='2', label=(sinonimi[simul]))
 
-            plt.plot(ILT_cont, Z_cont, linestyle=':', linewidth='2', c=color, )
-            plt.xlabel("$r$ [mm]")
-            plt.ylabel("$z$ [mm]")
-            plt.figtext(0.1,0.065, "$a)$" )         # bolja pozicija texta !!a
-            plt.ylim([30, 190])
-            # plt.xlim([6, 16.2])
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            fig.subplots_adjust(left=0.26, top=0.93, bottom=0.15, right=0.91)
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.03, handletextpad=0.1,
-                       handlelength=0.8, bbox_to_anchor=(1.052, -0.024))
+            def vertical_contours_3_in_line():
+                font = {'family': 'Times New Roman',
+                        'size': 22}
+                plt.rc('font', **font)
+                plt.rcParams['mathtext.fontset'] = 'stix'
 
-            if picture_save == True:
-                fig.savefig(diagramsDir + 'vertical_contours_'+str(r)+'.png', dpi=100)
+                print(index)
+                color = next(plt.gca()._get_lines.prop_cycler)['color']
+                if sinonimi_u_legendi == False:
+                    plt.plot(inner_cont, Z_cont, c=color,linewidth='2', label=(simul))
+                elif sinonimi_u_legendi == True:
+                    # plt.plot(inner_cont, Z_cont, c=color,linewidth='2', label=(sinonimi[simul]))
+                    # if radii.index(r) == 0:
+                    plt.plot(inner_cont, Z_cont, c=color,linewidth='2', label="ILT wall")
+
+                # plt.plot(ILT_cont, Z_cont, linestyle=':', linewidth='2', c=color, )
+                plt.plot(ILT_cont, Z_cont, linestyle=':', linewidth='2', c=color, label="inner wall")
 
 
 
-        def vertical_contours():
-            font = {'family': 'Times New Roman',
-                    'size': 20}
-            plt.rc('font', **font)
-            plt.rcParams['mathtext.fontset'] = 'stix'
+                plt.xlabel("$r$ [mm]")
+                plt.ylabel("$z$ [mm]")
+                # plt.figtext(0.1,0.065, "$a)$" )         # bolja pozicija texta !!a
+                plt.ylim([30, 190])
+                # plt.xlim([6, 16.2])
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+                fig.subplots_adjust(left=0.26, top=0.93, bottom=0.15, right=0.91)
+                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.03, handletextpad=0.1,
+                           handlelength=0.8, bbox_to_anchor=(1.052, -0.024))
 
-            print(index)
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
-            if sinonimi_u_legendi == False:
-                plt.plot(inner_cont, Z_cont, c=color, label=(simul))
-            elif sinonimi_u_legendi == True:
-                plt.plot(inner_cont, Z_cont, c=color, label=(sinonimi[simul]))
+                if picture_save == True:
+                    fig.savefig(diagramsDir + 'vertical_contours_'+str(r)+'.png', dpi=100)
 
-            plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
-            plt.xlabel("$r$ [mm]")
-            plt.ylabel("$z$ [mm]")
-            plt.text(8.6, -5, "$b)$" )
-            plt.ylim([20, 190])
-            plt.xlim([9.5, 15.11])
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            fig.subplots_adjust(left=0.20, top=0.91, bottom=0.2, right=0.91)
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.03, handletextpad=0.1,
-                       handlelength=0.8, bbox_to_anchor=(1.026, -0.033))
 
-            if picture_save == True:
-                fig.savefig(diagramsDir + 'vertical_contours_'+str(r)+'.png', dpi=400)
 
-        def ILT_inner_cont():
-            print(index)
-            adj_left, adj_bottom = 0.25, 0.15
-            fig_x, fig_y = 6.6, 6.6
+            def vertical_contours():
+                font = {'family': 'Times New Roman',
+                        'size': 20}
+                plt.rc('font', **font)
+                plt.rcParams['mathtext.fontset'] = 'stix'
 
-            fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
+                print(index)
+                color = next(plt.gca()._get_lines.prop_cycler)['color']
+                if sinonimi_u_legendi == False:
+                    plt.plot(inner_cont, Z_cont, c=color, label=(simul))
+                elif sinonimi_u_legendi == True:
+                    plt.plot(inner_cont, Z_cont, c=color, label=(sinonimi[simul]))
 
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(inner_cont, Z_cont, c=color, label="inner wall")
-            plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, label="ILT wall")
+                plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
+                plt.xlabel("$r$ [mm]")
+                plt.ylabel("$z$ [mm]")
+                plt.text(8.6, -5, "$b)$" )
+                plt.ylim([20, 190])
+                plt.xlim([9.5, 15.11])
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+                fig.subplots_adjust(left=0.20, top=0.91, bottom=0.2, right=0.91)
+                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.03, handletextpad=0.1,
+                           handlelength=0.8, bbox_to_anchor=(1.026, -0.033))
 
-            # plt.title("ILT and inner contours")
-            plt.ylabel("$z$ [mm]")
-            plt.xlabel("$r$ [mm]")
-            plt.text(5, -15, "$a)$")
-            plt.xlim([7, 18])
-            plt.ylim(40, 210)
-            plt.text(5, 20, "$a)$")
-            fig.subplots_adjust(left=adj_left, bottom=adj_bottom)
+                if picture_save == True:
+                    fig.savefig(diagramsDir + 'vertical_contours_'+str(r)+'.png', dpi=400)
 
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+            def ILT_inner_cont():
+                print(index)
+                adj_left, adj_bottom = 0.25, 0.15
+                fig_x, fig_y = 6.6, 6.6
 
-            # ovo zakomentirati ako želim sve odjednom plotati
-            if picture_save == True:
-                fig.savefig(diagramsDir + 'ILT_inner_cont.png', dpi=300)
-            elif picture_save == False:
-                plt.show()
+                fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
 
-        def stress_cont():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
-            if sinonimi_u_legendi == False:
-                plt.plot(S22_cont, Z_cont, c=color, label=(simul + ", TS: " + str(time)))
-            elif sinonimi_u_legendi == True:
-                plt.plot(S22_cont, Z_cont, c=color, label=(sinonimi[simul] + ", TS: " + str(time)))
-            # plt.title(str(trenutak) + ". korak")
-            plt.xlabel("Stress S22 [kPa]")
-            plt.ylabel("Axial coordinate $z$ [mm]")
-            plt.ylim([0, 250])
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            plt.legend()
+                color = next(plt.gca()._get_lines.prop_cycler)['color']
+                plt.plot(inner_cont, Z_cont, c=color, label="inner wall")
+                plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, label="ILT wall")
 
-            fig.subplots_adjust(left=0.20)
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-            if picture_save == True:
-                fig.savefig(diagramsDir + 'stress_cont.png', dpi=300)
+                # plt.title("ILT and inner contours")
+                plt.ylabel("$z$ [mm]")
+                plt.xlabel("$r$ [mm]")
+                plt.text(5, -15, "$a)$")
+                plt.xlim([7, 18])
+                plt.ylim(40, 210)
+                plt.text(5, 20, "$a)$")
+                fig.subplots_adjust(left=adj_left, bottom=adj_bottom)
 
-        def ILT_thickness_f():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(Z_cont, ILT_thickness_cont, c=color, label=(simul+", TS: "+str(time)))
-            plt.title("ILT thickness, D="+str(wanted_D)+"mm")
-            plt.ylabel("Thickness [mm]")
-            plt.xlabel("Axial coordinate $z$ [mm]")
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            plt.legend()
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                           handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
 
-        def vein_thickness_f():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
-            plt.plot(Z_cont, vein_thickness, linestyle='-', c=color, label=(simul+", TS: "+str(time)))
-            plt.title("Vein thickness: ")
-            plt.ylabel("Thickness [mm]")
-            plt.xlabel("Axial coordinate $z$ [mm]")
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            plt.legend()
+                # ovo zakomentirati ako želim sve odjednom plotati
+                if picture_save == True:
+                    fig.savefig(diagramsDir + 'ILT_inner_cont.png', dpi=300)
+                elif picture_save == False:
+                    plt.show()
+
+            def stress_cont():
+                color = next(plt.gca()._get_lines.prop_cycler)['color']
+                if sinonimi_u_legendi == False:
+                    plt.plot(S22_cont, Z_cont, c=color, label=(simul + ", TS: " + str(time)))
+                elif sinonimi_u_legendi == True:
+                    plt.plot(S22_cont, Z_cont, c=color, label=(sinonimi[simul] + ", TS: " + str(time)))
+                # plt.title(str(trenutak) + ". korak")
+                plt.xlabel("Stress S22 [kPa]")
+                plt.ylabel("Axial coordinate $z$ [mm]")
+                plt.ylim([0, 250])
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+                plt.legend()
+
+                fig.subplots_adjust(left=0.20)
+                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                           handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+                if picture_save == True:
+                    fig.savefig(diagramsDir + 'stress_cont.png', dpi=300)
+
+            def ILT_thickness_f():
+                color = next(plt.gca()._get_lines.prop_cycler)['color']
+                plt.plot(Z_cont, ILT_thickness_cont, c=color, label=(simul+", TS: "+str(time)))
+                plt.title("ILT thickness, D="+str(wanted_D)+"mm")
+                plt.ylabel("Thickness [mm]")
+                plt.xlabel("Axial coordinate $z$ [mm]")
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+                plt.legend()
+
+            def vein_thickness_f():
+                color = next(plt.gca()._get_lines.prop_cycler)['color']
+                plt.plot(Z_cont, vein_thickness, linestyle='-', c=color, label=(simul+", TS: "+str(time)))
+                plt.title("Vein thickness: ")
+                plt.ylabel("Thickness [mm]")
+                plt.xlabel("Axial coordinate $z$ [mm]")
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+                plt.legend()
 
 
         # ILT_inner_cont()
@@ -763,9 +772,7 @@ def diameter_analysis():
 
     if picture_save == False:
         plt.show()
-
-
-# diameter_analysis()
+diameter_analysis()
 
 
 
@@ -1051,7 +1058,7 @@ def growth_over_time():
     if picture_save == False:
         plt.show()
 
-growth_over_time()
+# growth_over_time()
 
 
 

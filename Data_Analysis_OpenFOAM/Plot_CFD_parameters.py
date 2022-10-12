@@ -16,7 +16,7 @@ simulations_times = {1:[2], 30:[2], 60:[2]}
 
 
 
-picture_save = True
+picture_save = False
 already_averaged = True
 
 viscosity = 5e-6*1060
@@ -63,15 +63,18 @@ class VadenjePodataka_FOAM:
             self.data_DF = pd.DataFrame(self.data_dict)
 
 
-            ##self.Plot_radius()
+            # self.Plot_radius()
             # self.Plot_TAWSS()
             # self.Plot_OSI()
             # self.Plot_ECAP()
             # self.Plot_shear_rate()
 
-        self.Plot_shear_rate_Average()
-        # self.Plot_shear_rate_cycle()
 
+        self.Plot_radius_NOVI()
+        plt.show()
+
+        # self.Plot_shear_rate_Average()
+        # self.Plot_shear_rate_cycle()
 
 
     def Koordinate_reading(self):
@@ -91,7 +94,6 @@ class VadenjePodataka_FOAM:
                 z.append(float(red[2])*1000)
         self.data_dict["r"].append(r)
         self.data_dict["z"].append(z)
-
     def TAWSS_shear_rate_reading(self):
         TAWSS, shear_rate = [], []
         write_TAWSS = False
@@ -108,8 +110,6 @@ class VadenjePodataka_FOAM:
                 shear_rate.append(float(red)/viscosity)
         self.data_dict["TAWSS"].append(TAWSS)
         self.data_dict["shear_rate"].append(shear_rate)
-
-
     def OSI_reading(self):
         OSI = []
         write_OSI = False
@@ -124,7 +124,6 @@ class VadenjePodataka_FOAM:
             if write_OSI == True:
                 OSI.append(float(red))
         self.data_dict["OSI"].append(OSI)
-
     def ECAP_reading(self):
         ECAP = []
         write_ECAP = False
@@ -142,28 +141,61 @@ class VadenjePodataka_FOAM:
 
 
 
-    # def Plot_radius(self):
-    #     fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-    #
-    #     plt.clf()
-    #
-    #     plt.plot(self.data_DF["r"], self.data_DF["z"], label=self.simulation_name)
-    #     plt.title("Radius")
-    #     plt.ylabel("$z$ [mm]")
-    #     plt.xlabel("$r$ [mm]")
-    #     plt.xlim([7, 18])
-    #     plt.ylim(40, 210)
-    #     plt.text(5.5, 20, "$a)$")
-    #     plt.grid(which='both', linestyle='--', linewidth='0.5')
-    #     fig = plt.gcf()
-    #     fig.subplots_adjust(left=adj_left)
-    #     fig.subplots_adjust(bottom=adj_bottom)
-    #     if picture_save == True:
-    #         fig.subplots_adjust(left=adj_left)
-    #         fig.subplots_adjust(bottom=adj_bottom)
-    #         fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
-    #     elif picture_save == False:
-    #         plt.show()
+    def Plot_radius(self):
+        fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
+        plt.clf()
+        plt.plot(self.data_DF["r"][0], self.data_DF["z"][0], label=self.simulation_name)
+        plt.title("Radius")
+        plt.ylabel("$z$ [mm]")
+        plt.xlabel("$r$ [mm]")
+        plt.xlim([7, 18])
+        plt.ylim(40, 210)
+        plt.text(5.5, 20, "$a)$")
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
+        fig = plt.gcf()
+        fig.subplots_adjust(left=adj_left)
+        fig.subplots_adjust(bottom=adj_bottom)
+        if picture_save == True:
+            fig.subplots_adjust(left=adj_left)
+            fig.subplots_adjust(bottom=adj_bottom)
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
+        elif picture_save == False:
+            plt.show()
+
+
+
+    def Plot_radius_NOVI(self):
+        fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
+        plt.clf()
+
+        real_days = lambda sim_number: (100 + sim_number*3)*10
+        n_count = 0
+        for sim in simulations_times.keys():
+            for moment in simulations_times[sim]:
+                plt.plot(self.data_DF["r"][n_count], self.data_DF["z"][n_count], label="$s=$"+str(real_days(sim))+" days")
+                n_count +=1
+        # plt.ylim(50,200)
+        # plt.xlim(50,300)
+        # plt.axvline(x=140, linestyle='--', color="grey")
+        # plt.axvline(x=160, linestyle='--', color="grey")
+        plt.ylabel("$z$ [mm]")
+        plt.xlabel("r [mm]")
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
+        fig = plt.gcf()
+        fig.subplots_adjust(left=adj_left, right=adj_right, bottom=adj_bottom)
+
+        if picture_save == True:
+            fig.subplots_adjust(left=adj_left)
+            fig.subplots_adjust(bottom=adj_bottom)
+            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0253))
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/r_novi.png", dpi=300)
+        elif picture_save == False:
+            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0253))
+            plt.show()
+
+
 
     def Plot_TAWSS(self):
         fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
