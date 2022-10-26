@@ -8,9 +8,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-# simulacija_foam = "//home/josip/feap/FSG/automatizacija_25/Casson/simulacija32"
-simulacija_foam = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4/simulacija60"
-
+simulacija_foam = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4/simulacija8"
+average_moments = [1.25, 1.3, 1.5]
 
 
 FF_system = False
@@ -21,9 +20,9 @@ pictures_save = False
 
 class AveragingParameters:
     
-    def __init__(self, Case ):
+    def __init__(self, Case, foam_time):
         # foam_time = 2
-        foam_time = 1.5
+        self.foam_time = foam_time
         self.simulation_name = Case.split("/")[-1]
 
 
@@ -201,9 +200,11 @@ class AveragingParameters:
 
 
 
-avg = AveragingParameters(simulacija_foam)
+# avg = AveragingParameters(simulacija_foam)
 
 
+for time in average_moments:
+    AveragingParameters(simulacija_foam, time)
 
 
 
