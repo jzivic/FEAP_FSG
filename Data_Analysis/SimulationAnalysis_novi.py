@@ -209,12 +209,6 @@ plt.rcParams['mathtext.fontset'] = 'stix'
 
 
 def time_analysis(times):
-    # fig = plt.figure(figsize=(4.2, 7.4), dpi=100)       # 3 in line
-
-    # fig_x, fig_y = 6, 5
-    # fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-    # fig.subplots_adjust(left=0.18, top=0.91, bottom=0.15, right=0.91)
-
     fig_x, fig_y = 5.2, 7.2
     fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
     adj_left, adj_right, adj_top, adj_bottom = 0.21, 0.86, 0.95, 0.15
@@ -261,25 +255,22 @@ def time_analysis(times):
 
 
             def stress_by_layers():
-                # color = next(plt.gca()._get_lines.prop_cycler)['color']
+                font = {'family': 'Times New Roman',
+                        'size': 20}
+                plt.rc('font', **font)
+                plt.rcParams['mathtext.fontset'] = 'stix'
+                fig = plt.figure(figsize=(6, 5), dpi=100)
+                fig.subplots_adjust(left=0.18, top=0.91, bottom=0.15, right=0.91)
+                plt.grid(which='both', linestyle='--', linewidth='0.5')
+
                 plt.plot(range(1,8), S22_by_layer, label=simul)
-                # plt.title("Circumferential stress through radial layers")
                 plt.xlabel("Radial layer [-]")
                 plt.ylabel("${\sigma}_{22}$ [Pa]")
                 plt.xlim([0, 8])
-                # plt.ylim([170, 290])
-                # plt.title("Circumferential stress through radial layers")
-
-                plt.figtext(0.1,0.065, "$g)$" )         # bolja pozicija texta !!a
-
-                fig = plt.gcf()
-                fig.subplots_adjust(left=0.15)
-                fig.subplots_adjust(bottom=0.18)
-                plt.grid(which='both', linestyle='--', linewidth='0.5')
-
+                plt.figtext(0.1,0.065, "$d)$" )         # bolja pozicija texta !!a
                 if picture_save == True:
                     fig.savefig(diagramsDir + '/stress_through_layers_'+str(times[0]), dpi=300)
-            # stress_by_layers()
+            stress_by_layers()
 
 
             #
