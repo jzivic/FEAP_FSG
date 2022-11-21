@@ -8,8 +8,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-simulacija_foam = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4/simulacija8"
-average_moments = [1.25, 1.3, 1.5]
+
+
+simulacija_foam = "///home/josip/feap/FSG/automatizacija_38/TAWSS/casson/simulacija34"
+average_moments = [3]
 
 
 FF_system = False

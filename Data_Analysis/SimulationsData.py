@@ -273,19 +273,19 @@ simulationsData_dict_38 = {
 
 
 
-pickle_name_casson = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_casson.pickle"
-simulationsData_dict_casson = {
-
-                "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
-                    {"version": "new",
-
-                     "simulations":
-                         [
-                                "casson",
-                          ]
-                     },
-
-          }
+# pickle_name_casson = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_casson.pickle"
+# simulationsData_dict_casson = {
+#
+#                 "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
+#                     {"version": "new",
+#
+#                      "simulations":
+#                          [
+#                                 "casson",
+#                           ]
+#                      },
+#
+#           }
 
 
 pickle_name =pickle_name_38
