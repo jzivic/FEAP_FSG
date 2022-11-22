@@ -10,8 +10,10 @@ import numpy as np
 
 
 
-simulacija_foam = "///home/josip/feap/FSG/automatizacija_38/TAWSS/casson/simulacija34"
-average_moments = [3]
+simulacija_foam = "///home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1/simulacija20"
+simulacija_foam = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4/simulacija22"
+
+average_moments = [2]
 
 
 FF_system = False
@@ -23,7 +25,6 @@ pictures_save = False
 class AveragingParameters:
     
     def __init__(self, Case, foam_time):
-        # foam_time = 2
         self.foam_time = foam_time
         self.simulation_name = Case.split("/")[-1]
 

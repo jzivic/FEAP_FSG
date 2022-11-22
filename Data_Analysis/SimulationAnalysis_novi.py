@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 import matplotlib.animation as ani
 
 
-picture_save = False
+picture_save = True
 sinonimi_u_legendi = True
 
 
@@ -307,9 +307,9 @@ def time_analysis(times):
                     fig.savefig(diagramsDir + 'ILT_th.png', dpi=300)
 
             # vertical_contours()
-            ILT_thickness_f()
+            # ILT_thickness_f()
             # ILT_inner_cont()
-            stress_by_layers()
+            # stress_by_layers()
             # stress_cont()
 
 
@@ -530,7 +530,7 @@ def animate_radial_stress_by_layers(i_help=int):
 #15.71, 15.2, 16
 # 12, 13.7, 15      # tawss
 
-radii = [11.9]
+radii = [13]
 diameters = [ i*2 for i in radii]
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
@@ -568,7 +568,6 @@ def diameter_analysis():
                 plt.xlabel("$r$ [mm]")
                 plt.ylabel("$z$ [mm]")
                 plt.figtext(0.1,0.065, "$a)$" )
-
                 plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.03, handletextpad=0.1,
                            handlelength=0.8, borderaxespad=0.05)
                 if picture_save == True:
@@ -596,9 +595,9 @@ def diameter_analysis():
                     plt.plot(S22_cont, Z_cont, c=color, label=(sinonimi[simul] ))
                 plt.ylabel("$z$ [mm]")
                 plt.xlabel("${\sigma}_{22}$ [Pa]")
-                plt.figtext(0.1,0.065, "$c)$" )
-                # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
+                plt.figtext(0.1,0.065, "$b)$" )
+                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                           handlelength=1.8,  borderaxespad=0.05)
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'stress_cont_'+str(r)+'.png', dpi=300)
 
@@ -608,7 +607,7 @@ def diameter_analysis():
                 plt.plot(ILT_thickness_cont, Z_cont, c=color, label=(sinonimi[simul]))
                 plt.ylabel("$d_{\mathrm{ ILT}}$ [mm]")
                 plt.xlabel("$z$ [mm]")
-                plt.ylim([30, 190])
+                plt.figtext(0.1,0.065, "$a)$" )
                 plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.03, handletextpad=0.1,
                            handlelength=0.8, borderaxespad=0.05)                # SUPER FORA!!!
                 if picture_save == True:
@@ -620,6 +619,7 @@ def diameter_analysis():
 
                 plt.ylabel("Vein thickness [mm]")
                 plt.xlabel("$z$ [mm]")
+                plt.figtext(0.1,0.065, "$a)$" )
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
                 plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.03, handletextpad=0.1,
                            handlelength=0.8, borderaxespad=0.05)                # SUPER FORA!!!
@@ -627,8 +627,8 @@ def diameter_analysis():
                     fig.savefig(diagramsDir + 'vein_thickness_f.png', dpi=300)
 
 
-            # ILT_inner_cont()
-            vertical_contours()
+            ILT_inner_cont()
+            # vertical_contours()
             # stress_cont()
             # ILT_thickness_f()
             # vein_thickness_f()        #?????

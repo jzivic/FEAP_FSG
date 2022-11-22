@@ -9,15 +9,13 @@ plt.rcParams['mathtext.fontset'] = 'stix'
 
 
 picture_save = False
-already_averaged = True
+already_averaged = False
 
 viscosity = 5e-6*1060
 
 
 
-adj_left, adj_right,adj_top, adj_bottom = 0.21, 0.86,0.95, 0.15
-# fig_x, fig_y = 6.2, 6.6
-fig_x, fig_y = 4.6, 6.2
+
 
 
 cases_directory = {
@@ -37,15 +35,16 @@ cases_directory = {
         # "//home/josip/feap/FSG/automatizacija_39/from_0": {1:[4]}
         # "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson": {58: [3]},   # 34, 58
 
-        "//home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1":   {20: [2]}
+        # "//home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1":   {20: [7]},
+        "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4":          {22: [2]}
 
 }
 
 
 
 name_dictionary = {
-                "Newt_turb_53":     "turbulent",
-                "Newt_5":           "laminar",
+                # "Newt_turb_53":     "turbulent",
+                # "Newt_5":           "laminar",
 
                 # "casson": "Casson",
 
@@ -58,18 +57,21 @@ name_dictionary = {
                 # "casson": "Casson",
                 # "BC": "Bird-Carreau",
 
-                "casson": "",
-                "from_0": "",
-                "tawss_turbulent_Newt_1": "turbulent"
+                # "casson": "",
+                # "from_0": "",
+                "tawss_turbulent_Newt_1": "turbulent",
+                "Newt_50_4": "laminar"
 
 }
 
 
+
+
 class VadenjePodataka_FOAM_novo:
+
     def __init__(self, god="n"):
 
         self.data_dict = {"simulation_name":[], "r":[], "z":[], "TAWSS":[], "OSI":[],"ECAP":[], "shear_rate":[], }
-
         for simulation_case in cases_directory:                                 # case
             self.simulation_name = simulation_case.split("/")[-1]
 
@@ -95,11 +97,26 @@ class VadenjePodataka_FOAM_novo:
 
 
 
+
+        real_days = lambda sim_number: (100 + sim_number * 3) * 10
+        self.fig = plt.figure(figsize=(4.6, 6.2), dpi=100)
+        self.fig.subplots_adjust(left=0.21, right=0.86, top=0.95, bottom=0.15)
+
+        plt.clf()
+        plt.ylim(50, 200)
+        plt.ylabel("$z$ [mm]")
+        plt.grid(which='both', linestyle='--', linewidth='0.5')
+
+
         # self.Plot_radius()
-        self.Plot_TAWSS()
+        # self.Plot_TAWSS()
         # self.Plot_OSI()
-        # self.Plot_ECAP()
+        self.Plot_ECAP()
         # self.Plot_shear_rate_Avg()
+
+        if picture_save == False:
+            plt.show()
+
 
     #     # self.Plot_shear_rate_Average()
     #     # self.Plot_shear_rate_cycle()
@@ -198,46 +215,25 @@ class VadenjePodataka_FOAM_novo:
                 ECAP.append(float(red))
         self.data_dict["ECAP"].append(ECAP)
 
+
+
     def Plot_radius(self):
-        fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-        plt.clf()
-        real_days = lambda sim_number: (100 + sim_number*3)*10
         n_count = 0
         for simulation_case in cases_directory:  # case
             for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
                 for foam_time in cases_directory[simulation_case][sim_broj]:    # 2
                     plt.plot(self.data_DF["r"][n_count], self.data_DF["z"][n_count])#, label="$s=$"+str(real_days(sim))+" days")
                     n_count +=1
+                    print(3)
 
-        plt.ylim(50,200)
-        # plt.xlim(9,16)
-        # plt.axvline(x=140, linestyle='--', color="grey")
-        # plt.axvline(x=160, linestyle='--', color="grey")
-        plt.ylabel("$z$ [mm]")
         plt.xlabel("$r$ [mm]")
-        plt.figtext(0.07, 0.05, "$a)$")
-
-        plt.grid(which='both', linestyle='--', linewidth='0.5')
-        fig = plt.gcf()
-        fig.subplots_adjust(left=adj_left, right=adj_right, bottom=adj_bottom)
-
+        plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                   handlelength=1.8, borderaxespad=0.05)
         if picture_save == True:
-            fig.subplots_adjust(left=adj_left)
-            fig.subplots_adjust(bottom=adj_bottom)
-            # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-            #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0253))
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/r_2.png", dpi=300)
-        elif picture_save == False:
-            # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-            #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0253))
-            plt.show()
+            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
+
 
     def Plot_TAWSS(self):
-        fig_x, fig_y = 5.2, 7.2     # za 2
-        fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-        # fig = plt.figure()
-        plt.clf()
-        real_days = lambda sim_number: (100 + sim_number*3)*10
         n_count = 0
         for simulation_case in cases_directory:  # case
             for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
@@ -247,84 +243,56 @@ class VadenjePodataka_FOAM_novo:
                              label=name_dictionary[self.data_DF["simulation_name"][n_count]])
                     n_count +=1
 
-        plt.axvline(x=0.4, linestyle='--', color="red")
-        plt.xlim(0.25, 1)
-        plt.ylim(40, 210)     # turbulencija
-        # plt.ylim(40, 230)
-
-        # plt.title("Time averaged wall shear stress")
-        plt.ylabel("$z$ [mm]")
         plt.xlabel("TAWSS [Pa]")
         plt.figtext(0.07, 0.05, "$b)$")
-        plt.grid(which='both', linestyle='--', linewidth='0.5')
-        fig.subplots_adjust(left=adj_left, top=adj_top, bottom=adj_bottom)
-        # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-        #            handlelength=1.8, borderaxespad=0.05)     # turbulencija
-        # plt.legend()
-
+        plt.axvline(x=0.4, linestyle='--', color="red")
+        plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                   handlelength=1.8, borderaxespad=0.05)
         if picture_save == True:
-            # fig.subplots_adjust(left=adj_left, right=adj_right, bottom=adj_bottom)
-            # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-            #            handlelength=1.8, borderaxespad=0.05)
-
-
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
-        elif picture_save == False:
-            plt.show()
+            self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
 
 
     def Plot_OSI(self):
-        fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-        plt.clf()
-        real_days = lambda sim_number: (100 + sim_number*3)*10
         n_count = 0
         for simulation_case in cases_directory:  # case
             for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
                 for foam_time in cases_directory[simulation_case][sim_broj]:    # 2
-                    plt.plot(self.data_DF["OSI"][n_count], self.data_DF["z"][n_count])#, label="$s=$"+str(real_days(sim))+" days")
+                    plt.plot(self.data_DF["OSI"][n_count], self.data_DF["z"][n_count],
+                             label=name_dictionary[self.data_DF["simulation_name"][n_count]])
                     n_count +=1
 
         plt.xlim(0.18, 0.53)
-        plt.ylim(40, 210)
-        plt.ylabel("$z$ [mm]")
         plt.xlabel("OSI [-]")
         plt.figtext(0.07, 0.05, "$d)$")
-        plt.grid(which='both', linestyle='--', linewidth='0.5')
-        fig = plt.gcf()
-        fig.subplots_adjust(left=adj_left, top=adj_top, bottom=adj_bottom)
+        plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                   handlelength=1.8, borderaxespad=0.05)
         if picture_save == True:
-            fig.subplots_adjust(left=adj_left, top=adj_top, bottom=adj_bottom)
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/OSI.png", dpi=300)
-        elif picture_save == False:
-            plt.show()
+            self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/OSI.png", dpi=300)
 
     def Plot_ECAP(self):
-        fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-        plt.clf()
-
-        real_days = lambda sim_number: (100 + sim_number*3)*10
         n_count = 0
         for simulation_case in cases_directory:  # case
             for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
                 for foam_time in cases_directory[simulation_case][sim_broj]:    # 2
-                    plt.plot(self.data_DF["ECAP"][n_count], self.data_DF["z"][n_count])#, label="$s=$"+str(real_days(sim))+" days")
+                    plt.plot(self.data_DF["ECAP"][n_count], self.data_DF["z"][n_count],
+                             label=name_dictionary[self.data_DF["simulation_name"][n_count]])
                     n_count +=1
 
         # plt.xlim(0.5, 1.5)
-        plt.ylim(40, 210)
-        # plt.title("Endothelium cell activation potential")
-        plt.ylabel("$z$ [mm]")
         plt.xlabel("ECAP [-]")
         plt.figtext(0.07, 0.05, "$e)$")
+        plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                   handlelength=1.8, borderaxespad=0.05)
 
-        plt.grid(which='both', linestyle='--', linewidth='0.5')
-        fig = plt.gcf()
-        fig.subplots_adjust(left=adj_left, top=adj_top, bottom=adj_bottom)
         if picture_save == True:
-            fig.subplots_adjust(left=adj_left, top=adj_top, bottom=adj_bottom)
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/ECAP.png", dpi=300)
-        elif picture_save == False:
-            plt.show()
+            self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/ECAP.png", dpi=300)
+
+
+
+
+
+
+
 
 
 
