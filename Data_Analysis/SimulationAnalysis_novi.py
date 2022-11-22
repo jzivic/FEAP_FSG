@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 import matplotlib.animation as ani
 
 
-picture_save = True
+picture_save = False
 sinonimi_u_legendi = True
 
 
@@ -21,7 +21,6 @@ sinonimi_25 = {
     "Newt_5":0,
     "Newt_6":0,
     "Newt_33": "Newt,  $\\nu=3.3\mathrm{x}10^{-6}$ m$^2$/s",
-
 
     # "tawss=030":0,
     # "tawss=035":0,
@@ -133,7 +132,7 @@ sinonimi_38 = {
 
 
                     # "BC":"Bird-Carreau",
-                    "casson":"Casson",
+                    # "casson":"Casson",
                     # "Newt_40_2": "$\\nu=4\mathrm{x}10^{-6}$ m$^2$/s",
                     # "Newt_50_4":"$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
                     # "Newt_60_4":"$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
@@ -152,8 +151,8 @@ sinonimi_38 = {
                     # "a3=30": "$\Delta z_{\mathrm{MED}}={\mathrm{30mm}}$",
                     # "a3=40": "$\Delta z_{\mathrm{MED}}={\mathrm{40mm}}$",
 
-                    # "Newt_50_4":"laminar",
-                    # "tawss_turbulent_3": "turbulent",
+                    "Newt_50_4":"laminar",
+                    "tawss_turbulent_3": "turbulent",
 
 }
 
@@ -175,17 +174,22 @@ all_data = pd.read_pickle(pickle_name)
 diagramsDir = "//home/josip/feap/FSG/slike/FSG_model/"
 
 
-font = {'family' : 'Times New Roman',
-        'size'   : 20}
-plt.rc('font', **font)
-plt.rcParams['mathtext.fontset'] = 'stix'
+
+def parameter_averaging(input_list):  # osrednjavanjeee!!
+    n_neighb = 58
+    if n_neighb % 2 == 0:
+        n_neighb += 1
+    average_list = list(input_list)
+    start_index = int((n_neighb - 1) / 2)  # početni index da se izbjegnu rubovi
+    for n in range(start_index, (len(input_list) - start_index), 1):
+        neighbours = [input_list[(n - start_index) + i] for i in range(n_neighb)]
+        parameter_avg = sum(neighbours) / len(neighbours)
+        average_list[n] = parameter_avg
+    return average_list
+
+
 ts_from_sim = lambda sim: 100 + (sim-1)*3
 
-"""VREMENA:
-    tawss=0.4 .         sim6
-    r=14:               sim 34
-    r = 16:             sim 57
-"""
 
 
 
@@ -234,7 +238,6 @@ def time_analysis(times):
             height_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["height"]
             index_S22_is_max = all_data.loc[simul]["Z_S22_is_max"][trenutak]["index"]
             S22_by_layer = all_data.loc[simul]["S22_contours"][index][index_S22_is_max]
-
             Z_foam_cont = all_data.loc[simul]["Z_foam_cont"][index]
             TAWSS = all_data.loc[simul]["TAWSS"][index]
             OSI, ECAP = TAWSS, TAWSS
@@ -251,8 +254,6 @@ def time_analysis(times):
                            handlelength=1.8, borderaxespad=0.05)
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
-            # vertical_contours()
-
 
             def stress_by_layers():
                 font = {'family': 'Times New Roman',
@@ -263,17 +264,14 @@ def time_analysis(times):
                 fig.subplots_adjust(left=0.18, top=0.91, bottom=0.15, right=0.91)
                 plt.grid(which='both', linestyle='--', linewidth='0.5')
 
-                plt.plot(range(1,8), S22_by_layer, label=simul)
+                plt.plot(range(1,8), S22_by_layer, label=(sinonimi[simul]))
                 plt.xlabel("Radial layer [-]")
                 plt.ylabel("${\sigma}_{22}$ [Pa]")
                 plt.xlim([0, 8])
                 plt.figtext(0.1,0.065, "$d)$" )         # bolja pozicija texta !!a
                 if picture_save == True:
                     fig.savefig(diagramsDir + '/stress_through_layers_'+str(times[0]), dpi=300)
-            stress_by_layers()
 
-
-            #
             def ILT_inner_cont():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
                 plt.plot(inner_cont, Z_cont, c=color, label="inner wall")
@@ -286,7 +284,6 @@ def time_analysis(times):
                            handlelength=1.8, borderaxespad=0.05)
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'ILT_inner_cont.png', dpi=300)
-            # ILT_inner_cont()
 
             def stress_cont():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -297,7 +294,6 @@ def time_analysis(times):
                            handlelength=1.8, borderaxespad=0.05)
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'stress_cont.png', dpi=300)
-            # stress_cont()
 
             def ILT_thickness_f():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -310,8 +306,11 @@ def time_analysis(times):
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'ILT_th.png', dpi=300)
 
+            # vertical_contours()
             ILT_thickness_f()
-
+            # ILT_inner_cont()
+            stress_by_layers()
+            # stress_cont()
 
 
             # def dupli_graf_TAWSS():
@@ -483,12 +482,10 @@ def time_analysis(times):
             #     elif picture_save == False:
             #         plt.show()
             # # dupli_graf_ECAP()
-
-
     if picture_save == False:
         plt.show()
 
-time_analysis(times)
+# time_analysis(times)
 
 
 
@@ -533,7 +530,7 @@ def animate_radial_stress_by_layers(i_help=int):
 #15.71, 15.2, 16
 # 12, 13.7, 15      # tawss
 
-radii = [11.7]
+radii = [11.9]
 diameters = [ i*2 for i in radii]
 
 assert chosen_layer in range(1,8), print("Čvor nije u rasponu 1-7 !!!")
@@ -589,7 +586,7 @@ def diameter_analysis():
                 plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                            handlelength=1.8,  borderaxespad=0.05)
                 if picture_save == True:
-                    fig.savefig(diagramsDir + 'ILT_inner_cont.png', dpi=300)
+                    fig.savefig(diagramsDir + 'ILT_inner_cont_'+str(r)+'.png', dpi=300)
 
             def stress_cont():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -599,11 +596,11 @@ def diameter_analysis():
                     plt.plot(S22_cont, Z_cont, c=color, label=(sinonimi[simul] ))
                 plt.ylabel("$z$ [mm]")
                 plt.xlabel("${\sigma}_{22}$ [Pa]")
-                plt.figtext(0.1,0.065, "$d)$" )
+                plt.figtext(0.1,0.065, "$c)$" )
                 # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                 #            handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
                 if picture_save == True:
-                    fig.savefig(diagramsDir + 'stress_cont.png', dpi=300)
+                    fig.savefig(diagramsDir + 'stress_cont_'+str(r)+'.png', dpi=300)
 
             def ILT_thickness_f():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
@@ -619,7 +616,7 @@ def diameter_analysis():
 
             def vein_thickness_f():
                 color = next(plt.gca()._get_lines.prop_cycler)['color']
-                plt.plot(Z_cont, vein_thickness, linestyle='-', c=color, label=(simul+", TS: "+str(time)))
+                plt.plot(vein_thickness, Z_cont, linestyle='-', c=color, label=(sinonimi[simul]))
 
                 plt.ylabel("Vein thickness [mm]")
                 plt.xlabel("$z$ [mm]")
@@ -630,20 +627,16 @@ def diameter_analysis():
                     fig.savefig(diagramsDir + 'vein_thickness_f.png', dpi=300)
 
 
-            ILT_inner_cont()
-            # vertical_contours()
+            # ILT_inner_cont()
+            vertical_contours()
             # stress_cont()
             # ILT_thickness_f()
-            # vein_thickness_f()        ?????
+            # vein_thickness_f()        #?????
 
     if picture_save == False:
         plt.show()
 
-# diameter_analysis()
-
-
-
-
+diameter_analysis()
 
 
 
@@ -668,18 +661,8 @@ def growth_over_time():
         S22_max_7 = np.array(all_data.loc[simul]["S22_max"])[:,7-1]
         Z_S22_is_max = [i["height"] for i in all_data.loc[simul]["Z_S22_is_max"]]
 
-        def parameter_averaging():      # osrednjavanjeee!!
-            n_neighb = 58
-            if n_neighb % 2 == 0:
-                n_neighb += 1
-            average_list = list(Z_S22_is_max)
-            start_index = int((n_neighb - 1) / 2)  # početni index da se izbjegnu rubovi
-            for n in range(start_index, (len(Z_S22_is_max) - start_index), 1):
-                neighbours = [Z_S22_is_max[(n - start_index) + i] for i in range(n_neighb)]
-                parameter_avg = sum(neighbours) / len(neighbours)
-                average_list[n] = parameter_avg
-            return average_list
-        # proba = parameter_averaging()
+
+        Z_S22_is_max_averaged = parameter_averaging(Z_S22_is_max)
 
         S22_max_abs = [i["S22"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
         Z_S22_abs_is_max = [i["height"] for i in all_data.loc[simul]["S22_Z_max_abs"]]
@@ -755,8 +738,8 @@ def growth_over_time():
                     parameter_avg = sum(neighbours) / len(neighbours)
                     average_list[n] = parameter_avg
                 return average_list
-            proba = parameter_averaging()
-            plt.plot(days, proba, label=(sinonimi[simul]))
+
+            plt.plot(days, Z_S22_is_max_averaged, label=(sinonimi[simul]))
             plt.ylabel("$H_{D_{\mathrm{max}}}$ [mm]")
             plt.xlabel("$s$ [days]")
             plt.figtext(0.1,0.065, "$b)$" )         # bolja pozicija texta !!
@@ -795,8 +778,8 @@ def growth_over_time():
                 fig.savefig(diagramsDir + 'rast_ILT_surface_f.png', dpi=300)
         # ILT_surface_f()
 
-        rast_D()
-        # ILT_volume_f_3_in_line()
+        # rast_D()
+        # ILT_volume_f()
         # rast_S22_1()
         # rast_H()
         # rast_Z_max_naprezanja()
@@ -830,59 +813,6 @@ def growth_over_time():
 
 
 
-
-
-
-
-########################################33
-
-"""
-staro
-
-        def vertical_contours():
-            color = next(plt.gca()._get_lines.prop_cycler)['color']
-            # plt.plot(Z_cont, inner_cont, c=color, label="inner cont")
-            # plt.plot(Z_cont, ILT_cont, linestyle=':', c=color, label="ILT cont")
-            # plt.plot(Z_cont, outer_cont, linestyle='--', c=color, label="outer cont")
-
-            # plt.plot(inner_cont, Z_cont, c=color, label="inner cont")
-            plt.plot(inner_cont, Z_cont, c=color, label=(simul))
-            # plt.plot(inner_cont, Z_cont, c=color, label=(simul+", TS: "+str(time)))
-            # plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, label="ILT cont")
-            plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, )
-            # plt.plot(outer_cont, Z_cont, linestyle='--', c=color)
-            # plt.plot(outer_cont, Z_cont, linestyle='--', c=color, label="outer cont")
-
-            fig = plt.gcf()
-            fig.subplots_adjust(left=0.20)
-
-            plt.title("Contours")
-            plt.xlabel("Radius $r$ [mm]")
-            plt.ylabel("Axial coordinate $z$ [mm]")
-            plt.ylim([0, 250])
-            plt.xlim([7, 18])
-            plt.grid(which='both', linestyle='--', linewidth='0.5')
-            # plt.legend()
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, bbox_to_anchor=(1.026, -0.0153))
-
-        vertical_contours()
-"""
-
-
-
-
-
-
-# a = all_data.loc["i4=120"]
-
-# print(a)
-
-# S22_max = np.array(all_data.loc["i4=120"]["S22_max"])
-# a = np.array(all_data.loc["i4=120"]["S22_max"])[:,]
-
-
-# print(a)
 
 
 

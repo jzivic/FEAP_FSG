@@ -8,8 +8,8 @@ plt.rcParams['mathtext.fontset'] = 'stix'
 
 
 
-picture_save = True
-already_averaged = False
+picture_save = False
+already_averaged = True
 
 viscosity = 5e-6*1060
 
@@ -35,7 +35,9 @@ cases_directory = {
 
 
         # "//home/josip/feap/FSG/automatizacija_39/from_0": {1:[4]}
-        "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson": {58: [3]},   # 34, 58
+        # "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson": {58: [3]},   # 34, 58
+
+        "//home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1":   {20: [2]}
 
 }
 
@@ -57,7 +59,8 @@ name_dictionary = {
                 # "BC": "Bird-Carreau",
 
                 "casson": "",
-                "from_0": ""
+                "from_0": "",
+                "tawss_turbulent_Newt_1": "turbulent"
 
 }
 
@@ -93,9 +96,9 @@ class VadenjePodataka_FOAM_novo:
 
 
         # self.Plot_radius()
-        # self.Plot_TAWSS()
-        self.Plot_OSI()
-        self.Plot_ECAP()
+        self.Plot_TAWSS()
+        # self.Plot_OSI()
+        # self.Plot_ECAP()
         # self.Plot_shear_rate_Avg()
 
     #     # self.Plot_shear_rate_Average()
@@ -252,7 +255,7 @@ class VadenjePodataka_FOAM_novo:
         # plt.title("Time averaged wall shear stress")
         plt.ylabel("$z$ [mm]")
         plt.xlabel("TAWSS [Pa]")
-        plt.figtext(0.07, 0.05, "$d)$")
+        plt.figtext(0.07, 0.05, "$b)$")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig.subplots_adjust(left=adj_left, top=adj_top, bottom=adj_bottom)
         # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
@@ -285,7 +288,7 @@ class VadenjePodataka_FOAM_novo:
         plt.ylim(40, 210)
         plt.ylabel("$z$ [mm]")
         plt.xlabel("OSI [-]")
-        plt.figtext(0.07, 0.05, "$a)$")
+        plt.figtext(0.07, 0.05, "$d)$")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
         fig.subplots_adjust(left=adj_left, top=adj_top, bottom=adj_bottom)
@@ -312,7 +315,7 @@ class VadenjePodataka_FOAM_novo:
         # plt.title("Endothelium cell activation potential")
         plt.ylabel("$z$ [mm]")
         plt.xlabel("ECAP [-]")
-        plt.figtext(0.07, 0.05, "$b)$")
+        plt.figtext(0.07, 0.05, "$e)$")
 
         plt.grid(which='both', linestyle='--', linewidth='0.5')
         fig = plt.gcf()
