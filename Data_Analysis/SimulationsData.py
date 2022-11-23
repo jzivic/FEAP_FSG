@@ -85,14 +85,14 @@ simulationsData_dict_36 = {
 
                      "simulations":
                          [
-                            # "tawss_le_030",
-                            # "tawss_le_035",
+                            "tawss_le_030",
+                            "tawss_le_035",
                             "tawss_le_040",
-                            # "tawss_le_045",
-                            #  "tawss_le_0475",
-                            #  "tawss_le_0475",
-                            # "tawss_le_04825",
-                            # "tawss_le_050",
+                            "tawss_le_045",
+                             "tawss_le_0475",
+                             "tawss_le_0475",
+                            "tawss_le_04825",
+                            "tawss_le_050",
                           ]
                      },
 
@@ -131,37 +131,37 @@ simulationsData_dict_36 = {
                          [
 
                                 "osi_le_0250",
-                                # "osi_le_0275",
-                                # "osi_le_0300",
-                                # "osi_le_0325",
-                                # "osi_le_0350_2",
+                                "osi_le_0275",
+                                "osi_le_0300",
+                                "osi_le_0325",
+                                "osi_le_0350_2",
                          ]
                      },
 
 
-                # "//home/josip/feap/FSG/automatizacija_36/ECAP/GREATER/":
-                #     {"version": "new",
-                #
-                #      "simulations":
-                #          [
-                #             # "ecap_gt_145",
-                #             ###"ecap_gt_14625",    # ovo
-                #             ###"ecap_gt_14750",
-                #             ###"ecap_gt_14825",
-                #
-                #              "ecap_gt_14625_2",     # 2. runda
-                #              "ecap_gt_14750_2",     # 2. runda
-                #              "ecap_gt_14825_3",     # 2. runda
-                #
-                #              "ecap_gt_150",
-                #              "ecap_gt_150_2",       # 3. runda
-                #              "ecap_gt_155",
-                #              "ecap_gt_160",
-                #
-                #              "ecap_gt_150_from_0",
-                #
-                #          ]
-                #      },
+                "//home/josip/feap/FSG/automatizacija_36/ECAP/GREATER/":
+                    {"version": "new",
+
+                     "simulations":
+                         [
+                            # "ecap_gt_145",
+                            ###"ecap_gt_14625",    # ovo
+                            ###"ecap_gt_14750",
+                            ###"ecap_gt_14825",
+
+                             "ecap_gt_14625_2",     # 2. runda
+                             "ecap_gt_14750_2",     # 2. runda
+                             "ecap_gt_14825_3",     # 2. runda
+
+                             "ecap_gt_150",
+                             "ecap_gt_150_2",       # 3. runda
+                             "ecap_gt_155",
+                             "ecap_gt_160",
+
+                             "ecap_gt_150_from_0",
+
+                         ]
+                     },
 
 
                 "//home/josip/feap/FSG/automatizacija_36/ECAP/lower/":
@@ -169,10 +169,10 @@ simulationsData_dict_36 = {
 
                      "simulations":
                          [
-                             # "ecap_le_065",
+                             "ecap_le_065",
                              "ecap_le_070",
-                             # "ecap_le_075",
-                             # "ecap_le_080",
+                             "ecap_le_075",
+                             "ecap_le_080",
                          ]
                      },
 
@@ -234,6 +234,16 @@ simulationsData_dict_37 = {
 pickle_name_38 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_38.pickle"
 simulationsData_dict_38 = {
 
+                "//home/josip/feap/FSG/automatizacija_39/":
+                    {"version": "new",
+
+                     "simulations":
+                         [
+                             "tawss_turbulent_Newt_1"
+                         ]
+                     },
+
+
                 "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
                     {"version": "new",
 
@@ -258,16 +268,6 @@ simulationsData_dict_38 = {
                           ]
                      },
 
-                "//home/josip/feap/FSG/automatizacija_38/":
-                    {"version": "new",
-
-                     "simulations":
-                         [
-                            "tawss_turbulent_3"
-                         ]
-                     },
-
-
           }
 
 
@@ -288,5 +288,5 @@ simulationsData_dict_38 = {
 #           }
 
 
-pickle_name =pickle_name_38
-simulationsData_dict = simulationsData_dict_38
+pickle_name =pickle_name_37
+simulationsData_dict = simulationsData_dict_37

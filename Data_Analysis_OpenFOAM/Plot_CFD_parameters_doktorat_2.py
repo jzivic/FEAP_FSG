@@ -35,8 +35,8 @@ cases_directory = {
         # "//home/josip/feap/FSG/automatizacija_39/from_0": {1:[4]}
         # "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson": {58: [3]},   # 34, 58
 
-        # "//home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1":   {20: [7]},
-        "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4":          {22: [2]}
+        "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4": {20: [2]},
+        "//home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1":   {20: [7]}
 
 }
 
@@ -101,17 +101,16 @@ class VadenjePodataka_FOAM_novo:
         real_days = lambda sim_number: (100 + sim_number * 3) * 10
         self.fig = plt.figure(figsize=(4.6, 6.2), dpi=100)
         self.fig.subplots_adjust(left=0.21, right=0.86, top=0.95, bottom=0.15)
-
         plt.clf()
-        plt.ylim(50, 200)
+        plt.ylim(40, 210)  # turbulencija
         plt.ylabel("$z$ [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
 
 
-        # self.Plot_radius()
+        self.Plot_radius()
         # self.Plot_TAWSS()
         # self.Plot_OSI()
-        self.Plot_ECAP()
+        # self.Plot_ECAP()
         # self.Plot_shear_rate_Avg()
 
         if picture_save == False:
@@ -220,32 +219,31 @@ class VadenjePodataka_FOAM_novo:
     def Plot_radius(self):
         n_count = 0
         for simulation_case in cases_directory:  # case
-            for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
-                for foam_time in cases_directory[simulation_case][sim_broj]:    # 2
-                    plt.plot(self.data_DF["r"][n_count], self.data_DF["z"][n_count])#, label="$s=$"+str(real_days(sim))+" days")
+            for sim_broj in cases_directory[simulation_case]:
+                for foam_time in cases_directory[simulation_case][sim_broj]:
+                    plt.plot(self.data_DF["r"][n_count], self.data_DF["z"][n_count],
+                             label=name_dictionary[self.data_DF["simulation_name"][n_count]])
                     n_count +=1
-                    print(3)
-
         plt.xlabel("$r$ [mm]")
         plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                    handlelength=1.8, borderaxespad=0.05)
         if picture_save == True:
-            fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
+            self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
 
 
     def Plot_TAWSS(self):
         n_count = 0
         for simulation_case in cases_directory:  # case
-            for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
-                for foam_time in cases_directory[simulation_case][sim_broj]:    # 2
-                    # plt.plot(self.data_DF["TAWSS"][n_count], self.data_DF["z"][n_count])#, label="$s=$"+str(real_days(sim))+" days")
+            for sim_broj in cases_directory[simulation_case]:
+                for foam_time in cases_directory[simulation_case][sim_broj]:
                     plt.plot(self.data_DF["TAWSS"][n_count], self.data_DF["z"][n_count],
                              label=name_dictionary[self.data_DF["simulation_name"][n_count]])
                     n_count +=1
 
         plt.xlabel("TAWSS [Pa]")
-        plt.figtext(0.07, 0.05, "$b)$")
         plt.axvline(x=0.4, linestyle='--', color="red")
+        plt.xlim(0.25, 1)
+        plt.figtext(0.07, 0.05, "$b)$")
         plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                    handlelength=1.8, borderaxespad=0.05)
         if picture_save == True:
@@ -255,8 +253,8 @@ class VadenjePodataka_FOAM_novo:
     def Plot_OSI(self):
         n_count = 0
         for simulation_case in cases_directory:  # case
-            for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
-                for foam_time in cases_directory[simulation_case][sim_broj]:    # 2
+            for sim_broj in cases_directory[simulation_case]:
+                for foam_time in cases_directory[simulation_case][sim_broj]:
                     plt.plot(self.data_DF["OSI"][n_count], self.data_DF["z"][n_count],
                              label=name_dictionary[self.data_DF["simulation_name"][n_count]])
                     n_count +=1

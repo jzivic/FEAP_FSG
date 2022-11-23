@@ -10,10 +10,11 @@ import numpy as np
 
 
 
-simulacija_foam = "///home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1/simulacija20"
-simulacija_foam = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4/simulacija22"
+simulacija_foam = "///home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1/simulacija"
+# simulacija_foam = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4/simulacija"
 
-average_moments = [2]
+average_times = range(1,69)
+average_moments = [7]
 
 
 FF_system = False
@@ -206,14 +207,13 @@ class AveragingParameters:
 # avg = AveragingParameters(simulacija_foam)
 
 
-for time in average_moments:
-    AveragingParameters(simulacija_foam, time)
+# for moment in average_moments:
+#     AveragingParameters(simulacija_foam, moment)
 
 
-
-
-
-
+for time in average_times:
+    sim = simulacija_foam + str(time)
+    AveragingParameters(sim, 7)
 
 
 
