@@ -10,11 +10,14 @@ import numpy as np
 
 
 
-simulacija_foam = "///home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1/simulacija"
-# simulacija_foam = "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4/simulacija"
+
+# simulacija_foam = "///home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_5/simulacija"
+simulacija_foam = "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson/simulacija"
+
+
 
 average_times = range(1,69)
-average_moments = [7]
+average_moments = [2]
 
 
 FF_system = False
@@ -92,8 +95,6 @@ class AveragingParameters:
                 continue
             if write_TAWSS == True:
                 self.data_dict["TAWSS"].append(float(red))
-
-
     def OSI_reading(self):
         write_OSI = False
         for red in open(self.OSI_file).readlines():
@@ -106,8 +107,6 @@ class AveragingParameters:
                 continue
             if write_OSI == True:
                 self.data_dict["OSI"].append(float(red))
-
-
     def ECAP_reading(self):
         write_ECAP = False
         for red in open(self.ECAP_file).readlines():
@@ -124,10 +123,8 @@ class AveragingParameters:
         self.data_dict["ECAP"] = [i/ECAP_distal for i in self.data_dict["ECAP"]]
 
 
-
-
     def parameter_averaging(self, parameter_name):
-        n_neighb = 3
+        n_neighb = 3                                    # =1, ne osrednjuje ništa
         if n_neighb % 2 == 0:
             n_neighb +=1
         average_list = list(self.data_dict[parameter_name])
@@ -179,10 +176,7 @@ class AveragingParameters:
         new_text_file.close()
 
 
-
-
     def plot_parameter(self, parameter_name):
-
         fig = plt.gcf()
         plt.plot(self.data_DF["z"], self.data_DF[parameter_name], label="org")
         plt.plot(self.data_DF["z"], self.data_DF[parameter_name+"_avg"], label="avg")
@@ -204,18 +198,12 @@ class AveragingParameters:
 
 
 
-# avg = AveragingParameters(simulacija_foam)
-
-
-# for moment in average_moments:
-#     AveragingParameters(simulacija_foam, moment)
-
-
 for time in average_times:
     sim = simulacija_foam + str(time)
-    AveragingParameters(sim, 7)
+    AveragingParameters(sim, 2)
 
 
+# AveragingParameters(simulacija_foam, 10)
 
 
 

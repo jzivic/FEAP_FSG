@@ -8,7 +8,7 @@ plt.rcParams['mathtext.fontset'] = 'stix'
 
 
 
-picture_save = False
+picture_save = True
 already_averaged = False
 
 viscosity = 5e-6*1060
@@ -33,10 +33,11 @@ cases_directory = {
 
 
         # "//home/josip/feap/FSG/automatizacija_39/from_0": {1:[4]}
-        # "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson": {58: [3]},   # 34, 58
+        "//home/josip/feap/FSG/automatizacija_38/TAWSS/casson": {58: [2]},   # 34, 58
 
-        "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4": {20: [2]},
-        "//home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_1":   {20: [7]}
+        # "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4":          {8: [1.25, 1.3, 1.5]}, # 8,53 [1.25, 1.3,1.5]
+        # "//home/josip/feap/FSG/automatizacija_38/TAWSS/Newt_50_4":          {8: [2], 53: [2]},
+        # "//home/josip/feap/FSG/automatizacija_39/tawss_turbulent_Newt_5":   {53: [7]}
 
 }
 
@@ -52,19 +53,20 @@ name_dictionary = {
                 # "Newt_45":         "$\\nu=4.5\mathrm{x}10^{-6}$ m$^2$/s",
                 # "Newt_5":           "$\\nu=5\mathrm{x}10^{-6}$ m$^2$/s",
                 # "Newt_6":           "$\\nu=6\mathrm{x}10^{-6}$ m$^2$/s",
-
+                #
                 # "Newt_45": "Newtonian",
-                # "casson": "Casson",
+                "casson": "Casson",
                 # "BC": "Bird-Carreau",
 
                 # "casson": "",
                 # "from_0": "",
-                "tawss_turbulent_Newt_1": "turbulent",
-                "Newt_50_4": "laminar"
+                # "tawss_turbulent_Newt_1": "t_1",
+                # "tawss_turbulent_Newt_5": "turbulent",
+                # "Newt_50_4": "laminar"
 
 }
 
-
+ts_from_sim = lambda sim: 100 + (sim - 1) * 3
 
 
 class VadenjePodataka_FOAM_novo:
@@ -97,21 +99,21 @@ class VadenjePodataka_FOAM_novo:
 
 
 
-
-        real_days = lambda sim_number: (100 + sim_number * 3) * 10
         self.fig = plt.figure(figsize=(4.6, 6.2), dpi=100)
         self.fig.subplots_adjust(left=0.21, right=0.86, top=0.95, bottom=0.15)
         plt.clf()
-        plt.ylim(40, 210)  # turbulencija
+        plt.ylim(20, 210)  # turbulencija
         plt.ylabel("$z$ [mm]")
         plt.grid(which='both', linestyle='--', linewidth='0.5')
 
 
-        self.Plot_radius()
+        # self.Plot_radius()
         # self.Plot_TAWSS()
         # self.Plot_OSI()
-        # self.Plot_ECAP()
-        # self.Plot_shear_rate_Avg()
+        self.Plot_ECAP()
+        # self.Plot_TASR()
+        # self.Plot_SR_cycle()
+
 
         if picture_save == False:
             plt.show()
@@ -214,23 +216,21 @@ class VadenjePodataka_FOAM_novo:
                 ECAP.append(float(red))
         self.data_dict["ECAP"].append(ECAP)
 
-
-
     def Plot_radius(self):
         n_count = 0
         for simulation_case in cases_directory:  # case
             for sim_broj in cases_directory[simulation_case]:
                 for foam_time in cases_directory[simulation_case][sim_broj]:
                     plt.plot(self.data_DF["r"][n_count], self.data_DF["z"][n_count],
-                             label=name_dictionary[self.data_DF["simulation_name"][n_count]])
+                             # label=name_dictionary[self.data_DF["simulation_name"][n_count]])
+                             label="$s=$"+str(ts_from_sim(sim_broj)*10)+" days")
+
                     n_count +=1
         plt.xlabel("$r$ [mm]")
         plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                    handlelength=1.8, borderaxespad=0.05)
         if picture_save == True:
             self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/radius.png", dpi=300)
-
-
     def Plot_TAWSS(self):
         n_count = 0
         for simulation_case in cases_directory:  # case
@@ -243,13 +243,11 @@ class VadenjePodataka_FOAM_novo:
         plt.xlabel("TAWSS [Pa]")
         plt.axvline(x=0.4, linestyle='--', color="red")
         plt.xlim(0.25, 1)
-        plt.figtext(0.07, 0.05, "$b)$")
-        plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                   handlelength=1.8, borderaxespad=0.05)
+        plt.figtext(0.07, 0.05, "$c)$")
+        # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+        #            handlelength=1.8, borderaxespad=0.05)
         if picture_save == True:
             self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TAWSS.png", dpi=300)
-
-
     def Plot_OSI(self):
         n_count = 0
         for simulation_case in cases_directory:  # case
@@ -262,11 +260,10 @@ class VadenjePodataka_FOAM_novo:
         plt.xlim(0.18, 0.53)
         plt.xlabel("OSI [-]")
         plt.figtext(0.07, 0.05, "$d)$")
-        plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                   handlelength=1.8, borderaxespad=0.05)
+        # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+        #            handlelength=1.8, borderaxespad=0.05)
         if picture_save == True:
             self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/OSI.png", dpi=300)
-
     def Plot_ECAP(self):
         n_count = 0
         for simulation_case in cases_directory:  # case
@@ -279,163 +276,60 @@ class VadenjePodataka_FOAM_novo:
         # plt.xlim(0.5, 1.5)
         plt.xlabel("ECAP [-]")
         plt.figtext(0.07, 0.05, "$e)$")
-        plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                   handlelength=1.8, borderaxespad=0.05)
+        # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+        #            handlelength=1.8, borderaxespad=0.05)
 
         if picture_save == True:
             self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/ECAP.png", dpi=300)
+    def Plot_TASR(self):
+        n_count = 0
+        for simulation_case in cases_directory:  # case
+            for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
+                for foam_time in cases_directory[simulation_case][sim_broj]:    # 2
+                    plt.plot(self.data_DF["shear_rate"][n_count], self.data_DF["z"][n_count],
+                                label="$s=$"+str(ts_from_sim(sim_broj)*10)+" days")
+                    n_count +=1
+
+        plt.xlabel("TASR [1/s]")
+        plt.ylim((30, 210))
+        plt.xlim((50, 250))
+
+        plt.axvline(x=140, linestyle='--', color="grey")
+        plt.axvline(x=160, linestyle='--', color="grey")
+        plt.text(85, 200, "C")
+        plt.text(145, 200, "T")
+        plt.text(180, 200, "N")
+
+        plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                   handlelength=1.8, borderaxespad=0.05)
+        if picture_save == True:
+            self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/TASR.png", dpi=300)
+    def Plot_SR_cycle(self):
+        n_count = 0
+        for simulation_case in cases_directory:  # case
+            for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
+                for foam_time in cases_directory[simulation_case][sim_broj]:    # 2
+                    plt.plot(self.data_DF["shear_rate"][n_count], self.data_DF["z"][n_count],
+                                label="$t=$"+str(round((foam_time-1),2))+"s")
+                    n_count +=1
+
+        plt.xlabel("$\gamma \u0307 $ [1/s]")    # znak za shear rate
+        plt.figtext(0.07, 0.05, "$a)$")
+        plt.ylim((20, 210))
+        plt.xlim((-50, 700))
+
+        plt.axvline(x=140, linestyle='--', color="grey")
+        plt.axvline(x=160, linestyle='--', color="grey")
+        plt.text(0, 200, "C")
+        plt.text(130, 200, "T")
+        plt.text(300, 200, "N")
+
+        plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                   handlelength=1.8, borderaxespad=0.05)
+        if picture_save == True:
+            self.fig.savefig("//home/josip/feap/FSG/slike/FSG_model/shear_rate_"+str(sim_broj)+".png", dpi=300)
 
 
-
-
-
-
-
-
-
-
-"""            def ILT_inner_cont_2_inLine():
-                print(index)
-                adj_left, adj_bottom = 0.25, 0.15
-                fig_x, fig_y = 5.2, 7.2
-
-                fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-
-                color = next(plt.gca()._get_lines.prop_cycler)['color']
-                plt.plot(inner_cont, Z_cont, c=color, label="inner wall")
-                plt.plot(ILT_cont, Z_cont, linestyle=':', c=color, label="ILT wall")
-
-                # plt.title("ILT and inner contours")
-                plt.ylabel("$z$ [mm]")
-                plt.xlabel("$r$ [mm]")
-                # plt.text(5, -15, "$a)$")
-                plt.xlim([7, 18])
-                plt.ylim(40, 210)
-                plt.text(5, 20, "$b)$")
-                # fig.subplots_adjust(left=adj_left, bottom=adj_bottom)
-                fig.subplots_adjust(left=0.20, top=0.91, bottom=0.15, right=0.91)
-                plt.grid(which='both', linestyle='--', linewidth='0.5')
-                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                           handlelength=1.8,  borderaxespad=0.05)
-
-                # ovo zakomentirati ako želim sve odjednom plotati
-                if picture_save == True:
-                    fig.savefig(diagramsDir + 'ILT_inner_cont.png', dpi=300)
-                elif picture_save == False:
-                    plt.show()
-"""
-
-
-
-
-
-    # def Plot_shear_rate(self):
-    #     fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-    #     plt.clf()
-    #     plt.plot(self.data_DF["shear_rate"], self.data_DF["z"],  label=self.simulation_name)
-    #     plt.axvline(x=140, linestyle='--', color="blue", label='Casson')
-    #     plt.axvline(x=160, linestyle='--', color="red", label='Newt')
-    #
-    #     plt.title("MAX shear rate, 2800. day")
-    #     plt.ylabel("$z$ [mm]")
-    #     plt.xlabel("shear rate [1/s]")
-    #     # plt.text(0.2, 20, "$d)$")
-    #
-    #     plt.grid(which='both', linestyle='--', linewidth='0.5')
-    #     fig = plt.gcf()
-    #     fig.subplots_adjust(left=adj_left, right=adj_right, bottom=adj_bottom)
-    #     if picture_save == True:
-    #         fig.subplots_adjust(left=adj_left)
-    #         fig.subplots_adjust(bottom=adj_bottom)
-    #         fig.savefig("//home/josip/feap/FSG/slike/FSG_model/shear_rate.png", dpi=300)
-    #     elif picture_save == False:
-    #         plt.show()
-
-
-    # def Plot_shear_rate_Avg(self):
-    #     fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-    #     plt.clf()
-    #     real_days = lambda sim_number: (100 + sim_number*3)*10
-    #     n_count = 0
-    #     for simulation_case in cases_directory:  # case
-    #         for sim_broj in cases_directory[simulation_case]:                   # simulacijaX
-    #             for foam_time in cases_directory[simulation_case][sim_broj]:    # 2
-    #                 plt.plot(self.data_DF["shear_rate"][n_count], self.data_DF["z"][n_count])#, label="$s=$"+str(real_days(sim))+" days")
-    #                 n_count +=1
-    #     plt.ylim(50,200)
-    #     plt.xlim(50,200)
-    #
-    #     plt.axvline(x=140, linestyle='--', color="grey")
-    #     plt.axvline(x=160, linestyle='--', color="grey")
-    #
-    #     plt.ylabel("$z$ [mm]")
-    #     plt.xlabel("TASR [1/s]")
-    #
-    #     plt.text(85, 190, "C")
-    #     plt.text(147, 190, "T")
-    #     plt.text(180, 190, "N")
-    #     # plt.text(20, 30, "$a)$")
-    #
-    #
-    #     plt.grid(which='both', linestyle='--', linewidth='0.5')
-    #     fig = plt.gcf()
-    #     fig.subplots_adjust(left=adj_left, right=adj_right, bottom=adj_bottom)
-    #
-    #     if picture_save == True:
-    #         fig.subplots_adjust(left=adj_left)
-    #         fig.subplots_adjust(bottom=adj_bottom)
-    #         plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-    #                    handlelength=1.8, bbox_to_anchor=(1.033, -0.032))
-    #         fig.savefig("//home/josip/feap/FSG/slike/FSG_model/shear_rate_Avg.png", dpi=300)
-    #     elif picture_save == False:
-    #         plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-    #                    handlelength=1.8, bbox_to_anchor=(-1.10, -0.04))
-    #         plt.show()
-    #
-    #
-    # def Plot_shear_rate_cycle(self):
-    #     adj_left, adj_right, adj_top, adj_bottom = 0.18, 0.92, 0.91, 0.15
-    #
-    #     fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
-    #     plt.clf()
-    #     real_days = lambda sim_number: (100 + sim_number*3)*10
-    #     n_count = 0
-    #     abc = ["A", "B", "C"]
-    #     for sim in simulations_times.keys():
-    #         for moment in simulations_times[sim]:
-    #             plt.plot(self.data_DF["shear_rate"][n_count], self.data_DF["z"][n_count], label="$t=$"+str(round((moment-1),2))+"s")
-    #             n_count +=1
-    #
-    #     plt.ylim(50,200)
-    #     plt.xlim(-50, 700)            # za TASR
-    #
-    #     plt.axvline(x=140, linestyle='--', color="grey")
-    #     plt.axvline(x=160, linestyle='--', color="grey")
-    #
-    #     plt.ylabel("$z$ [mm]")
-    #     plt.xlabel("Shear rate [1/s]")
-    #     plt.figtext(0.24,0.86, "C" )         # bolja pozicija texta !!a
-    #     plt.figtext(0.363,0.86, "T" )         # bolja pozicija texta !!a
-    #     plt.figtext(0.51,0.86, "N" )         # bolja pozicija texta !!a
-    #
-    #     plt.text(-150, 30, "$b)$")
-    #
-    #     plt.grid(which='both', linestyle='--', linewidth='0.5')
-    #     fig = plt.gcf()
-    #     fig.subplots_adjust(left=adj_left, right=adj_right, top=adj_top, bottom=adj_bottom)
-    #
-    #     if picture_save == True:
-    #         fig.subplots_adjust(left=adj_left)
-    #         fig.subplots_adjust(bottom=adj_bottom)
-    #         plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-    #                    handlelength=1.8, bbox_to_anchor=(1.03, 0.772))
-    #         fig.savefig("//home/josip/feap/FSG/slike/FSG_model/shear_rate_cycle.png", dpi=300)
-    #     elif picture_save == False:
-    #         plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-    #                    handlelength=1.8, bbox_to_anchor=(1.033, 0.75))
-    #                    # handlelength=1.8, bbox_to_anchor=(1.026, -0.026))
-    #
-    #         plt.show()
 
 
 

@@ -239,7 +239,7 @@ simulationsData_dict_38 = {
 
                      "simulations":
                          [
-                             "tawss_turbulent_Newt_1"
+                             "tawss_turbulent_Newt_5"
                          ]
                      },
 
@@ -270,9 +270,6 @@ simulationsData_dict_38 = {
 
           }
 
-
-
-
 # pickle_name_casson = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_casson.pickle"
 # simulationsData_dict_casson = {
 #
@@ -288,5 +285,33 @@ simulationsData_dict_38 = {
 #           }
 
 
-pickle_name =pickle_name_37
-simulationsData_dict = simulationsData_dict_37
+pickle_name_usporedba_FSG = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_usporedba_FSG.pickle"
+simulationsData_dict_usporedba_FSG = {
+
+                "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
+                    {"version": "new",
+                     "FSG_bool": True,
+
+                     "simulations":
+                         [
+                                "casson",
+                          ]
+                     },
+
+                    "//home/josip/feap/FSG/automatizacija_38/":
+                        {"version": "NEW",
+                         "FSG_bool" : False,
+
+                         "simulations":
+                             [
+                                 "noFSG",
+                             ]
+                         },
+
+
+}
+
+
+
+pickle_name =pickle_name_usporedba_FSG
+simulationsData_dict = simulationsData_dict_usporedba_FSG

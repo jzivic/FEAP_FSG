@@ -19,7 +19,7 @@ TSLlenght_rN0841 = 1
 TSLlenght_res_Y0__field = 850
 Y0_corrention = 132                 # pomak Y0 file za broj redova nakon restarta
 
-suffixes = ["89-5", "172-22"]
+suffixes = ["89-5", "172-22", "96-6"]
 
 
 n_sim_conv = lambda ts: (ts-100)/3 +1       # preračunavanje time stepa u broj simulacije
@@ -62,6 +62,7 @@ class FSG_Analysis:
 
         for subdirectory in simulationsData_dict.keys():                               # ulazi u folder simulacije
             self.Y0_version = simulationsData_dict[subdirectory]["version"]
+            self.FSG_bool = simulationsData_dict[subdirectory]["FSG_bool"]
             simulations_in_directory = simulationsData_dict[subdirectory]["simulations"]
 
             for simulation_name in simulations_in_directory:
@@ -85,15 +86,23 @@ class FSG_Analysis:
                     if self.check_AAA_formation() == True:
                         self.Z_foam_cont, self.TAWSS, self.OSI, self.ECAP = None, None, None, None
 
-                        #   DIO ZA FOAM
-                        if (n_sim_conv(self.time_step)%1 == 0 and self.time_step >= 100) :
-                            sim_number = int(n_sim_conv(self.time_step))
-                            VadenjePodataka_object =  VadenjePodataka_FOAM(simulation_path, sim_number)
 
-                            self.Z_foam_cont = VadenjePodataka_object.return_Z_foam()
-                            self.TAWSS = VadenjePodataka_object.return_TAWSS()
-                            self.OSI = VadenjePodataka_object.return_OSI()
-                            self.ECAP = VadenjePodataka_object.return_ECAP()
+
+                        #   DIO ZA FOAM
+                        if self.FSG_bool == True:
+                            if (n_sim_conv(self.time_step)%1 == 0 and self.time_step >= 100) :
+                                sim_number = int(n_sim_conv(self.time_step))
+                                VadenjePodataka_object =  VadenjePodataka_FOAM(simulation_path, sim_number)
+
+                                self.Z_foam_cont = VadenjePodataka_object.return_Z_foam()
+                                self.TAWSS = VadenjePodataka_object.return_TAWSS()
+                                self.OSI = VadenjePodataka_object.return_OSI()
+                                self.ECAP = VadenjePodataka_object.return_ECAP()
+
+                        elif self.FSG_bool == False:
+                            pass
+
+
 
                         self.timeStep_extraction_FEAP()              # ovdje je bio try!!!
 

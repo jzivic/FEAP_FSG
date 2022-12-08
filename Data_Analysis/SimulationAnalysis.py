@@ -143,16 +143,22 @@ sinonimi_38 = {
                     # "tawss=045":"TAWSS=0.45 Pa",
                     # "tawss=050": "TAWSS=0.50 Pa",
 
-                    # "casson":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 20 mm",
-                    # "a3=30":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 30 mm",
-                    # "a3=40":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 40 mm",
+                    "casson":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 20 mm",
+                    "a3=30":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 30 mm",
+                    "a3=40":"$z_{\mathrm{up}}-z_{\mathrm{down}}$= 40 mm",
 
                     # "casson": "$\Delta z_{\mathrm{MED}}={\mathrm{20mm}}$",
                     # "a3=30": "$\Delta z_{\mathrm{MED}}={\mathrm{30mm}}$",
                     # "a3=40": "$\Delta z_{\mathrm{MED}}={\mathrm{40mm}}$",
 
-                    "Newt_50_4":"laminar",
-                    "tawss_turbulent_Newt_1": "turbulent",
+                    # "Newt_50_4":"laminar",
+                    # "tawss_turbulent_Newt_5": "turbulent",
+
+}
+
+sinonimi_usporedba_FSG = {
+    "casson":   "FSG",
+    "noFSG":    "noFSG",
 
 }
 
@@ -160,9 +166,8 @@ sinonimi_38 = {
 
 
 
-
-auto_name = "automatizacija_37"
-sinonimi = sinonimi_37
+auto_name = "automatizacija_usporedba_FSG"
+sinonimi = sinonimi_usporedba_FSG
 
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
@@ -186,22 +191,15 @@ def parameter_averaging(input_list):  # osrednjavanjeee!!
         parameter_avg = sum(neighbours) / len(neighbours)
         average_list[n] = parameter_avg
     return average_list
-
-
 ts_from_sim = lambda sim: 100 + (sim-1)*3
 
 
 
 
-
-
-# 1, 5,6, 40,
-#   ZA OSI_0.25:  10,20, 55
-#   ZA ECAP_0.70:  6,20,45
-
 graf_slovo="a"
 # times = [ts_from_sim(6), ts_from_sim(22)]
-times = [ts_from_sim(21)]
+times = [ts_from_sim(5)]
+# times = [116, 251]
 
 chosen_layer = 1
 
@@ -250,8 +248,8 @@ def time_analysis(times):
                 plt.ylabel("$z$ [mm]")
                 plt.xlabel("$r$ [mm]")
                 plt.figtext(0.1,0.065, "$a)$" )         # bolja pozicija texta !!a
-                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                           handlelength=1.8, borderaxespad=0.05)
+                # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                #            handlelength=1.8, borderaxespad=0.05)
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'vertical_contours.png', dpi=300)
 
@@ -266,9 +264,9 @@ def time_analysis(times):
 
                 plt.plot(range(1,8), S22_by_layer, label=(sinonimi[simul]))
                 plt.xlabel("Radial layer [-]")
-                plt.ylabel("${\sigma}_{22}$ [Pa]")
+                plt.ylabel("${\sigma}_{22{\mathrm{max}}}$ [Pa]")
                 plt.xlim([0, 8])
-                plt.figtext(0.1,0.065, "$d)$" )         # bolja pozicija texta !!a
+                plt.figtext(0.1,0.065, "$a)$" )         # bolja pozicija texta !!a
                 if picture_save == True:
                     fig.savefig(diagramsDir + '/stress_through_layers_'+str(times[0]), dpi=300)
 
@@ -290,8 +288,10 @@ def time_analysis(times):
                 plt.plot(S22_cont, Z_cont, c=color, label=(sinonimi[simul]))
                 plt.ylabel("$z$ [mm]")
                 plt.xlabel("${\sigma}_{22}$ [Pa]")
-                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                           handlelength=1.8, borderaxespad=0.05)
+                plt.figtext(0.1,0.065, "$b)$" )         # bolja pozicija texta !!a
+
+                # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                #            handlelength=1.8, borderaxespad=0.05)
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'stress_cont.png', dpi=300)
 
@@ -306,11 +306,11 @@ def time_analysis(times):
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'ILT_th.png', dpi=300)
 
-            vertical_contours()
+            # vertical_contours()
             # ILT_thickness_f()
             # ILT_inner_cont()
+            stress_cont()
             # stress_by_layers()
-            # stress_cont()
             3
             # def dupli_graf_TAWSS():
             #
@@ -536,7 +536,9 @@ def diameter_analysis():
     fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
     adj_left, adj_right, adj_top, adj_bottom = 0.21, 0.86, 0.95, 0.15
     fig.subplots_adjust(left=adj_left, top=adj_top, bottom=adj_bottom)
-    plt.ylim(40, 210)  # turbulencija
+    # plt.ylim(40, 210)  # turbulencija
+    plt.ylim((30, 210))
+
     plt.grid(which='both', linestyle='--', linewidth='0.5')
 
     for r in radii:
@@ -575,7 +577,7 @@ def diameter_analysis():
                 # plt.xlim([8, 17])
                 plt.ylabel("$z$ [mm]")
                 plt.xlabel("$r$ [mm]")
-                plt.figtext(0.1,0.065, "$a)$" )
+                plt.figtext(0.1,0.065, "$b)$" )
                 plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                            handlelength=1.8,  borderaxespad=0.05)
                 if picture_save == True:
@@ -590,8 +592,8 @@ def diameter_analysis():
                 plt.ylabel("$z$ [mm]")
                 plt.xlabel("${\sigma}_{22}$ [Pa]")
                 plt.figtext(0.1,0.065, "$b)$" )
-                plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                           handlelength=1.8,  borderaxespad=0.05)
+                # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+                #            handlelength=1.8,  borderaxespad=0.05)
                 if picture_save == True:
                     fig.savefig(diagramsDir + 'stress_cont_'+str(r)+'.png', dpi=300)
 
@@ -670,7 +672,7 @@ def growth_over_time():
 
         def rast_D():
             plt.plot(days, D_inner_max, label=(sinonimi[simul]))
-            plt.ylabel("$D$ [mm]")
+            plt.ylabel("$D_{\mathrm{max}}$ [mm]")
             plt.xlabel("$s$ [days]")
             plt.figtext(0.1,0.065, "$a)$" )         # bolja pozicija texta !!
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
@@ -683,7 +685,7 @@ def growth_over_time():
                 plt.plot(days, S22_max_1, label=(simul))
             elif sinonimi_u_legendi == True:
                 plt.plot(days, S22_max_1, label=(sinonimi[simul]))
-            plt.ylabel("${\sigma}_{22}$ [Pa]")
+            plt.ylabel("${\sigma}_{22{\mathrm{max}}}$ [Pa]")
             plt.xlabel("$s$ [days]")
             plt.figtext(0.1,0.065, "$c)$" )         # bolja pozicija texta !!
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
@@ -695,8 +697,8 @@ def growth_over_time():
             plt.plot(days, Volume_ILT, label=(sinonimi[simul]))
             plt.ylabel("$V_{\mathrm{ILT}}$ [cm$^3$]")
             plt.xlabel("$s$ [days]")
-            plt.figtext(0.1,0.065, "$b)$" )         # bolja pozicija texta !!
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+            plt.figtext(0.1,0.065, "$c)$" )         # bolja pozicija texta !!
+            plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8, borderaxespad=0.05)
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_Volume_ILT.png', dpi=400)
@@ -705,7 +707,7 @@ def growth_over_time():
             plt.plot(days, H, label=(sinonimi[simul]))
             plt.ylabel("$H$ [mm]")
             plt.xlabel("$s$ [days]")
-            plt.figtext(0.1,0.065, "$b)$" )         # bolja pozicija texta !!
+            plt.figtext(0.1,0.065, "$d)$" )         # bolja pozicija texta !!
             plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
                        handlelength=1.8,borderaxespad=0.05)
             if picture_save == True:
@@ -713,11 +715,12 @@ def growth_over_time():
 
         def rast_S22_7():
             plt.plot(days, S22_max_7, label=(sinonimi[simul]))
-            plt.ylabel("${\sigma}_{22}$ [Pa]")
+            # plt.ylabel("${\sigma}_{22}$ [Pa]")
+            plt.ylabel("\sigma_{22}_{\mathrm{max}}}$ [mm]")
             plt.xlabel("$s$ [days]")
             plt.figtext(0.1,0.065, "$a)$" )         # bolja pozicija texta !!
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, borderaxespad=0.05)
+            # plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+            #            handlelength=1.8, borderaxespad=0.05)
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_S22_7.png', dpi=300)
 
@@ -736,9 +739,9 @@ def growth_over_time():
             plt.plot(days, Z_S22_abs_is_max_averaged, label=(sinonimi[simul]))
             plt.ylabel("$H_{{\sigma_{22}}_{\mathrm{max}}}$ [mm]")
             plt.xlabel("$s$ [days]")
-            plt.figtext(0.1,0.065, "$b)$" )         # bolja pozicija texta !!
-            plt.legend(loc='lower right', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
-                       handlelength=1.8, borderaxespad=0.05)
+            plt.figtext(0.1,0.065, "$c)$" )         # bolja pozicija texta !!
+            # plt.legend(loc='upper left', framealpha=1, labelspacing=0, borderpad=0.1, handletextpad=0.2,
+            #            handlelength=1.8, borderaxespad=0.05)
             if picture_save == True:
                 fig.savefig(diagramsDir + 'rast_H_S22_max.png', dpi=300)
 
@@ -767,8 +770,8 @@ def growth_over_time():
         # ILT_volume_f()
         # rast_S22_1()
         # rast_H()
-        # rast_Z_max_naprezanja()
-        rast_Z_over_S22_abs()
+        rast_Z_max_naprezanja()
+        # rast_Z_over_S22_abs()
 
 
     if picture_save == False:
