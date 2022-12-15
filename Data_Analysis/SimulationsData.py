@@ -183,6 +183,7 @@ simulationsData_dict_37 = {
 
                 "//home/josip/feap/FSG/automatizacija_36/TAWSS/":
                     {"version": "new",
+                     "FSG_bool": True,
 
                      "simulations":
                          [
@@ -198,7 +199,9 @@ simulationsData_dict_37 = {
 
                 "//home/josip/feap/FSG/automatizacija_37/OSI/":
                     {"version": "new",
-                         "simulations":
+                     "FSG_bool": True,
+
+                     "simulations":
                              [
                                 # "osi_f70_gt_04700",
                                 "osi_f0_gt_04650",
@@ -213,7 +216,9 @@ simulationsData_dict_37 = {
 
                 "//home/josip/feap/FSG/automatizacija_37/ECAP/":
                     {"version": "new",
-                         "simulations":
+                     "FSG_bool": True,
+
+                     "simulations":
                              [
                                 "ecap_f0_gt_150",
                                 "ecap_f0_gt_151",
@@ -229,13 +234,29 @@ simulationsData_dict_37 = {
                              ]
                      },
 
+                "//home/josip/feap/FSG/automatizacija_39/":
+                    {"version": "new",
+                     "FSG_bool": True,
+
+                     "simulations":
+                         [
+                                "ECAP_154_turbulent_2",
+                         ]
+                     },
+
+
           }
+
+
+
+
 
 pickle_name_38 = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_38.pickle"
 simulationsData_dict_38 = {
 
                 "//home/josip/feap/FSG/automatizacija_39/":
                     {"version": "new",
+                     "FSG_bool": True,
 
                      "simulations":
                          [
@@ -246,7 +267,7 @@ simulationsData_dict_38 = {
 
                 "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
                     {"version": "new",
-
+                     "FSG_bool": True,
                      "simulations":
                          [
                                 "BC",
@@ -264,25 +285,25 @@ simulationsData_dict_38 = {
 
                                  "a3=30",
                                  "a3=40",
-
                           ]
                      },
 
+                "//home/josip/feap/FSG/automatizacija_38/noFSG/":
+                    {"version": "new",
+                     "FSG_bool": False,
+
+                     "simulations":
+                         [
+                             "noFSG_12_3",
+                             "noFSG_13_3",
+                         ]
+                     },
+
+
+
           }
 
-# pickle_name_casson = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_casson.pickle"
-# simulationsData_dict_casson = {
-#
-#                 "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
-#                     {"version": "new",
-#
-#                      "simulations":
-#                          [
-#                                 "casson",
-#                           ]
-#                      },
-#
-#           }
+
 
 
 pickle_name_usporedba_FSG = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_usporedba_FSG.pickle"
@@ -298,20 +319,48 @@ simulationsData_dict_usporedba_FSG = {
                           ]
                      },
 
-                    "//home/josip/feap/FSG/automatizacija_38/":
-                        {"version": "NEW",
+                    "//home/josip/feap/FSG/automatizacija_38/noFSG/":
+                        {"version": "new",
                          "FSG_bool" : False,
 
                          "simulations":
                              [
-                                 "noFSG",
+                                 "noFSG_115",
+                                 "noFSG_12",
+                                 "noFSG_13",
                              ]
                          },
-
-
 }
 
 
 
-pickle_name =pickle_name_usporedba_FSG
-simulationsData_dict = simulationsData_dict_usporedba_FSG
+pickle_name_proba = "//home/josip/PycharmProjects/FEAP_FSG/automatizacija_proba.pickle"
+simulationsData_dict_proba = {
+
+                "/home/josip/feap/FSG/automatizacija_41/":
+                    {"version": "new",
+                     "FSG_bool": False,
+
+                     "simulations":
+                         [
+                                "biochemo_3D",
+                                "biochemo_1",
+                          ]
+                     },
+
+                "//home/josip/feap/FSG/automatizacija_38/TAWSS/":
+                    {"version": "new",
+                     "FSG_bool": False,
+
+                     "simulations":
+                         [
+                             "casson",
+                         ]
+                     },
+}
+
+
+
+
+pickle_name = pickle_name_proba
+simulationsData_dict = simulationsData_dict_proba

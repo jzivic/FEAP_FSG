@@ -86,8 +86,6 @@ class FSG_Analysis:
                     if self.check_AAA_formation() == True:
                         self.Z_foam_cont, self.TAWSS, self.OSI, self.ECAP = None, None, None, None
 
-
-
                         #   DIO ZA FOAM
                         if self.FSG_bool == True:
                             if (n_sim_conv(self.time_step)%1 == 0 and self.time_step >= 100) :

@@ -870,8 +870,19 @@ class ReadResY0File:
                 list_S11.append(float(data[3]))
                 list_S22.append(float(data[4]))
                 list_S33.append(float(data[5]))
-                list_M_elas.append(float(data[6]))
-                list_M_MMP.append(float(data[7]))
+
+                try:
+                    list_M_elas.append(float(data[6]))
+                except ValueError:
+                    list_M_elas.append(0)
+
+                try:
+                    list_M_MMP.append(float(data[7]))
+                except ValueError:
+                    list_M_MMP.append(0)
+
+
+
         self.node.append([])
         self.radius.append([])
         self.zcoor.append([])
@@ -976,8 +987,19 @@ class ReadResY0ILTFile:
                 list_S11.append(float(data[3]))
                 list_S22.append(float(data[4]))
                 list_S33.append(float(data[5]))
-                list_M_elas.append(float(data[6]))
-                list_M_MMP.append(float(data[7]))
+
+                try:
+                    list_M_elas.append(float(data[6]))
+                except ValueError:
+                    list_M_elas.append(0)
+
+                try:
+                    list_M_MMP.append(float(data[7]))
+                except ValueError:
+                    list_M_MMP.append(0)
+
+
+
         self.node.append([])
         self.radius.append([])
         self.zcoor.append([])

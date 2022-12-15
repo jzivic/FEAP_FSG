@@ -157,8 +157,17 @@ sinonimi_38 = {
 }
 
 sinonimi_usporedba_FSG = {
-    "casson":   "FSG",
-    "noFSG":    "noFSG",
+    "casson":                 "FSG",
+     # "noFSG_115":              "noFSG_115",
+     "noFSG_12":              "noFSG",
+     # "noFSG_13":              "noFSG_13",
+}
+
+sinonimi_proba = {
+    "biochemo_3D":      "3D",
+    "biochemo_1":       "radial",
+    # "casson":           "FSG",
+
 
 }
 
@@ -166,8 +175,8 @@ sinonimi_usporedba_FSG = {
 
 
 
-auto_name = "automatizacija_usporedba_FSG"
-sinonimi = sinonimi_usporedba_FSG
+auto_name = "automatizacija_proba"
+sinonimi = sinonimi_proba
 
 
 pickle_name = "//home/josip/PycharmProjects/FEAP_FSG/" + auto_name +  ".pickle"
@@ -198,8 +207,8 @@ ts_from_sim = lambda sim: 100 + (sim-1)*3
 
 graf_slovo="a"
 # times = [ts_from_sim(6), ts_from_sim(22)]
-times = [ts_from_sim(5)]
-# times = [116, 251]
+# times = [ts_from_sim(5)]
+times = [90]
 
 chosen_layer = 1
 
@@ -215,7 +224,7 @@ def time_analysis(times):
     fig = plt.figure(figsize=(fig_x, fig_y), dpi=100)
     adj_left, adj_right, adj_top, adj_bottom = 0.21, 0.86, 0.95, 0.15
     fig.subplots_adjust(left=adj_left, top=adj_top, bottom=adj_bottom)
-    plt.ylim(40, 210)  # turbulencija
+    # plt.ylim(40, 210)  # turbulencija
     plt.grid(which='both', linestyle='--', linewidth='0.5')
 
 
@@ -308,8 +317,8 @@ def time_analysis(times):
 
             # vertical_contours()
             # ILT_thickness_f()
-            # ILT_inner_cont()
-            stress_cont()
+            ILT_inner_cont()
+            # stress_cont()
             # stress_by_layers()
             3
             # def dupli_graf_TAWSS():
@@ -623,16 +632,16 @@ def diameter_analysis():
                     fig.savefig(diagramsDir + 'vein_thickness_f.png', dpi=300)
 
 
-            # ILT_inner_cont()
-            vertical_contours()
+            ILT_inner_cont()
+            # vertical_contours()
             # stress_cont()
             # ILT_thickness_f()
-            # vein_thickness_f()        #?????
+            # vein_thickness_f()
 
     if picture_save == False:
         plt.show()
 
-# diameter_analysis()
+diameter_analysis()
 
 
 
@@ -770,15 +779,14 @@ def growth_over_time():
         # ILT_volume_f()
         # rast_S22_1()
         # rast_H()
-        rast_Z_max_naprezanja()
-        # rast_Z_over_S22_abs()
+        # rast_Z_max_naprezanja()
+        rast_Z_over_S22_abs()
 
 
     if picture_save == False:
         plt.show()
 
-growth_over_time()
-
+# growth_over_time()
 
 
 
